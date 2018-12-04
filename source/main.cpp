@@ -45,7 +45,7 @@ void printError(int errorCode, string extra) {
   }
 }
 
-void scanForKip() {
+void scanFileSystem() {
   kipsCount = 0;
   DIR* enabledKipDir;
   struct dirent* enabledKipEnt;
@@ -134,14 +134,14 @@ void setKip(int kipId, bool enabled) {
 int main(int argc, char **argv)
 {
   consoleInit(NULL);
-  scanForKip();
+  scanFileSystem();
   updateScreen();
   while(appletMainLoop() && run)
   {
     updateInputs();
     if (kDown & KEY_MINUS) {
       kipSelected = 0;
-      scanForKip();
+      scanFileSystem();
       updateScreen();
     }
     else if (kDown & KEY_DDOWN) {
