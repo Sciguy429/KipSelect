@@ -1,4 +1,5 @@
 # Kip Select
+![screenshot](https://github.com/Sciguy429/KipSelect/raw/master/icon/ExampleScreenshot.jpg)
 This is a WIP kip manager for atmosphere's fuse launcher, this homebrew will not work with Kosmos, or any other pack that boots from hekate, while it will run it wont do anything as hekate controls what kips load in those packs. This hombrew is intended only for use with 'vanilia' atmosphere, luanched with fuse.
 
 ## How To Use
