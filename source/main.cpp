@@ -8,16 +8,13 @@
 using namespace std;
 
 string kips[32];
-bool kipsEnabled[32];
 string bct[2] = {"debugmode = ", "debugmode_user = "};
 int bctValues[2] = {-1, -1};
-
-bool run = true;
-bool bctSelected = false;
-int debugModeStatus = -1;
-int debugModeUserStatus = -1;
 int menuSelected = 0;
 int kipsCount = 0;
+bool kipsEnabled[32];
+bool run = true;
+bool bctSelected = false;
 u64 kDown;
 
 void updateInputs() {
