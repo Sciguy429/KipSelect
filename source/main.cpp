@@ -1,6 +1,6 @@
-#include <switch.h>								//The nxlib header file. It includes the functions which allow you to talk to the switch software/hardware
-#include <stdio.h>								//Used for printf
+#include <switch.h>
 #include <string>
+#include <stdio.h>
 #include <dirent.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -9,12 +9,10 @@ using namespace std;
 
 string kips[8];
 bool kipsEnabled[8];
+bool run = true;
 int kipSelected = 0;
 int kipsCount = 0;
-
 u64 kDown;
-
-bool run = true;
 
 void updateInputs() {
   hidScanInput();
@@ -26,17 +24,17 @@ void printError(int errorCode, string extra) {
   printf(CONSOLE_ESC(2J) CONSOLE_RED "An Error Has Occured! (Error Code: %d) Press '+' To Exit Back To HB-Menu\n\n", errorCode);
   switch (errorCode) {
     case 0:
-      printf("Unable To Make Dirrectory: %s", extra.c_str());
-      break;
+    printf("Unable To Make Dirrectory: %s", extra.c_str());
+    break;
     case 1:
-      printf("No Kips Found!\nDid You Install Any?");
-      break;
+    printf("No Kips Found!\nDid You Install Any?");
+    break;
     case 2:
     printf("File Moved Failed!\nOffending Kip: %s\n\n\nThis Is Typicly Caused By A Kip Being Present In kips and kips_disabled\nAt The Same Time, Check These Folders First", extra.c_str());
-      break;
+    break;
     default:
     printf("UKNOWN ERROR\n(You're In DEEP Trouble If This Shows Up Lol :P)");
-      break;
+    break;
   }
   while (run) {
     consoleUpdate(NULL);
