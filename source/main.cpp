@@ -9,8 +9,14 @@ using namespace std;
 
 string kips[32];
 bool kipsEnabled[32];
+string bct[2] = {"debugmode = ", "debugmode_user = "};
+int bctValues[2] = {-1, -1};
+
 bool run = true;
-int kipSelected = 0;
+bool bctSelected = false;
+int debugModeStatus = -1;
+int debugModeUserStatus = -1;
+int menuSelected = 0;
 int kipsCount = 0;
 u64 kDown;
 
@@ -90,24 +96,64 @@ void scanFileSystem() {
   }
 }
 
+string getBctFormating(int d) {
+  if (d == 1) {
+    printf(CONSOLE_GREEN);
+    return "1";
+  }
+  if (d == 0) {
+    printf(CONSOLE_RED);
+    return "0";
+  }
+  else {
+    printf(CONSOLE_YELLOW);
+    return "?";
+  }
+}
+
 void updateScreen() {
   printf(CONSOLE_ESC(2J));
   printf(CONSOLE_MAGENTA CONSOLE_ESC(4m) "Kip Select V%d.%d.%d", VERSION_MAJOR, VERSION_MINOR, VERSION_MICRO);
   printf(CONSOLE_RESET " (+ To Exit Back To HB-Menu, - To Refresh)");
   printf(CONSOLE_ESC(45;68H) CONSOLE_MAGENTA "-By Sciguy429");
-  printf(CONSOLE_ESC(4;1H) CONSOLE_RESET CONSOLE_ESC(4m) "Installed Kips:\n");
+  printf(CONSOLE_ESC(4;1H) CONSOLE_RESET CONSOLE_ESC(4m) "Installed Kips:");
+  printf(CONSOLE_ESC(4;59H) "BCT.ini:\n");
+  printf(CONSOLE_RESET);
   for (int i = 0; i < kipsCount; i++) {
-    printf(CONSOLE_RESET);
     if (kipsEnabled[i]) {
       printf(CONSOLE_GREEN);
     }
     else {
       printf(CONSOLE_RED);
     }
-    if (kipSelected == i) {
+    if (menuSelected == i && !bctSelected) {
       printf(CONSOLE_ESC(7m));
     }
     printf(" * %s\n", kips[i].c_str());
+    printf(CONSOLE_RESET);
+  }
+  printf(CONSOLE_ESC(5;1H));
+  for (int i = 0; i < 2; i++) {
+    printf(CONSOLE_ESC(59C));
+    string bctStatus;
+    switch (bctValues[i]) {
+      case 0:
+      bctStatus = "0";
+      printf(CONSOLE_RED);
+      break;
+      case 1:
+      bctStatus = "1";
+      printf(CONSOLE_GREEN);
+      break;
+      default:
+      bctStatus = "?";
+      printf(CONSOLE_YELLOW);
+      break;
+    }
+    if (menuSelected == i && bctSelected) {
+      printf(CONSOLE_ESC(7m));
+    }
+    printf("* %s%s\n", bct[i].c_str(), bctStatus.c_str());
     printf(CONSOLE_RESET);
   }
 }
@@ -140,31 +186,45 @@ int main(int argc, char **argv)
   {
     updateInputs();
     if (kDown & KEY_MINUS) {
-      kipSelected = 0;
+      menuSelected = 0;
       scanFileSystem();
       updateScreen();
     }
+    else if (kDown & KEY_LEFT) {
+      if (bctSelected == true) {
+        bctSelected = false;
+        menuSelected = 0;
+        updateScreen();
+      }
+    }
+    else if (kDown & KEY_RIGHT) {
+      if (bctSelected == false) {
+        bctSelected = true;
+        menuSelected = 0;
+        updateScreen();
+      }
+    }
     else if (kDown & KEY_DDOWN) {
-      kipSelected++;
-      if (kipSelected >= kipsCount) {
-        kipSelected = kipsCount - 1;
+      menuSelected++;
+      if (menuSelected >= kipsCount) {
+        menuSelected = kipsCount - 1;
       }
       else {
         updateScreen();
       }
     }
     else if (kDown & KEY_DUP) {
-      kipSelected--;
-      if (kipSelected <= -1) {
-        kipSelected = 0;
+      menuSelected--;
+      if (menuSelected <= -1) {
+        menuSelected = 0;
       }
       else {
         updateScreen();
       }
     }
     else if (kDown & KEY_A) {
-      kipsEnabled[kipSelected] = !kipsEnabled[kipSelected];
-      setKip(kipSelected, kipsEnabled[kipSelected]);
+      kipsEnabled[menuSelected] = !kipsEnabled[menuSelected];
+      setKip(menuSelected, kipsEnabled[menuSelected]);
       updateScreen();
     }
     consoleUpdate(NULL);
