@@ -32,7 +32,7 @@ void printError(int errorCode, string extra) {
       printf("No Kips Found!\nDid You Install Any?");
       break;
     case 2:
-    printf("Multiple Kips With The Same Name Found!\nOffender Kip: %s", extra.c_str());
+    printf("File Moved Failed!\nOffending Kip: %s\n\n\nThis Is Typicly Caused By A Kip Being Present In kips and kips_disabled\nAt The Same Time, Check These Folders First", extra.c_str());
       break;
     default:
     printf("UKNOWN ERROR\n(You're In DEEP Trouble If This Shows Up Lol :P)");
@@ -116,7 +116,9 @@ void setKip(int kipId, bool enabled) {
   }
   start.append(name);
   end.append(name);
-  rename(start.c_str(), end.c_str());
+  if (rename(start.c_str(), end.c_str()) != 0) {
+    printError(2, name);
+  }
 }
 
 int main(int argc, char **argv)
