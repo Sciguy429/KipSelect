@@ -93,7 +93,7 @@ void scanForKip() {
 void updateScreen() {
   printf(CONSOLE_ESC(2J));
   printf(CONSOLE_MAGENTA CONSOLE_ESC(4m) "Kip Select V%d.%d.%d", VERSION_MAJOR, VERSION_MINOR, VERSION_MICRO);
-  printf(CONSOLE_RESET " (+ To Exit Back To HB-Menu, - To Refresh Kip List)");
+  printf(CONSOLE_RESET " (+ To Exit Back To HB-Menu, - To Refresh)");
   printf(CONSOLE_ESC(45;68H) CONSOLE_MAGENTA "-By Sciguy429");
   printf(CONSOLE_ESC(4;1H) CONSOLE_RESET CONSOLE_ESC(4m) "Installed Kips:\n");
   for (int i = 0; i < kipsCount; i++) {
