@@ -84,7 +84,7 @@ void scanForKip() {
 void updateScreen() {
   printf(CONSOLE_ESC(2J));
   printf(CONSOLE_ESC(1;1H) CONSOLE_MAGENTA CONSOLE_ESC(4m) "Kip Select V%d.%d.%d", VERSION_MAJOR, VERSION_MINOR, VERSION_MICRO);
-  printf(CONSOLE_RESET " (+ To Exit Back To HB-Menu)");
+  printf(CONSOLE_RESET " (+ To Exit Back To HB-Menu, - To Refresh Kip List)");
   printf(CONSOLE_ESC(4;1H) CONSOLE_ESC(4m) "Installed Kips:\n");
   for (int i = 0; i < kipsCount; i++) {
     printf(CONSOLE_RESET);
@@ -127,7 +127,12 @@ int main(int argc, char **argv)
   while(appletMainLoop() && run)
   {
     updateInputs();
-    if (kDown & KEY_DDOWN) {
+    if (kDown & KEY_MINUS) {
+      kipSelected = 0;
+      scanForKip();
+      updateScreen();
+    }
+    else if (kDown & KEY_DDOWN) {
       kipSelected++;
       if (kipSelected >= kipsCount) {
         kipSelected = kipsCount - 1;
