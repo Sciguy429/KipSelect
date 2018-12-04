@@ -7,8 +7,8 @@
 
 using namespace std;
 
-string kips[8];
-bool kipsEnabled[8];
+string kips[32];
+bool kipsEnabled[32];
 bool run = true;
 int kipSelected = 0;
 int kipsCount = 0;
