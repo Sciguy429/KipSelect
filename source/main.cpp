@@ -30,6 +30,9 @@ void printError(int errorCode, string extra) {
     printf("No Kips Found!\nDid You Install Any?");
     break;
     case 2:
+    printf("More Than 32 Kips Found!");
+    break;
+    case 3:
     printf("File Moved Failed!\nOffending Kip: %s\n\n\nThis Is Typicly Caused By A Kip Being Present In kips and kips_disabled\nAt The Same Time, Check These Folders First", extra.c_str());
     break;
     default:
@@ -57,6 +60,10 @@ void scanForKip() {
       kips[kipsCount] = enabledKipEnt->d_name;
       kipsEnabled[kipsCount] = true;
       kipsCount++;
+      if (kipsCount == 32) {
+        kipsCount = 0; //Set the kip count back to 0 to prevent a crash screen from showing
+        printError(2, "");
+      }
     }
   }
   DIR* disabledKipDir;
@@ -72,6 +79,10 @@ void scanForKip() {
       kips[kipsCount] = disabledKipEnt->d_name;
       kipsEnabled[kipsCount] = false;
       kipsCount++;
+      if (kipsCount == 32) {
+        kipsCount = 0; //Set the kip count back to 0 to prevent a crash screen from showing
+        printError(2, "");
+      }
     }
   }
   if (kipsCount == 0) {
@@ -115,7 +126,7 @@ void setKip(int kipId, bool enabled) {
   start.append(name);
   end.append(name);
   if (rename(start.c_str(), end.c_str()) != 0) {
-    printError(2, name);
+    printError(3, name);
   }
 }
 
