@@ -50,7 +50,7 @@ void scanForKip() {
   struct dirent* enabledKipEnt;
   enabledKipDir = opendir("/atmosphere/kips/");
   if (enabledKipDir == NULL) {
-    if (!mkdir("/atmosphere/kips/", 0700)) {
+    if (mkdir("/atmosphere/kips/", 0700) == -1) {
       printError(0, "/atmosphere/kips/");
     }
   }
@@ -65,7 +65,7 @@ void scanForKip() {
   struct dirent* disabledKipEnt;
   disabledKipDir = opendir("/atmosphere/kips_disabled/");
   if (disabledKipDir == NULL) {
-    if (!mkdir("/atmosphere/kips_disabled/", 0700)) {
+    if (mkdir("/atmosphere/kips_disabled/", 0700) == -1) {
       printError(0, "/atmosphere/kips_disabled/");
     }
   }
@@ -153,10 +153,8 @@ int main(int argc, char **argv)
     else if (kDown & KEY_Y) {
       printError(5, "");
     }
-
     consoleUpdate(NULL);
   }
-
   consoleExit(NULL);
   return 0;
 }
