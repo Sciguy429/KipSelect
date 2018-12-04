@@ -166,9 +166,6 @@ int main(int argc, char **argv)
       setKip(kipSelected, kipsEnabled[kipSelected]);
       updateScreen();
     }
-    else if (kDown & KEY_Y) {
-      printError(5, "");
-    }
     consoleUpdate(NULL);
   }
   consoleExit(NULL);
