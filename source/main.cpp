@@ -223,9 +223,23 @@ int main(int argc, char **argv)
       }
     }
     else if (kDown & KEY_A) {
-      kipsEnabled[menuSelected] = !kipsEnabled[menuSelected];
-      setKip(menuSelected, kipsEnabled[menuSelected]);
-      updateScreen();
+      if (bctSelected) {
+        if (bctValues[menuSelected] == 0) {
+          bctValues[menuSelected] = 1;
+          //setBct(menuSelected, 1);
+          updateScreen();
+        }
+        else if (bctValues[menuSelected] == 1) {
+          bctValues[menuSelected] = 0;
+          //setBct(menuSelected, 0);
+          updateScreen();
+        }
+      }
+      else {
+        kipsEnabled[menuSelected] = !kipsEnabled[menuSelected];
+        setKip(menuSelected, kipsEnabled[menuSelected]);
+        updateScreen();
+      }
     }
     consoleUpdate(NULL);
   }
