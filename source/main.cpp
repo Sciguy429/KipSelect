@@ -191,7 +191,7 @@ void updateScreen() {
   }
   printf(CONSOLE_ESC(5;1H));
   for (int i = 0; i < 2; i++) {
-    printf(CONSOLE_ESC(59C));
+    printf(CONSOLE_ESC(58C));
     string bctStatus;
     switch (bctValues[i]) {
       case 0:
@@ -210,7 +210,7 @@ void updateScreen() {
     if (menuSelected == i && bctSelected) {
       printf(CONSOLE_ESC(7m));
     }
-    printf("* %s%s\n", bct[i].c_str(), bctStatus.c_str());
+    printf(" * %s%s\n", bct[i].c_str(), bctStatus.c_str());
     printf(CONSOLE_RESET);
   }
 }
