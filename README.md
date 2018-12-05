@@ -5,7 +5,7 @@ This is a WIP kip manager for atmosphere's fusée launcher, this homebrew will n
 ## How To Use
 This howmebrew enables and disables kips by moving them between the /atmosphere/kips/ folder and an added folder called /atmosphere/kips_disabled/. Since fusée only checks the kips folder on boot, anything in kips_disabled gets ignored. The homebrew automatically creates the required folders (/atmosphere/kips/ & /atmosphere/kips_disabled/) if they are missing, all you need to do is make sure your kips are in one of the two folders before launching. The .nro has no other special requirements and should be launchable from anywhere (although simply placing it in /switch/ is recommended).
 
-###### This homebrew also now supports BCT.ini editing on atmosphere version 0.8.1+
+#### This homebrew also now supports BCT.ini editing on atmosphere version 0.8.1+
 Current changeable values are debugmode and debugmode_user, both required for using a cheat engine such as sys-netcheat.
 
 ## Notes
