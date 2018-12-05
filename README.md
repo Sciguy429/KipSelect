@@ -11,7 +11,7 @@ Current changeable values are debugmode and debugmode_user, both required for us
 ## Notes
 * This homebrew only supports a maximum of 32 kips, attempting to use more will result in a error and possibly even a console hard crash.
 * Try and name your kips something reasonable, the program should be able to work with any file name the sdcard fs supports but naming your kip with emoji's isn't going to help.
-* I have no idea how safe this is to use on exFat, it shouldn't corrupt anything as the only write operation it uses is rename(), but should isn't won't, please be careful.
+* I have no idea how safe this is to use on exFat, it shouldn't corrupt anything as all file operations are correctly closed, but should isn't won't, please be careful.
 
 ## Credits
 * [libnx](https://github.com/switchbrew/libnx)
