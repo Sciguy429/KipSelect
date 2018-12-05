@@ -232,7 +232,7 @@ int main(int argc, char **argv)
         updateScreen();
       }
     }
-    else if (kDown & KEY_DDOWN) {
+    else if (kDown & KEY_DOWN) {
       menuSelected++;
       if (menuSelected >= (kipsCount * !bctSelected) + (2 * bctSelected)) {
         menuSelected = (kipsCount * !bctSelected) + (2 * bctSelected) - 1;
@@ -241,7 +241,7 @@ int main(int argc, char **argv)
         updateScreen();
       }
     }
-    else if (kDown & KEY_DUP) {
+    else if (kDown & KEY_UP) {
       menuSelected--;
       if (menuSelected <= -1) {
         menuSelected = 0;
