@@ -52,6 +52,26 @@ void printError(int errorCode, string extra) {
   }
 }
 
+void printWarning(int warningCode, string extra) {
+  bool pause = true;
+  printf(CONSOLE_ESC(2J) CONSOLE_YELLOW "### WARNING (Warning Code: %d) ###\nPress '+' To Exit Back To HB-Menu, Press '-' To Continue\n\n", warningCode);
+  switch (warningCode) {
+    case 0:
+    printf("REBOOTING VIA HOMEBREW WHILE USING EXFAT WILL CAUSE CORRUPTION!\n\n\nContinue at your own risk!");
+    break;
+    default:
+    printf("UKNOWN WARNING\n\n\nProceed With Caution!");
+    break;
+  }
+  while (pause && run) {
+    consoleUpdate(NULL);
+    updateInputs();
+    if (kDown & KEY_MINUS) {
+      pause = false;
+    }
+  }
+}
+
 void scanForKips() {
   kipsCount = 0;
   DIR* enabledKipDir;
