@@ -1,5 +1,6 @@
 #include <switch.h>
 #include <string>
+#include <fstream>
 #include <stdio.h>
 #include <dirent.h>
 #include <sys/stat.h>
@@ -93,6 +94,57 @@ void scanForKips() {
   }
 }
 
+void readBCT() {
+  ifstream bctStream("/BCT.ini");
+  string bctString((std::istreambuf_iterator<char>(bctStream)), (std::istreambuf_iterator<char>()));
+  unsigned int debugModeLocation = bctString.find("debugmode = ", 0) + 12;
+  unsigned int debugModeUserLocation = bctString.find("debugmode_user = ", 0) + 17;
+  bctValues[0] = bctString[debugModeLocation] - 48;
+  bctValues[1] = bctString[debugModeUserLocation] - 48;
+}
+
+void setKip(int kipId, bool enabled) {
+  string name = kips[kipId];
+  string start = "/atmosphere/";
+  string end = "/atmosphere/";
+  if (enabled) {
+    start.append("kips_disabled/");
+    end.append("kips/");
+  }
+  else {
+    start.append("kips/");
+    end.append("kips_disabled/");
+  }
+  start.append(name);
+  end.append(name);
+  if (rename(start.c_str(), end.c_str()) != 0) {
+    printError(3, name);
+  }
+}
+
+void setBCT(int bcdId, bool enabled) {
+  unsigned int loctaion = 0;
+  ifstream bctIfStream("/BCT.ini");
+  string bctString((std::istreambuf_iterator<char>(bctIfStream)), (std::istreambuf_iterator<char>()));
+  bctIfStream.close();
+  switch (bcdId) {
+    case 0:
+    loctaion = bctString.find("debugmode = ", 0) + 12;
+    break;
+    case 1:
+    loctaion = bctString.find("debugmode_user = ", 0) + 17;
+    break;
+    default:
+    break;
+  }
+  if (loctaion != 0) {
+    bctString[loctaion] = 48 + enabled;
+    ofstream bctOfStream("/BCT.ini");
+    bctOfStream << bctString;
+    bctOfStream.close();
+  }
+}
+
 string getBctFormating(int d) {
   if (d == 1) {
     printf(CONSOLE_GREEN);
@@ -155,29 +207,11 @@ void updateScreen() {
   }
 }
 
-void setKip(int kipId, bool enabled) {
-  string name = kips[kipId];
-  string start = "/atmosphere/";
-  string end = "/atmosphere/";
-  if (enabled) {
-    start.append("kips_disabled/");
-    end.append("kips/");
-  }
-  else {
-    start.append("kips/");
-    end.append("kips_disabled/");
-  }
-  start.append(name);
-  end.append(name);
-  if (rename(start.c_str(), end.c_str()) != 0) {
-    printError(3, name);
-  }
-}
-
 int main(int argc, char **argv)
 {
   consoleInit(NULL);
   scanForKips();
+  readBCT();
   updateScreen();
   while(appletMainLoop() && run)
   {
@@ -185,6 +219,7 @@ int main(int argc, char **argv)
     if (kDown & KEY_MINUS) {
       menuSelected = 0;
       scanForKips();
+      readBCT();
       updateScreen();
     }
     else if (kDown & KEY_LEFT) {
@@ -223,12 +258,12 @@ int main(int argc, char **argv)
       if (bctSelected) {
         if (bctValues[menuSelected] == 0) {
           bctValues[menuSelected] = 1;
-          //setBct(menuSelected, 1);
+          setBCT(menuSelected, true);
           updateScreen();
         }
         else if (bctValues[menuSelected] == 1) {
           bctValues[menuSelected] = 0;
-          //setBct(menuSelected, 0);
+          setBCT(menuSelected, false);
           updateScreen();
         }
       }
