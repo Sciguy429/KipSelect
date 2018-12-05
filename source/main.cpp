@@ -39,6 +39,9 @@ void printError(int errorCode, string extra) {
     case 3:
     printf("File Moved Failed!\nOffending Kip: %s\n\n\nThis Is Typicly Caused By A Kip Being Present In kips and kips_disabled\nAt The Same Time, Check These Folders First", extra.c_str());
     break;
+    case 4:
+    printf("Unabled To Open BCT.ini!");
+    break;
     default:
     printf("UKNOWN ERROR\n(You're In DEEP Trouble If This Shows Up Lol :P)");
     break;
@@ -140,8 +143,13 @@ void setBCT(int bcdId, bool enabled) {
   if (loctaion != 0) {
     bctString[loctaion] = 48 + enabled;
     ofstream bctOfStream("/BCT.ini");
-    bctOfStream << bctString;
-    bctOfStream.close();
+    if (bctOfStream.is_open()) {
+      bctOfStream << bctString;
+      bctOfStream.close();
+    }
+    else {
+      printError(4, "");
+    }
   }
 }
 
