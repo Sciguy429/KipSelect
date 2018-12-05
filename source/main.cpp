@@ -218,6 +218,7 @@ int main(int argc, char **argv)
     updateInputs();
     if (kDown & KEY_MINUS) {
       menuSelected = 0;
+      bctSelected = false;
       scanForKips();
       readBCT();
       updateScreen();
