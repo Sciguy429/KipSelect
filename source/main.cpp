@@ -289,6 +289,13 @@ int main(int argc, char **argv)
         updateScreen();
       }
     }
+    else if (kDown & KEY_Y) {
+      printWarning(0, "");
+      if (run) {
+        bpcInitialize();
+        bpcRebootSystem();
+      }
+    }
     consoleUpdate(NULL);
   }
   consoleExit(NULL);
