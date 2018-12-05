@@ -100,8 +100,9 @@ void scanForKips() {
 }
 
 void readBCT() {
-  ifstream bctStream("/BCT.ini");
-  string bctString((std::istreambuf_iterator<char>(bctStream)), (std::istreambuf_iterator<char>()));
+  ifstream bctIfStream("/BCT.ini");
+  string bctString((std::istreambuf_iterator<char>(bctIfStream)), (std::istreambuf_iterator<char>()));
+  bctIfStream.close();
   unsigned int debugModeLocation = bctString.find("debugmode = ", 0) + 12;
   unsigned int debugModeUserLocation = bctString.find("debugmode_user = ", 0) + 17;
   bctValues[0] = bctString[debugModeLocation] - 48;
