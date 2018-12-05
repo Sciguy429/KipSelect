@@ -156,21 +156,6 @@ void setBCT(int bcdId, bool enabled) {
   }
 }
 
-string getBctFormating(int d) {
-  if (d == 1) {
-    printf(CONSOLE_GREEN);
-    return "1";
-  }
-  if (d == 0) {
-    printf(CONSOLE_RED);
-    return "0";
-  }
-  else {
-    printf(CONSOLE_YELLOW);
-    return "?";
-  }
-}
-
 void updateScreen() {
   printf(CONSOLE_ESC(2J));
   printf(CONSOLE_MAGENTA CONSOLE_ESC(4m) "Kip Select V%d.%d.%d", VERSION_MAJOR, VERSION_MINOR, VERSION_MICRO);
