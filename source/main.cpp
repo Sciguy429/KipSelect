@@ -246,8 +246,8 @@ int main(int argc, char **argv)
     }
     else if (kDown & KEY_DDOWN) {
       menuSelected++;
-      if (menuSelected >= kipsCount) {
-        menuSelected = kipsCount - 1;
+      if (menuSelected >= (kipsCount * !bctSelected) + (2 * bctSelected)) {
+        menuSelected = (kipsCount * !bctSelected) + (2 * bctSelected) - 1;
       }
       else {
         updateScreen();
