@@ -12,10 +12,10 @@ using namespace std;
 
 string kipName[32];
 string bctName[BCT_LIST_LENGTH] = {"debugmode = ", "debugmode_user = "};
-int bctValues[BCT_LIST_LENGTH] = {-1, -1};
+int bctValue[BCT_LIST_LENGTH] = {-1, -1};
 int menuSelected = 0;
 int kipsCount = 0;
-bool kipsEnabled[32];
+bool kipValue[32];
 bool run = true;
 bool bctSelected = false;
 u64 kDown;
@@ -89,7 +89,7 @@ void scanForKips() {
   else {
     while ((enabledKipEnt = readdir(enabledKipDir))) {
       kipName[kipsCount] = enabledKipEnt->d_name;
-      kipsEnabled[kipsCount] = true;
+      kipValue[kipsCount] = true;
       kipsCount++;
       if (kipsCount == 32) {
         kipsCount = 0; //Set the kip count back to 0 to prevent a crash screen from showing
@@ -109,7 +109,7 @@ void scanForKips() {
   else {
     while ((disabledKipEnt = readdir(disabledKipDir))) {
       kipName[kipsCount] = disabledKipEnt->d_name;
-      kipsEnabled[kipsCount] = false;
+      kipValue[kipsCount] = false;
       kipsCount++;
       if (kipsCount == 32) {
         kipsCount = 0; //Set the kip count back to 0 to prevent a crash screen from showing
@@ -129,8 +129,8 @@ void readBCT() {
   bctIfStream.close();
   unsigned int debugModeLocation = bctString.find("debugmode = ", 0) + 12;
   unsigned int debugModeUserLocation = bctString.find("debugmode_user = ", 0) + 17;
-  bctValues[0] = bctString[debugModeLocation] - 48;
-  bctValues[1] = bctString[debugModeUserLocation] - 48;
+  bctValue[0] = bctString[debugModeLocation] - 48;
+  bctValue[1] = bctString[debugModeUserLocation] - 48;
 }
 
 void setKip(int kipId, bool enabled) {
@@ -198,7 +198,7 @@ void updateScreen() {
   printf(CONSOLE_ESC(4;59H) "BCT.ini:\n");
   printf(CONSOLE_RESET);
   for (int i = 0; i < kipsCount; i++) {
-    if (kipsEnabled[i]) {
+    if (kipValue[i]) {
       printf(CONSOLE_GREEN);
     }
     else {
@@ -214,7 +214,7 @@ void updateScreen() {
   for (int i = 0; i < BCT_LIST_LENGTH; i++) {
     printf(CONSOLE_ESC(58C));
     string bctStatus;
-    switch (bctValues[i]) {
+    switch (bctValue[i]) {
       case 0:
       bctStatus = "0";
       printf(CONSOLE_RED);
@@ -290,20 +290,20 @@ int main(int argc, char **argv)
     }
     else if (kDown & KEY_A) {
       if (bctSelected) {
-        if (bctValues[menuSelected] == 0) {
-          bctValues[menuSelected] = 1;
+        if (bctValue[menuSelected] == 0) {
+          bctValue[menuSelected] = 1;
           setBCT(menuSelected, true);
           updateScreen();
         }
-        else if (bctValues[menuSelected] == 1) {
-          bctValues[menuSelected] = 0;
+        else if (bctValue[menuSelected] == 1) {
+          bctValue[menuSelected] = 0;
           setBCT(menuSelected, false);
           updateScreen();
         }
       }
       else {
-        kipsEnabled[menuSelected] = !kipsEnabled[menuSelected];
-        setKip(menuSelected, kipsEnabled[menuSelected]);
+        kipValue[menuSelected] = !kipValue[menuSelected];
+        setKip(menuSelected, kipValue[menuSelected]);
         updateScreen();
       }
     }
