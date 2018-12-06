@@ -39,10 +39,13 @@ void printError(int errorCode, string extra) {
     printf("More Than 32 Kips Found!");
     break;
     case 3:
-    printf("File Moved Failed!\nOffending Kip: %s\n\n\nThis Is Typicly Caused By A Kip Being Present In kips and kips_disabled\nAt The Same Time, Check These Folders First", extra.c_str());
+    printf("File Moved Failed!\nOffending Kip: '%s'\n\n\nThis Is Typicly Caused By A Kip Being Present In kips and kips_disabled\nAt The Same Time, Check These Folders First", extra.c_str());
     break;
     case 4:
     printf("Unabled To Open BCT.ini!");
+    break;
+    case 5:
+    printf("Unabled To Find Value In BCT.ini!\nOffending Value: '%s'", extra.c_str());
     break;
     default:
     printf("UKNOWN ERROR\n(You're In DEEP Trouble If This Shows Up Lol :P)");
@@ -150,23 +153,29 @@ void setKip(int kipId, bool enabled) {
   }
 }
 
-void setBCT(int bcdId, bool enabled) {
-  unsigned int loctaion = 0;
+void setBCT(int bctId, bool enabled) {
+  size_t location = 0;
   ifstream bctIfStream("/BCT.ini");
   string bctString((std::istreambuf_iterator<char>(bctIfStream)), (std::istreambuf_iterator<char>()));
   bctIfStream.close();
-  switch (bcdId) {
+  switch (bctId) {
     case 0:
-    loctaion = bctString.find("debugmode = ", 0) + 12;
+    location = bctString.find("debugmode = ", 0);
+    if (location != string::npos) {
+      location = location + 12;
+    }
     break;
     case 1:
-    loctaion = bctString.find("debugmode_user = ", 0) + 17;
+    location = bctString.find("debugmode_user = ", 0);
+    if (location != string::npos) {
+      location = location + 17;
+    }
     break;
     default:
     break;
   }
-  if (loctaion != 0) {
-    bctString[loctaion] = 48 + enabled;
+  if (location != string::npos) {
+    bctString[location] = 48 + enabled;
     ofstream bctOfStream("/BCT.ini");
     if (bctOfStream.is_open()) {
       bctOfStream << bctString;
@@ -175,6 +184,9 @@ void setBCT(int bcdId, bool enabled) {
     else {
       printError(4, "");
     }
+  }
+  else {
+    printError(5, bct[bctId]);
   }
 }
 
