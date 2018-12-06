@@ -13,5 +13,8 @@ Current changeable values are debugmode and debugmode_user, both required for us
 * Try and name your kips something reasonable, the program should be able to work with any file name the sdcard fs supports but naming your kip with emoji's isn't going to help.
 * I have no idea how safe this is to use on exFat, it shouldn't corrupt anything as all file operations are correctly closed, but should isn't won't, please be careful.
 
+## Building
+This homebrew is a standered libnx project, make sure you have devkitpro installed correctly and simply run make from the project root.
+
 ## Credits
 * [libnx](https://github.com/switchbrew/libnx)
