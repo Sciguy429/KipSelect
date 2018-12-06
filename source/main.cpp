@@ -95,7 +95,7 @@ void scanForKips() {
       if (kipsCount == 32) {
         kipsCount = 0; //Set the kip count back to 0 to prevent a crash screen from showing
         printError(2, "");
-        break;
+        return;
       }
     }
   }
@@ -115,7 +115,7 @@ void scanForKips() {
       if (kipsCount == 32) {
         kipsCount = 0; //Set the kip count back to 0 to prevent a crash screen from showing
         printError(2, "");
-        break;
+        return;
       }
     }
   }
