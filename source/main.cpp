@@ -10,8 +10,8 @@ using namespace std;
 
 #define BCT_LIST_LENGTH 2
 
-string kips[32];
-string bct[BCT_LIST_LENGTH] = {"debugmode = ", "debugmode_user = "};
+string kipName[32];
+string bctName[BCT_LIST_LENGTH] = {"debugmode = ", "debugmode_user = "};
 int bctValues[BCT_LIST_LENGTH] = {-1, -1};
 int menuSelected = 0;
 int kipsCount = 0;
@@ -88,7 +88,7 @@ void scanForKips() {
   }
   else {
     while ((enabledKipEnt = readdir(enabledKipDir))) {
-      kips[kipsCount] = enabledKipEnt->d_name;
+      kipName[kipsCount] = enabledKipEnt->d_name;
       kipsEnabled[kipsCount] = true;
       kipsCount++;
       if (kipsCount == 32) {
@@ -108,7 +108,7 @@ void scanForKips() {
   }
   else {
     while ((disabledKipEnt = readdir(disabledKipDir))) {
-      kips[kipsCount] = disabledKipEnt->d_name;
+      kipName[kipsCount] = disabledKipEnt->d_name;
       kipsEnabled[kipsCount] = false;
       kipsCount++;
       if (kipsCount == 32) {
@@ -134,7 +134,7 @@ void readBCT() {
 }
 
 void setKip(int kipId, bool enabled) {
-  string name = kips[kipId];
+  string name = kipName[kipId];
   string start = "/atmosphere/";
   string end = "/atmosphere/";
   if (enabled) {
@@ -185,7 +185,7 @@ void setBCT(int bctId, bool enabled) {
     }
   }
   else {
-    printError(5, bct[bctId]);
+    printError(5, bctName[bctId]);
   }
 }
 
@@ -207,7 +207,7 @@ void updateScreen() {
     if (menuSelected == i && !bctSelected) {
       printf(CONSOLE_ESC(7m));
     }
-    printf(" * %s\n", kips[i].c_str());
+    printf(" * %s\n", kipName[i].c_str());
     printf(CONSOLE_RESET);
   }
   printf(CONSOLE_ESC(5;1H));
@@ -231,7 +231,7 @@ void updateScreen() {
     if (menuSelected == i && bctSelected) {
       printf(CONSOLE_ESC(7m));
     }
-    printf(" * %s%s\n", bct[i].c_str(), bctStatus.c_str());
+    printf(" * %s%s\n", bctName[i].c_str(), bctStatus.c_str());
     printf(CONSOLE_RESET);
   }
 }
