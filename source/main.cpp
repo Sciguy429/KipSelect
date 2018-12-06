@@ -8,14 +8,15 @@
 
 using namespace std;
 
+#define KIP_LIST_LENGTH 32
 #define BCT_LIST_LENGTH 2
 
-string kipName[32];
+string kipName[KIP_LIST_LENGTH];
 string bctName[BCT_LIST_LENGTH] = {"debugmode = ", "debugmode_user = "};
 int bctValue[BCT_LIST_LENGTH] = {-1, -1};
 int menuSelected = 0;
 int kipCount = 0;
-bool kipValue[32];
+bool kipValue[KIP_LIST_LENGTH];
 bool run = true;
 bool bctSelected = false;
 u64 kDown;
@@ -91,7 +92,7 @@ void scanForKips() {
       kipName[kipCount] = enabledKipEnt->d_name;
       kipValue[kipCount] = true;
       kipCount++;
-      if (kipCount == 32) {
+      if (kipCount == KIP_LIST_LENGTH) {
         kipCount = 0; //Set the kip count back to 0 to prevent a crash screen from showing
         printError(2, "");
         return;
@@ -111,7 +112,7 @@ void scanForKips() {
       kipName[kipCount] = disabledKipEnt->d_name;
       kipValue[kipCount] = false;
       kipCount++;
-      if (kipCount == 32) {
+      if (kipCount == KIP_LIST_LENGTH) {
         kipCount = 0; //Set the kip count back to 0 to prevent a crash screen from showing
         printError(2, "");
         return;
