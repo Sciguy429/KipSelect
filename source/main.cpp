@@ -8,9 +8,11 @@
 
 using namespace std;
 
+#define BCT_LIST_LENGTH 2
+
 string kips[32];
-string bct[2] = {"debugmode = ", "debugmode_user = "};
-int bctValues[2] = {-1, -1};
+string bct[BCT_LIST_LENGTH] = {"debugmode = ", "debugmode_user = "};
+int bctValues[BCT_LIST_LENGTH] = {-1, -1};
 int menuSelected = 0;
 int kipsCount = 0;
 bool kipsEnabled[32];
@@ -198,7 +200,7 @@ void updateScreen() {
     printf(CONSOLE_RESET);
   }
   printf(CONSOLE_ESC(5;1H));
-  for (int i = 0; i < 2; i++) {
+  for (int i = 0; i < BCT_LIST_LENGTH; i++) {
     printf(CONSOLE_ESC(58C));
     string bctStatus;
     switch (bctValues[i]) {
@@ -234,6 +236,7 @@ int main(int argc, char **argv)
     updateInputs();
     if (kDown & KEY_MINUS) {
       menuSelected = 0;
+      bctSelected = false;
       scanForKips();
       readBCT();
       updateScreen();
@@ -241,21 +244,25 @@ int main(int argc, char **argv)
     else if (kDown & KEY_LEFT) {
       if (bctSelected == true) {
         bctSelected = false;
-        menuSelected = 0;
+        if (menuSelected > kipsCount) {
+          menuSelected = kipsCount;
+        }
         updateScreen();
       }
     }
     else if (kDown & KEY_RIGHT) {
       if (bctSelected == false) {
         bctSelected = true;
-        menuSelected = 0;
+        if (menuSelected > BCT_LIST_LENGTH - 1) {
+          menuSelected = BCT_LIST_LENGTH - 1;
+        }
         updateScreen();
       }
     }
     else if (kDown & KEY_DOWN) {
       menuSelected++;
-      if (menuSelected >= (kipsCount * !bctSelected) + (2 * bctSelected)) {
-        menuSelected = (kipsCount * !bctSelected) + (2 * bctSelected) - 1;
+      if (menuSelected >= (kipsCount * !bctSelected) + (BCT_LIST_LENGTH * bctSelected)) {
+        menuSelected = (kipsCount * !bctSelected) + (BCT_LIST_LENGTH * bctSelected) - 1;
       }
       else {
         updateScreen();
@@ -263,7 +270,7 @@ int main(int argc, char **argv)
     }
     else if (kDown & KEY_UP) {
       menuSelected--;
-      if (menuSelected <= -1) {
+      if (menuSelected < 0) {
         menuSelected = 0;
       }
       else {
