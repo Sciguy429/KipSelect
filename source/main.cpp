@@ -27,7 +27,7 @@ void updateInputs() {
 }
 
 void printError(int errorCode, string extra) {
-  printf(CONSOLE_ESC(2J) CONSOLE_RED "An Error Has Occured! (Error Code: %d) Press '+' To Exit Back To HB-Menu\n\n", errorCode);
+  printf(CONSOLE_ESC(2J) CONSOLE_RED "An Error Has Occured! (Error Code: %d) Press + To Exit Back To HB-Menu\n\n", errorCode);
   switch (errorCode) {
     case 0:
     printf("Unable To Make Dirrectory: %s", extra.c_str());
@@ -56,7 +56,7 @@ void printError(int errorCode, string extra) {
 
 void printWarning(int warningCode, string extra) {
   bool pause = true;
-  printf(CONSOLE_ESC(2J) CONSOLE_YELLOW "### WARNING (Warning Code: %d) ###\nPress '+' To Exit Back To HB-Menu, Press '-' To Continue\n\n", warningCode);
+  printf(CONSOLE_ESC(2J) CONSOLE_YELLOW "### WARNING (Warning Code: %d) ###\nPress + To Exit Back To HB-Menu, Press - To Continue\n\n", warningCode);
   switch (warningCode) {
     case 0:
     printf("REBOOTING VIA HOMEBREW WHILE USING EXFAT WILL CAUSE CORRUPTION!\n\n\nContinue at your own risk!");
