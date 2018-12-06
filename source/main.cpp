@@ -14,7 +14,7 @@ string kipName[32];
 string bctName[BCT_LIST_LENGTH] = {"debugmode = ", "debugmode_user = "};
 int bctValue[BCT_LIST_LENGTH] = {-1, -1};
 int menuSelected = 0;
-int kipsCount = 0;
+int kipCount = 0;
 bool kipValue[32];
 bool run = true;
 bool bctSelected = false;
@@ -77,7 +77,7 @@ void printWarning(int warningCode, string extra) {
 }
 
 void scanForKips() {
-  kipsCount = 0;
+  kipCount = 0;
   DIR* enabledKipDir;
   struct dirent* enabledKipEnt;
   enabledKipDir = opendir("/atmosphere/kips/");
@@ -88,11 +88,11 @@ void scanForKips() {
   }
   else {
     while ((enabledKipEnt = readdir(enabledKipDir))) {
-      kipName[kipsCount] = enabledKipEnt->d_name;
-      kipValue[kipsCount] = true;
-      kipsCount++;
-      if (kipsCount == 32) {
-        kipsCount = 0; //Set the kip count back to 0 to prevent a crash screen from showing
+      kipName[kipCount] = enabledKipEnt->d_name;
+      kipValue[kipCount] = true;
+      kipCount++;
+      if (kipCount == 32) {
+        kipCount = 0; //Set the kip count back to 0 to prevent a crash screen from showing
         printError(2, "");
         return;
       }
@@ -108,17 +108,17 @@ void scanForKips() {
   }
   else {
     while ((disabledKipEnt = readdir(disabledKipDir))) {
-      kipName[kipsCount] = disabledKipEnt->d_name;
-      kipValue[kipsCount] = false;
-      kipsCount++;
-      if (kipsCount == 32) {
-        kipsCount = 0; //Set the kip count back to 0 to prevent a crash screen from showing
+      kipName[kipCount] = disabledKipEnt->d_name;
+      kipValue[kipCount] = false;
+      kipCount++;
+      if (kipCount == 32) {
+        kipCount = 0; //Set the kip count back to 0 to prevent a crash screen from showing
         printError(2, "");
         return;
       }
     }
   }
-  if (kipsCount == 0) {
+  if (kipCount == 0) {
     printError(1, "");
   }
 }
@@ -197,7 +197,7 @@ void updateScreen() {
   printf(CONSOLE_ESC(4;1H) CONSOLE_RESET CONSOLE_ESC(4m) "Installed Kips:");
   printf(CONSOLE_ESC(4;59H) "BCT.ini:\n");
   printf(CONSOLE_RESET);
-  for (int i = 0; i < kipsCount; i++) {
+  for (int i = 0; i < kipCount; i++) {
     if (kipValue[i]) {
       printf(CONSOLE_GREEN);
     }
@@ -255,8 +255,8 @@ int main(int argc, char **argv)
     else if (kDown & KEY_LEFT) {
       if (bctSelected == true) {
         bctSelected = false;
-        if (menuSelected > kipsCount) {
-          menuSelected = kipsCount;
+        if (menuSelected > kipCount) {
+          menuSelected = kipCount;
         }
         updateScreen();
       }
@@ -272,8 +272,8 @@ int main(int argc, char **argv)
     }
     else if (kDown & KEY_DOWN) {
       menuSelected++;
-      if (menuSelected >= (kipsCount * !bctSelected) + (BCT_LIST_LENGTH * bctSelected)) {
-        menuSelected = (kipsCount * !bctSelected) + (BCT_LIST_LENGTH * bctSelected) - 1;
+      if (menuSelected >= (kipCount * !bctSelected) + (BCT_LIST_LENGTH * bctSelected)) {
+        menuSelected = (kipCount * !bctSelected) + (BCT_LIST_LENGTH * bctSelected) - 1;
       }
       else {
         updateScreen();
