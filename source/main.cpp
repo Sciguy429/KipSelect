@@ -58,7 +58,6 @@ void printError(int errorCode, string extra) {
 }
 
 void printWarning(int warningCode, string extra) {
-  bool pause = true;
   printf(CONSOLE_ESC(2J) CONSOLE_YELLOW "### WARNING (Warning Code: %d) ###\nPress + To Exit Back To HB-Menu, Press - To Continue\n\n", warningCode);
   switch (warningCode) {
     case 0:
@@ -68,11 +67,11 @@ void printWarning(int warningCode, string extra) {
     printf("UKNOWN WARNING\n\n\nProceed With Caution!");
     break;
   }
-  while (pause && run) {
+  while (run) {
     consoleUpdate(NULL);
     updateInputs();
     if (kDown & KEY_MINUS) {
-      pause = false;
+      return;
     }
   }
 }
