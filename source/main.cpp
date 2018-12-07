@@ -37,7 +37,7 @@ void printError(int errorCode, string extra) {
     printf("No Kips Found!\nDid You Install Any?");
     break;
     case 2:
-    printf("More Than 32 Kips Found!");
+    printf("More Than %d Kips Found!", KIP_LIST_LENGTH);
     break;
     case 3:
     printf("File Moved Failed!\nOffending Kip: '%s'\n\n\nThis Is Typicly Caused By A Kip Being Present In kips and kips_disabled\nAt The Same Time, Check These Folders First", extra.c_str());
