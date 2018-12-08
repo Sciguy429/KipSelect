@@ -125,7 +125,7 @@ void scanForKips() {
 }
 
 void readBCT() {
-  ifstream bctIfStream("/BCT.ini");
+  ifstream bctIfStream("/atmosphere/BCT.ini");
   string bctString((std::istreambuf_iterator<char>(bctIfStream)), (std::istreambuf_iterator<char>()));
   bctIfStream.close();
   unsigned int debugModeLocation = bctString.find("debugmode = ", 0) + 12;
@@ -155,7 +155,7 @@ void setKip(int kipId, bool enabled) {
 
 void setBCT(int bctId, bool enabled) {
   size_t location = 0;
-  ifstream bctIfStream("/BCT.ini");
+  ifstream bctIfStream("/atmosphere/BCT.ini");
   string bctString((std::istreambuf_iterator<char>(bctIfStream)), (std::istreambuf_iterator<char>()));
   bctIfStream.close();
   switch (bctId) {
