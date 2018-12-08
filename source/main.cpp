@@ -176,7 +176,7 @@ void setBCT(int bctId, bool enabled) {
   }
   if (location != string::npos) {
     bctString[location] = 48 + enabled;
-    ofstream bctOfStream("/BCT.ini");
+    ofstream bctOfStream("/atmosphere/BCT.ini");
     if (bctOfStream.is_open()) {
       bctOfStream << bctString;
       bctOfStream.close();
