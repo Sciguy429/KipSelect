@@ -154,7 +154,7 @@ void setKip(int kipId, bool enabled) {
 }
 
 void setBCT(int bctId, bool enabled) {
-  size_t location = 0;
+  size_t location = string::npos;
   ifstream bctIfStream("/atmosphere/BCT.ini");
   string bctString((std::istreambuf_iterator<char>(bctIfStream)), (std::istreambuf_iterator<char>()));
   bctIfStream.close();
