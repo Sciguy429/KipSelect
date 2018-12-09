@@ -14,7 +14,7 @@ Current changeable values are debugmode and debugmode_user, both required for us
 * I have no idea how safe this is to use on exFat, it shouldn't corrupt anything as all file operations are correctly closed, but should isn't won't, please be careful.
 
 ## Building
-This homebrew is a standered libnx project, make sure you have devkitpro installed correctly and simply run make from the project root.
+This homebrew is a standered libnx project, make sure you have devkitpro installed correctly and simply run make from the project root. I personaly write this project useing VsCode and thus there is a CppProperties.json file already configured for proper syntax highlighting in the project root, this configuration should work with almost any other homebrew project although depending on where your devkitpro install is you may need to change some values around.
 
 ## Credits
 * [libnx](https://github.com/switchbrew/libnx)
