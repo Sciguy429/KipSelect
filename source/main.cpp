@@ -128,10 +128,20 @@ void readBCT() {
 	ifstream bctIfStream("/atmosphere/BCT.ini");
 	string bctString((std::istreambuf_iterator<char>(bctIfStream)), (std::istreambuf_iterator<char>()));
 	bctIfStream.close();
-	unsigned int debugModeLocation = bctString.find("debugmode = ", 0) + 12;
-	unsigned int debugModeUserLocation = bctString.find("debugmode_user = ", 0) + 17;
-	bctValue[0] = bctString[debugModeLocation] - 48;
-	bctValue[1] = bctString[debugModeUserLocation] - 48;
+	size_t debugModeLocation = bctString.find("debugmode = ", 0) + 12;
+	size_t debugModeUserLocation = bctString.find("debugmode_user = ", 0) + 17;
+	if (debugModeLocation == string::npos) {
+		bctValue[0] = -1;
+	}
+	else {
+		bctValue[0] = bctString[debugModeLocation] - 48;
+	}
+	if (debugModeUserLocation == string::npos) {
+		bctValue[1] = -1;
+	}
+	else {
+		bctValue[1] = bctString[debugModeUserLocation] - 48;
+	}
 }
 
 void setKip(int kipId, bool enabled) {
