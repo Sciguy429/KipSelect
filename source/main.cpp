@@ -204,9 +204,9 @@ void updateScreen() {
 	printf(CONSOLE_ESC(2J));
 	printf(CONSOLE_MAGENTA CONSOLE_ESC(4m) "Kip Select V%d.%d.%d", VERSION_MAJOR, VERSION_MINOR, VERSION_MICRO);
 	printf(CONSOLE_RESET " (+ To Exit Back To HB-Menu, - To Refresh, Y To Restart)");
-	printf(CONSOLE_ESC(45; 68H) CONSOLE_MAGENTA "-By Sciguy429");
-	printf(CONSOLE_ESC(4; 1H) CONSOLE_RESET CONSOLE_ESC(4m) "Installed Kips:");
-	printf(CONSOLE_ESC(4; 59H) "BCT.ini:\n");
+	printf(CONSOLE_ESC(45;68H) CONSOLE_MAGENTA "-By Sciguy429");
+	printf(CONSOLE_ESC(4;1H) CONSOLE_RESET CONSOLE_ESC(4m) "Installed Kips:");
+	printf(CONSOLE_ESC(4;59H) "BCT.ini:\n");
 	printf(CONSOLE_RESET);
 	for (int i = 0; i < kipCount; i++) {
 		if (kipValue[i]) {
@@ -221,7 +221,7 @@ void updateScreen() {
 		printf(" * %s\n", kipName[i].c_str());
 		printf(CONSOLE_RESET);
 	}
-	printf(CONSOLE_ESC(5; 1H));
+	printf(CONSOLE_ESC(5;1H));
 	for (int i = 0; i < BCT_LIST_LENGTH; i++) {
 		printf(CONSOLE_ESC(58C));
 		string bctStatus;
