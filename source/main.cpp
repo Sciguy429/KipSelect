@@ -8,8 +8,8 @@
 
 using namespace std;
 
-#define KIP_LIST_LENGTH 32
-#define BCT_LIST_LENGTH 2
+#define KIP_LIST_LENGTH 32 //Maximum number of kip files the program supports
+#define BCT_LIST_LENGTH 2 //Amount of bct values currently editable
 
 string kipName[KIP_LIST_LENGTH];
 string bctName[BCT_LIST_LENGTH] = { "debugmode = ", "debugmode_user = " };
