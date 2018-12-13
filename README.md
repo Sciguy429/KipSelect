@@ -1,3 +1,6 @@
+# GFX Test Branch
+This is a alpha GUI for Kip Select, build at your own risk
+
 # Kip Select
 ![screenshot](https://github.com/Sciguy429/KipSelect/raw/master/icon/ExampleScreenshot.jpg)
 This is a WIP kip manager for atmosphere's fusée launcher, this homebrew will not work with Kosmos, or any other pack that boots from hekate, while it will run it wont do anything as hekate controls what kips load in those packs. This homebrew is intended only for use with 'vanilla' atmosphere, launched with fusée.
