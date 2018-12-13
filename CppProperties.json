@@ -7,7 +7,8 @@
         "C:\\devkitpro\\devkitA64\\include\\**",
         "C:\\devkitpro\\devkitA64\\aarch64-none-elf\\include\\**",
         "C:\\devkitPro\\devkitA64\\lib\\gcc\\aarch64-none-elf\\8.2.0\\include\\**",
-        "${workspaceRoot}\\source\\**"
+        "${workspaceRoot}\\source\\**",
+        "${workspaceRoot}\\include\\**"
       ],
       "defines": [
         "VERSION_MAJOR",
