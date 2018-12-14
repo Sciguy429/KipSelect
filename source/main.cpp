@@ -22,11 +22,11 @@ int main(int argc, char **argv)
 	log("Scanning For BCT Values", LOG_LEVEL_INFO);
 	bct.readBCT();
 	log(SSTR("Found " << bct.getBCTCount() << " BCT Values"), LOG_LEVEL_INFO);
-	while (appletMainLoop) {
+	while (appletMainLoop && run) {
 		hidScanInput();
 		u32 kdown = hidKeysDown(CONTROLLER_P1_AUTO);
 		if (kdown & KEY_PLUS) {
-			break;
+			run = false;
 		}
 		consoleUpdate(NULL);
 	}
