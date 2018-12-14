@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 	while (appletMainLoop && run) {
 		hidScanInput();
 		kDown = hidKeysDown(CONTROLLER_P1_AUTO);
-		if (kdown & KEY_PLUS) {
+		if (kDown & KEY_PLUS) {
 			run = false;
 		}
 		consoleUpdate(NULL);
