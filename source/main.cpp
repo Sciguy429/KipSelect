@@ -24,6 +24,7 @@ int main(int argc, char **argv) {
 	log(SSTR("Found " << bct.getBCTCount() << " BCT Values"), LOG_LEVEL_INFO);
 	gfxDrawPixel(0, 0, RGBA8(255, 0, 0, 0));
 	gfxDrawPixel(100, 100, RGBA8(0, 255, 0, 0));
+	gfxDrawLine(200, 200, 600, 600, RGBA8(0, 0, 255, 0));
 	while (appletMainLoop && run) {
 		hidScanInput();
 		kDown = hidKeysDown(CONTROLLER_P1_AUTO);
