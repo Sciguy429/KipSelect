@@ -1,4 +1,3 @@
-#include <switch.h>
 #include <fstream>
 #include <dirent.h>
 #include <sys/stat.h>
