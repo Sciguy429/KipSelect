@@ -6,6 +6,8 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
+#include "../include/console.h"
+
 using namespace std;
 
 #define KIP_LIST_LENGTH 32 //Maximum number of kip files the program supports
@@ -203,7 +205,20 @@ void setBCT(int bctId, bool enabled) {
 int main(int argc, char **argv)
 {
 	consoleInit(NULL);
-	//
+	initLocalConsole();
+
+	log("info test", LOG_LEVEL_INFO);
+	log("warning test", LOG_LEVEL_WARNING);
+	log("error test", LOG_LEVEL_ERROR);
+
+	while (appletMainLoop) {
+		hidScanInput();
+		u32 kdown = hidKeysDown(CONTROLLER_P1_AUTO);
+		if (kdown & KEY_PLUS) {
+			break;
+		}
+		consoleUpdate(NULL);
+	}
 	consoleExit(NULL);
 	return 0;
 }
