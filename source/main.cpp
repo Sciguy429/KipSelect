@@ -10,15 +10,14 @@
 
 using namespace std;
 
-#define KIP_LIST_LENGTH 32 //Maximum number of kip files the program supports
 #define BCT_LIST_LENGTH 2 //Amount of bct values currently editable
 
-string kipName[KIP_LIST_LENGTH];
+
 string bctName[BCT_LIST_LENGTH] = { "debugmode = ", "debugmode_user = " };
 int bctValue[BCT_LIST_LENGTH] = { -1, -1 };
 int menuSelected = 0;
 int kipCount = 0;
-bool kipValue[KIP_LIST_LENGTH];
+
 bool run = true;
 bool bctSelected = false;
 u64 kDown;
@@ -76,53 +75,6 @@ void printWarning(int warningCode, string extra) {
 		if (kDown & KEY_MINUS) {
 			return;
 		}
-	}
-}
-
-void scanForKips() {
-	kipCount = 0;
-	DIR* enabledKipDir;
-	struct dirent* enabledKipEnt;
-	enabledKipDir = opendir("/atmosphere/kips/");
-	if (enabledKipDir == NULL) {
-		if (mkdir("/atmosphere/kips/", 0700) == -1) {
-			printError(0, "/atmosphere/kips/");
-		}
-	}
-	else {
-		while ((enabledKipEnt = readdir(enabledKipDir))) {
-			kipName[kipCount] = enabledKipEnt->d_name;
-			kipValue[kipCount] = true;
-			kipCount++;
-			if (kipCount == KIP_LIST_LENGTH) {
-				kipCount = 0; //Set the kip count back to 0 to prevent a crash screen from showing
-				printError(2, "");
-				return;
-			}
-		}
-	}
-	DIR* disabledKipDir;
-	struct dirent* disabledKipEnt;
-	disabledKipDir = opendir("/atmosphere/kips_disabled/");
-	if (disabledKipDir == NULL) {
-		if (mkdir("/atmosphere/kips_disabled/", 0700) == -1) {
-			printError(0, "/atmosphere/kips_disabled/");
-		}
-	}
-	else {
-		while ((disabledKipEnt = readdir(disabledKipDir))) {
-			kipName[kipCount] = disabledKipEnt->d_name;
-			kipValue[kipCount] = false;
-			kipCount++;
-			if (kipCount == KIP_LIST_LENGTH) {
-				kipCount = 0; //Set the kip count back to 0 to prevent a crash screen from showing
-				printError(2, "");
-				return;
-			}
-		}
-	}
-	if (kipCount == 0) {
-		printError(1, "");
 	}
 }
 
