@@ -9,7 +9,7 @@
 
 using namespace std;
 
-void kip::scanForKip() {
+void KIP::scanForKip() {
 	int kipCount = 0;
 	DIR* enabledKipDir;
 	struct dirent* enabledKipEnt;
@@ -61,7 +61,7 @@ void kip::scanForKip() {
 	}
 }
 
-void kip::setKip(int kipId, bool enabled) {
+void KIP::setKip(int kipId, bool enabled) {
 	string name = kipName[kipId];
 	string start = "/atmosphere/";
 	string end = "/atmosphere/";

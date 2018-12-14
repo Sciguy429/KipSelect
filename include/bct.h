@@ -4,7 +4,7 @@
 
 #define BCT_LIST_LENGTH 2
 
-class bct {
+class BCT {
 public:
 	void readBCT();
 	void setBCT(int bctId, bool enabled);

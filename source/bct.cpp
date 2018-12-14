@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void bct::readBCT() {
+void BCT::readBCT() {
 	ifstream bctIfStream("/atmosphere/BCT.ini");
 	string bctString((std::istreambuf_iterator<char>(bctIfStream)), (std::istreambuf_iterator<char>()));
 	bctIfStream.close();
@@ -26,7 +26,7 @@ void bct::readBCT() {
 	}
 }
 
-void bct::setBCT(int bctId, bool enabled) {
+void BCT::setBCT(int bctId, bool enabled) {
 	size_t location = string::npos;
 	ifstream bctIfStream("/atmosphere/BCT.ini");
 	string bctString((std::istreambuf_iterator<char>(bctIfStream)), (std::istreambuf_iterator<char>()));

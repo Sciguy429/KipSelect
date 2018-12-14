@@ -71,12 +71,17 @@ void printWarning(int warningCode, string extra) {
 */
 int main(int argc, char **argv)
 {
+	KIP kip;
+	BCT bct;
 	consoleInit(NULL);
 	initLocalConsole();
 
 	log("info test", LOG_LEVEL_INFO);
 	log("warning test", LOG_LEVEL_WARNING);
 	log("error test", LOG_LEVEL_ERROR);
+
+	kip.scanForKip();
+	bct.readBCT();
 
 	while (appletMainLoop) {
 		hidScanInput();

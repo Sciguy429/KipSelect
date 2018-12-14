@@ -4,7 +4,7 @@
 
 #define KIP_LIST_LENGTH 32
 
-class kip {
+class KIP {
 public:
 	void scanForKip();
 	void setKip(int kipId, bool enabled);
