@@ -1,10 +1,5 @@
 #include <switch.h>
 #include <string>
-#include <fstream>
-#include <stdio.h>
-#include <dirent.h>
-#include <sys/stat.h>
-#include <sys/types.h>
 
 #include "console.h"
 #include "kip.h"
