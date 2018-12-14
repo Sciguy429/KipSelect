@@ -10,8 +10,7 @@ using namespace std;
 bool run = true;
 u64 kDown;
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
 	KIP kip;
 	BCT bct;
 	consoleInit(NULL);
