@@ -18,7 +18,7 @@ int main(int argc, char **argv) {
 	log("Scanning For Kips", LOG_LEVEL_INFO);
 	kip.scanForKip();
 	log(SSTR("Found " << kip.getKipCount() << " Kips"), LOG_LEVEL_INFO);
-	log("Scanning For BCT Values", LOG_LEVEL_INFO);
+	log("Reading BCT Values", LOG_LEVEL_INFO);
 	bct.readBCT();
 	log(SSTR("Found " << bct.getBCTCount() << " BCT Values"), LOG_LEVEL_INFO);
 	while (appletMainLoop && run) {
