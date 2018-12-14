@@ -8,11 +8,7 @@ using namespace std;
 
 void initLocalConsole() {
 	consoleClear();
-	printf(CONSOLE_ESC(4m) "Local Debug Console Started!\n\n" CONSOLE_RESET);
-}
-
-void initRemoteConsole() {
-
+	printf(CONSOLE_ESC(4m) "Loading Kip Select...\n\n" CONSOLE_RESET);
 }
 
 void log(string str, int logLevel) {

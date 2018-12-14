@@ -10,6 +10,4 @@
 
 void initLocalConsole();
 
-void initRemoteConsole();
-
 void log(std::string str, int logLevel);
