@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string>
 
-#include "../include/console.h"
+#include "console.h"
 
 using namespace std;
 

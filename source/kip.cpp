@@ -4,10 +4,12 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#include "../include/kip.h"
-#include "../include/console.h"
+#include "kip.h"
+#include "console.h"
 
-void scanForKip() {
+using namespace std;
+
+void kip::scanForKip() {
 	int kipCount = 0;
 	DIR* enabledKipDir;
 	struct dirent* enabledKipEnt;
@@ -59,7 +61,7 @@ void scanForKip() {
 	}
 }
 
-void setKip(int kipId, bool enabled) {
+void kip::setKip(int kipId, bool enabled) {
 	string name = kipName[kipId];
 	string start = "/atmosphere/";
 	string end = "/atmosphere/";
