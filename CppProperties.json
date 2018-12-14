@@ -3,6 +3,7 @@
     {
       "name": "Switch",
       "includePath": [
+        "${workspaceRoot}\\include",
         "C:\\devkitpro\\libnx\\include\\**",
         "C:\\devkitpro\\devkitA64\\include\\**",
         "C:\\devkitpro\\devkitA64\\aarch64-none-elf\\include\\**",
