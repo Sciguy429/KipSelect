@@ -1,1 +1,8 @@
-//Menu h stub
+#pragma once
+
+//
+
+class menu {
+public:
+
+};

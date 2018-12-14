@@ -2,6 +2,7 @@
 #include <string>
 
 #include "console.h"
+#include "gfx.h"
 #include "kip.h"
 #include "bct.h"
 
@@ -13,7 +14,7 @@ u64 kDown;
 int main(int argc, char **argv) {
 	KIP kip;
 	BCT bct;
-	consoleInit(NULL);
+	gfxInit(1280, 720);
 	initLocalConsole();
 	log("Scanning For Kips", LOG_LEVEL_INFO);
 	kip.scanForKip();
@@ -21,6 +22,8 @@ int main(int argc, char **argv) {
 	log("Reading BCT Values", LOG_LEVEL_INFO);
 	bct.readBCT();
 	log(SSTR("Found " << bct.getBCTCount() << " BCT Values"), LOG_LEVEL_INFO);
+	gfxDrawPixel(0, 0, RGBA8(255, 0, 0, 0));
+	gfxDrawPixel(100, 100, RGBA8(0, 255, 0, 0));
 	while (appletMainLoop && run) {
 		hidScanInput();
 		kDown = hidKeysDown(CONTROLLER_P1_AUTO);
