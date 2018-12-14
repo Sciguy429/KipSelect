@@ -9,7 +9,6 @@
 using namespace std;
 
 void KIP::scanForKip() {
-	int kipCount = 0;
 	DIR* enabledKipDir;
 	struct dirent* enabledKipEnt;
 	enabledKipDir = opendir("/atmosphere/kips/");
@@ -78,4 +77,16 @@ void KIP::setKip(int kipId, bool enabled) {
 		//printError(3, name);
 		log("Unable To Move Kip Between Dirrectories", LOG_LEVEL_ERROR);
 	}
+}
+
+int KIP::getKipCount() {
+	return kipCount;
+}
+
+string KIP::getKipName(int kipId) {
+	return kipName[kipId];
+}
+
+bool KIP::getKipValue(int kipId) {
+	return kipValue[kipId];
 }
