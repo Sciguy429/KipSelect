@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 	log(SSTR("Found " << bct.getBCTCount() << " BCT Values"), LOG_LEVEL_INFO);
 	while (appletMainLoop && run) {
 		hidScanInput();
-		u32 kdown = hidKeysDown(CONTROLLER_P1_AUTO);
+		kDown = hidKeysDown(CONTROLLER_P1_AUTO);
 		if (kdown & KEY_PLUS) {
 			run = false;
 		}
