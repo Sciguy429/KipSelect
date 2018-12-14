@@ -64,3 +64,15 @@ void BCT::setBCT(int bctId, bool enabled) {
 		log("Couldnt Find Value In /atmosphere/BCT.ini", LOG_LEVEL_ERROR);
 	}
 }
+
+int BCT::getBCTCount() {
+	return BCT_LIST_LENGTH;
+}
+
+string BCT::getBCTName(int bctId) {
+	return bctName[bctId];
+}
+
+bool BCT::getBCTValue(int bctId) {
+	return bctValue[bctId];
+}

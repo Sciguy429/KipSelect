@@ -8,6 +8,9 @@ class BCT {
 public:
 	void readBCT();
 	void setBCT(int bctId, bool enabled);
+	int getBCTCount();
+	std::string getBCTName(int bctId);
+	bool getBCTValue(int bctId);
 private:
 	std::string bctName[BCT_LIST_LENGTH];
 	bool bctValue[BCT_LIST_LENGTH];
