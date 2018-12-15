@@ -33,6 +33,7 @@ int main(int argc, char **argv) {
 	gfxDrawRect(600, 325, 650, 350, RGBA8(255, 0, 0, 0), true);
 	gfxDrawLine(0, 0, 1280 - 1, 720 - 1, RGBA8(255, 255, 255, 0));
 	gfxDrawPixel(1280 - 1, 720 - 1, RGBA8(255, 0, 0, 0));
+	gfxDrawRect(300, 300, 100, 100, RGBA8(255, 255, 255, 0), true);
 
 	while (appletMainLoop && run) {
 		hidScanInput();

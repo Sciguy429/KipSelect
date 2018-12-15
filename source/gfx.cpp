@@ -65,7 +65,7 @@ void gfxDrawRect(unsigned int tx, unsigned int ty, unsigned int bx, unsigned int
 	int width = by - ty;
 	if ((length > 0) || (width > 0)) {
 		if (fill) {
-			for (unsigned int i = 0; i < length; i++) {
+			for (int i = 0; i < length; i++) {
 				gfxDrawVerticalLine(tx + i, ty, width, clr);
 			}
 		}
