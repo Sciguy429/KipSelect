@@ -164,13 +164,13 @@ texture *gfxCreateTextureFromPNG(const char *path) {
 	return NULL;
 }
 
-void gfxTextureBlit(texture *target, texture *source, unsigned int x, unsigned int y) {
+void gfxTextureBlit(texture *target, texture *source, unsigned int x, unsigned int y, unsigned int alpha) {
 	if (source != NULL) {
 		uint32_t *dataPtr = &source->data[0];
 		for (unsigned int ty = y; ty < y + source->height; ty++) {
 			uint32_t *rowPtr = &target->data[ty * target->width + x];
 			for (unsigned int tx = x; tx < x + source->width; tx++, rowPtr++) {
-				*rowPtr = colorBlendAlpha(*dataPtr++, *rowPtr, 0);
+				*rowPtr = colorBlendAlpha(*dataPtr++, *rowPtr, alpha);
 			}
 		}
 	}

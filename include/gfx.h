@@ -30,6 +30,6 @@ void gfxDestroyTexture(texture *tex);
 
 texture *gfxCreateTextureFromPNG(const char *path);
 
-void gfxTextureBlit(texture *target, texture *source, unsigned int x, unsigned int y);
+void gfxTextureBlit(texture *target, texture *source, unsigned int x, unsigned int y, unsigned int alpha);
 
 extern texture *frameBuffer;

@@ -24,6 +24,10 @@ int main(int argc, char **argv) {
 	bct.readBCT();
 	log(SSTR("Found " << bct.getBCTCount() << " BCT Values"), LOG_LEVEL_INFO);
 
+	texture *backround = gfxCreateTextureFromPNG("romfs:/backround.png");
+	gfxTextureBlit(frameBuffer, backround, 0, 0, 0);
+	gfxDestroyTexture(backround);
+
 	gfxDrawPixel(frameBuffer, 0, 0, RGBA8(255, 0, 0, 0));
 	gfxDrawPixel(frameBuffer, 100, 100, RGBA8(0, 255, 0, 0));
 	gfxDrawLine(frameBuffer, 200, 200, 600, 600, RGBA8(0, 0, 255, 0));
@@ -38,11 +42,11 @@ int main(int argc, char **argv) {
 	texture *test = gfxCreateTexture(200, 200);
 	gfxDrawRect(test, 0, 0, 100, 100, RGBA8(255, 0, 0, 0), true);
 	gfxDrawRect(test, 100, 100, 199, 199, RGBA8(0, 255, 0, 0), true);
-	gfxTextureBlit(frameBuffer, test, 600, 500);
+	gfxTextureBlit(frameBuffer, test, 600, 500, 0);
 	gfxDestroyTexture(test);
 
 	texture *icon = gfxCreateTextureFromPNG("romfs:/icon.png");
-	gfxTextureBlit(frameBuffer, icon, 1280 - 256, 720 - 256);
+	gfxTextureBlit(frameBuffer, icon, 1280 - 256, 720 - 256, 0);
 	gfxDestroyTexture(icon);
 
 	while (appletMainLoop() && run) {
