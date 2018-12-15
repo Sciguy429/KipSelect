@@ -21,7 +21,9 @@ void gfxHandelBuffers() {
 void gfxDrawPixel(unsigned int x, unsigned int y, uint32_t clr) {
 	u32 width, height;
 	framebuf = (u32*)gfxGetFramebuffer((u32*)&width, (u32*)&height);
-	framebuf[y * width + x] = clr;
+	if ((x < width) && (y < height)) {
+		framebuf[y * width + x] = clr;
+	}
 }
 
 void gfxDrawLine(unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, uint32_t clr) {
