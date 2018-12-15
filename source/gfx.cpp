@@ -105,3 +105,12 @@ void gfxDestroyTexture(texture *tex) {
 		free(tex);
 	}
 }
+
+texture *gfxTextureLoadPNG(std::string path) {
+	//stub
+	return NULL;
+}
+
+void gfxTextureBlit(texture * target, texture * source, unsigned int x, unsigned int y) {
+	//stub
+}
