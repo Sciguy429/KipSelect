@@ -96,7 +96,7 @@ void gfxDrawRect(texture *tex, unsigned int tx, unsigned int ty, unsigned int bx
 	}
 }
 
-void gfxTextureBlit(texture *target, texture *source, unsigned int x, unsigned int y, unsigned int alpha) {
+void gfxBlit(texture *target, texture *source, unsigned int x, unsigned int y, unsigned int alpha) {
 	if (source != NULL) {
 		uint32_t *dataPtr = &source->data[0];
 		for (unsigned int ty = y; ty < y + source->height; ty++) {
