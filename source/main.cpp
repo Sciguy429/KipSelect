@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
 	bct.readBCT();
 	//log(SSTR("Found " << bct.getBCTCount() << " BCT Values"), LOG_LEVEL_INFO);
 
-	texture *backround = gfxCreateTextureFromPNG("romfs:/backround.png");
+	texture *backround = gfxCreateTextureFromPNG("romfs:/png/backround.png");
 	gfxBlit(frameBuffer, backround, 0, 0, 0);
 	gfxDestroyTexture(backround);
 
@@ -46,7 +46,7 @@ int main(int argc, char **argv) {
 	gfxBlit(frameBuffer, test, 600, 500, 0);
 	gfxDestroyTexture(test);
 
-	texture *icon = gfxCreateTextureFromPNG("romfs:/icon.png");
+	texture *icon = gfxCreateTextureFromPNG("romfs:/png/icon.png");
 	gfxBlit(frameBuffer, icon, 1280 - 256, 720 - 256, 0);
 	gfxDestroyTexture(icon);
 
