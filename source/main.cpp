@@ -40,6 +40,7 @@ int main(int argc, char **argv) {
 	gfxDrawPixel(frameBuffer, 1280 - 1, 720 - 1, RGBA8(255, 0, 0, 0));
 
 	texture *test = gfxCreateTexture(200, 200);
+	gfxFill(test, RGBA8(0, 0, 255, 0));
 	gfxDrawRect(test, 0, 0, 100, 100, RGBA8(255, 0, 0, 0), true);
 	gfxDrawRect(test, 100, 100, 199, 199, RGBA8(0, 255, 0, 0), true);
 	gfxBlit(frameBuffer, test, 600, 500, 0);
