@@ -96,6 +96,18 @@ void gfxDrawRect(texture *tex, unsigned int tx, unsigned int ty, unsigned int bx
 	}
 }
 
+void gfxTextureBlit(texture *target, texture *source, unsigned int x, unsigned int y, unsigned int alpha) {
+	if (source != NULL) {
+		uint32_t *dataPtr = &source->data[0];
+		for (unsigned int ty = y; ty < y + source->height; ty++) {
+			uint32_t *rowPtr = &target->data[ty * target->width + x];
+			for (unsigned int tx = x; tx < x + source->width; tx++, rowPtr++) {
+				*rowPtr = colorBlendAlpha(*dataPtr++, *rowPtr, alpha);
+			}
+		}
+	}
+}
+
 texture *gfxCreateTexture(unsigned int width, unsigned int height) {
 	texture *tex = (texture*)malloc(sizeof(texture));
 	tex->width = width;
@@ -162,16 +174,4 @@ texture *gfxCreateTextureFromPNG(const char *path) {
 		return tex;
 	}
 	return NULL;
-}
-
-void gfxTextureBlit(texture *target, texture *source, unsigned int x, unsigned int y, unsigned int alpha) {
-	if (source != NULL) {
-		uint32_t *dataPtr = &source->data[0];
-		for (unsigned int ty = y; ty < y + source->height; ty++) {
-			uint32_t *rowPtr = &target->data[ty * target->width + x];
-			for (unsigned int tx = x; tx < x + source->width; tx++, rowPtr++) {
-				*rowPtr = colorBlendAlpha(*dataPtr++, *rowPtr, alpha);
-			}
-		}
-	}
 }
