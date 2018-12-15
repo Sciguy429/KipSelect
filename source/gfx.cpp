@@ -96,6 +96,10 @@ void gfxDrawRect(texture *tex, unsigned int tx, unsigned int ty, unsigned int bx
 	}
 }
 
+void gfxFill(texture * tex, uint32_t clr) {
+	//stub
+}
+
 void gfxBlit(texture *target, texture *source, unsigned int x, unsigned int y, unsigned int alpha) {
 	if (source != NULL) {
 		uint32_t *dataPtr = &source->data[0];

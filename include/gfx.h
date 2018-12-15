@@ -24,6 +24,8 @@ void gfxDrawHorizontalLine(texture *tex, unsigned int x, unsigned int y, unsigne
 
 void gfxDrawRect(texture *tex, unsigned int tx, unsigned int ty, unsigned int bx, unsigned int by, uint32_t clr, bool fill);
 
+void gfxFill(texture *tex, uint32_t clr);
+
 void gfxBlit(texture *target, texture *source, unsigned int x, unsigned int y, unsigned int alpha);
 
 texture *gfxCreateTexture(unsigned int width, unsigned int height);
