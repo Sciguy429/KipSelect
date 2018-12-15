@@ -23,17 +23,16 @@ int main(int argc, char **argv) {
 	bct.readBCT();
 	log(SSTR("Found " << bct.getBCTCount() << " BCT Values"), LOG_LEVEL_INFO);
 
-	gfxDrawPixel(0, 0, RGBA8(255, 0, 0, 0));
-	gfxDrawPixel(100, 100, RGBA8(0, 255, 0, 0));
-	gfxDrawLine(200, 200, 600, 600, RGBA8(0, 0, 255, 0));
-	gfxDrawVerticalLine(500, 500, 100, RGBA8(255, 255, 0, 0));
-	gfxDrawHorizontalLine(500, 500, 100, RGBA8(255, 0, 255, 0));
-	gfxDrawRect(400, 300, 500, 350, RGBA8(255, 255, 0, 0), false);
-	gfxDrawRect(550, 300, 650, 350, RGBA8(0, 255, 255, 0), true);
-	gfxDrawRect(600, 325, 650, 350, RGBA8(255, 0, 0, 0), true);
-	gfxDrawLine(0, 0, 1280 - 1, 720 - 1, RGBA8(255, 255, 255, 0));
-	gfxDrawPixel(1280 - 1, 720 - 1, RGBA8(255, 0, 0, 0));
-	gfxDrawRect(300, 300, 100, 100, RGBA8(255, 255, 255, 0), true);
+	gfxDrawPixel(frameBuffer, 0, 0, RGBA8(255, 0, 0, 0));
+	gfxDrawPixel(frameBuffer, 100, 100, RGBA8(0, 255, 0, 0));
+	gfxDrawLine(frameBuffer, 200, 200, 600, 600, RGBA8(0, 0, 255, 0));
+	gfxDrawVerticalLine(frameBuffer, 500, 500, 100, RGBA8(255, 255, 0, 0));
+	gfxDrawHorizontalLine(frameBuffer, 500, 500, 100, RGBA8(255, 0, 255, 0));
+	gfxDrawRect(frameBuffer, 400, 300, 500, 350, RGBA8(255, 255, 0, 0), false);
+	gfxDrawRect(frameBuffer, 550, 300, 650, 350, RGBA8(0, 255, 255, 0), true);
+	gfxDrawRect(frameBuffer, 600, 325, 650, 350, RGBA8(255, 0, 0, 0), true);
+	gfxDrawLine(frameBuffer, 0, 0, 1280 - 1, 720 - 1, RGBA8(255, 255, 255, 0));
+	gfxDrawPixel(frameBuffer, 1280 - 1, 720 - 1, RGBA8(255, 0, 0, 0));
 
 	while (appletMainLoop && run) {
 		hidScanInput();
