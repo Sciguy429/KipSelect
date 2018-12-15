@@ -30,6 +30,7 @@ int main(int argc, char **argv) {
 	gfxDrawHorizontalLine(500, 500, 100, RGBA8(255, 0, 255, 0));
 	gfxDrawRect(400, 300, 500, 350, RGBA8(255, 255, 0, 0), false);
 	gfxDrawRect(550, 300, 650, 350, RGBA8(0, 255, 255, 0), true);
+	gfxDrawRect(600, 325, 650, 350, RGBA8(255, 0, 0, 0), true);
 	gfxDrawLine(0, 0, 1280 - 1, 720 - 1, RGBA8(255, 255, 255, 0));
 	gfxDrawPixel(1280 - 1, 720 - 1, RGBA8(255, 0, 0, 0));
 

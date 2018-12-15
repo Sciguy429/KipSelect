@@ -49,13 +49,13 @@ void gfxDrawLine(unsigned int x0, unsigned int y0, unsigned int x1, unsigned int
 }
 
 void gfxDrawVerticalLine(unsigned int x, unsigned int y, unsigned int length, uint32_t clr) {
-	for (int i = 0; i < length; i++) {
+	for (unsigned int i = 0; i < length; i++) {
 		gfxDrawPixel(x, y + i, clr);
 	}
 }
 
 void gfxDrawHorizontalLine(unsigned int x, unsigned int y, unsigned int length, uint32_t clr) {
-	for (int i = 0; i < length; i++) {
+	for (unsigned int i = 0; i < length; i++) {
 		gfxDrawPixel(x + i, y, clr);
 	}
 }
@@ -64,7 +64,7 @@ void gfxDrawRect(unsigned int tx, unsigned int ty, unsigned int bx, unsigned int
 	int length = bx - tx;
 	int width = by - ty;
 	if (fill) {
-		for (int i = 0; i < length; i++) {
+		for (unsigned int i = 0; i < length; i++) {
 			gfxDrawVerticalLine(tx + i, ty, width, clr);
 		}
 	}
