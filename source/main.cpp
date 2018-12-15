@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
 	gfxDestroyTexture(test);
 
 	texture *icon = gfxCreateTextureFromPNG("romfs:/icon.png");
-	gfxTextureBlit(frameBuffer, icon, 1280 - 256 - 1, 720 - 256 - 1);
+	gfxTextureBlit(frameBuffer, icon, 1280 - 256, 720 - 256);
 	gfxDestroyTexture(icon);
 
 	while (appletMainLoop() && run) {
