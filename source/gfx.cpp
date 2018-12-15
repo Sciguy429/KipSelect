@@ -96,7 +96,7 @@ void gfxDrawRect(texture *tex, unsigned int tx, unsigned int ty, unsigned int bx
 	}
 }
 
-void gfxFill(texture * tex, uint32_t clr) {
+void gfxFill(texture *tex, uint32_t clr) {
 	uint32_t *dataPtr = &tex->data[0];
 	for (unsigned int y = 0; y < tex->height; y++) {
 		for (unsigned int x = 0; x < tex->width; x++) {
