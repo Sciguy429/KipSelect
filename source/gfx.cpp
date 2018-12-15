@@ -63,15 +63,17 @@ void gfxDrawHorizontalLine(unsigned int x, unsigned int y, unsigned int length, 
 void gfxDrawRect(unsigned int tx, unsigned int ty, unsigned int bx, unsigned int by, uint32_t clr, bool fill) {
 	int length = bx - tx;
 	int width = by - ty;
-	if (fill) {
-		for (unsigned int i = 0; i < length; i++) {
-			gfxDrawVerticalLine(tx + i, ty, width, clr);
+	if ((length > 0) || (width) > 0) {
+		if (fill) {
+			for (unsigned int i = 0; i < length; i++) {
+				gfxDrawVerticalLine(tx + i, ty, width, clr);
+			}
 		}
-	}
-	else {
-		gfxDrawHorizontalLine(tx, ty, length, clr);
-		gfxDrawHorizontalLine(tx, ty + width, length, clr);
-		gfxDrawVerticalLine(tx, ty, width, clr);
-		gfxDrawVerticalLine(tx + length, ty, width, clr);
+		else {
+			gfxDrawHorizontalLine(tx, ty, length, clr);
+			gfxDrawHorizontalLine(tx, ty + width, length, clr);
+			gfxDrawVerticalLine(tx, ty, width, clr);
+			gfxDrawVerticalLine(tx + length, ty, width, clr);
+		}
 	}
 }
