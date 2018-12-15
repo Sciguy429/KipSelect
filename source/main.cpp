@@ -45,6 +45,7 @@ int main(int argc, char **argv) {
 		}
 		consoleUpdate(NULL);
 	}
+	gfxCleanUp();
 	consoleExit(NULL);
 	return 0;
 }

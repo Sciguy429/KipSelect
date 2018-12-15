@@ -8,6 +8,8 @@ typedef struct {
 
 void gfxInit(unsigned int windowWidth, unsigned int windowHeight);
 
+void gfxCleanUp();
+
 void gfxHandelBuffers();
 
 void gfxDrawPixel(texture *tex, unsigned int x, unsigned int y, uint32_t clr);
@@ -19,5 +21,9 @@ void gfxDrawVerticalLine(texture *tex, unsigned int x, unsigned int y, unsigned 
 void gfxDrawHorizontalLine(texture *tex, unsigned int x, unsigned int y, unsigned int length, uint32_t clr);
 
 void gfxDrawRect(texture *tex, unsigned int tx, unsigned int ty, unsigned int bx, unsigned int by, uint32_t clr, bool fill);
+
+texture *gfxCreateTexture(unsigned int width, unsigned int height);
+
+void gfxDestroyTexture(texture *tex);
 
 extern texture *frameBuffer;

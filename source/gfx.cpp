@@ -1,4 +1,5 @@
 #include <switch.h>
+#include <cstring>
 #include <stdlib.h>
 
 #include "gfx.h"
@@ -10,12 +11,16 @@ void gfxInit(unsigned int windowWidth, unsigned int windowHeight) {
 	gfxInitDefault();
 	consoleInit(NULL);
 	gfxSetMode(GfxMode_LinearDouble);
-
 	frameBuffer = (texture*)malloc(sizeof(texture));
 	frameBuffer->width = windowWidth;
 	frameBuffer->height = windowHeight;
 	frameBuffer->data = (uint32_t*)gfxGetFramebuffer(NULL, NULL);
 	frameBuffer->size = windowWidth * windowHeight;
+}
+
+void gfxCleanUp() {
+	free(frameBuffer);
+	gfxExit();
 }
 
 void gfxHandelBuffers() {
@@ -79,5 +84,24 @@ void gfxDrawRect(texture *tex, unsigned int tx, unsigned int ty, unsigned int bx
 			gfxDrawVerticalLine(tex, tx, ty, width, clr);
 			gfxDrawVerticalLine(tex, tx + length, ty, width, clr);
 		}
+	}
+}
+
+texture *gfxCreateTexture(unsigned int width, unsigned int height) {
+	texture *tex = (texture*)malloc(sizeof(texture));
+	tex->width = width;
+	tex->height = height;
+	tex->data = (uint32_t*)malloc(width * height * sizeof(uint32_t));
+	memset(tex->data, 0, width * height * sizeof(uint32_t));
+	tex->size = tex->width * tex->height;
+	return tex;
+}
+
+void gfxDestroyTexture(texture *tex) {
+	if (tex->data != NULL) {
+		free(tex->data);
+	}
+	if (tex != NULL) {
+		free(tex);
 	}
 }
