@@ -14,6 +14,7 @@ u64 kDown;
 int main(int argc, char **argv) {
 	KIP kip;
 	BCT bct;
+	romfsInit();
 	gfxInit(1280, 720);
 	initLocalConsole();
 	log("Scanning For Kips", LOG_LEVEL_INFO);
@@ -40,6 +41,10 @@ int main(int argc, char **argv) {
 	gfxTextureBlit(frameBuffer, test, 600, 500);
 	gfxDestroyTexture(test);
 
+	texture *icon = gfxCreateTextureFromPNG("romfs:/icon.png");
+	gfxTextureBlit(frameBuffer, icon, 0, 0);
+	gfxDestroyTexture(icon);
+
 	while (appletMainLoop && run) {
 		hidScanInput();
 		kDown = hidKeysDown(CONTROLLER_P1_AUTO);
@@ -52,6 +57,7 @@ int main(int argc, char **argv) {
 		consoleUpdate(NULL);
 	}
 	gfxCleanUp();
+	romfsExit();
 	consoleExit(NULL);
 	return 0;
 }

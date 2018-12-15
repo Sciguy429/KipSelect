@@ -1,6 +1,7 @@
 #include <switch.h>
 #include <cstring>
 #include <stdlib.h>
+#include <png.h>
 
 #include "gfx.h"
 
@@ -114,8 +115,52 @@ void gfxDestroyTexture(texture *tex) {
 	}
 }
 
-texture *gfxTextureLoadPNG(std::string path) {
-	//stub
+texture *gfxCreateTextureFromPNG(const char *path) {
+	FILE *pngFile = fopen(path, "rb");
+	if (pngFile != NULL) {
+		png_structp pngReadStruct = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+		if (pngReadStruct == 0) {
+			return NULL;
+		}
+		png_infop pngInfoStruct = png_create_info_struct(pngReadStruct);
+		if (pngInfoStruct == 0) {
+			return NULL;
+		}
+		int pngJmp = setjmp(png_jmpbuf(pngReadStruct));
+		if (pngJmp) {
+			return NULL;
+		}
+		png_init_io(pngReadStruct, pngFile);
+		png_read_info(pngReadStruct, pngInfoStruct);
+		if (png_get_color_type(pngReadStruct, pngInfoStruct) != PNG_COLOR_TYPE_RGBA) {
+			png_destroy_read_struct(&pngReadStruct, &pngInfoStruct, NULL);
+			return NULL;
+		}
+		texture *tex = (texture*)malloc(sizeof(texture));
+		tex->width = png_get_image_width(pngReadStruct, pngInfoStruct);
+		tex->height = png_get_image_height(pngReadStruct, pngInfoStruct);
+		tex->data = (uint32_t*)malloc((tex->width * tex->height) * sizeof(uint32_t));
+		tex->size = tex->width * tex->height;
+		png_bytep *rows = (png_bytep*)malloc(sizeof(png_bytep) * tex->height);
+		for (unsigned int i = 0; i < tex->height; i++) {
+			rows[i] = (png_bytep)malloc(png_get_rowbytes(pngReadStruct, pngInfoStruct));
+		}
+		png_read_image(pngReadStruct, rows);
+		uint32_t *dataPtr = &tex->data[0];
+		for (unsigned int y = 0; y < tex->height; y++) {
+			uint32_t *rowPtr = (uint32_t*)rows[y];
+			for (unsigned int x = 0; x < tex->width; x++) {
+				*dataPtr++ = *rowPtr++;
+			}
+		}
+		for (unsigned int i = 0; i < tex->height; i++) {
+			free(rows[i]);
+		}
+		free(rows);
+		png_destroy_read_struct(&pngReadStruct, &pngInfoStruct, NULL);
+		fclose(pngFile);
+		return tex;
+	}
 	return NULL;
 }
 

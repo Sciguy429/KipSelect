@@ -1,7 +1,5 @@
 #pragma once
 
-#include <string>
-
 typedef struct {
 	size_t size;
 	unsigned width, height;
@@ -30,7 +28,7 @@ texture *gfxCreateTexture(unsigned int width, unsigned int height);
 
 void gfxDestroyTexture(texture *tex);
 
-texture *gfxTextureLoadPNG(std::string path);
+texture *gfxCreateTextureFromPNG(const char *path);
 
 void gfxTextureBlit(texture *target, texture *source, unsigned int x, unsigned int y);
 
