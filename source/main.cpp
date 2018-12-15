@@ -1,7 +1,7 @@
 #include <switch.h>
 #include <string>
 
-#include "console.h"
+//#include "console.h"
 #include "gfx.h"
 #include "kip.h"
 #include "bct.h"
