@@ -8,7 +8,7 @@
         "C:\\devkitpro\\devkitA64\\include\\**",
         "C:\\devkitpro\\devkitA64\\aarch64-none-elf\\include\\**",
         "C:\\devkitPro\\devkitA64\\lib\\gcc\\aarch64-none-elf\\8.2.0\\include\\**",
-        "C:\\devkitpro\\portlibs\\switch\\include\\",
+        "C:\\devkitpro\\portlibs\\switch\\include\\**",
         "${workspaceRoot}\\source\\**"
       ],
       "defines": [
