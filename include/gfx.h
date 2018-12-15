@@ -6,7 +6,7 @@ typedef struct {
 	uint32_t *data;
 } texture;
 
-unsigned int colorBlendAlpha(unsigned int colora, unsigned int colorb, unsigned int alpha);
+unsigned int gfxColorBlendAlpha(unsigned int colora, unsigned int colorb, unsigned int alpha);
 
 void gfxInit(unsigned int windowWidth, unsigned int windowHeight);
 

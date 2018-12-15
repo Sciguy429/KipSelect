@@ -7,7 +7,7 @@
 
 texture *frameBuffer;
 
-unsigned int colorBlendAlpha(unsigned int colora, unsigned int colorb, unsigned int alpha) {
+unsigned int gfxColorBlendAlpha(unsigned int colora, unsigned int colorb, unsigned int alpha) {
 	unsigned int rb1 = ((0x100 - alpha) * (colora & 0xFF00FF)) >> 8;
 	unsigned int rb2 = (alpha * (colorb & 0xFF00FF)) >> 8;
 	unsigned int g1 = ((0x100 - alpha) * (colora & 0x00FF00)) >> 8;
@@ -111,7 +111,7 @@ void gfxBlit(texture *target, texture *source, unsigned int x, unsigned int y, u
 		for (unsigned int ty = y; ty < y + source->height; ty++) {
 			uint32_t *rowPtr = &target->data[ty * target->width + x];
 			for (unsigned int tx = x; tx < x + source->width; tx++, rowPtr++) {
-				*rowPtr = colorBlendAlpha(*dataPtr++, *rowPtr, alpha);
+				*rowPtr = gfxColorBlendAlpha(*dataPtr++, *rowPtr, alpha);
 			}
 		}
 	}
