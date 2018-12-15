@@ -7,14 +7,6 @@
 
 texture *frameBuffer;
 
-unsigned int gfxColorBlendAlpha(unsigned int colora, unsigned int colorb, unsigned int alpha) {
-	unsigned int rb1 = ((0x100 - alpha) * (colora & 0xFF00FF)) >> 8;
-	unsigned int rb2 = (alpha * (colorb & 0xFF00FF)) >> 8;
-	unsigned int g1 = ((0x100 - alpha) * (colora & 0x00FF00)) >> 8;
-	unsigned int g2 = (alpha * (colorb & 0x00FF00)) >> 8;
-	return ((rb1 | rb2) & 0xFF00FF) + ((g1 | g2) & 0x00FF00);
-}
-
 void gfxInit(unsigned int windowWidth, unsigned int windowHeight) {
 	gfxInitResolution((uint32_t)windowWidth, (uint32_t)windowHeight);
 	gfxInitDefault();
@@ -36,6 +28,14 @@ void gfxHandelBuffers() {
 	gfxFlushBuffers();
 	gfxSwapBuffers();
 	gfxWaitForVsync();
+}
+
+unsigned int gfxColorBlendAlpha(unsigned int colora, unsigned int colorb, unsigned int alpha) {
+	unsigned int rb1 = ((0x100 - alpha) * (colora & 0xFF00FF)) >> 8;
+	unsigned int rb2 = (alpha * (colorb & 0xFF00FF)) >> 8;
+	unsigned int g1 = ((0x100 - alpha) * (colora & 0x00FF00)) >> 8;
+	unsigned int g2 = (alpha * (colorb & 0x00FF00)) >> 8;
+	return ((rb1 | rb2) & 0xFF00FF) + ((g1 | g2) & 0x00FF00);
 }
 
 void gfxDrawPixel(texture *tex, unsigned int x, unsigned int y, uint32_t clr) {
