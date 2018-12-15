@@ -1,5 +1,5 @@
 #include <switch.h>
-#include <cmath>
+#include <stdlib.h>
 
 #include "gfx.h"
 
@@ -47,13 +47,29 @@ void gfxDrawLine(int x0, int y0, int x1, int y1, uint32_t clr) {
 }
 
 void gfxDrawVerticalLine(int x, int y, int length, uint32_t clr) {
-	//stub
+	for (int i = 0; i < length; i++) {
+		gfxDrawPixel(x, y + i, clr);
+	}
 }
 
 void gfxDrawHorizontalLine(int x, int y, int lenght, uint32_t clr) {
-	//stub
+	for (int i = 0; i < lenght; i++) {
+		gfxDrawPixel(x + i, y, clr);
+	}
 }
 
 void gfxDrawRect(int tx, int ty, int bx, int by, uint32_t clr, bool fill) {
-	//stub
+	int length = bx - tx;
+	int width = by - ty;
+	if (fill) {
+		for (int i = 0; i < length; i++) {
+			gfxDrawVerticalLine(tx + i, ty, width, clr);
+		}
+	}
+	else {
+		gfxDrawHorizontalLine(tx, ty, length, clr);
+		gfxDrawHorizontalLine(tx, ty + width, length, clr);
+		gfxDrawVerticalLine(tx, ty, width, clr);
+		gfxDrawVerticalLine(tx + length, ty, width, clr);
+	}
 }
