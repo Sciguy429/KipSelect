@@ -38,6 +38,9 @@ int main(int argc, char **argv) {
 		if (kDown & KEY_PLUS) {
 			run = false;
 		}
+		if (kDown & KEY_A) {
+			gfxHandelBuffers();
+		}
 		consoleUpdate(NULL);
 	}
 	consoleExit(NULL);
