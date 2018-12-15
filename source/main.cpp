@@ -34,6 +34,12 @@ int main(int argc, char **argv) {
 	gfxDrawLine(frameBuffer, 0, 0, 1280 - 1, 720 - 1, RGBA8(255, 255, 255, 0));
 	gfxDrawPixel(frameBuffer, 1280 - 1, 720 - 1, RGBA8(255, 0, 0, 0));
 
+	texture *test = gfxCreateTexture(200, 200);
+	gfxDrawRect(test, 0, 0, 100, 100, RGBA8(255, 0, 0, 0), true);
+	gfxDrawRect(test, 100, 100, 199, 199, RGBA8(0, 255, 0, 0), true);
+	gfxTextureBlit(frameBuffer, test, 600, 500);
+	gfxDestroyTexture(test);
+
 	while (appletMainLoop && run) {
 		hidScanInput();
 		kDown = hidKeysDown(CONTROLLER_P1_AUTO);
