@@ -5,7 +5,7 @@
 
 u32* framebuf;
 
-void gfxInit(int windowWidth, int windowHeight) {
+void gfxInit(unsigned int windowWidth, unsigned int windowHeight) {
 	gfxInitResolution((uint32_t)windowWidth, (uint32_t)windowHeight);
 	gfxInitDefault();
 	consoleInit(NULL);
@@ -18,13 +18,13 @@ void gfxHandelBuffers() {
 	gfxWaitForVsync();
 }
 
-void gfxDrawPixel(int x, int y, uint32_t clr) {
+void gfxDrawPixel(unsigned int x, unsigned int y, uint32_t clr) {
 	u32 width, height;
 	framebuf = (u32*)gfxGetFramebuffer((u32*)&width, (u32*)&height);
 	framebuf[y * width + x] = clr;
 }
 
-void gfxDrawLine(int x0, int y0, int x1, int y1, uint32_t clr) {
+void gfxDrawLine(unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, uint32_t clr) {
 	int x = x1 - x0;
 	int y = y1 - y0;
 	int dx = abs(x), sx = x0 < x1 ? 1 : -1;
@@ -46,19 +46,19 @@ void gfxDrawLine(int x0, int y0, int x1, int y1, uint32_t clr) {
 	}
 }
 
-void gfxDrawVerticalLine(int x, int y, int length, uint32_t clr) {
+void gfxDrawVerticalLine(unsigned int x, unsigned int y, unsigned int length, uint32_t clr) {
 	for (int i = 0; i < length; i++) {
 		gfxDrawPixel(x, y + i, clr);
 	}
 }
 
-void gfxDrawHorizontalLine(int x, int y, int lenght, uint32_t clr) {
-	for (int i = 0; i < lenght; i++) {
+void gfxDrawHorizontalLine(unsigned int x, unsigned int y, unsigned int length, uint32_t clr) {
+	for (int i = 0; i < length; i++) {
 		gfxDrawPixel(x + i, y, clr);
 	}
 }
 
-void gfxDrawRect(int tx, int ty, int bx, int by, uint32_t clr, bool fill) {
+void gfxDrawRect(unsigned int tx, unsigned int ty, unsigned int bx, unsigned int by, uint32_t clr, bool fill) {
 	int length = bx - tx;
 	int width = by - ty;
 	if (fill) {
