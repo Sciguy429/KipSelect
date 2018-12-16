@@ -9,14 +9,15 @@ void MENU::init() {
 	menuOptSelected = 0;
 	//LOAD ASSETS
 	mainFont = gfxCreateFontFromTTF("romfs:/font/bahnschrift.ttf");
-	versionFont = gfxCreateFontFromTTF("romfs:/font/tt0288m_.ttf");
+	font *versionFont = gfxCreateFontFromTTF("romfs:/font/tt0288m_.ttf");
 	backroundTex = gfxCreateTextureFromPNG("romfs:/png/background.png");
 	menuBar = gfxCreateTextureFromPNG("romfs:/png/menu_bar.png");
 	menuBarSelected = gfxCreateTextureFromPNG("romfs:/png/menu_bar_selected.png");
 	//END LOAD ASSETS
 	std::ostringstream ss;
 	ss << "Version " << VERSION_MAJOR << '.' << VERSION_MINOR << '.' << VERSION_MICRO;
-	gfxDrawText(backroundTex, ss.str().c_str(), versionFont, 192, 135, 15, RGBA8(255, 255, 255, 0));
+	gfxDrawText(backroundTex, ss.str().c_str(), versionFont, 1170, 700, 16, RGBA8(255, 255, 255, 0));
+	gfxDestroyFont(versionFont);
 }
 
 void MENU::setTabSelected(unsigned int tabId) {
@@ -63,7 +64,6 @@ void MENU::drawMenu() {
 
 void MENU::destroyAssets() {
 	gfxDestroyFont(mainFont);
-	gfxDestroyFont(versionFont);
 	gfxDestroyTexture(backroundTex);
 	gfxDestroyTexture(menuBar);
 	gfxDestroyTexture(menuBarSelected);

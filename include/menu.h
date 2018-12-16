@@ -36,7 +36,6 @@ private:
 	unsigned int menuOptSelected;
 	texture *backroundTex;
 	font *mainFont;
-	font *versionFont;
 	texture *menuBar;
 	texture *menuBarSelected;
 	std::vector<menuTab> menuTabs;
