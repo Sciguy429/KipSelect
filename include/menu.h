@@ -2,7 +2,7 @@
 
 //
 
-class menu {
+class MENU {
 public:
 
 };
