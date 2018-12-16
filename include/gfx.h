@@ -40,9 +40,9 @@ void gfxBlit(texture *target, texture *source, unsigned int x, unsigned int y, u
 
 texture *gfxCreateTexture(unsigned int width, unsigned int height);
 
-void gfxDestroyTexture(texture *tex);
-
 texture *gfxCreateTextureFromPNG(const char *path);
+
+void gfxDestroyTexture(texture *tex);
 
 font *gfxCreateFontFromTTF(const char *path);
 

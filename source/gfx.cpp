@@ -55,6 +55,7 @@ void gfxInit(unsigned int windowWidth, unsigned int windowHeight) {
 	frameBuffer->height = windowHeight;
 	frameBuffer->data = (uint32_t*)gfxGetFramebuffer(NULL, NULL);
 	frameBuffer->size = windowWidth * windowHeight;
+	printf("Frambuffer located at address %p\n", (void*)frameBuffer);
 }
 
 void gfxCleanUp() {
@@ -180,16 +181,8 @@ texture *gfxCreateTexture(unsigned int width, unsigned int height) {
 	tex->data = (uint32_t*)malloc(width * height * sizeof(uint32_t));
 	memset(tex->data, 0, width * height * sizeof(uint32_t));
 	tex->size = tex->width * tex->height;
+	printf("Created empty %d by %d texture at address %p\n", width, height, (void*)tex);
 	return tex;
-}
-
-void gfxDestroyTexture(texture *tex) {
-	if (tex->data != NULL) {
-		free(tex->data);
-	}
-	if (tex != NULL) {
-		free(tex);
-	}
 }
 
 texture *gfxCreateTextureFromPNG(const char *path) {
@@ -236,9 +229,20 @@ texture *gfxCreateTextureFromPNG(const char *path) {
 		free(rows);
 		png_destroy_read_struct(&pngReadStruct, &pngInfoStruct, NULL);
 		fclose(pngFile);
+		printf("Created texture from %s at address %p\n", path, (void*)tex);
 		return tex;
 	}
 	return NULL;
+}
+
+void gfxDestroyTexture(texture *tex) {
+	if (tex->data != NULL) {
+		free(tex->data);
+	}
+	if (tex != NULL) {
+		free(tex);
+	}
+	printf("Destroyed texture at address %p\n", (void*)tex);
 }
 
 font *gfxCreateFontFromTTF(const char *path) {
@@ -259,6 +263,7 @@ font *gfxCreateFontFromTTF(const char *path) {
 		free(fnt);
 		return NULL;
 	}
+	printf("Created font from %s at address %p\n", path, (void*)fnt);
 	return fnt;
 }
 
@@ -273,4 +278,5 @@ void gfxDestroyFont(font *fnt) {
 		free(fnt->data);
 	}
 	free(fnt);
+	printf("Destroyed font at address %p\n", (void*)fnt);
 }
