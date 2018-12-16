@@ -2,6 +2,8 @@
 #include <cstring>
 #include <stdlib.h>
 #include <png.h>
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 #include "gfx.h"
 
