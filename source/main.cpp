@@ -50,6 +50,9 @@ int main(int argc, char **argv) {
 	gfxBlit(frameBuffer, icon, 1280 - 256, 720 - 256, 0);
 	gfxDestroyTexture(icon);
 
+	font *fnt = gfxCreateFontFromTTF("romfs:/font/sans.ttf");
+	gfxDestroyFont(fnt);
+
 	while (appletMainLoop() && run) {
 		hidScanInput();
 		kDown = hidKeysDown(CONTROLLER_P1_AUTO);

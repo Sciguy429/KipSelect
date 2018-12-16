@@ -1,10 +1,20 @@
 #pragma once
 
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
 typedef struct {
 	size_t size;
 	unsigned width, height;
 	uint32_t *data;
 } texture;
+
+typedef struct {
+	FT_Library lib;
+	FT_Face face[6];
+	FT_Error libRet, faceRet;
+	uint8_t *data;
+} font;
 
 void gfxInit(unsigned int windowWidth, unsigned int windowHeight);
 
@@ -33,5 +43,9 @@ texture *gfxCreateTexture(unsigned int width, unsigned int height);
 void gfxDestroyTexture(texture *tex);
 
 texture *gfxCreateTextureFromPNG(const char *path);
+
+font *gfxCreateFontFromTTF(const char *path);
+
+void gfxDestroyFont(font *fnt);
 
 extern texture *frameBuffer;

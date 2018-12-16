@@ -2,8 +2,6 @@
 #include <cstring>
 #include <stdlib.h>
 #include <png.h>
-#include <ft2build.h>
-#include FT_FREETYPE_H
 
 #include "gfx.h"
 
@@ -185,4 +183,38 @@ texture *gfxCreateTextureFromPNG(const char *path) {
 		return tex;
 	}
 	return NULL;
+}
+
+font *gfxCreateFontFromTTF(const char *path) {
+	font *fnt = (font*)malloc(sizeof(font));
+	if ((fnt->libRet = FT_Init_FreeType(&fnt->lib))) {
+		free(fnt);
+		return NULL;
+	}
+	FILE *ttfFile = fopen(path, "rb");
+	fseek(ttfFile, 0, SEEK_END);
+	size_t ttfFileSize = ftell(ttfFile);
+	fseek(ttfFile, 0, SEEK_SET);
+	fnt->data = (uint8_t*)malloc(ttfFileSize);
+	fread(fnt->data, 1, ttfFileSize, ttfFile);
+	fclose(ttfFile);
+	if ((fnt->faceRet = FT_New_Memory_Face(fnt->lib, fnt->data, ttfFileSize, 0, &fnt->face[0]))) {
+		free(fnt->data);
+		free(fnt);
+		return NULL;
+	}
+	return fnt;
+}
+
+void gfxDestroyFont(font *fnt) {
+	if (fnt->faceRet == 0) {
+		FT_Done_Face(fnt->face[0]);
+	}
+	if (fnt->libRet == 0) {
+		FT_Done_FreeType(fnt->lib);
+	}
+	if (fnt->data != NULL) {
+		free(fnt->data);
+	}
+	free(fnt);
 }
