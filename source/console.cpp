@@ -1,3 +1,6 @@
+//DEPRACATED, Will rework later
+
+
 #include <switch.h>
 #include <stdio.h>
 #include <string>

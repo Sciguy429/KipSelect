@@ -1,7 +1,6 @@
 #include <switch.h>
 #include <string>
 
-#include "console.h"
 #include "gfx.h"
 #include "kip.h"
 #include "bct.h"
@@ -13,6 +12,7 @@ bool run = true;
 u64 kDown;
 
 int main(int argc, char **argv) {
+	MENU menu;
 	KIP kip;
 	BCT bct;
 	romfsInit();
@@ -25,34 +25,7 @@ int main(int argc, char **argv) {
 	bct.readBCT();
 	//log(SSTR("Found " << bct.getBCTCount() << " BCT Values"), LOG_LEVEL_INFO);
 
-	texture *backround = gfxCreateTextureFromPNG("romfs:/png/backround.png");
-	gfxBlit(frameBuffer, backround, 0, 0, 0);
-	gfxDestroyTexture(backround);
-
-	gfxDrawPixel(frameBuffer, 0, 0, RGBA8(255, 0, 0, 0));
-	gfxDrawPixel(frameBuffer, 100, 100, RGBA8(0, 255, 0, 0));
-	gfxDrawLine(frameBuffer, 200, 200, 600, 600, RGBA8(0, 0, 255, 0));
-	gfxDrawVerticalLine(frameBuffer, 500, 500, 100, RGBA8(255, 255, 0, 0));
-	gfxDrawHorizontalLine(frameBuffer, 500, 500, 100, RGBA8(255, 0, 255, 0));
-	gfxDrawRect(frameBuffer, 400, 300, 500, 350, RGBA8(255, 255, 0, 0), false);
-	gfxDrawRect(frameBuffer, 550, 300, 650, 350, RGBA8(0, 255, 255, 0), true);
-	gfxDrawRect(frameBuffer, 600, 325, 650, 350, RGBA8(255, 0, 0, 0), true);
-	gfxDrawLine(frameBuffer, 0, 0, 1280 - 1, 720 - 1, RGBA8(255, 255, 255, 0));
-	gfxDrawPixel(frameBuffer, 1280 - 1, 720 - 1, RGBA8(255, 0, 0, 0));
-
-	texture *test = gfxCreateTexture(200, 200);
-	gfxFill(test, RGBA8(0, 0, 255, 0));
-	gfxDrawRect(test, 0, 0, 100, 100, RGBA8(255, 0, 0, 0), true);
-	gfxDrawRect(test, 100, 100, 199, 199, RGBA8(0, 255, 0, 0), true);
-	gfxBlit(frameBuffer, test, 600, 500, 0);
-	gfxDestroyTexture(test);
-
-	font *fnt = gfxCreateFontFromTTF("romfs:/font/sans.ttf");
-	gfxDrawText(frameBuffer, "Text Test\nNewline Test", fnt, 0, 200, 30, RGBA8(255, 255, 255, 0));
-	gfxDrawText(frameBuffer, "BLUE", fnt, 0, 400, 30, RGBA8(0, 0, 255, 0));
-	gfxDrawText(frameBuffer, "Kips", fnt, 25, 140, 25, RGBA8(255, 255, 255, 0));
-	gfxDrawText(frameBuffer, SSTR("Version " << VERSION_MAJOR << '.' << VERSION_MINOR << '.' << VERSION_MICRO).c_str(), fnt, 140, 80, 15, RGBA8(255, 255, 255, 0));
-	gfxDestroyFont(fnt);
+	menu.init();
 
 	while (appletMainLoop() && run) {
 		hidScanInput();
@@ -65,6 +38,7 @@ int main(int argc, char **argv) {
 		}
 		consoleUpdate(NULL);
 	}
+	menu.destroyAssets();
 	gfxCleanUp();
 	romfsExit();
 	consoleExit(NULL);
