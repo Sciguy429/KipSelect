@@ -34,9 +34,18 @@ public:
 private:
 	unsigned int menuTabSelected;
 	unsigned int menuOptSelected;
+	std::vector<menuTab> menuTabs;
+	//ASSETS
 	texture *background;
 	font *mainFont;
 	texture *menuBar;
 	texture *menuBarSelected;
-	std::vector<menuTab> menuTabs;
+	texture *tabKips;
+	texture *tabKipsSelected;
+	texture *tabBCT;
+	texture *tabBCTSelected;
+	texture *tabLayeredFS;
+	texture *tabLayeredFSSelected;
+	texture *tabOptions;
+	texture *tabOptionsSelected;
 };

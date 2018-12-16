@@ -11,8 +11,16 @@ void MENU::init() {
 	mainFont = gfxCreateFontFromTTF("romfs:/font/bahnschrift.ttf");
 	font *versionFont = gfxCreateFontFromTTF("romfs:/font/tt0288m_.ttf");
 	background = gfxCreateTextureFromPNG("romfs:/png/background.png");
-	menuBar = gfxCreateTextureFromPNG("romfs:/png/menu_bar.png");
-	menuBarSelected = gfxCreateTextureFromPNG("romfs:/png/menu_bar_selected.png");
+	menuBar = gfxCreateTextureFromPNG("romfs:/png/menu/menu_bar.png");
+	menuBarSelected = gfxCreateTextureFromPNG("romfs:/png/menu/menu_bar_selected.png");
+	tabKips = gfxCreateTextureFromPNG("romfs:/png/tab/tab_kips.png");
+	tabKipsSelected = gfxCreateTextureFromPNG("romfs:/png/tab/tab_kips_selected.png");
+	tabBCT = gfxCreateTextureFromPNG("romfs:/png/tab/tab_bct.png");
+	tabBCTSelected = gfxCreateTextureFromPNG("romfs:/png/tab/tab_bct_selected.png");
+	tabLayeredFS = gfxCreateTextureFromPNG("romfs:/png/tab/tab_layeredfs.png");
+	tabLayeredFSSelected = gfxCreateTextureFromPNG("romfs:/png/tab/tab_layeredfs_selected.png");
+	tabOptions = gfxCreateTextureFromPNG("romfs:/png/tab/tab_options.png");
+	tabOptionsSelected = gfxCreateTextureFromPNG("romfs:/png/tab/tab_options_selected.png");
 	//END LOAD ASSETS
 	std::ostringstream ss;
 	ss << "Version " << VERSION_MAJOR << '.' << VERSION_MINOR << '.' << VERSION_MICRO;
@@ -67,4 +75,12 @@ void MENU::destroyAssets() {
 	gfxDestroyTexture(background);
 	gfxDestroyTexture(menuBar);
 	gfxDestroyTexture(menuBarSelected);
+	gfxDestroyTexture(tabKips);
+	gfxDestroyTexture(tabKipsSelected);
+	gfxDestroyTexture(tabBCT);
+	gfxDestroyTexture(tabBCTSelected);
+	gfxDestroyTexture(tabLayeredFS);
+	gfxDestroyTexture(tabLayeredFSSelected);
+	gfxDestroyTexture(tabOptions);
+	gfxDestroyTexture(tabOptionsSelected);
 }
