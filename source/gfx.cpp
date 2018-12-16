@@ -1,5 +1,5 @@
 #include <switch.h>
-#include <cstring>
+#include <string>
 #include <stdlib.h>
 #include <png.h>
 

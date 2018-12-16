@@ -1,7 +1,7 @@
 #include <switch.h>
 #include <string>
 
-//#include "console.h"
+#include "console.h"
 #include "gfx.h"
 #include "kip.h"
 #include "bct.h"
@@ -46,12 +46,11 @@ int main(int argc, char **argv) {
 	gfxBlit(frameBuffer, test, 600, 500, 0);
 	gfxDestroyTexture(test);
 
-	texture *icon = gfxCreateTextureFromPNG("romfs:/png/icon.png");
-	gfxBlit(frameBuffer, icon, 1280 - 256, 720 - 256, 0);
-	gfxDestroyTexture(icon);
-
 	font *fnt = gfxCreateFontFromTTF("romfs:/font/sans.ttf");
-	gfxDrawText(frameBuffer, "This is a test", fnt, 300, 600, 50, RGBA8(255, 255, 255, 0));
+	gfxDrawText(frameBuffer, "Text Test\nNewline Test", fnt, 0, 200, 30, RGBA8(255, 255, 255, 0));
+	gfxDrawText(frameBuffer, "BLUE", fnt, 0, 400, 30, RGBA8(0, 0, 255, 0));
+	gfxDrawText(frameBuffer, "Kips", fnt, 25, 140, 25, RGBA8(255, 255, 255, 0));
+	gfxDrawText(frameBuffer, SSTR("Version " << VERSION_MAJOR << '.' << VERSION_MINOR << '.' << VERSION_MICRO).c_str(), fnt, 140, 80, 15, RGBA8(255, 255, 255, 0));
 	gfxDestroyFont(fnt);
 
 	while (appletMainLoop() && run) {
