@@ -126,8 +126,30 @@ void gfxDrawRect(texture *tex, unsigned int tx, unsigned int ty, unsigned int bx
 	}
 }
 
-void gfxDrawText(texture *tex, const char *text, const font *fnt, int x, int y, int size) {
-	//STUB
+void gfxDrawText(texture *tex, const char *text, const font *fnt, int x, int y, int size, uint32_t clr) {
+	int curX = x;
+	uint32_t tmpChar = 0;
+	ssize_t unitCount = 0;
+	resizeFont(fnt, size);
+	size_t length = strlen(text);
+	for (unsigned int i = 0; i < length;) {
+		unitCount = decode_utf8(&tmpChar, (const uint8_t*)&text[i]);
+		if (unitCount <= 0) {
+			break;
+		}
+		i += unitCount;
+		if (tmpChar == '\n') {
+			curX = x;
+			y += size + 8;
+			continue;
+		}
+		FT_GlyphSlot slot = loadGlyph(tmpChar, fnt);
+		if (slot != NULL) {
+			int drawY = y + (size - slot->bitmap_top);
+			drawGlyph(tex, &slot->bitmap, curX + slot->bitmap_left, drawY, clr);
+			curX += slot->advance.x >> 6;
+		}
+	}
 }
 
 void gfxFill(texture *tex, uint32_t clr) {

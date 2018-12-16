@@ -32,7 +32,7 @@ void gfxDrawHorizontalLine(texture *tex, unsigned int x, unsigned int y, unsigne
 
 void gfxDrawRect(texture *tex, unsigned int tx, unsigned int ty, unsigned int bx, unsigned int by, uint32_t clr, bool fill);
 
-void gfxDrawText(texture *tex, const char *text, const font *fnt, int x, int y, int size);
+void gfxDrawText(texture *tex, const char *text, const font *fnt, int x, int y, int size, uint32_t clr);
 
 void gfxFill(texture *tex, uint32_t clr);
 

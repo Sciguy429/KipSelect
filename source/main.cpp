@@ -51,6 +51,7 @@ int main(int argc, char **argv) {
 	gfxDestroyTexture(icon);
 
 	font *fnt = gfxCreateFontFromTTF("romfs:/font/sans.ttf");
+	gfxDrawText(frameBuffer, "This is a test", fnt, 300, 600, 50, RGBA8(255, 255, 255, 0));
 	gfxDestroyFont(fnt);
 
 	while (appletMainLoop() && run) {
