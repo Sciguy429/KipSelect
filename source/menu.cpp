@@ -16,7 +16,7 @@ void MENU::init() {
 	//END LOAD ASSETS
 	std::ostringstream ss;
 	ss << "Version " << VERSION_MAJOR << '.' << VERSION_MINOR << '.' << VERSION_MICRO;
-	gfxDrawText(backroundTex, ss.str().c_str(), versionFont, 140, 80, 15, RGBA8(255, 255, 255, 0));
+	gfxDrawText(backroundTex, ss.str().c_str(), versionFont, 192, 135, 15, RGBA8(255, 255, 255, 0));
 }
 
 void MENU::setTabSelected(unsigned int tabId) {
