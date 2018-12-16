@@ -12,10 +12,13 @@ public:
 	void addTab(std::string tabName);
 	void addOpt(int tabId, std::string optName);
 	void resetMenu();
-	void handleInput(uint64_t kDown);
+	void drawMenu();
 	void destroyAssets();
 private:
 	texture *backroundTex;
 	font *mainFont;
-	std::vector<std::vector<std::string>> menuMatrix;
+	texture *menuBar;
+	texture *menuBarSelected;
+	std::vector<std::string> menuTab;
+	std::vector<std::string> menuOpt;
 };

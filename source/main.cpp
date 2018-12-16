@@ -22,6 +22,10 @@ int main(int argc, char **argv) {
 	bct.readBCT();
 
 	menu.init();
+	for (int i = 0; i < kip.getKipCount(); i++) {
+		menu.addOpt(0, kip.getKipName(i));
+	}
+	menu.drawMenu();
 
 	while (appletMainLoop() && run) {
 		hidScanInput();
