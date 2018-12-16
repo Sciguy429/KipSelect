@@ -5,9 +5,9 @@
       "includePath": [
         "${workspaceRoot}\\source\\**",
         "${workspaceRoot}\\include\\**",
-        "C:\\devkitpro\\libnx\\include\\**",
-        "C:\\devkitpro\\devkitA64\\include\\**",
-        "C:\\devkitpro\\devkitA64\\aarch64-none-elf\\include\\**",
+        "C:\\devkitPro\\libnx\\include\\**",
+        "C:\\devkitPro\\devkitA64\\include\\**",
+        "C:\\devkitPro\\devkitA64\\aarch64-none-elf\\include\\**",
         "C:\\devkitPro\\devkitA64\\lib\\gcc\\aarch64-none-elf\\8.2.0\\include\\**",
         "C:\\devkitPro\\portlibs\\switch\\include\\**"
       ],
