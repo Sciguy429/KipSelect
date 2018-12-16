@@ -1,8 +1,9 @@
+//DEPRACATED, Will rework later
+
+
 #pragma once
 
 #include <sstream>
-
-#define SSTR(x) static_cast< std::ostringstream & > (( std::ostringstream() << std::dec << x )).str()
 
 #define LOG_LEVEL_INFO 0
 #define LOG_LEVEL_WARNING 1
