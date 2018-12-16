@@ -8,14 +8,15 @@ void MENU::init() {
 	menuTabSelected = 0;
 	menuOptSelected = 0;
 	//LOAD ASSETS
-	mainFont = gfxCreateFontFromTTF("romfs:/font/sans.ttf");
-	backroundTex = gfxCreateTextureFromPNG("romfs:/png/backround.png");
-	menuBar = gfxCreateTextureFromPNG("romfs:/png/menuBar.png");
-	menuBarSelected = gfxCreateTextureFromPNG("romfs:/png/menuBarSelected.png");
+	mainFont = gfxCreateFontFromTTF("romfs:/font/bahnschrift.ttf");
+	versionFont = gfxCreateFontFromTTF("romfs:/font/tt0288m_.ttf");
+	backroundTex = gfxCreateTextureFromPNG("romfs:/png/background.png");
+	menuBar = gfxCreateTextureFromPNG("romfs:/png/menu_bar.png");
+	menuBarSelected = gfxCreateTextureFromPNG("romfs:/png/menu_bar_selected.png");
 	//END LOAD ASSETS
 	std::ostringstream ss;
 	ss << "Version " << VERSION_MAJOR << '.' << VERSION_MINOR << '.' << VERSION_MICRO;
-	gfxDrawText(backroundTex, ss.str().c_str(), mainFont, 140, 80, 15, RGBA8(255, 255, 255, 0));
+	gfxDrawText(backroundTex, ss.str().c_str(), versionFont, 140, 80, 15, RGBA8(255, 255, 255, 0));
 }
 
 void MENU::setTabSelected(unsigned int tabId) {
@@ -41,25 +42,28 @@ void MENU::addOpt(int tabId, std::string optName) {
 }
 
 void MENU::resetMenu() {
-	//stub
+	menuTabs.clear();
 }
 
 void MENU::drawMenu() {
-	gfxBlit(frameBuffer, backroundTex, 0, 0, 0);
-	for (unsigned int i = 0; i < menuTabs[menuTabSelected].opt.size(); i++) {
-		unsigned int drawY = 178 + (i * 64);
-		if (i == menuOptSelected) {
-			gfxBlit(frameBuffer, menuBarSelected, 0, drawY, 0);
+	if (!menuTabs.empty()) {
+		gfxBlit(frameBuffer, backroundTex, 0, 0, 0);
+		for (unsigned int i = 0; i < menuTabs[menuTabSelected].opt.size(); i++) {
+			unsigned int drawY = 178 + (i * 64);
+			if (i == menuOptSelected) {
+				gfxBlit(frameBuffer, menuBarSelected, 0, drawY, 0);
+			}
+			else {
+				gfxBlit(frameBuffer, menuBar, 0, drawY, 0);
+			}
+			gfxDrawText(frameBuffer, menuTabs[0].opt[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
 		}
-		else {
-			gfxBlit(frameBuffer, menuBar, 0, drawY, 0);
-		}
-		gfxDrawText(frameBuffer, menuTabs[0].opt[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
 	}
 }
 
 void MENU::destroyAssets() {
 	gfxDestroyFont(mainFont);
+	gfxDestroyFont(versionFont);
 	gfxDestroyTexture(backroundTex);
 	gfxDestroyTexture(menuBar);
 	gfxDestroyTexture(menuBarSelected);

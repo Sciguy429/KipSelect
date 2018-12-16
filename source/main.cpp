@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
 			run = false;
 		}
 		if (kDown & KEY_A) {
-			menu.setOptSelected(2);
+			menu.resetMenu();
 			menu.drawMenu();
 		}
 		consoleUpdate(NULL);
