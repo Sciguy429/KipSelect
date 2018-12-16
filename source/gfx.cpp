@@ -198,7 +198,7 @@ font *gfxCreateFontFromTTF(const char *path) {
 	fnt->data = (uint8_t*)malloc(ttfFileSize);
 	fread(fnt->data, 1, ttfFileSize, ttfFile);
 	fclose(ttfFile);
-	if ((fnt->faceRet = FT_New_Memory_Face(fnt->lib, fnt->data, ttfFileSize, 0, &fnt->face[0]))) {
+	if ((fnt->faceRet = FT_New_Memory_Face(fnt->lib, fnt->data, ttfFileSize, 0, &fnt->face))) {
 		free(fnt->data);
 		free(fnt);
 		return NULL;
@@ -208,7 +208,7 @@ font *gfxCreateFontFromTTF(const char *path) {
 
 void gfxDestroyFont(font *fnt) {
 	if (fnt->faceRet == 0) {
-		FT_Done_Face(fnt->face[0]);
+		FT_Done_Face(fnt->face);
 	}
 	if (fnt->libRet == 0) {
 		FT_Done_FreeType(fnt->lib);

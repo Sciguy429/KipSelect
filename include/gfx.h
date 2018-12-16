@@ -11,7 +11,7 @@ typedef struct {
 
 typedef struct {
 	FT_Library lib;
-	FT_Face face[6];
+	FT_Face face;
 	FT_Error libRet, faceRet;
 	uint8_t *data;
 } font;
