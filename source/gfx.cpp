@@ -36,6 +36,10 @@ static void drawGlyph(texture *tex, const FT_Bitmap *ftBmp, int posX, int posY, 
 	}
 }
 
+static void resizeFont(const font *fnt, int size) {
+	FT_Set_Char_Size(fnt->face, 0, size * 64, 90, 90);
+}
+
 void gfxInit(unsigned int windowWidth, unsigned int windowHeight) {
 	gfxInitResolution((uint32_t)windowWidth, (uint32_t)windowHeight);
 	gfxInitDefault();
