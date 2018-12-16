@@ -5,8 +5,8 @@
 #include "menu.h"
 
 void MENU::init() {
-	menuTabSelected = 0;
-	menuOptSelected = 0;
+	tabSelected = 0;
+	menuSelected = 0;
 	//LOAD ASSETS
 	mainFont = gfxCreateFontFromTTF("romfs:/font/bahnschrift.ttf");
 	font *versionFont = gfxCreateFontFromTTF("romfs:/font/tt0288m_.ttf");
@@ -29,11 +29,11 @@ void MENU::init() {
 }
 
 void MENU::setTabSelected(unsigned int tabId) {
-	menuTabSelected = tabId;
+	tabSelected = tabId;
 }
 
-void MENU::setOptSelected(unsigned int optId) {
-	menuOptSelected = optId;
+void MENU::setOptSelected(unsigned int menuId) {
+	menuSelected = menuId;
 }
 
 void MENU::addTab(std::string tabName) {
@@ -55,8 +55,14 @@ void MENU::resetMenu() {
 }
 
 void MENU::drawMenu() {
+	gfxBlit(frameBuffer, background, 0, 0);
+	gfxBlit(frameBuffer, tabSelected == 0 ? tabKipsSelected : tabKips, 560, 118);
+	gfxBlit(frameBuffer, tabSelected == 1 ? tabBCTSelected : tabBCT, 683, 118);
+	gfxBlit(frameBuffer, tabSelected == 2 ? tabLayeredFSSelected : tabLayeredFS, 843, 118);
+	gfxBlit(frameBuffer, tabSelected == 3 ? tabOptionsSelected : tabOptions, 1088, 118);
+
+	/*
 	if (!menuTabs.empty()) {
-		gfxBlit(frameBuffer, background, 0, 0);
 		for (unsigned int i = 0; i < menuTabs[menuTabSelected].opt.size(); i++) {
 			unsigned int drawY = 178 + (i * 64);
 			if (i == menuOptSelected) {
@@ -69,6 +75,7 @@ void MENU::drawMenu() {
 		}
 		gfxBlit(frameBuffer, tabKips, 400, 400);
 	}
+	*/
 }
 
 void MENU::destroyAssets() {

@@ -25,15 +25,15 @@ class MENU {
 public:
 	void init();
 	void setTabSelected(unsigned int tabId);
-	void setOptSelected(unsigned int optId);
+	void setOptSelected(unsigned int menuId);
 	void addTab(std::string tabName);
 	void addOpt(int tabId, std::string optName);
 	void resetMenu();
 	void drawMenu();
 	void destroyAssets();
 private:
-	unsigned int menuTabSelected;
-	unsigned int menuOptSelected;
+	unsigned int tabSelected;
+	unsigned int menuSelected;
 	std::vector<menuTab> menuTabs;
 	//ASSETS
 	texture *background;

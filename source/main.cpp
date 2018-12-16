@@ -38,7 +38,7 @@ int main(int argc, char **argv) {
 			run = false;
 		}
 		if (kDown & KEY_A) {
-			menu.resetMenu();
+			menu.setTabSelected(3);
 			menu.drawMenu();
 		}
 		consoleUpdate(NULL);
