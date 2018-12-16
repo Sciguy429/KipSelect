@@ -16,6 +16,8 @@ int main(int argc, char **argv) {
 	KIP kip;
 	BCT bct;
 	romfsInit();
+	socketInitializeDefault();
+	nxlinkStdio();
 	gfxInit(1280, 720);
 
 	kip.scanForKip();
@@ -44,6 +46,7 @@ int main(int argc, char **argv) {
 	menu.destroyAssets();
 	gfxCleanUp();
 	romfsExit();
+	socketExit();
 	consoleExit(NULL);
 	return 0;
 }
