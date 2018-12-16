@@ -40,6 +40,11 @@ static void resizeFont(const font *fnt, int size) {
 	FT_Set_Char_Size(fnt->face, 0, size * 64, 90, 90);
 }
 
+static FT_GlyphSlot loadGlyph(const uint32_t charId, const font *fnt) {
+	FT_Load_Glyph(fnt->face, FT_Get_Char_Index(fnt->face, charId), FT_LOAD_RENDER);
+	return fnt->face->glyph;
+}
+
 void gfxInit(unsigned int windowWidth, unsigned int windowHeight) {
 	gfxInitResolution((uint32_t)windowWidth, (uint32_t)windowHeight);
 	gfxInitDefault();
