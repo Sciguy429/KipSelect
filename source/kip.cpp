@@ -4,7 +4,6 @@
 #include <sys/types.h>
 
 #include "kip.h"
-#include "console.h"
 
 using namespace std;
 
@@ -15,7 +14,7 @@ void KIP::scanForKip() {
 	if (enabledKipDir == NULL) {
 		if (mkdir("/atmosphere/kips/", 0700) == -1) {
 			//printError(0, "/atmosphere/kips/");
-			log("Unable To Make Dirrectory /atmopshere/kips/", LOG_LEVEL_ERROR);
+			//log("Unable To Make Dirrectory /atmopshere/kips/", LOG_LEVEL_ERROR);
 		}
 	}
 	else {
@@ -26,7 +25,7 @@ void KIP::scanForKip() {
 			if (kipCount == KIP_LIST_LENGTH) {
 				kipCount = 0; //Set the kip count back to 0 to prevent a crash screen from showing
 				//printError(2, "");
-				log("More Than 32 Kips Detected", LOG_LEVEL_ERROR);
+				//log("More Than 32 Kips Detected", LOG_LEVEL_ERROR);
 				return;
 			}
 		}
@@ -37,7 +36,7 @@ void KIP::scanForKip() {
 	if (disabledKipDir == NULL) {
 		if (mkdir("/atmosphere/kips_disabled/", 0700) == -1) {
 			//printError(0, "/atmosphere/kips_disabled/");
-			log("Unable To Make Dirrectory /atmosphere/kips_disabled/", LOG_LEVEL_ERROR);
+			//log("Unable To Make Dirrectory /atmosphere/kips_disabled/", LOG_LEVEL_ERROR);
 		}
 	}
 	else {
@@ -48,14 +47,14 @@ void KIP::scanForKip() {
 			if (kipCount == KIP_LIST_LENGTH) {
 				kipCount = 0; //Set the kip count back to 0 to prevent a crash screen from showing
 				//printError(2, "");
-				log("More Than 32 Kips Detected", LOG_LEVEL_ERROR);
+				//log("More Than 32 Kips Detected", LOG_LEVEL_ERROR);
 				return;
 			}
 		}
 	}
 	if (kipCount == 0) {
 		//printError(1, "");
-		log("No Kips Found", LOG_LEVEL_ERROR);
+		//log("No Kips Found", LOG_LEVEL_ERROR);
 	}
 }
 
@@ -75,7 +74,7 @@ void KIP::setKip(int kipId, bool enabled) {
 	end.append(name);
 	if (rename(start.c_str(), end.c_str()) != 0) {
 		//printError(3, name);
-		log("Unable To Move Kip Between Dirrectories", LOG_LEVEL_ERROR);
+		//log("Unable To Move Kip Between Dirrectories", LOG_LEVEL_ERROR);
 	}
 }
 

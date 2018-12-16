@@ -2,7 +2,6 @@
 #include <string>
 
 #include "bct.h"
-#include "console.h"
 
 using namespace std;
 
@@ -56,12 +55,12 @@ void BCT::setBCT(int bctId, bool enabled) {
 		}
 		else {
 			//printError(4, "");
-			log("Couln't Open /atmosphere/BCT.ini", LOG_LEVEL_ERROR);
+			//log("Couln't Open /atmosphere/BCT.ini", LOG_LEVEL_ERROR);
 		}
 	}
 	else {
 		//printError(5, bctName[bctId]);
-		log("Couldnt Find Value In /atmosphere/BCT.ini", LOG_LEVEL_ERROR);
+		//log("Couldnt Find Value In /atmosphere/BCT.ini", LOG_LEVEL_ERROR);
 	}
 }
 
