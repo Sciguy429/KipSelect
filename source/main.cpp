@@ -17,13 +17,9 @@ int main(int argc, char **argv) {
 	BCT bct;
 	romfsInit();
 	gfxInit(1280, 720);
-	//initLocalConsole();
-	//log("Scanning For Kips", LOG_LEVEL_INFO);
+
 	kip.scanForKip();
-	//log(SSTR("Found " << kip.getKipCount() << " Kips"), LOG_LEVEL_INFO);
-	//log("Reading BCT Values", LOG_LEVEL_INFO);
 	bct.readBCT();
-	//log(SSTR("Found " << bct.getBCTCount() << " BCT Values"), LOG_LEVEL_INFO);
 
 	menu.init();
 
