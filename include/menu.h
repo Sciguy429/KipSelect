@@ -34,7 +34,7 @@ public:
 private:
 	unsigned int menuTabSelected;
 	unsigned int menuOptSelected;
-	texture *backroundTex;
+	texture *background;
 	font *mainFont;
 	texture *menuBar;
 	texture *menuBarSelected;
