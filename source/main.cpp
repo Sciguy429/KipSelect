@@ -5,6 +5,7 @@
 #include "gfx.h"
 #include "kip.h"
 #include "bct.h"
+#include "menu.h"
 
 using namespace std;
 
