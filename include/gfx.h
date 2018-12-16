@@ -36,7 +36,7 @@ void gfxDrawText(texture *tex, const char *text, const font *fnt, int x, int y, 
 
 void gfxFill(texture *tex, uint32_t clr);
 
-void gfxBlit(texture *target, texture *source, unsigned int x, unsigned int y, unsigned int alpha);
+void gfxBlit(texture *target, texture *source, unsigned int x, unsigned int y);
 
 texture *gfxCreateTexture(unsigned int width, unsigned int height);
 

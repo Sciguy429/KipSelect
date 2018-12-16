@@ -7,12 +7,26 @@
 
 texture *frameBuffer;
 
-static inline unsigned int colorBlendAlpha(unsigned int colora, unsigned int colorb, unsigned int alpha) {
-	unsigned int rb1 = ((0x100 - alpha) * (colora & 0xFF00FF)) >> 8;
-	unsigned int rb2 = (alpha * (colorb & 0xFF00FF)) >> 8;
-	unsigned int g1 = ((0x100 - alpha) * (colora & 0x00FF00)) >> 8;
-	unsigned int g2 = (alpha * (colorb & 0x00FF00)) >> 8;
-	return ((rb1 | rb2) & 0xFF00FF) + ((g1 | g2) & 0x00FF00);
+static inline uint32_t colorBlendAlpha(uint32_t colorA, uint32_t colorB) {
+	uint8_t aR = colorA & 0xFF;
+	uint8_t aG = colorA >> 8 & 0xFF;
+	uint8_t aB = colorA >> 16 & 0xFF;
+	uint8_t aA = colorA >> 24 & 0xFF;
+	uint8_t bR = colorB & 0xFF;
+	uint8_t bG = colorB >> 8 & 0xFF;
+	uint8_t bB = colorB >> 16 & 0xFF;
+	uint8_t fA = 0xFF - aA;
+	uint8_t fR = (aR * aA + bR * fA) / 0xFF;
+	uint8_t fG = (aG * aA + bG * fA) / 0xFF;
+	uint8_t fB = (aB * aA + bB * fA) / 0xFF;
+	return (0xFF << 24 | fB << 16 | fG << 8 | fR);
+}
+
+static inline uint32_t colorReplaceAlpha(uint32_t clr, uint8_t alpha) {
+	uint8_t r = clr & 0xFF;
+	uint8_t g = clr >> 8 & 0xFF;
+	uint8_t b = clr >> 16 & 0xFF;
+	return (alpha << 24 | b << 16 | g << 8 | r);
 }
 
 static void drawGlyph(texture *tex, const FT_Bitmap *ftBmp, int posX, int posY, uint32_t clr) {
@@ -30,7 +44,7 @@ static void drawGlyph(texture *tex, const FT_Bitmap *ftBmp, int posX, int posY, 
 				continue;
 			}
 			if (*ftBmpPtr > 0) {
-				*rowPtr = colorBlendAlpha(*rowPtr, clr, *ftBmpPtr);
+				*rowPtr = colorBlendAlpha(colorReplaceAlpha(clr, *ftBmpPtr), *rowPtr);
 			}
 		}
 	}
@@ -162,13 +176,13 @@ void gfxFill(texture *tex, uint32_t clr) {
 	}
 }
 
-void gfxBlit(texture *target, texture *source, unsigned int x, unsigned int y, unsigned int alpha) {
+void gfxBlit(texture *target, texture *source, unsigned int x, unsigned int y) {
 	if (source != NULL) {
 		uint32_t *dataPtr = &source->data[0];
 		for (unsigned int ty = y; ty < y + source->height; ty++) {
 			uint32_t *rowPtr = &target->data[ty * target->width + x];
 			for (unsigned int tx = x; tx < x + source->width; tx++, rowPtr++) {
-				*rowPtr = colorBlendAlpha(*dataPtr++, *rowPtr, alpha);
+				*rowPtr = colorBlendAlpha(*dataPtr++, *rowPtr);
 			}
 		}
 	}

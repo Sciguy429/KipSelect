@@ -56,17 +56,18 @@ void MENU::resetMenu() {
 
 void MENU::drawMenu() {
 	if (!menuTabs.empty()) {
-		gfxBlit(frameBuffer, background, 0, 0, 0);
+		gfxBlit(frameBuffer, background, 0, 0);
 		for (unsigned int i = 0; i < menuTabs[menuTabSelected].opt.size(); i++) {
 			unsigned int drawY = 178 + (i * 64);
 			if (i == menuOptSelected) {
-				gfxBlit(frameBuffer, menuBarSelected, 0, drawY, 0);
+				gfxBlit(frameBuffer, menuBarSelected, 0, drawY);
 			}
 			else {
-				gfxBlit(frameBuffer, menuBar, 0, drawY, 0);
+				gfxBlit(frameBuffer, menuBar, 0, drawY);
 			}
 			gfxDrawText(frameBuffer, menuTabs[0].opt[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
 		}
+		gfxBlit(frameBuffer, tabKips, 400, 400);
 	}
 }
 
