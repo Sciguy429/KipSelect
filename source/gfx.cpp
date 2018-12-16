@@ -7,6 +7,35 @@
 
 texture *frameBuffer;
 
+static inline unsigned int colorBlendAlpha(unsigned int colora, unsigned int colorb, unsigned int alpha) {
+	unsigned int rb1 = ((0x100 - alpha) * (colora & 0xFF00FF)) >> 8;
+	unsigned int rb2 = (alpha * (colorb & 0xFF00FF)) >> 8;
+	unsigned int g1 = ((0x100 - alpha) * (colora & 0x00FF00)) >> 8;
+	unsigned int g2 = (alpha * (colorb & 0x00FF00)) >> 8;
+	return ((rb1 | rb2) & 0xFF00FF) + ((g1 | g2) & 0x00FF00);
+}
+
+static void drawGlyph(texture *tex, const FT_Bitmap *ftBmp, int posX, int posY, uint32_t clr) {
+	if (ftBmp->pixel_mode != FT_PIXEL_MODE_GRAY) {
+		return;
+	}
+	uint8_t *ftBmpPtr = ftBmp->buffer;
+	for (int y = posY; y < posY + ftBmp->rows; y++) {
+		if (y > tex->height || y < 0) {
+			continue;
+		}
+		uint32_t *rowPtr = &tex->data[y * tex->width + posX];
+		for (int x = posX; x < posX + ftBmp->width; x++, ftBmpPtr++, rowPtr++) {
+			if (x > tex->width || x < 0) {
+				continue;
+			}
+			if (*ftBmpPtr > 0) {
+				*rowPtr = colorBlendAlpha(*rowPtr, clr, *ftBmpPtr);
+			}
+		}
+	}
+}
+
 void gfxInit(unsigned int windowWidth, unsigned int windowHeight) {
 	gfxInitResolution((uint32_t)windowWidth, (uint32_t)windowHeight);
 	gfxInitDefault();
@@ -28,14 +57,6 @@ void gfxHandelBuffers() {
 	gfxFlushBuffers();
 	gfxSwapBuffers();
 	gfxWaitForVsync();
-}
-
-unsigned int gfxColorBlendAlpha(unsigned int colora, unsigned int colorb, unsigned int alpha) {
-	unsigned int rb1 = ((0x100 - alpha) * (colora & 0xFF00FF)) >> 8;
-	unsigned int rb2 = (alpha * (colorb & 0xFF00FF)) >> 8;
-	unsigned int g1 = ((0x100 - alpha) * (colora & 0x00FF00)) >> 8;
-	unsigned int g2 = (alpha * (colorb & 0x00FF00)) >> 8;
-	return ((rb1 | rb2) & 0xFF00FF) + ((g1 | g2) & 0x00FF00);
 }
 
 void gfxDrawPixel(texture *tex, unsigned int x, unsigned int y, uint32_t clr) {
@@ -96,6 +117,10 @@ void gfxDrawRect(texture *tex, unsigned int tx, unsigned int ty, unsigned int bx
 	}
 }
 
+void gfxDrawText(texture *tex, const char *text, const font *fnt, int x, int y, int size) {
+	//STUB
+}
+
 void gfxFill(texture *tex, uint32_t clr) {
 	uint32_t *dataPtr = &tex->data[0];
 	for (unsigned int y = 0; y < tex->height; y++) {
@@ -111,7 +136,7 @@ void gfxBlit(texture *target, texture *source, unsigned int x, unsigned int y, u
 		for (unsigned int ty = y; ty < y + source->height; ty++) {
 			uint32_t *rowPtr = &target->data[ty * target->width + x];
 			for (unsigned int tx = x; tx < x + source->width; tx++, rowPtr++) {
-				*rowPtr = gfxColorBlendAlpha(*dataPtr++, *rowPtr, alpha);
+				*rowPtr = colorBlendAlpha(*dataPtr++, *rowPtr, alpha);
 			}
 		}
 	}

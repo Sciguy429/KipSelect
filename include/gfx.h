@@ -22,8 +22,6 @@ void gfxCleanUp();
 
 void gfxHandelBuffers();
 
-unsigned int gfxColorBlendAlpha(unsigned int colora, unsigned int colorb, unsigned int alpha);
-
 void gfxDrawPixel(texture *tex, unsigned int x, unsigned int y, uint32_t clr);
 
 void gfxDrawLine(texture *tex, unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, uint32_t clr);
@@ -33,6 +31,8 @@ void gfxDrawVerticalLine(texture *tex, unsigned int x, unsigned int y, unsigned 
 void gfxDrawHorizontalLine(texture *tex, unsigned int x, unsigned int y, unsigned int length, uint32_t clr);
 
 void gfxDrawRect(texture *tex, unsigned int tx, unsigned int ty, unsigned int bx, unsigned int by, uint32_t clr, bool fill);
+
+void gfxDrawText(texture *tex, const char *text, const font *fnt, int x, int y, int size);
 
 void gfxFill(texture *tex, uint32_t clr);
 
