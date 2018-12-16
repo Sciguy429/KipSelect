@@ -55,7 +55,7 @@ void gfxInit(unsigned int windowWidth, unsigned int windowHeight) {
 	frameBuffer->height = windowHeight;
 	frameBuffer->data = (uint32_t*)gfxGetFramebuffer(NULL, NULL);
 	frameBuffer->size = windowWidth * windowHeight;
-	printf("Frambuffer located at address %p\n", (void*)frameBuffer);
+	printf("Framebuffer located at address %p\n", (void*)frameBuffer);
 }
 
 void gfxCleanUp() {
