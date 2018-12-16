@@ -5,6 +5,8 @@
 #include "menu.h"
 
 void MENU::init() {
+	menuTabSelected = 0;
+	menuOptSelected = 0;
 	//LOAD ASSETS
 	mainFont = gfxCreateFontFromTTF("romfs:/font/sans.ttf");
 	backroundTex = gfxCreateTextureFromPNG("romfs:/png/backround.png");
@@ -16,12 +18,26 @@ void MENU::init() {
 	gfxDrawText(backroundTex, ss.str().c_str(), mainFont, 140, 80, 15, RGBA8(255, 255, 255, 0));
 }
 
+void MENU::setTabSelected(unsigned int tabId) {
+	menuTabSelected = tabId;
+}
+
+void MENU::setOptSelected(unsigned int optId) {
+	menuOptSelected = optId;
+}
+
 void MENU::addTab(std::string tabName) {
-	menuTab.push_back(tabName);
+	unsigned int size = menuTabs.size();
+	menuTabs.push_back(menuTab());
+	menuTabs[size].id = size;
+	menuTabs[size].name = tabName;
 }
 
 void MENU::addOpt(int tabId, std::string optName) {
-	menuOpt.push_back(optName);
+	unsigned int size = menuTabs[tabId].opt.size();
+	menuTabs[tabId].opt.push_back(menuOpt());
+	menuTabs[tabId].opt[size].id = size;
+	menuTabs[tabId].opt[size].name = optName;
 }
 
 void MENU::resetMenu() {
@@ -30,15 +46,15 @@ void MENU::resetMenu() {
 
 void MENU::drawMenu() {
 	gfxBlit(frameBuffer, backroundTex, 0, 0, 0);
-	for (unsigned int i = 0; i < menuOpt.size(); i++) {
+	for (unsigned int i = 0; i < menuTabs[menuTabSelected].opt.size(); i++) {
 		unsigned int drawY = 178 + (i * 64);
-		if (i == 1) {
+		if (i == menuOptSelected) {
 			gfxBlit(frameBuffer, menuBarSelected, 0, drawY, 0);
 		}
 		else {
 			gfxBlit(frameBuffer, menuBar, 0, drawY, 0);
 		}
-		gfxDrawText(frameBuffer, menuOpt[i].c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
+		gfxDrawText(frameBuffer, menuTabs[0].opt[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
 	}
 }
 

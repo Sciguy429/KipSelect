@@ -22,6 +22,8 @@ int main(int argc, char **argv) {
 	bct.readBCT();
 
 	menu.init();
+	menu.addTab("Kip");
+	menu.addTab("BCT.ini");
 	for (int i = 0; i < kip.getKipCount(); i++) {
 		menu.addOpt(0, kip.getKipName(i));
 	}
@@ -34,7 +36,8 @@ int main(int argc, char **argv) {
 			run = false;
 		}
 		if (kDown & KEY_A) {
-			gfxHandelBuffers();
+			menu.setOptSelected(2);
+			menu.drawMenu();
 		}
 		consoleUpdate(NULL);
 	}
