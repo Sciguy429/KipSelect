@@ -37,8 +37,7 @@ int main(int argc, char **argv) {
 		if (kDown & KEY_PLUS) {
 			run = false;
 		}
-		//START HID
-		if (kDown & KEY_L) {
+		else if (kDown & KEY_L) {
 			if (menu.getTabSelected() > 0) {
 				menu.setMenuSelected(0);
 				menu.setTabSelected(menu.getTabSelected() - 1);
