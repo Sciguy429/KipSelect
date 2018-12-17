@@ -74,6 +74,7 @@ void gfxInit(unsigned int windowWidth, unsigned int windowHeight) {
 
 void gfxCleanUp() {
 	free(frameBuffer);
+	printf("Freed framebuffer at address %p\n", (void*)frameBuffer);
 	gfxExit();
 }
 
