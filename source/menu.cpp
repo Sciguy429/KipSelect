@@ -21,9 +21,9 @@ void MENU::init() {
 	tabOptions = gfxCreateTextureFromPNG("romfs:/png/tab/tab_options.png");
 	tabOptionsSelected = gfxCreateTextureFromPNG("romfs:/png/tab/tab_options_selected.png");
 	//END LOAD ASSETS
-	std::ostringstream ss;
-	ss << 'v' << VERSION_MAJOR << '.' << VERSION_MINOR << '.' << VERSION_MICRO;
-	gfxDrawText(background, ss.str().c_str(), versionFont, 380, 59, 18, RGBA8(194, 17, 170, 0));
+	std::ostringstream version;
+	version << 'v' << VERSION_MAJOR << '.' << VERSION_MINOR << '.' << VERSION_MICRO;
+	gfxDrawText(background, version.str().c_str(), versionFont, 380, 59, 18, RGBA8(194, 17, 170, 0));
 	gfxDestroyFont(versionFont);
 }
 
@@ -143,5 +143,5 @@ void MENU::destroyAssets() {
 	gfxDestroyTexture(tabOptions);
 	gfxDestroyTexture(tabOptionsSelected);
 }
-stroyTexture(tabOptionsSelected);
+bOptionsSelected);
 }
