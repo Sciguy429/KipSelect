@@ -98,22 +98,24 @@ void MENU::drawMenu() {
 	gfxBlit(frameBuffer, tabSelected == 1 ? tabBCTSelected : tabBCT, 683, 118);
 	gfxBlit(frameBuffer, tabSelected == 2 ? tabLayeredFSSelected : tabLayeredFS, 843, 118);
 	gfxBlit(frameBuffer, tabSelected == 3 ? tabOptionsSelected : tabOptions, 1088, 118);
-	std::vector<menuItem> mnu;
+	std::vector<menuItem> *mnu = new std::vector<menuItem>;
 	switch (tabSelected) {
 	case 0:
-		mnu = kips;
+		mnu = &kips;
 		break;
 	case 1:
-		mnu = bct;
+		mnu = &bct;
 		break;
 	case 2:
-		mnu = layeredFS;
+		mnu = &layeredFS;
 		break;
 	case 3:
-		mnu = options;
+		mnu = &options;
 		break;
+	default:
+		return;
 	}
-	for (unsigned int i = 0; i < mnu.size(); i++) {
+	for (unsigned int i = 0; i < mnu->size(); i++) {
 		unsigned int drawY = 178 + (i * 64);
 		if (i == menuSelected) {
 			gfxBlit(frameBuffer, menuBarSelected, 0, drawY);
@@ -121,10 +123,10 @@ void MENU::drawMenu() {
 		else {
 			gfxBlit(frameBuffer, menuBar, 0, drawY);
 		}
-		if (mnu[i].enabled) {
+		if ((*mnu)[i].enabled) {
 			gfxBlit(frameBuffer, checkmark, 825, drawY + 16);
 		}
-		gfxDrawText(frameBuffer, mnu[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
+		gfxDrawText(frameBuffer, (*mnu)[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
 	}
 }
 
@@ -142,6 +144,4 @@ void MENU::destroyAssets() {
 	gfxDestroyTexture(tabLayeredFSSelected);
 	gfxDestroyTexture(tabOptions);
 	gfxDestroyTexture(tabOptionsSelected);
-}
-bOptionsSelected);
 }
