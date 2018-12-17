@@ -8,6 +8,7 @@
 
 typedef struct {
 	std::string name;
+	std::string md5;
 	std::string version;
 	std::string description;
 	std::string data;
