@@ -25,7 +25,7 @@ void MENU::init() {
 	//END LOAD ASSETS
 	std::ostringstream ss;
 	ss << 'v' << VERSION_MAJOR << '.' << VERSION_MINOR << '.' << VERSION_MICRO;
-	gfxDrawText(background, ss.str().c_str(), versionFont, 380, 60, 18, RGBA8(194, 17, 170, 0));
+	gfxDrawText(background, ss.str().c_str(), versionFont, 380, 59, 18, RGBA8(194, 17, 170, 0));
 	gfxDestroyFont(versionFont);
 }
 
