@@ -7,7 +7,7 @@
 
 texture *frameBuffer;
 
-static inline uint32_t colorBlendAlpha(uint32_t colorA, uint32_t colorB) {
+static uint32_t colorBlendAlpha(uint32_t colorA, uint32_t colorB) {
 	uint8_t aR = colorA & 0xFF;
 	uint8_t aG = colorA >> 8 & 0xFF;
 	uint8_t aB = colorA >> 16 & 0xFF;
@@ -22,7 +22,7 @@ static inline uint32_t colorBlendAlpha(uint32_t colorA, uint32_t colorB) {
 	return (0xFF << 24 | fB << 16 | fG << 8 | fR);
 }
 
-static inline uint32_t colorReplaceAlpha(uint32_t clr, uint8_t alpha) {
+static uint32_t colorReplaceAlpha(uint32_t clr, uint8_t alpha) {
 	uint8_t r = clr & 0xFF;
 	uint8_t g = clr >> 8 & 0xFF;
 	uint8_t b = clr >> 16 & 0xFF;
