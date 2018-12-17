@@ -51,6 +51,18 @@ int main(int argc, char **argv) {
 				menu.drawMenu();
 			}
 		}
+		else if (kDown & KEY_UP) {
+			if (menu.getMenuSelected() > 0) {
+				menu.setMenuSelected(menu.getMenuSelected() - 1);
+				menu.drawMenu();
+			}
+		}
+		else if (kDown & KEY_DOWN) {
+			if (menu.getMenuSelected() < menu.getMenuSize() - 1) {
+				menu.setMenuSelected(menu.getMenuSelected() + 1);
+				menu.drawMenu();
+			}
+		}
 		consoleUpdate(NULL);
 	}
 	menu.destroyAssets();

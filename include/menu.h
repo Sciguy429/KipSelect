@@ -21,6 +21,7 @@ public:
 	unsigned int getTabSelected();
 	void setMenuSelected(unsigned int menuId);
 	unsigned int getMenuSelected();
+	unsigned int getMenuSize();
 	void addKipItem(std::string name, std::string version, std::string description, std::string data, bool enabled);
 	void addBCTItem(std::string name, std::string version, std::string description, std::string data, bool enabled);
 	void addLayeredFSItem(std::string name, std::string version, std::string description, std::string data, bool enabled);
