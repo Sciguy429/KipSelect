@@ -38,6 +38,7 @@ private:
 	font *mainFont;
 	texture *menuBar;
 	texture *menuBarSelected;
+	texture *checkmark;
 	texture *tabKips;
 	texture *tabKipsSelected;
 	texture *tabBCT;

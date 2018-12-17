@@ -13,6 +13,7 @@ void MENU::init() {
 	background = gfxCreateTextureFromPNG("romfs:/png/background.png");
 	menuBar = gfxCreateTextureFromPNG("romfs:/png/menu/menu_bar.png");
 	menuBarSelected = gfxCreateTextureFromPNG("romfs:/png/menu/menu_bar_selected.png");
+	checkmark = gfxCreateTextureFromPNG("romfs:/png/menu/checkmark.png");
 	tabKips = gfxCreateTextureFromPNG("romfs:/png/tab/tab_kips.png");
 	tabKipsSelected = gfxCreateTextureFromPNG("romfs:/png/tab/tab_kips_selected.png");
 	tabBCT = gfxCreateTextureFromPNG("romfs:/png/tab/tab_bct.png");
@@ -122,6 +123,9 @@ void MENU::drawMenu() {
 		else {
 			gfxBlit(frameBuffer, menuBar, 0, drawY);
 		}
+		if (mnu[i].enabled) {
+			gfxBlit(frameBuffer, checkmark, 825, drawY + 16);
+		}
 		gfxDrawText(frameBuffer, mnu[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
 	}
 }
@@ -131,6 +135,7 @@ void MENU::destroyAssets() {
 	gfxDestroyTexture(background);
 	gfxDestroyTexture(menuBar);
 	gfxDestroyTexture(menuBarSelected);
+	gfxDestroyTexture(checkmark);
 	gfxDestroyTexture(tabKips);
 	gfxDestroyTexture(tabKipsSelected);
 	gfxDestroyTexture(tabBCT);
