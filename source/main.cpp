@@ -21,15 +21,15 @@ int main(int argc, char **argv) {
 	bct.readBCT();
 	menu.init();
 	for (int i = 0; i < kip.getKipCount(); i++) {
-		menu.addMenuItem(0, kip.getKipName(i), "", "", kip.getKipName(i), kip.getKipValue(i));
+		menu.addMenuItem(0, kip.getKipName(i), "", "", "", kip.getKipName(i), kip.getKipValue(i));
 	}
 	for (int i = 0; i < bct.getBCTCount(); i++) {
-		menu.addMenuItem(1, bct.getBCTName(i), "", "", bct.getBCTName(i), bct.getBCTValue(i));
+		menu.addMenuItem(1, bct.getBCTName(i), "", "", "", bct.getBCTName(i), bct.getBCTValue(i));
 	}
-	menu.addMenuItem(2, "TEST ITEM 1", "", "", "", true);
-	menu.addMenuItem(2, "TEST ITEM 2", "", "", "", false);
-	menu.addMenuItem(2, "TEST ITEM 3", "", "", "", true);
-	menu.addMenuItem(2, "TEST ITEM 4", "", "", "", true);
+	menu.addMenuItem(2, "TEST ITEM 1", "9f06243abcb89c70e0c331c61d871fa7", "1.2.1", "This is a test of a discription", "", true);
+	menu.addMenuItem(2, "TEST ITEM 2", "9f06243abcb89c70e0c331c61d871fa7", "1.2.1", "", "", false);
+	menu.addMenuItem(2, "TEST ITEM 3", "9f06243abcb89c70e0c331c61d871fa7", "0.0.0", "", "", true);
+	menu.addMenuItem(2, "TEST ITEM 4", "9f06243abcb89c70e0c331c61d871fa7", "7.6.4", "", "", true);
 	menu.drawMenu();
 	while (appletMainLoop() && run) {
 		hidScanInput();

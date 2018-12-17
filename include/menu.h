@@ -23,7 +23,7 @@ public:
 	void setMenuSelected(unsigned int menuId);
 	unsigned int getMenuSelected();
 	unsigned int getMenuSize();
-	void addMenuItem(unsigned int tab, std::string name, std::string version, std::string description, std::string data, bool enabled);
+	void addMenuItem(unsigned int tab, std::string name, std::string md5, std::string version, std::string description, std::string data, bool enabled);
 	void resetMenu();
 	void drawMenu();
 	void destroyAssets();

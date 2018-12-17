@@ -59,7 +59,7 @@ unsigned int MENU::getMenuSize() {
 	}
 }
 
-void MENU::addMenuItem(unsigned int tab, std::string name, std::string version, std::string description, std::string data, bool enabled) {
+void MENU::addMenuItem(unsigned int tab, std::string name, std::string md5, std::string version, std::string description, std::string data, bool enabled) {
 	std::vector<menuItem> *mnu = new std::vector<menuItem>;
 	switch (tab) {
 	case 0:
@@ -80,6 +80,7 @@ void MENU::addMenuItem(unsigned int tab, std::string name, std::string version, 
 	unsigned int pos = mnu->size();
 	mnu->push_back(menuItem());
 	(*mnu)[pos].name = name;
+	(*mnu)[pos].md5 = md5;
 	(*mnu)[pos].version = version;
 	(*mnu)[pos].description = description;
 	(*mnu)[pos].data = data;
@@ -128,6 +129,28 @@ void MENU::drawMenu() {
 			gfxBlit(frameBuffer, checkmark, 825, drawY + 16);
 		}
 		gfxDrawText(frameBuffer, (*mnu)[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
+	}
+	if (mnu->size() > 0) {
+		gfxDrawText(frameBuffer, (*mnu)[menuSelected].name.c_str(), mainFont, 905, 178, 18, RGBA8(255, 255, 255, 0));
+		unsigned int curX = 202;
+		if ((*mnu)[menuSelected].md5 != "") {
+			std::ostringstream ss;
+			ss << "MD5: " << (*mnu)[menuSelected].md5;
+			gfxDrawText(frameBuffer, ss.str().c_str(), mainFont, 905, curX, 12, RGBA8(255, 255, 255, 0));
+			curX += 18;
+		}
+		if ((*mnu)[menuSelected].version != "") {
+			std::ostringstream ss;
+			ss << "Version: " << (*mnu)[menuSelected].version;
+			gfxDrawText(frameBuffer, ss.str().c_str(), mainFont, 905, curX, 12, RGBA8(255, 255, 255, 0));
+			curX += 18;
+		}
+		if ((*mnu)[menuSelected].description != "") {
+			std::ostringstream ss;
+			ss << "Discription:\n" << (*mnu)[menuSelected].description;
+			gfxDrawText(frameBuffer, ss.str().c_str(), mainFont, 905, curX, 12, RGBA8(255, 255, 255, 0));
+			curX += 18;
+		}
 	}
 }
 
