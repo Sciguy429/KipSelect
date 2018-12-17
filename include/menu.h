@@ -39,6 +39,7 @@ private:
 	texture *menuBar;
 	texture *menuBarSelected;
 	texture *checkmark;
+	texture *questionmark;
 	texture *tabKips;
 	texture *tabKipsSelected;
 	texture *tabBCT;
