@@ -28,7 +28,10 @@ int main(int argc, char **argv) {
 	for (int i = 0; i < bct.getBCTCount(); i++) {
 		menu.addMenuItem(1, bct.getBCTName(i), "", "", bct.getBCTName(i), bct.getBCTValue(i));
 	}
-	menu.addMenuItem(2, "TEST ITEM", "", "", "", true);
+	menu.addMenuItem(2, "TEST ITEM 1", "", "", "", true);
+	menu.addMenuItem(2, "TEST ITEM 2", "", "", "", false);
+	menu.addMenuItem(2, "TEST ITEM 3", "", "", "", true);
+	menu.addMenuItem(2, "TEST ITEM 4", "", "", "", true);
 	menu.drawMenu();
 	while (appletMainLoop() && run) {
 		hidScanInput();
