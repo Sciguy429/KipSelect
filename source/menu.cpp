@@ -1,6 +1,4 @@
-#include <string>
 #include <sstream>
-#include <vector>
 
 #include "menu.h"
 
@@ -144,4 +142,6 @@ void MENU::destroyAssets() {
 	gfxDestroyTexture(tabLayeredFSSelected);
 	gfxDestroyTexture(tabOptions);
 	gfxDestroyTexture(tabOptionsSelected);
+}
+stroyTexture(tabOptionsSelected);
 }
