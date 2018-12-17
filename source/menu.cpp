@@ -23,8 +23,8 @@ void MENU::init() {
 	tabOptionsSelected = gfxCreateTextureFromPNG("romfs:/png/tab/tab_options_selected.png");
 	//END LOAD ASSETS
 	std::ostringstream ss;
-	ss << "Version " << VERSION_MAJOR << '.' << VERSION_MINOR << '.' << VERSION_MICRO;
-	gfxDrawText(background, ss.str().c_str(), versionFont, 192, 135, 18, RGBA8(255, 255, 255, 0));
+	ss << 'v' << VERSION_MAJOR << '.' << VERSION_MINOR << '.' << VERSION_MICRO;
+	gfxDrawText(background, ss.str().c_str(), versionFont, 384, 63, 18, RGBA8(194, 17, 170, 0));
 	gfxDestroyFont(versionFont);
 }
 
@@ -32,26 +32,63 @@ void MENU::setTabSelected(unsigned int tabId) {
 	tabSelected = tabId;
 }
 
-void MENU::setOptSelected(unsigned int menuId) {
+unsigned int MENU::getTabSelected() {
+	return tabSelected;
+}
+
+void MENU::setMenuSelected(unsigned int menuId) {
 	menuSelected = menuId;
 }
 
-void MENU::addTab(std::string tabName) {
-	unsigned int size = menuTabs.size();
-	menuTabs.push_back(menuTab());
-	menuTabs[size].id = size;
-	menuTabs[size].name = tabName;
+unsigned int MENU::getMenuSelected() {
+	return menuSelected;
 }
 
-void MENU::addOpt(int tabId, std::string optName) {
-	unsigned int size = menuTabs[tabId].opt.size();
-	menuTabs[tabId].opt.push_back(menuOpt());
-	menuTabs[tabId].opt[size].id = size;
-	menuTabs[tabId].opt[size].name = optName;
+void MENU::addKipItem(std::string name, std::string version, std::string description, std::string data, bool enabled) {
+	unsigned int pos = kips.size();
+	kips.push_back(menuItem());
+	kips[pos].name = name;
+	kips[pos].version = version;
+	kips[pos].description = description;
+	kips[pos].data = data;
+	kips[pos].enabled = enabled;
+}
+
+void MENU::addBCTItem(std::string name, std::string version, std::string description, std::string data, bool enabled) {
+	unsigned int pos = bct.size();
+	bct.push_back(menuItem());
+	bct[pos].name = name;
+	bct[pos].version = version;
+	bct[pos].description = description;
+	bct[pos].data = data;
+	bct[pos].enabled = enabled;
+}
+
+void MENU::addLayeredFSItem(std::string name, std::string version, std::string description, std::string data, bool enabled) {
+	unsigned int pos = layeredFS.size();
+	layeredFS.push_back(menuItem());
+	layeredFS[pos].name = name;
+	layeredFS[pos].version = version;
+	layeredFS[pos].description = description;
+	layeredFS[pos].data = data;
+	layeredFS[pos].enabled = enabled;
+}
+
+void MENU::addOptionsItem(std::string name, std::string version, std::string description, std::string data, bool enabled) {
+	unsigned int pos = options.size();
+	options.push_back(menuItem());
+	options[pos].name = name;
+	options[pos].version = version;
+	options[pos].description = description;
+	options[pos].data = data;
+	options[pos].enabled = enabled;
 }
 
 void MENU::resetMenu() {
-	menuTabs.clear();
+	kips.clear();
+	bct.clear();
+	layeredFS.clear();
+	options.clear();
 }
 
 void MENU::drawMenu() {
@@ -60,22 +97,31 @@ void MENU::drawMenu() {
 	gfxBlit(frameBuffer, tabSelected == 1 ? tabBCTSelected : tabBCT, 683, 118);
 	gfxBlit(frameBuffer, tabSelected == 2 ? tabLayeredFSSelected : tabLayeredFS, 843, 118);
 	gfxBlit(frameBuffer, tabSelected == 3 ? tabOptionsSelected : tabOptions, 1088, 118);
-
-	/*
-	if (!menuTabs.empty()) {
-		for (unsigned int i = 0; i < menuTabs[menuTabSelected].opt.size(); i++) {
-			unsigned int drawY = 178 + (i * 64);
-			if (i == menuOptSelected) {
-				gfxBlit(frameBuffer, menuBarSelected, 0, drawY);
-			}
-			else {
-				gfxBlit(frameBuffer, menuBar, 0, drawY);
-			}
-			gfxDrawText(frameBuffer, menuTabs[0].opt[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
-		}
-		gfxBlit(frameBuffer, tabKips, 400, 400);
+	std::vector<menuItem> mnu;
+	switch (tabSelected) {
+	case 0:
+		mnu = kips;
+		break;
+	case 1:
+		mnu = bct;
+		break;
+	case 2:
+		mnu = layeredFS;
+		break;
+	case 3:
+		mnu = options;
+		break;
 	}
-	*/
+	for (unsigned int i = 0; i < mnu.size(); i++) {
+		unsigned int drawY = 178 + (i * 64);
+		if (i == menuSelected) {
+			gfxBlit(frameBuffer, menuBarSelected, 0, drawY);
+		}
+		else {
+			gfxBlit(frameBuffer, menuBar, 0, drawY);
+		}
+		gfxDrawText(frameBuffer, mnu[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
+	}
 }
 
 void MENU::destroyAssets() {

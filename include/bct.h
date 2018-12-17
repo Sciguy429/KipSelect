@@ -12,6 +12,6 @@ public:
 	std::string getBCTName(int bctId);
 	bool getBCTValue(int bctId);
 private:
-	std::string bctName[BCT_LIST_LENGTH];
+	std::string bctName[BCT_LIST_LENGTH] = {"debugmode", "debugmode_user"};
 	bool bctValue[BCT_LIST_LENGTH];
 };
