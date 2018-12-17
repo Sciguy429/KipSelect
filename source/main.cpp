@@ -6,8 +6,6 @@
 #include "bct.h"
 #include "menu.h"
 
-using namespace std;
-
 bool run = true;
 u64 kDown;
 
