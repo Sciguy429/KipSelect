@@ -23,12 +23,12 @@ int main(int argc, char **argv) {
 	bct.readBCT();
 	menu.init();
 	for (int i = 0; i < kip.getKipCount(); i++) {
-		menu.addKipItem(kip.getKipName(i), "", "", kip.getKipName(i), kip.getKipValue(i));
+		menu.addMenuItem(0, kip.getKipName(i), "", "", kip.getKipName(i), kip.getKipValue(i));
 	}
 	for (int i = 0; i < bct.getBCTCount(); i++) {
-		menu.addBCTItem(bct.getBCTName(i), "", "", bct.getBCTName(i), bct.getBCTValue(i));
+		menu.addMenuItem(1, bct.getBCTName(i), "", "", bct.getBCTName(i), bct.getBCTValue(i));
 	}
-	menu.addLayeredFSItem("TEST ITEM", "", "", "", true);
+	menu.addMenuItem(2, "TEST ITEM", "", "", "", true);
 	menu.drawMenu();
 	while (appletMainLoop() && run) {
 		hidScanInput();

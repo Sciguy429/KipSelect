@@ -59,44 +59,31 @@ unsigned int MENU::getMenuSize() {
 	}
 }
 
-void MENU::addKipItem(std::string name, std::string version, std::string description, std::string data, bool enabled) {
-	unsigned int pos = kips.size();
-	kips.push_back(menuItem());
-	kips[pos].name = name;
-	kips[pos].version = version;
-	kips[pos].description = description;
-	kips[pos].data = data;
-	kips[pos].enabled = enabled;
-}
-
-void MENU::addBCTItem(std::string name, std::string version, std::string description, std::string data, bool enabled) {
-	unsigned int pos = bct.size();
-	bct.push_back(menuItem());
-	bct[pos].name = name;
-	bct[pos].version = version;
-	bct[pos].description = description;
-	bct[pos].data = data;
-	bct[pos].enabled = enabled;
-}
-
-void MENU::addLayeredFSItem(std::string name, std::string version, std::string description, std::string data, bool enabled) {
-	unsigned int pos = layeredFS.size();
-	layeredFS.push_back(menuItem());
-	layeredFS[pos].name = name;
-	layeredFS[pos].version = version;
-	layeredFS[pos].description = description;
-	layeredFS[pos].data = data;
-	layeredFS[pos].enabled = enabled;
-}
-
-void MENU::addOptionsItem(std::string name, std::string version, std::string description, std::string data, bool enabled) {
-	unsigned int pos = options.size();
-	options.push_back(menuItem());
-	options[pos].name = name;
-	options[pos].version = version;
-	options[pos].description = description;
-	options[pos].data = data;
-	options[pos].enabled = enabled;
+void MENU::addMenuItem(unsigned int tab, std::string name, std::string version, std::string description, std::string data, bool enabled) {
+	std::vector<menuItem> *mnu = new std::vector<menuItem>;
+	switch (tab) {
+	case 0:
+		mnu = &kips;
+		break;
+	case 1:
+		mnu = &bct;
+		break;
+	case 2:
+		mnu = &layeredFS;
+		break;
+	case 3:
+		mnu = &options;
+		break;
+	default:
+		return;
+	}
+	unsigned int pos = mnu->size();
+	mnu->push_back(menuItem());
+	(*mnu)[pos].name = name;
+	(*mnu)[pos].version = version;
+	(*mnu)[pos].description = description;
+	(*mnu)[pos].data = data;
+	(*mnu)[pos].enabled = enabled;
 }
 
 void MENU::resetMenu() {
