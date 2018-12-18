@@ -80,11 +80,8 @@ void MENU::addMenuItem(unsigned int tab, std:string name, std::vector<menuDetail
 	unsigned int pos = mnu->size();
 	mnu->push_back(menuItem());
 	(*mnu)[pos].name = name;
-	(*mnu)[pos].md5 = md5;
-	(*mnu)[pos].version = version;
-	(*mnu)[pos].description = description;
-	(*mnu)[pos].data = data;
-	(*mnu)[pos].enabled = enabled;
+	(*mnu)[pos].details = details;
+	(*mnu)[pos].status = status;
 }
 
 void MENU::resetMenu() {
@@ -167,6 +164,9 @@ void MENU::destroyAssets() {
 	gfxDestroyTexture(tabBCTSelected);
 	gfxDestroyTexture(tabLayeredFS);
 	gfxDestroyTexture(tabLayeredFSSelected);
+	gfxDestroyTexture(tabOptions);
+	gfxDestroyTexture(tabOptionsSelected);
+}ayeredFSSelected);
 	gfxDestroyTexture(tabOptions);
 	gfxDestroyTexture(tabOptionsSelected);
 }Options);
