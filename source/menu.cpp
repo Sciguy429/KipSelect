@@ -6,8 +6,10 @@ void MENU::init() {
 	tabSelected = 0;
 	menuSelected = 0;
 	//LOAD ASSETS
+	//Fonts
 	mainFont = gfxCreateFontFromTTF("romfs:/font/bahnschrift.ttf");
 	font *versionFont = gfxCreateFontFromTTF("romfs:/font/tt0288m_.ttf");
+	//Textures
 	background = gfxCreateTextureFromPNG("romfs:/png/background.png");
 	menuBar = gfxCreateTextureFromPNG("romfs:/png/menu/menu_bar.png");
 	menuBarSelected = gfxCreateTextureFromPNG("romfs:/png/menu/menu_bar_selected.png");
