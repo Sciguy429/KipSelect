@@ -123,38 +123,26 @@ void MENU::drawMenu() {
 			else {
 				gfxBlit(frameBuffer, menuBar, 0, drawY);
 			}
-			/*
-			if ((*mnu)[i].enabled) {
+			switch ((*mnu)[i].status)
+			{
+			case (1):
 				gfxBlit(frameBuffer, checkmark, 825, drawY + 16);
+				break;
+			case (2):
+				gfxBlit(frameBuffer, questionmark, 825, drawY + 16);
+				break;
+			default:
+				break;
 			}
-			*/
-				gfxDrawText(frameBuffer, (*mnu)[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
+			gfxDrawText(frameBuffer, (*mnu)[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
+			for (unsigned int d = 0; d < mnu->size(); d++) {
+				unsigned int curX = d * 18 + 202;
+				std::ostringstream ss;
+				ss << (*mnu)[i].details[d].prefix << (*mnu)[i].details[d].data << (*mnu)[i].details[d].suffix;
+				gfxDrawText(frameBuffer, ss.str().c_str(), mainFont, 905, curX, 12, RGBA8(255, 255, 255, 0));
+			}
 		}
 	}
-	/* This code doesn't work anymore but is being temporarily kept for reference
-	if (mnu->size() > 0) {
-		gfxDrawText(frameBuffer, (*mnu)[menuSelected].name.c_str(), mainFont, 905, 178, 18, RGBA8(255, 255, 255, 0));
-		unsigned int curX = 202;
-		if ((*mnu)[menuSelected].md5 != "") {
-			std::ostringstream ss;
-			ss << "MD5: " << (*mnu)[menuSelected].md5;
-			gfxDrawText(frameBuffer, ss.str().c_str(), mainFont, 905, curX, 12, RGBA8(255, 255, 255, 0));
-			curX += 18;
-		}
-		if ((*mnu)[menuSelected].version != "") {
-			std::ostringstream ss;
-			ss << "Version: " << (*mnu)[menuSelected].version;
-			gfxDrawText(frameBuffer, ss.str().c_str(), mainFont, 905, curX, 12, RGBA8(255, 255, 255, 0));
-			curX += 18;
-		}
-		if ((*mnu)[menuSelected].description != "") {
-			std::ostringstream ss;
-			ss << "Discription:\n" << (*mnu)[menuSelected].description;
-			gfxDrawText(frameBuffer, ss.str().c_str(), mainFont, 905, curX, 12, RGBA8(255, 255, 255, 0));
-			curX += 18;
-		}
-	}
-	*/
 }
 
 void MENU::destroyAssets() {
