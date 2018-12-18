@@ -59,7 +59,7 @@ unsigned int MENU::getMenuSize() {
 	}
 }
 
-void MENU::addMenuItem(unsigned int tab, std:string name, std::vector<menuDetail> details, int status) {
+void MENU::addMenuItem(unsigned int tab, std::string name, std::vector<menuDetail> details, int status) {
 	std::vector<menuItem> *mnu = new std::vector<menuItem>;
 	switch (tab) {
 	case 0:

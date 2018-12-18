@@ -14,7 +14,7 @@ typedef struct {
 
 typedef struct {
 	std::string name;
-	std::vector details;
+	std::vector<menuDetail> details;
 	int status;
 } menuItem;
 
@@ -26,7 +26,7 @@ public:
 	void setMenuSelected(unsigned int menuId);
 	unsigned int getMenuSelected();
 	unsigned int getMenuSize();
-	void addMenuItem(unsigned int tab, std:string name, std::vector<menuDetail> details, int status);
+	void addMenuItem(unsigned int tab, std::string name, std::vector<menuDetail> details, int status);
 	void resetMenu();
 	void drawMenu();
 	void destroyAssets();
@@ -50,11 +50,6 @@ private:
 	texture *tabBCTSelected;
 	texture *tabLayeredFS;
 	texture *tabLayeredFSSelected;
-	texture *tabOptions;
-	texture *tabOptionsSelected;
-};xture *tabOptions;
-	texture *tabOptionsSelected;
-};SSelected;
 	texture *tabOptions;
 	texture *tabOptionsSelected;
 };
