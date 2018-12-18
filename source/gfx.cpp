@@ -8,10 +8,16 @@
 texture *frameBuffer;
 
 static uint32_t colorBlendAlpha(uint32_t colorA, uint32_t colorB) {
+	uint8_t aA = colorA >> 24 & 0xFF;
+	if (aA == 0x00) {
+		return colorB;
+	}
+	else if (aA == 0xFF) {
+		return colorA;
+	}
 	uint8_t aR = colorA & 0xFF;
 	uint8_t aG = colorA >> 8 & 0xFF;
 	uint8_t aB = colorA >> 16 & 0xFF;
-	uint8_t aA = colorA >> 24 & 0xFF;
 	uint8_t bR = colorB & 0xFF;
 	uint8_t bG = colorB >> 8 & 0xFF;
 	uint8_t bB = colorB >> 16 & 0xFF;
@@ -182,8 +188,10 @@ void gfxBlit(texture *target, texture *source, unsigned int x, unsigned int y) {
 		uint32_t *dataPtr = &source->data[0];
 		for (unsigned int ty = y; ty < y + source->height; ty++) {
 			uint32_t *rowPtr = &target->data[ty * target->width + x];
-			for (unsigned int tx = x; tx < x + source->width; tx++, rowPtr++) {
-				*rowPtr = colorBlendAlpha(*dataPtr++, *rowPtr);
+			for (unsigned int tx = x; tx < x + source->width; tx++, dataPtr++, rowPtr++) {
+				if (tx < target->width && ty < target->height) {
+					*rowPtr = colorBlendAlpha(*dataPtr, *rowPtr);
+				}
 			}
 		}
 	}
