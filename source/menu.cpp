@@ -21,11 +21,43 @@ void MENU::init() {
 	tabLayeredFSSelected = gfxCreateTextureFromPNG("romfs:/png/tab/tab_layeredfs_selected.png");
 	tabOptions = gfxCreateTextureFromPNG("romfs:/png/tab/tab_options.png");
 	tabOptionsSelected = gfxCreateTextureFromPNG("romfs:/png/tab/tab_options_selected.png");
+	texture *purpleBox = gfxCreateTextureFromPNG("romfs:/png/detail/detail_purple.png");
+	texture *grayBox = gfxCreateTextureFromPNG("romfs:/png/detail/detail_gray.png");
 	//END LOAD ASSETS
+	//BUILD ASSETS
+	//Detail Enabled
+	detailEnabled = gfxCreateTexture(236, 52);
+	gfxFill(detailEnabled, RGBA8(70, 70, 70, 0));
+	gfxBlit(detailEnabled, purpleBox, 0, 0);
+	gfxDrawText(detailEnabled, "Enabled", mainFont, 8, 8, 30, RGBA8(255, 255, 255, 0));
+	gfxDrawPixel(detailEnabled, 0, 0, RGBA8(255, 255, 25, 0));
+	//Detail Disabled
+	detailDisabled = gfxCreateTexture(236, 52);
+	gfxFill(detailDisabled, RGBA8(70, 70, 70, 0));
+	gfxBlit(detailDisabled, grayBox, 0, 0);
+	gfxDrawText(detailDisabled, "Disabled", mainFont, 8, 8, 30, RGBA8(50, 50, 50, 0));
+	gfxDrawPixel(detailDisabled, 0, 0, RGBA8(255, 255, 25, 0));
+	//Detail Loaded
+	detailLoaded = gfxCreateTexture(236, 52);
+	gfxFill(detailLoaded, RGBA8(70, 70, 70, 0));
+	gfxBlit(detailLoaded, purpleBox, 0, 0);
+	gfxDrawText(detailLoaded, "Loaded", mainFont, 8, 8, 30, RGBA8(255, 255, 255, 0));
+	gfxDrawPixel(detailLoaded, 0, 0, RGBA8(255, 255, 25, 0));
+	//Detail Unloaded
+	detailUnloaded = gfxCreateTexture(236, 52);
+	gfxFill(detailUnloaded, RGBA8(70, 70, 70, 0));
+	gfxBlit(detailUnloaded, grayBox, 0, 0);
+	gfxDrawText(detailUnloaded, "Unloaded", mainFont, 8, 8, 30, RGBA8(50, 50, 50, 0));
+	gfxDrawPixel(detailUnloaded, 0, 0, RGBA8(255, 255, 25, 0));
+	//Destroy Base Assets
+	gfxDestroyTexture(purpleBox);
+	gfxDestroyTexture(grayBox);
+	//Add Version To Backround
 	std::ostringstream version;
 	version << 'v' << VERSION_MAJOR << '.' << VERSION_MINOR << '.' << VERSION_MICRO;
 	gfxDrawText(background, version.str().c_str(), versionFont, 380, 59, 18, RGBA8(194, 17, 170, 0));
 	gfxDestroyFont(versionFont);
+	//END BUILD
 }
 
 void MENU::setTabSelected(unsigned int tabId) {
@@ -142,6 +174,7 @@ void MENU::drawMenu() {
 				gfxDrawText(frameBuffer, ss.str().c_str(), mainFont, 905, curX, 12, RGBA8(255, 255, 255, 0));
 			}
 		}
+		//gfxBlit(frameBuffer, detailUnloaded, 972, 652);
 	}
 }
 
@@ -160,4 +193,8 @@ void MENU::destroyAssets() {
 	gfxDestroyTexture(tabLayeredFSSelected);
 	gfxDestroyTexture(tabOptions);
 	gfxDestroyTexture(tabOptionsSelected);
+	gfxDestroyTexture(detailEnabled);
+	gfxDestroyTexture(detailDisabled);
+	gfxDestroyTexture(detailLoaded);
+	gfxDestroyTexture(detailUnloaded);
 }

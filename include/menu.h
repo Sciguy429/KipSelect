@@ -52,4 +52,8 @@ private:
 	texture *tabLayeredFSSelected;
 	texture *tabOptions;
 	texture *tabOptionsSelected;
+	texture *detailEnabled;
+	texture *detailDisabled;
+	texture *detailLoaded;
+	texture *detailUnloaded;
 };
