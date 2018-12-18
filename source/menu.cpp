@@ -114,18 +114,20 @@ void MENU::drawMenu() {
 	default:
 		return;
 	}
-	for (unsigned int i = 0; i < mnu->size(); i++) {
-		unsigned int drawY = 178 + (i * 64);
-		if (i == menuSelected) {
-			gfxBlit(frameBuffer, menuBarSelected, 0, drawY);
+	if (mnu->size() > 0) {
+		for (unsigned int i = 0; i < mnu->size(); i++) {
+			unsigned int drawY = 178 + (i * 64);
+			if (i == menuSelected) {
+				gfxBlit(frameBuffer, menuBarSelected, 0, drawY);
+			}
+			else {
+				gfxBlit(frameBuffer, menuBar, 0, drawY);
+			}
+			if ((*mnu)[i].enabled) {
+				gfxBlit(frameBuffer, checkmark, 825, drawY + 16);
+			}
+				gfxDrawText(frameBuffer, (*mnu)[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
 		}
-		else {
-			gfxBlit(frameBuffer, menuBar, 0, drawY);
-		}
-		if ((*mnu)[i].enabled) {
-			gfxBlit(frameBuffer, checkmark, 825, drawY + 16);
-		}
-		gfxDrawText(frameBuffer, (*mnu)[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
 	}
 	/* This code doesn't work anymore but is being temporarily kept for reference
 	if (mnu->size() > 0) {
@@ -168,7 +170,5 @@ void MENU::destroyAssets() {
 	gfxDestroyTexture(tabLayeredFSSelected);
 	gfxDestroyTexture(tabOptions);
 	gfxDestroyTexture(tabOptionsSelected);
-}ected);
-}Options);
-	gfxDestroyTexture(tabOptionsSelected);
+}OptionsSelected);
 }
