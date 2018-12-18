@@ -14,11 +14,8 @@ typedef struct {
 
 typedef struct {
 	std::string name;
-	std::string md5;
-	std::string version;
-	std::string description;
-	std::string data;
-	bool enabled;
+	std::vector details;
+	int status;
 } menuItem;
 
 class MENU {
@@ -53,6 +50,9 @@ private:
 	texture *tabBCTSelected;
 	texture *tabLayeredFS;
 	texture *tabLayeredFSSelected;
+	texture *tabOptions;
+	texture *tabOptionsSelected;
+};SSelected;
 	texture *tabOptions;
 	texture *tabOptionsSelected;
 };
