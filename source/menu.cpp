@@ -32,25 +32,21 @@ void MENU::init() {
 	gfxFill(detailEnabled, RGBA8(70, 70, 70, 0));
 	gfxBlit(detailEnabled, purpleBox, 0, 0);
 	gfxDrawText(detailEnabled, "Enabled", mainFont, 8, 8, 30, RGBA8(255, 255, 255, 0));
-	gfxDrawPixel(detailEnabled, 0, 0, RGBA8(255, 255, 25, 0));
 	//Detail Disabled
 	detailDisabled = gfxCreateTexture(236, 52);
 	gfxFill(detailDisabled, RGBA8(70, 70, 70, 0));
 	gfxBlit(detailDisabled, grayBox, 0, 0);
 	gfxDrawText(detailDisabled, "Disabled", mainFont, 8, 8, 30, RGBA8(50, 50, 50, 0));
-	gfxDrawPixel(detailDisabled, 0, 0, RGBA8(255, 255, 25, 0));
 	//Detail Loaded
 	detailLoaded = gfxCreateTexture(236, 52);
 	gfxFill(detailLoaded, RGBA8(70, 70, 70, 0));
 	gfxBlit(detailLoaded, purpleBox, 0, 0);
 	gfxDrawText(detailLoaded, "Loaded", mainFont, 8, 8, 30, RGBA8(255, 255, 255, 0));
-	gfxDrawPixel(detailLoaded, 0, 0, RGBA8(255, 255, 25, 0));
 	//Detail Unloaded
 	detailUnloaded = gfxCreateTexture(236, 52);
 	gfxFill(detailUnloaded, RGBA8(70, 70, 70, 0));
 	gfxBlit(detailUnloaded, grayBox, 0, 0);
 	gfxDrawText(detailUnloaded, "Unloaded", mainFont, 8, 8, 30, RGBA8(50, 50, 50, 0));
-	gfxDrawPixel(detailUnloaded, 0, 0, RGBA8(255, 255, 25, 0));
 	//Destroy Base Assets
 	gfxDestroyTexture(purpleBox);
 	gfxDestroyTexture(grayBox);
