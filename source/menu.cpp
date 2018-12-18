@@ -171,8 +171,17 @@ void MENU::drawMenu() {
 				ss << (*mnu)[menuSelected].details[d].prefix << (*mnu)[menuSelected].details[d].data << (*mnu)[menuSelected].details[d].suffix;
 				gfxDrawText(frameBuffer, ss.str().c_str(), mainFont, 905, curX, 12, RGBA8(255, 255, 255, 0));
 			}
+			switch ((*mnu)[menuSelected].status) {
+			case 0:
+				gfxBlit(frameBuffer, detailDisabled, 972, 652);
+				break;
+			case 1:
+				gfxBlit(frameBuffer, detailEnabled, 972, 652);
+				break;
+			default:
+				break;
+			}
 		}
-		//gfxBlit(frameBuffer, detailUnloaded, 972, 652);
 	}
 }
 
