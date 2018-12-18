@@ -6,10 +6,10 @@ void MENU::init() {
 	tabSelected = 0;
 	menuSelected = 0;
 	//LOAD ASSETS
-	//Fonts
+	//-Fonts
 	mainFont = gfxCreateFontFromTTF("romfs:/font/bahnschrift.ttf");
 	font *versionFont = gfxCreateFontFromTTF("romfs:/font/tt0288m_.ttf");
-	//Textures
+	//-Textures
 	background = gfxCreateTextureFromPNG("romfs:/png/background.png");
 	menuBar = gfxCreateTextureFromPNG("romfs:/png/menu/menu_bar.png");
 	menuBarSelected = gfxCreateTextureFromPNG("romfs:/png/menu/menu_bar_selected.png");
@@ -27,30 +27,30 @@ void MENU::init() {
 	texture *grayBox = gfxCreateTextureFromPNG("romfs:/png/detail/detail_gray.png");
 	//END LOAD ASSETS
 	//BUILD ASSETS
-	//Detail Enabled
+	//-Detail Enabled
 	detailEnabled = gfxCreateTexture(236, 52);
 	gfxFill(detailEnabled, RGBA8(70, 70, 70, 0));
 	gfxBlit(detailEnabled, purpleBox, 0, 0);
 	gfxDrawText(detailEnabled, "Enabled", mainFont, 8, 8, 30, RGBA8(255, 255, 255, 0));
-	//Detail Disabled
+	//-Detail Disabled
 	detailDisabled = gfxCreateTexture(236, 52);
 	gfxFill(detailDisabled, RGBA8(70, 70, 70, 0));
 	gfxBlit(detailDisabled, grayBox, 0, 0);
 	gfxDrawText(detailDisabled, "Disabled", mainFont, 8, 8, 30, RGBA8(50, 50, 50, 0));
-	//Detail Loaded
+	//-Detail Loaded
 	detailLoaded = gfxCreateTexture(236, 52);
 	gfxFill(detailLoaded, RGBA8(70, 70, 70, 0));
 	gfxBlit(detailLoaded, purpleBox, 0, 0);
 	gfxDrawText(detailLoaded, "Loaded", mainFont, 8, 8, 30, RGBA8(255, 255, 255, 0));
-	//Detail Unloaded
+	//-Detail Unloaded
 	detailUnloaded = gfxCreateTexture(236, 52);
 	gfxFill(detailUnloaded, RGBA8(70, 70, 70, 0));
 	gfxBlit(detailUnloaded, grayBox, 0, 0);
 	gfxDrawText(detailUnloaded, "Unloaded", mainFont, 8, 8, 30, RGBA8(50, 50, 50, 0));
-	//Destroy Base Assets
+	//-Destroy Base Assets
 	gfxDestroyTexture(purpleBox);
 	gfxDestroyTexture(grayBox);
-	//Add Version To Backround
+	//-Add Version To Backround
 	std::ostringstream version;
 	version << 'v' << VERSION_MAJOR << '.' << VERSION_MINOR << '.' << VERSION_MICRO;
 	gfxDrawText(background, version.str().c_str(), versionFont, 380, 59, 18, RGBA8(194, 17, 170, 0));
