@@ -26,7 +26,7 @@ public:
 	void setMenuSelected(unsigned int menuId);
 	unsigned int getMenuSelected();
 	unsigned int getMenuSize();
-	void addMenuItem(unsigned int tab, std::string name, std::string md5, std::string version, std::string description, std::string data, bool enabled);
+	void addMenuItem(unsigned int tab, std:string name, std::vector<menuDetail> details, int status);
 	void resetMenu();
 	void drawMenu();
 	void destroyAssets();
@@ -51,6 +51,8 @@ private:
 	texture *tabLayeredFS;
 	texture *tabLayeredFSSelected;
 	texture *tabOptions;
+	texture *tabOptionsSelected;
+};xture *tabOptions;
 	texture *tabOptionsSelected;
 };SSelected;
 	texture *tabOptions;

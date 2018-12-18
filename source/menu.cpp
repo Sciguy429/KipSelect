@@ -59,7 +59,7 @@ unsigned int MENU::getMenuSize() {
 	}
 }
 
-void MENU::addMenuItem(unsigned int tab, std::string name, std::string md5, std::string version, std::string description, std::string data, bool enabled) {
+void MENU::addMenuItem(unsigned int tab, std:string name, std::vector<menuDetail> details, int status) {
 	std::vector<menuItem> *mnu = new std::vector<menuItem>;
 	switch (tab) {
 	case 0:
@@ -168,5 +168,7 @@ void MENU::destroyAssets() {
 	gfxDestroyTexture(tabLayeredFS);
 	gfxDestroyTexture(tabLayeredFSSelected);
 	gfxDestroyTexture(tabOptions);
+	gfxDestroyTexture(tabOptionsSelected);
+}Options);
 	gfxDestroyTexture(tabOptionsSelected);
 }
