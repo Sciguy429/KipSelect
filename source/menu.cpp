@@ -123,8 +123,7 @@ void MENU::drawMenu() {
 			else {
 				gfxBlit(frameBuffer, menuBar, 0, drawY);
 			}
-			switch ((*mnu)[i].status)
-			{
+			switch ((*mnu)[i].status) {
 			case (1):
 				gfxBlit(frameBuffer, checkmark, 825, drawY + 16);
 				break;
@@ -135,10 +134,11 @@ void MENU::drawMenu() {
 				break;
 			}
 			gfxDrawText(frameBuffer, (*mnu)[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
-			for (unsigned int d = 0; d < mnu->size(); d++) {
+			gfxDrawText(frameBuffer, (*mnu)[menuSelected].name.c_str(), mainFont, 905, 178, 18, RGBA8(255, 255, 255, 0));
+			for (unsigned int d = 0; d < (*mnu)[menuSelected].details.size(); d++) {
 				unsigned int curX = d * 18 + 202;
 				std::ostringstream ss;
-				ss << (*mnu)[i].details[d].prefix << (*mnu)[i].details[d].data << (*mnu)[i].details[d].suffix;
+				ss << (*mnu)[menuSelected].details[d].prefix << (*mnu)[menuSelected].details[d].data << (*mnu)[menuSelected].details[d].suffix;
 				gfxDrawText(frameBuffer, ss.str().c_str(), mainFont, 905, curX, 12, RGBA8(255, 255, 255, 0));
 			}
 		}
