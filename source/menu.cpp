@@ -123,9 +123,11 @@ void MENU::drawMenu() {
 			else {
 				gfxBlit(frameBuffer, menuBar, 0, drawY);
 			}
+			/*
 			if ((*mnu)[i].enabled) {
 				gfxBlit(frameBuffer, checkmark, 825, drawY + 16);
 			}
+			*/
 				gfxDrawText(frameBuffer, (*mnu)[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
 		}
 	}
@@ -170,5 +172,5 @@ void MENU::destroyAssets() {
 	gfxDestroyTexture(tabLayeredFSSelected);
 	gfxDestroyTexture(tabOptions);
 	gfxDestroyTexture(tabOptionsSelected);
-}OptionsSelected);
+}ted);
 }
