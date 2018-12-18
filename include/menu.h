@@ -9,7 +9,7 @@
 typedef struct {
 	std::string prefix;
 	std::string data;
-	std::string sufix;
+	std::string suffix;
 } menuDetail;
 
 typedef struct {
