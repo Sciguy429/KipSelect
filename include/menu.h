@@ -7,6 +7,12 @@
 #include "gfx.h"
 
 typedef struct {
+	std::string prefix;
+	std::string data;
+	std::string sufix;
+} menuDetail;
+
+typedef struct {
 	std::string name;
 	std::string md5;
 	std::string version;
