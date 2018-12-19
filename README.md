@@ -1,5 +1,5 @@
-# GFX Test Branch
-This is a alpha GUI for Kip Select, build at your own risk
+# GFX
+This is a alpha GUI for Kip Select, build at your own risk, this new update will be posted officialy wehn its compleatly done.
 
 # Kip Select
 ![screenshot](https://github.com/Sciguy429/KipSelect/raw/master/icon/ExampleScreenshot.jpg)

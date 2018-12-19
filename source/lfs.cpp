@@ -3,7 +3,8 @@
 #include "lfs.h"
 
 void LFS::scanLFS() {
-	//stub
+	lfsItems.clear();
+
 }
 
 unsigned int LFS::getLFSCount() {
@@ -11,5 +12,6 @@ unsigned int LFS::getLFSCount() {
 }
 
 menuItem LFS::getLFSMenuItem(unsigned int lfsId) {
+	//stub
 	return menuItem();
 }
