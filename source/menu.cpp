@@ -188,7 +188,7 @@ void MENU::drawMenu() {
 			gfxBlit(frameBuffer, detailEnabled, 972, 652);
 		}
 		else {
-			gfxBlit(frameBuffer, detailDisabled, 968, 652);
+			gfxBlit(frameBuffer, detailDisabled, 972, 652);
 		}
 	}
 }
