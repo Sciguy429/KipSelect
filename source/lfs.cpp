@@ -7,7 +7,7 @@ void LFS::scanLFS() {
 }
 
 unsigned int LFS::getLFSCount() {
-	return 0;
+	return lfsItems.size();
 }
 
 menuItem LFS::getLFSMenuItem(unsigned int lfsId) {
