@@ -36,8 +36,8 @@ int main(int argc, char **argv) {
 	dets[0].data = "Feature Commming Soon!";
 	dets.push_back(menuDetail());
 	dets[1].data = ":D";
-	menu.addMenuItem(2, "TEST", dets, false);
-	menu.addMenuItem(3, "TEST", dets, false);
+	menu.addMenuItem(2, "Feature Planned", dets, false);
+	menu.addMenuItem(3, "Feature Planned", dets, false);
 	//~~
 	menu.drawMenu();
 	while (appletMainLoop() && run) {
