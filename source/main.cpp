@@ -20,16 +20,25 @@ int main(int argc, char **argv) {
 	kip.scanForKip();
 	bct.readBCT();
 	menu.init();
-	std::vector<menuDetail> dets;
 	for (int i = 0; i < kip.getKipCount(); i++) {
-		unsigned int pos = dets.size();
-		dets.push_back(menuDetail());
-		dets[pos].data = "test";
+		//TODO: Set up details
+		std::vector<menuDetail> dets;
 		menu.addMenuItem(0, kip.getKipName(i), dets, kip.getKipValue(i));
 	}
 	for (int i = 0; i < bct.getBCTCount(); i++) {
-		//menu.addMenuItem(1, bct.getBCTName(i), "", "", "", bct.getBCTName(i), bct.getBCTValue(i));
+		//TODO: Set up details
+		std::vector<menuDetail> dets;
+		menu.addMenuItem(1, bct.getBCTName(i), dets, bct.getBCTValue(i));
 	}
+	//TEMPORARY
+	std::vector<menuDetail> dets;
+	dets.push_back(menuDetail());
+	dets[0].data = "Feature Commming Soon!";
+	dets.push_back(menuDetail());
+	dets[1].data = ":D";
+	menu.addMenuItem(2, "TEST", dets, false);
+	menu.addMenuItem(3, "TEST", dets, false);
+	//~~
 	menu.drawMenu();
 	while (appletMainLoop() && run) {
 		hidScanInput();
@@ -61,6 +70,29 @@ int main(int argc, char **argv) {
 			if (menu.getMenuSelected() < menu.getMenuSize() - 1) {
 				menu.setMenuSelected(menu.getMenuSelected() + 1);
 				menu.drawMenu();
+			}
+		}
+		else if (kDown & KEY_A) {
+			switch (menu.getTabSelected()) {
+			case 0:
+				kip.setKip(menu.getMenuSelected(), !kip.getKipValue(menu.getMenuSelected()));
+				menu.toggleSelected();
+				menu.drawMenu();
+				break;
+			case 1:
+				bct.setBCT(menu.getMenuSelected(), !bct.getBCTValue(menu.getMenuSelected()));
+				menu.toggleSelected();
+				menu.drawMenu();
+				break;
+			case 2:
+				menu.toggleSelected();
+				menu.drawMenu();
+				break;
+			case 3:
+				//Options
+				break;
+			default:
+				break;
 			}
 		}
 		consoleUpdate(NULL);

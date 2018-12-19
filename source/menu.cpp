@@ -89,7 +89,30 @@ unsigned int MENU::getMenuSize() {
 	}
 }
 
-void MENU::addMenuItem(unsigned int tab, std::string name, std::vector<menuDetail> details, int status) {
+void MENU::toggleSelected() {
+	std::vector<menuItem> *mnu = new std::vector<menuItem>;
+	switch (tabSelected) {
+	case 0:
+		mnu = &kips;
+		break;
+	case 1:
+		mnu = &bct;
+		break;
+	case 2:
+		mnu = &layeredFS;
+		break;
+	case 3:
+		mnu = &options;
+		break;
+	default:
+		return;
+	}
+	if (mnu->size() > 0) {
+		(*mnu)[menuSelected].status = !(*mnu)[menuSelected].status;
+	}
+}
+
+void MENU::addMenuItem(unsigned int tab, std::string name, std::vector<menuDetail> details, bool status) {
 	std::vector<menuItem> *mnu = new std::vector<menuItem>;
 	switch (tab) {
 	case 0:
@@ -153,15 +176,8 @@ void MENU::drawMenu() {
 			else {
 				gfxBlit(frameBuffer, menuBar, 0, drawY);
 			}
-			switch ((*mnu)[i].status) {
-			case (1):
+			if ((*mnu)[i].status) {
 				gfxBlit(frameBuffer, checkmark, 825, drawY + 16);
-				break;
-			case (2):
-				gfxBlit(frameBuffer, questionmark, 825, drawY + 16);
-				break;
-			default:
-				break;
 			}
 			gfxDrawText(frameBuffer, (*mnu)[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
 		}
@@ -172,15 +188,11 @@ void MENU::drawMenu() {
 			ss << (*mnu)[menuSelected].details[d].prefix << (*mnu)[menuSelected].details[d].data << (*mnu)[menuSelected].details[d].suffix;
 			gfxDrawText(frameBuffer, ss.str().c_str(), mainFont, 905, curX, 12, RGBA8(255, 255, 255, 0));
 		}
-		switch ((*mnu)[menuSelected].status) {
-		case 0:
-			gfxBlit(frameBuffer, detailDisabled, 972, 652);
-			break;
-		case 1:
+		if ((*mnu)[menuSelected].status) {
 			gfxBlit(frameBuffer, detailEnabled, 972, 652);
-			break;
-		default:
-			break;
+		}
+		else {
+			gfxBlit(frameBuffer, detailDisabled, 972, 652);
 		}
 	}
 }

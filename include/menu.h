@@ -15,7 +15,7 @@ typedef struct {
 typedef struct {
 	std::string name;
 	std::vector<menuDetail> details;
-	int status;
+	bool status;
 } menuItem;
 
 class MENU {
@@ -26,7 +26,8 @@ public:
 	void setMenuSelected(unsigned int menuId);
 	unsigned int getMenuSelected();
 	unsigned int getMenuSize();
-	void addMenuItem(unsigned int tab, std::string name, std::vector<menuDetail> details, int status);
+	void toggleSelected();
+	void addMenuItem(unsigned int tab, std::string name, std::vector<menuDetail> details, bool status);
 	void resetMenu();
 	void drawMenu();
 	void destroyAssets();
