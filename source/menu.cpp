@@ -28,23 +28,19 @@ void MENU::init() {
 	//END LOAD ASSETS
 	//BUILD ASSETS
 	//-Detail Enabled
-	detailEnabled = gfxCreateTexture(236, 52);
-	gfxFill(detailEnabled, RGBA8(70, 70, 70, 0));
+	detailEnabled = gfxCreateTexture(243, 59);
 	gfxBlit(detailEnabled, purpleBox, 0, 0);
 	gfxDrawText(detailEnabled, "Enabled", mainFont, 8, 8, 30, RGBA8(255, 255, 255, 0));
 	//-Detail Disabled
-	detailDisabled = gfxCreateTexture(236, 52);
-	gfxFill(detailDisabled, RGBA8(70, 70, 70, 0));
+	detailDisabled = gfxCreateTexture(243, 59);
 	gfxBlit(detailDisabled, grayBox, 0, 0);
 	gfxDrawText(detailDisabled, "Disabled", mainFont, 8, 8, 30, RGBA8(50, 50, 50, 0));
 	//-Detail Loaded
-	detailLoaded = gfxCreateTexture(236, 52);
-	gfxFill(detailLoaded, RGBA8(70, 70, 70, 0));
+	detailLoaded = gfxCreateTexture(243, 59);
 	gfxBlit(detailLoaded, purpleBox, 0, 0);
 	gfxDrawText(detailLoaded, "Loaded", mainFont, 8, 8, 30, RGBA8(255, 255, 255, 0));
 	//-Detail Unloaded
-	detailUnloaded = gfxCreateTexture(236, 52);
-	gfxFill(detailUnloaded, RGBA8(70, 70, 70, 0));
+	detailUnloaded = gfxCreateTexture(243, 59);
 	gfxBlit(detailUnloaded, grayBox, 0, 0);
 	gfxDrawText(detailUnloaded, "Unloaded", mainFont, 8, 8, 30, RGBA8(50, 50, 50, 0));
 	//-Destroy Base Assets
@@ -192,7 +188,7 @@ void MENU::drawMenu() {
 			gfxBlit(frameBuffer, detailEnabled, 972, 652);
 		}
 		else {
-			gfxBlit(frameBuffer, detailDisabled, 972, 652);
+			gfxBlit(frameBuffer, detailDisabled, 968, 652);
 		}
 	}
 }
