@@ -1,6 +1,8 @@
 #include <string>
 #include <vector>
 
+#include "menu.h"
+
 typedef struct {
 	std::string titleId;
 	std::string titleName;
@@ -10,7 +12,9 @@ typedef struct {
 
 class LFS {
 public:
-	//
+	void scanLFS();
+	unsigned int getLFSCount();
+	menuItem getLFSMenuItem(unsigned int lfsId);
 private:
-	//
+	std::vector<lfsItem> lfsItems;
 };
