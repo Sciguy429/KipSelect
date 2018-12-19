@@ -4,6 +4,7 @@
 #include "gfx.h"
 #include "kip.h"
 #include "bct.h"
+#include "lfs.h"
 #include "menu.h"
 
 bool run = true;
