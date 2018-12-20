@@ -8,22 +8,24 @@ void BCT::scanBCT() {
 	bctIfStream.close();
 	for (unsigned int i = 0; i < (sizeof(bctTargets) / sizeof(*bctTargets)); i++) {
 		size_t debugModeLocation = bctString.find(bctTargets[i].c_str(), 0) + bctTargets[i].length();
-		unsigned int pos = bctItems.size();
-		bctItems.push_back(bctItem());
-		bctItems[pos].name = bctNames[i];
-		if (bctString[debugModeLocation] - 48 == 1) {
-			bctItems[pos].enabled = true;
-		}
-		else {
-			bctItems[pos].enabled = false;
+		if (debugModeLocation != std::string::npos) {
+			unsigned int pos = bctItems.size();
+			bctItems.push_back(bctItem());
+			bctItems[pos].name = bctNames[i];
+			if (bctString[debugModeLocation] - 48 == 1) {
+				bctItems[pos].enabled = true;
+			}
+			else {
+				bctItems[pos].enabled = false;
+			}
 		}
 	}
 }
-/*
-void BCT::setBCT(int bctId, bool enabled) {
-	size_t location = string::npos;
-	ifstream bctIfStream("/atmosphere/BCT.ini");
-	string bctString((std::istreambuf_iterator<char>(bctIfStream)), (std::istreambuf_iterator<char>()));
+
+void BCT::setBCTItemEnabled(unsigned int bctId, bool enabled) {
+	size_t location = std::string::npos;
+	std::ifstream bctIfStream("/atmosphere/BCT.ini");
+	std::string bctString((std::istreambuf_iterator<char>(bctIfStream)), (std::istreambuf_iterator<char>()));
 	bctIfStream.close();
 	switch (bctId) {
 	case 0:
@@ -68,4 +70,3 @@ string BCT::getBCTName(int bctId) {
 bool BCT::getBCTValue(int bctId) {
 	return bctValue[bctId];
 }
-*/
