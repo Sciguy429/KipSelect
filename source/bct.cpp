@@ -50,5 +50,6 @@ unsigned int BCT::getBCTItemCount() {
 }
 
 menuItem BCT::getBCTMenuItem(unsigned int bctId) {
+	//TODO: Generate menuItem
 	return menuItem();
 }

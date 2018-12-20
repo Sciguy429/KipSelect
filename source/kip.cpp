@@ -70,6 +70,6 @@ unsigned int KIP::getKIPCount() {
 }
 
 menuItem KIP::getKIPMenuItem(unsigned int kipId) {
-	//TODO: Generate a menuItem
+	//TODO: Generate menuItem
 	return menuItem();
 }
