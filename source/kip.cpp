@@ -5,9 +5,7 @@
 
 #include "kip.h"
 
-using namespace std;
-
-void KIP::scanForKip() {
+void KIP::scanKIP() {
 	DIR* enabledKipDir;
 	struct dirent* enabledKipEnt;
 	enabledKipDir = opendir("/atmosphere/kips/");

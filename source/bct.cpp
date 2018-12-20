@@ -3,8 +3,6 @@
 
 #include "bct.h"
 
-using namespace std;
-
 void BCT::readBCT() {
 	ifstream bctIfStream("/atmosphere/BCT.ini");
 	string bctString((std::istreambuf_iterator<char>(bctIfStream)), (std::istreambuf_iterator<char>()));
