@@ -6,6 +6,7 @@
 #include "kip.h"
 
 void KIP::scanKIP() {
+	kipItems.clear();
 	DIR* enabledKipDir;
 	struct dirent* enabledKipEnt;
 	enabledKipDir = opendir("/atmosphere/kips/");
@@ -16,9 +17,10 @@ void KIP::scanKIP() {
 	}
 	else {
 		while ((enabledKipEnt = readdir(enabledKipDir))) {
-			//kipName[kipCount] = enabledKipEnt->d_name;
-			//kipValue[kipCount] = true;
-			//kipCount++;
+			unsigned int pos = kipItems.size();
+			kipItems.push_back(kipItem());
+			kipItems[pos].name = enabledKipEnt->d_name;
+			kipItems[pos].enabled = true;
 		}
 	}
 	DIR* disabledKipDir;
@@ -31,9 +33,10 @@ void KIP::scanKIP() {
 	}
 	else {
 		while ((disabledKipEnt = readdir(disabledKipDir))) {
-			//kipName[kipCount] = disabledKipEnt->d_name;
-			//kipValue[kipCount] = false;
-			//kipCount++;
+			unsigned int pos = kipItems.size();
+			kipItems.push_back(kipItem());
+			kipItems[pos].name = disabledKipEnt->d_name;
+			kipItems[pos].enabled = false;
 		}
 	}
 }
