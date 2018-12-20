@@ -14,7 +14,8 @@ typedef struct {
 class BCT {
 public:
 	void scanBCT();
-	//void setBCTItemEnabled(unsigned int bctId, bool enabled);
+	void setBCTItemEnabled(unsigned int bctId, bool enabled);
+	bool getBCTItemEnabled(unsigned int bctId);
 	unsigned int getBCTItemCount();
 	menuItem getBCTMenuItem(unsigned int bctId);
 private:

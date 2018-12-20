@@ -17,7 +17,8 @@ typedef struct {
 class KIP {
 public:
 	void scanKIP();
-	//void setKIPItemEnabled(unsigned int kipId, bool enabled);
+	void setKIPItemEnabled(unsigned int kipId, bool enabled);
+	bool getKIPItemEnabled(unsigned int kipId);
 	unsigned int getKIPCount();
 	menuItem getKIPMenuItem(unsigned int kipId);
 private:
