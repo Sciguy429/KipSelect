@@ -63,3 +63,11 @@ void KIP::setKIPItemEnabled(unsigned int kipId, bool enabled) {
 bool KIP::getKIPItemEnabled(unsigned int kipId) {
 	return kipItems[kipId].enabled;
 }
+
+unsigned int KIP::getKIPCount() {
+	return kipItems.size();
+}
+
+menuItem KIP::getKIPMenuItem(unsigned int kipId) {
+	return menuItem();
+}
