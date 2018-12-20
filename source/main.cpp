@@ -14,12 +14,14 @@ int main(int argc, char **argv) {
 	MENU menu;
 	KIP kip;
 	BCT bct;
+	LFS lfs;
 	socketInitializeDefault();
 	nxlinkStdio();
 	romfsInit();
 	gfxInit(1280, 720);
 	kip.scanForKip();
 	bct.readBCT();
+	lfs.scanLFS();
 	menu.init();
 	for (int i = 0; i < kip.getKipCount(); i++) {
 		//TODO: Set up details
