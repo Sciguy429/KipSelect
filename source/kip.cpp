@@ -41,10 +41,10 @@ void KIP::scanKIP() {
 	}
 }
 
-void KIP::setKip(int kipId, bool enabled) {
-	string name = kipName[kipId];
-	string start = "/atmosphere/";
-	string end = "/atmosphere/";
+void KIP::setKIPItemEnabled(unsigned int kipId, bool enabled) {
+	std::string name = kipItems[kipId].name;
+	std::string start = "/atmosphere/";
+	std::string end = "/atmosphere/";
 	if (enabled) {
 		start.append("kips_disabled/");
 		end.append("kips/");
@@ -60,14 +60,6 @@ void KIP::setKip(int kipId, bool enabled) {
 	}
 }
 
-int KIP::getKipCount() {
-	return kipCount;
-}
-
-string KIP::getKipName(int kipId) {
-	return kipName[kipId];
-}
-
-bool KIP::getKipValue(int kipId) {
-	return kipValue[kipId];
+bool KIP::getKIPItemEnabled(unsigned int kipId) {
+	return kipItems[kipId].enabled;
 }
