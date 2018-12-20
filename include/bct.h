@@ -1,17 +1,23 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
-#define BCT_LIST_LENGTH 2
+#include "menu.h"
+
+typedef struct {
+	std::string name;
+	std::string description;
+	bool enabled;
+} bctItem;
 
 class BCT {
 public:
-	void readBCT();
-	void setBCT(int bctId, bool enabled);
-	int getBCTCount();
-	std::string getBCTName(int bctId);
-	bool getBCTValue(int bctId);
+	void scanBCT();
+	//void setBCTItemEnabled(unsigned int bctId, bool enabled);
+	unsigned int getBCTItemCount();
+	menuItem getBCTMenuItem(unsigned int bctId);
 private:
-	std::string bctName[BCT_LIST_LENGTH] = {"debugmode", "debugmode_user"};
-	bool bctValue[BCT_LIST_LENGTH];
+	std::vector<bctItem> bctItems;
+	std::string bctTargets[2] = {"debugmode", "debugmode_user"};
 };
