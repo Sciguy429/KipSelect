@@ -19,10 +19,11 @@ int main(int argc, char **argv) {
 	nxlinkStdio();
 	romfsInit();
 	gfxInit(1280, 720);
-	kip.scanForKip();
-	bct.readBCT();
+	kip.scanKIP();
+	bct.scanBCT();
 	lfs.scanLFS();
 	menu.init();
+	/*
 	for (int i = 0; i < kip.getKipCount(); i++) {
 		//TODO: Set up details
 		//std::vector<menuDetail> dets;
@@ -36,6 +37,7 @@ int main(int argc, char **argv) {
 	for (int i = 0; i < lfs.getLFSCount(), i++) {
 		//menu.addMenuItem(2, lfs.getLFSMenuItem(i));
 	}
+	*/
 	menu.drawMenu();
 	while (appletMainLoop() && run) {
 		hidScanInput();
@@ -72,12 +74,12 @@ int main(int argc, char **argv) {
 		else if (kDown & KEY_A) {
 			switch (menu.getTabSelected()) {
 			case 0:
-				kip.setKip(menu.getMenuSelected(), !kip.getKipValue(menu.getMenuSelected()));
+				//kip.setKip(menu.getMenuSelected(), !kip.getKipValue(menu.getMenuSelected()));
 				menu.toggleSelected();
 				menu.drawMenu();
 				break;
 			case 1:
-				bct.setBCT(menu.getMenuSelected(), !bct.getBCTValue(menu.getMenuSelected()));
+				//bct.setBCT(menu.getMenuSelected(), !bct.getBCTValue(menu.getMenuSelected()));
 				menu.toggleSelected();
 				menu.drawMenu();
 				break;
