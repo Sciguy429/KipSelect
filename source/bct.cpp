@@ -47,7 +47,7 @@ bool BCT::getBCTItemEnabled(unsigned int bctId) {
 }
 
 unsigned int BCT::getBCTItemCount() {
-	return 0;
+	return bctItems.size();
 }
 
 menuItem BCT::getBCTMenuItem(unsigned int bctId) {
