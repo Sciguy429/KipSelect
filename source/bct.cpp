@@ -52,13 +52,11 @@ void BCT::setBCT(int bctId, bool enabled) {
 			bctOfStream.close();
 		}
 		else {
-			//printError(4, "");
-			//log("Couln't Open /atmosphere/BCT.ini", LOG_LEVEL_ERROR);
+			//TODO: Throw a proper error here (error.h/error.cpp)
 		}
 	}
 	else {
-		//printError(5, bctName[bctId]);
-		//log("Couldnt Find Value In /atmosphere/BCT.ini", LOG_LEVEL_ERROR);
+		//TODO: Throw a proper error here (error.h/error.cpp)
 	}
 }
 
