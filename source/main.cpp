@@ -25,26 +25,17 @@ int main(int argc, char **argv) {
 	menu.init();
 	for (int i = 0; i < kip.getKipCount(); i++) {
 		//TODO: Set up details
-		std::vector<menuDetail> dets;
-		menu.addMenuItem(0, kip.getKipName(i), dets, kip.getKipValue(i));
+		//std::vector<menuDetail> dets;
+		//menu.addMenuItem(0, kip.getKipName(i), dets, kip.getKipValue(i));
 	}
 	for (int i = 0; i < bct.getBCTCount(); i++) {
 		//TODO: Set up details
-		std::vector<menuDetail> dets;
-		menu.addMenuItem(1, bct.getBCTName(i), dets, bct.getBCTValue(i));
+		//std::vector<menuDetail> dets;
+		//menu.addMenuItem(1, bct.getBCTName(i), dets, bct.getBCTValue(i));
 	}
 	for (int i = 0; i < lfs.getLFSCount(), i++) {
 		//menu.addMenuItem(2, lfs.getLFSMenuItem(i));
 	}
-	//TEMPORARY
-	std::vector<menuDetail> dets;
-	dets.push_back(menuDetail());
-	dets[0].data = "Feature Commming Soon!";
-	dets.push_back(menuDetail());
-	dets[1].data = ":D";
-	menu.addMenuItem(2, "Feature Planned", dets, false);
-	menu.addMenuItem(3, "Feature Planned", dets, false);
-	//~~
 	menu.drawMenu();
 	while (appletMainLoop() && run) {
 		hidScanInput();
