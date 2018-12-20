@@ -27,7 +27,7 @@ public:
 	unsigned int getMenuSelected();
 	unsigned int getMenuSize();
 	void toggleSelected();
-	void addMenuItem(unsigned int tab, std::string name, std::vector<menuDetail> details, bool status);
+	void addMenuItem(unsigned int tab, menuItem itm);
 	void resetMenu();
 	void drawMenu();
 	void destroyAssets();

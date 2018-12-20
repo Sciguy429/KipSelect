@@ -33,6 +33,9 @@ int main(int argc, char **argv) {
 		std::vector<menuDetail> dets;
 		menu.addMenuItem(1, bct.getBCTName(i), dets, bct.getBCTValue(i));
 	}
+	for (int i = 0; i < lfs.getLFSCount(), i++) {
+		//menu.addMenuItem(2, lfs.getLFSMenuItem(i));
+	}
 	//TEMPORARY
 	std::vector<menuDetail> dets;
 	dets.push_back(menuDetail());

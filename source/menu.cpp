@@ -108,7 +108,7 @@ void MENU::toggleSelected() {
 	}
 }
 
-void MENU::addMenuItem(unsigned int tab, std::string name, std::vector<menuDetail> details, bool status) {
+void MENU::addMenuItem(unsigned int tab, menuItem itm) {
 	std::vector<menuItem> *mnu = new std::vector<menuItem>;
 	switch (tab) {
 	case 0:
@@ -126,11 +126,7 @@ void MENU::addMenuItem(unsigned int tab, std::string name, std::vector<menuDetai
 	default:
 		return;
 	}
-	unsigned int pos = mnu->size();
-	mnu->push_back(menuItem());
-	(*mnu)[pos].name = name;
-	(*mnu)[pos].details = details;
-	(*mnu)[pos].status = status;
+	mnu->push_back(itm);
 }
 
 void MENU::resetMenu() {

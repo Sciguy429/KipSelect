@@ -50,6 +50,7 @@ unsigned int LFS::getLFSCount() {
 }
 
 menuItem LFS::getLFSMenuItem(unsigned int lfsId) {
-	//stub
+	menuItem mnu;
+	mnu.name = lfsItems[lfsId].titleId;
 	return menuItem();
 }
