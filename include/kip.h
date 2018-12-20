@@ -1,18 +1,25 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
-#define KIP_LIST_LENGTH 32
+#include "menu.h"
+
+typedef struct {
+	std::string name;
+	std::string md5;
+	std::string version;
+	std::string size;
+	std::string description;
+	bool enabled;
+} kipItem;
 
 class KIP {
 public:
-	void scanForKip();
-	void setKip(int kipId, bool enabled);
-	int getKipCount();
-	std::string getKipName(int kipId);
-	bool getKipValue(int kipId);
+	void scanKIP();
+	//void setKIPItemEnabled(unsigned int kipId, bool enabled);
+	unsigned int getKIPCount();
+	menuItem getKIPMenuItem(unsigned int kipId);
 private:
-	std::string kipName[KIP_LIST_LENGTH];
-	bool kipValue[KIP_LIST_LENGTH];
-	int kipCount = 0;
+	std::vector<kipItem> kipItems;
 };
