@@ -6,10 +6,10 @@
 #include "menu.h"
 
 typedef struct {
+	std::string name;
 	std::string titleId;
-	std::string titleName;
-	std::string titleDiscription;
-	bool titleEnabled;
+	std::string discription;
+	bool enabled;
 } lfsItem;
 
 class LFS {

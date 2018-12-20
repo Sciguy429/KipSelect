@@ -42,6 +42,7 @@ void KIP::scanKIP() {
 }
 
 void KIP::setKIPItemEnabled(unsigned int kipId, bool enabled) {
+	kipItems[kipId].enabled = enabled;
 	std::string name = kipItems[kipId].name;
 	std::string start = "/atmosphere/";
 	std::string end = "/atmosphere/";

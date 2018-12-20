@@ -23,6 +23,7 @@ void BCT::scanBCT() {
 }
 
 void BCT::setBCTItemEnabled(unsigned int bctId, bool enabled) {
+	bctItems[bctId].enabled = enabled;
 	std::ifstream bctIfStream("/atmosphere/BCT.ini");
 	std::string bctString((std::istreambuf_iterator<char>(bctIfStream)), (std::istreambuf_iterator<char>()));
 	bctIfStream.close();
@@ -40,14 +41,14 @@ void BCT::setBCTItemEnabled(unsigned int bctId, bool enabled) {
 	}
 }
 
-int BCT::getBCTCount() {
-	return BCT_LIST_LENGTH;
+bool BCT::getBCTItemEnabled(unsigned int bctId) {
+	return bctItems[bctId].enabled;
 }
 
-string BCT::getBCTName(int bctId) {
-	return bctName[bctId];
+unsigned int BCT::getBCTItemCount() {
+	return 0;
 }
 
-bool BCT::getBCTValue(int bctId) {
-	return bctValue[bctId];
+menuItem BCT::getBCTMenuItem(unsigned int bctId) {
+	return menuItem();
 }

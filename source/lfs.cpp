@@ -28,21 +28,30 @@ void LFS::scanLFS() {
 			if (info.st_mode & S_IFDIR) {
 				flagsPath << "/disabled.flag";
 				if (stat(flagsPath.str().c_str(), &info) == 0) {
-					lfsItems[pos].titleEnabled = false;
+					lfsItems[pos].enabled = false;
 				}
 				else {
-					lfsItems[pos].titleEnabled = true;
+					lfsItems[pos].enabled = true;
 				}
 			}
 			else {
-				lfsItems[pos].titleEnabled = true;
+				lfsItems[pos].enabled = true;
 				if (mkdir(flagsPath.str().c_str(), 0700) == -1) {
 					//TODO: Throw a proper error here
 				}
 			}
-			printf("---%s\n", lfsItems[pos].titleEnabled ? "Enabled" : "Disabled");
+			printf("---%s\n", lfsItems[pos].enabled ? "Enabled" : "Disabled");
 		}
 	}
+}
+
+void LFS::setLFSItemEnabled(unsigned int lfsId, bool enabled) {
+	lfsItems[lfsId].enabled = enabled;
+}
+
+bool LFS::getLFSItemEnabled(unsigned int lfsId)
+{
+	return false;
 }
 
 unsigned int LFS::getLFSCount() {
