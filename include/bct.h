@@ -20,5 +20,6 @@ public:
 	menuItem getBCTMenuItem(unsigned int bctId);
 private:
 	std::vector<bctItem> bctItems;
-	std::string bctTargets[3] = {"debugmode", "debugmode_user", "nogc"};
+	std::string bctNames[3] = {"Debug Mode", "Debug Mode User", "No Gamecard"};
+	std::string bctTargets[3] = {"debugmode = ", "debugmode_user = ", "nogc = "};
 };

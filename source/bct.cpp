@@ -1,15 +1,15 @@
 #include <fstream>
-#include <string>
 
 #include "bct.h"
 
-void BCT::readBCT() {
-	ifstream bctIfStream("/atmosphere/BCT.ini");
-	string bctString((std::istreambuf_iterator<char>(bctIfStream)), (std::istreambuf_iterator<char>()));
+void BCT::scanBCT() {
+	std::ifstream bctIfStream("/atmosphere/BCT.ini");
+	std::string bctString((std::istreambuf_iterator<char>(bctIfStream)), (std::istreambuf_iterator<char>()));
 	bctIfStream.close();
+	/*
 	size_t debugModeLocation = bctString.find("debugmode = ", 0) + 12;
 	size_t debugModeUserLocation = bctString.find("debugmode_user = ", 0) + 17;
-	if (debugModeLocation == string::npos) {
+	if (debugModeLocation == std::string::npos) {
 		bctValue[0] = -1;
 	}
 	else {
@@ -21,6 +21,7 @@ void BCT::readBCT() {
 	else {
 		bctValue[1] = bctString[debugModeUserLocation] - 48;
 	}
+	*/
 }
 
 void BCT::setBCT(int bctId, bool enabled) {
