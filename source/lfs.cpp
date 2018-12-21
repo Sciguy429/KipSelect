@@ -57,9 +57,7 @@ void LFS::setLFSItemEnabled(unsigned int lfsId, bool enabled) {
 	}
 	flagsPath << "/disabled.flag";
 	if (enabled) {
-		if (remove(flagsPath.str().c_str()) == -1) {
-			printf("Oh no: %s", flagsPath.str().c_str());
-		}
+		remove(flagsPath.str().c_str())
 	}
 	else {
 		std::ofstream flag(flagsPath.str().c_str());
