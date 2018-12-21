@@ -163,8 +163,27 @@ void MENU::drawMenu() {
 		return;
 	}
 	if (mnu->size() > 0) {
-		for (unsigned int i = 0; i < mnu->size(); i++) {
-			unsigned int drawY = 178 + (i * 64);
+		unsigned int offset;
+		unsigned int offsetLimit;
+		if ((int)(menuSelected - 7) > 0) {
+			if ((menuSelected - 7) < mnu->size()) {
+				offset = menuSelected - 7;
+			}
+			else {
+				offset = mnu->size() - 8;
+			}
+		}
+		else {
+			offset = 0;
+		}
+		if (mnu->size() - offset < 8) {
+			offsetLimit = mnu->size();
+		}
+		else {
+			offsetLimit = offset + 8;
+		}
+		for (unsigned int i = offset; i < offsetLimit; i++) {
+			unsigned int drawY = 178 + ((i - offset) * 64);
 			if (i == menuSelected) {
 				gfxBlit(frameBuffer, menuBarSelected, 0, drawY);
 			}
