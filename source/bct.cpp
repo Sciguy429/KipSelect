@@ -40,6 +40,9 @@ void BCT::setBCTItemEnabled(unsigned int bctId, bool enabled) {
 			//TODO: Throw a proper error here (error.h/error.cpp)
 		}
 	}
+	else {
+		//TODO: Throw a proper error here (error.h/error.cpp)
+	}
 }
 
 bool BCT::getBCTItemEnabled(unsigned int bctId) {

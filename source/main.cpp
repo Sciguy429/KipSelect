@@ -23,21 +23,15 @@ int main(int argc, char **argv) {
 	bct.scanBCT();
 	lfs.scanLFS();
 	menu.init();
-	/*
-	for (int i = 0; i < kip.getKipCount(); i++) {
-		//TODO: Set up details
-		//std::vector<menuDetail> dets;
-		//menu.addMenuItem(0, kip.getKipName(i), dets, kip.getKipValue(i));
+	for (unsigned int i = 0; i < kip.getKIPItemCount(); i++) {
+		menu.addMenuItem(2, kip.getKIPMenuItem(i));
 	}
-	for (int i = 0; i < bct.getBCTCount(); i++) {
-		//TODO: Set up details
-		//std::vector<menuDetail> dets;
-		//menu.addMenuItem(1, bct.getBCTName(i), dets, bct.getBCTValue(i));
+	for (unsigned int i = 0; i < bct.getBCTItemCount(); i++) {
+		menu.addMenuItem(2, bct.getBCTMenuItem(i));
 	}
-	for (int i = 0; i < lfs.getLFSCount(), i++) {
-		//menu.addMenuItem(2, lfs.getLFSMenuItem(i));
+	for (unsigned int i = 0; i < lfs.getLFSCount(); i++) {
+		menu.addMenuItem(2, lfs.getLFSMenuItem(i));
 	}
-	*/
 	menu.drawMenu();
 	while (appletMainLoop() && run) {
 		hidScanInput();
@@ -74,12 +68,10 @@ int main(int argc, char **argv) {
 		else if (kDown & KEY_A) {
 			switch (menu.getTabSelected()) {
 			case 0:
-				//kip.setKip(menu.getMenuSelected(), !kip.getKipValue(menu.getMenuSelected()));
 				menu.toggleSelected();
 				menu.drawMenu();
 				break;
 			case 1:
-				//bct.setBCT(menu.getMenuSelected(), !bct.getBCTValue(menu.getMenuSelected()));
 				menu.toggleSelected();
 				menu.drawMenu();
 				break;
