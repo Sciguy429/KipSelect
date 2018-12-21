@@ -24,10 +24,10 @@ int main(int argc, char **argv) {
 	lfs.scanLFS();
 	menu.init();
 	for (unsigned int i = 0; i < kip.getKIPItemCount(); i++) {
-		menu.addMenuItem(2, kip.getKIPMenuItem(i));
+		menu.addMenuItem(0, kip.getKIPMenuItem(i));
 	}
 	for (unsigned int i = 0; i < bct.getBCTItemCount(); i++) {
-		menu.addMenuItem(2, bct.getBCTMenuItem(i));
+		menu.addMenuItem(1, bct.getBCTMenuItem(i));
 	}
 	for (unsigned int i = 0; i < lfs.getLFSCount(); i++) {
 		menu.addMenuItem(2, lfs.getLFSMenuItem(i));
