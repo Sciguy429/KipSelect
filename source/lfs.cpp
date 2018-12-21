@@ -40,7 +40,6 @@ void LFS::scanLFS() {
 					//TODO: Throw a proper error here
 				}
 			}
-			printf("---%s\n", lfsItems[pos].enabled ? "Enabled" : "Disabled");
 		}
 	}
 }
