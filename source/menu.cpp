@@ -55,6 +55,7 @@ void MENU::init() {
 }
 
 void MENU::setTabSelected(unsigned int tabId) {
+	menuSelected = 0;
 	tabSelected = tabId;
 }
 
@@ -130,6 +131,8 @@ void MENU::addMenuItem(unsigned int tab, menuItem itm) {
 }
 
 void MENU::resetMenu() {
+	tabSelected = 0;
+	menuSelected = 0;
 	kips.clear();
 	bct.clear();
 	layeredFS.clear();

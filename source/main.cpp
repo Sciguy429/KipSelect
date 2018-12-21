@@ -32,6 +32,14 @@ int main(int argc, char **argv) {
 	for (unsigned int i = 0; i < lfs.getLFSCount(); i++) {
 		menu.addMenuItem(2, lfs.getLFSMenuItem(i));
 	}
+	//TMP
+	for (unsigned int i = 0; i < lfs.getLFSCount(); i++) {
+		menu.addMenuItem(2, lfs.getLFSMenuItem(i));
+	}
+	for (unsigned int i = 0; i < lfs.getLFSCount(); i++) {
+		menu.addMenuItem(2, lfs.getLFSMenuItem(i));
+	}
+	//~~
 	menu.drawMenu();
 	while (appletMainLoop() && run) {
 		hidScanInput();
@@ -41,14 +49,12 @@ int main(int argc, char **argv) {
 		}
 		else if (kDown & KEY_L) {
 			if (menu.getTabSelected() > 0) {
-				menu.setMenuSelected(0);
 				menu.setTabSelected(menu.getTabSelected() - 1);
 				menu.drawMenu();
 			}
 		}
 		else if (kDown & KEY_R) {
 			if (menu.getTabSelected() < 3) {
-				menu.setMenuSelected(0);
 				menu.setTabSelected(menu.getTabSelected() + 1);
 				menu.drawMenu();
 			}
