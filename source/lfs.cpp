@@ -1,4 +1,5 @@
 #include <sstream>
+#include <fstream>
 #include <dirent.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -20,7 +21,6 @@ void LFS::scanLFS() {
 			unsigned int pos = lfsItems.size();
 			lfsItems.push_back(lfsItem());
 			lfsItems[pos].titleId = lfsEnt->d_name;
-			printf("LFS FOUND: %s\n", lfsEnt->d_name);
 			std::ostringstream flagsPath;
 			flagsPath << "/atmosphere/titles/" << lfsEnt->d_name;
 			struct stat info;
@@ -46,11 +46,34 @@ void LFS::scanLFS() {
 
 void LFS::setLFSItemEnabled(unsigned int lfsId, bool enabled) {
 	lfsItems[lfsId].enabled = enabled;
+	std::ostringstream flagsPath;
+	flagsPath << "/atmosphere/titles/" << lfsItems[lfsId].titleId << "/flags";
+	struct stat info;
+	stat(flagsPath.str().c_str(), &info);
+	if (!(info.st_mode & S_IFDIR)) {
+		if (mkdir(flagsPath.str().c_str(), 0700) == -1) {
+			//TODO: Throw a proper error here
+		}
+	}
+	flagsPath << "/disabled.flag";
+	if (enabled) {
+		if (remove(flagsPath.str().c_str()) == -1) {
+			printf("Oh no: %s", flagsPath.str().c_str());
+		}
+	}
+	else {
+		std::ofstream flag(flagsPath.str().c_str());
+		if (flag.is_open()) {
+			flag.close();
+		}
+		else {
+			//TODO: Throw a proper error here
+		}
+	}
 }
 
-bool LFS::getLFSItemEnabled(unsigned int lfsId)
-{
-	return false;
+bool LFS::getLFSItemEnabled(unsigned int lfsId) {
+	return lfsItems[lfsId].enabled;
 }
 
 unsigned int LFS::getLFSCount() {
