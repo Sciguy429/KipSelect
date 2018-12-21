@@ -65,7 +65,7 @@ bool KIP::getKIPItemEnabled(unsigned int kipId) {
 	return kipItems[kipId].enabled;
 }
 
-unsigned int KIP::getKIPCount() {
+unsigned int KIP::getKIPItemCount() {
 	return kipItems.size();
 }
 

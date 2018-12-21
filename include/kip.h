@@ -19,7 +19,7 @@ public:
 	void scanKIP();
 	void setKIPItemEnabled(unsigned int kipId, bool enabled);
 	bool getKIPItemEnabled(unsigned int kipId);
-	unsigned int getKIPCount();
+	unsigned int getKIPItemCount();
 	menuItem getKIPMenuItem(unsigned int kipId);
 private:
 	std::vector<kipItem> kipItems;
