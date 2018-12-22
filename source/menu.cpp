@@ -186,12 +186,12 @@ void MENU::drawMenu() {
 			offsetLimit = offset + 8;
 		}
 		//~~
-		//PRINT SCROLL INDICATOR
+		//DRAW SCROLL INDICATOR
 		if (offset > 0) {
 			gfxBlit(frameBuffer, menuScrollUp, 0, 690);
 		}
 		if (offsetLimit < mnu->size()) {
-			gfxBlit(frameBuffer, menuScrollDown, 870, 690);
+			gfxBlit(frameBuffer, menuScrollDown, 862, 690);
 		}
 		//~~
 		//DRAW MENU LIST
