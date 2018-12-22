@@ -188,12 +188,10 @@ void MENU::drawMenu() {
 		//~~
 		//PRINT SCROLL INDICATOR
 		if (offset > 0) {
-			printf("%d: Above\n", offset);
-			//Blit
+			gfxBlit(frameBuffer, menuScrollUp, 0, 690);
 		}
 		if (offsetLimit < mnu->size()) {
-			printf("%d: Below\n", mnu->size() - offsetLimit);
-			//Blit
+			gfxBlit(frameBuffer, menuScrollDown, 870, 690);
 		}
 		//~~
 		for (unsigned int i = offset; i < offsetLimit; i++) {
