@@ -32,7 +32,7 @@ int main(int argc, char **argv) {
 	for (unsigned int i = 0; i < lfs.getLFSCount(); i++) {
 		menu.addMenuItem(2, lfs.getLFSMenuItem(i));
 	}
-	//TMP
+	//TMP (Test Code)
 	for (unsigned int i = 0; i < lfs.getLFSCount(); i++) {
 		menu.addMenuItem(2, lfs.getLFSMenuItem(i));
 	}

@@ -212,10 +212,10 @@ void MENU::drawMenu() {
 		//DRAW DETAILS WINDOW
 		gfxDrawText(frameBuffer, (*mnu)[menuSelected].name.c_str(), mainFont, 905, 178, 18, RGBA8(255, 255, 255, 0));
 		for (unsigned int i = 0; i < (*mnu)[menuSelected].details.size(); i++) {
-			unsigned int curX = i * 18 + 202;
+			unsigned int curY = i * 18 + 202;
 			std::ostringstream ss;
 			ss << (*mnu)[menuSelected].details[i].prefix << (*mnu)[menuSelected].details[i].data << (*mnu)[menuSelected].details[i].suffix;
-			gfxDrawTextWrap(frameBuffer, ss.str().c_str(), mainFont, 905, curX, 12, RGBA8(255, 255, 255, 0), 370);
+			gfxDrawTextWrap(frameBuffer, ss.str().c_str(), mainFont, 905, curY, 12, RGBA8(255, 255, 255, 0), 370);
 		}
 		if ((*mnu)[menuSelected].status) {
 			gfxBlit(frameBuffer, detailEnabled, 972, 652);
