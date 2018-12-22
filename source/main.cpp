@@ -8,7 +8,6 @@
 #include "bct.h"
 #include "lfs.h"
 
-bool run = true;
 u64 kDown;
 
 int main(int argc, char **argv) {
@@ -19,12 +18,12 @@ int main(int argc, char **argv) {
 	socketInitializeDefault();
 	nxlinkStdio();
 	romfsInit();
-	errorLoadAssets();
 	gfxInit(1280, 720);
+	errorLoadAssets();
+	menu.loadAssets();
 	kip.scanKIP();
 	bct.scanBCT();
 	lfs.scanLFS();
-	menu.init();
 	for (unsigned int i = 0; i < kip.getKIPItemCount(); i++) {
 		menu.addMenuItem(0, kip.getKIPMenuItem(i));
 	}
