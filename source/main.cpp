@@ -2,7 +2,6 @@
 #include <string>
 
 #include "gfx.h"
-#include "load.h"
 #include "error.h"
 #include "menu.h"
 #include "kip.h"
@@ -20,14 +19,12 @@ int main(int argc, char **argv) {
 	socketInitializeDefault();
 	nxlinkStdio();
 	romfsInit();
+	errorLoadAssets();
 	gfxInit(1280, 720);
-	errorRegisterAssets();
-	menu.registerAssets();
-	loadRegisteredAssets();
-	menu.init();
 	kip.scanKIP();
 	bct.scanBCT();
 	lfs.scanLFS();
+	menu.init();
 	for (unsigned int i = 0; i < kip.getKIPItemCount(); i++) {
 		menu.addMenuItem(0, kip.getKIPMenuItem(i));
 	}
@@ -99,8 +96,9 @@ int main(int argc, char **argv) {
 		}
 		consoleUpdate(NULL);
 	}
-	destroyRegisteredAssets();
+	menu.destroyAssets();
 	gfxCleanUp();
+	errorDestroyAssets();
 	romfsExit();
 	socketExit();
 	consoleExit(NULL);
