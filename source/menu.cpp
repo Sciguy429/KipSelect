@@ -165,7 +165,7 @@ void MENU::drawMenu() {
 		return;
 	}
 	if (mnu->size() > 0) {
-		//SCROLLING
+		//HANDLE SCROLLING
 		unsigned int offset;
 		unsigned int offsetLimit;
 		if ((int)(menuSelected - 7) > 0) {
