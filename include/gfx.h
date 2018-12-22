@@ -36,6 +36,8 @@ void gfxDrawText(texture *tex, const char *text, const font *fnt, int x, int y, 
 
 void gfxDrawTextWrap(texture *tex, const char *text, const font *fnt, int x, int y, int size, uint32_t clr, int maxLength);
 
+void gfxDrawTextCenter(texture *tex, const char *text, const font *fnt, int x, int y, int size, uint32_t clr);
+
 void gfxFill(texture *tex, uint32_t clr);
 
 void gfxBlit(texture *target, texture *source, unsigned int x, unsigned int y);

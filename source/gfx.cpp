@@ -65,7 +65,7 @@ static FT_GlyphSlot loadGlyph(const uint32_t charId, const font *fnt, FT_Int32 f
 	return fnt->face->glyph;
 }
 
-static size_t getTextWidth(const char *text, const font *fnt, int size) {
+static size_t getTextLength(const char *text, const font *fnt, int size) {
 	size_t width = 0;
 	uint32_t unitCount = 0;
 	uint32_t tmpChar = 0;
@@ -201,7 +201,7 @@ void gfxDrawTextWrap(texture *tex, const char *text, const font *fnt, int x, int
 		nextBreak = strcspn(&text[i], " /");
 		memset(wordBuf, 0, 128);
 		memcpy(wordBuf, &text[i], nextBreak + 1);
-		size_t width = getTextWidth(wordBuf, fnt, size);
+		size_t width = getTextLength(wordBuf, fnt, size);
 		if (curX + width >= x + maxLength) {
 			curX = x;
 			y += size + 8;
@@ -228,6 +228,11 @@ void gfxDrawTextWrap(texture *tex, const char *text, const font *fnt, int x, int
 		}
 		i += strlen(wordBuf);
 	}
+}
+
+void gfxDrawTextCenter(texture *tex, const char *text, const font *fnt, int x, int y, int size, uint32_t clr) {
+	size_t length = getTextLength(text, fnt, size);
+	gfxDrawText(tex, text, fnt, x - length / 2, y, size, clr);
 }
 
 void gfxFill(texture *tex, uint32_t clr) {
