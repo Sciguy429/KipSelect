@@ -9,8 +9,10 @@ texture *errorBackground;
 font *fnt;
 
 errorStructure errors[] = {
-	{"Unable To Create Dirrectory", "The program was unable to create a dirrectory on the SD card!"},
-	{"File Move Failed", "The program was unable to move a file!"}
+	{"Unable To Create Dirrectory", "The program was unable to create a dirrectory on the SD card!"}, //Mkdir Error
+	{"File Move Failed", "The program was unable to move a file!"}, //Rename Error
+	{"Unable To Open File", "The program was unable to open a file on the SD card in order to write to it!"}, //Ofstream Error
+	{"Missing String In BCT.ini", "The program could not find a target setting previously found in bct.ini!"} //BCT Location Not Found Error
 };
 
 void errorLoadAssets() {

@@ -87,7 +87,7 @@ int main(int argc, char **argv) {
 				menu.drawMenu();
 				break;
 			case 3:
-				errorThrow(0);
+				//Options
 				break;
 			default:
 				break;
