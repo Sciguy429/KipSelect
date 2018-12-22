@@ -194,6 +194,7 @@ void MENU::drawMenu() {
 			gfxBlit(frameBuffer, menuScrollDown, 870, 690);
 		}
 		//~~
+		//DRAW MENU LIST
 		for (unsigned int i = offset; i < offsetLimit; i++) {
 			unsigned int drawY = 178 + ((i - offset) * 64);
 			if (i == menuSelected) {
@@ -207,6 +208,8 @@ void MENU::drawMenu() {
 			}
 			gfxDrawText(frameBuffer, (*mnu)[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
 		}
+		//~~
+		//DRAW DETAILS WINDOW
 		gfxDrawText(frameBuffer, (*mnu)[menuSelected].name.c_str(), mainFont, 905, 178, 18, RGBA8(255, 255, 255, 0));
 		for (unsigned int i = 0; i < (*mnu)[menuSelected].details.size(); i++) {
 			unsigned int curX = i * 18 + 202;
@@ -220,6 +223,7 @@ void MENU::drawMenu() {
 		else {
 			gfxBlit(frameBuffer, detailDisabled, 972, 652);
 		}
+		//~~
 	}
 }
 
