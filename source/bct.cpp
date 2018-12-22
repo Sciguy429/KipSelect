@@ -1,6 +1,7 @@
 #include <fstream>
 
 #include "bct.h"
+#include "error.h"
 
 void BCT::scanBCT() {
 	bctItems.clear();
@@ -38,11 +39,11 @@ void BCT::setBCTItemEnabled(unsigned int bctId, bool enabled) {
 			bctOfStream.close();
 		}
 		else {
-			//TODO: Throw a proper error here (error.h/error.cpp)
+			errorThrow(2);
 		}
 	}
 	else {
-		//TODO: Throw a proper error here (error.h/error.cpp)
+		errorThrow(3);
 	}
 }
 

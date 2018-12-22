@@ -4,6 +4,7 @@
 #include <sys/types.h>
 
 #include "kip.h"
+#include "error.h"
 
 void KIP::scanKIP() {
 	kipItems.clear();
@@ -12,7 +13,7 @@ void KIP::scanKIP() {
 	enabledKipDir = opendir("/atmosphere/kips/");
 	if (enabledKipDir == NULL) {
 		if (mkdir("/atmosphere/kips/", 0700) == -1) {
-			//TODO: Throw a proper error here (error.h/error.cpp)
+			errorThrow(0);
 		}
 	}
 	else {
@@ -28,7 +29,7 @@ void KIP::scanKIP() {
 	disabledKipDir = opendir("/atmosphere/kips_disabled/");
 	if (disabledKipDir == NULL) {
 		if (mkdir("/atmosphere/kips_disabled/", 0700) == -1) {
-			//TODO: Throw a proper error here (error.h/error.cpp)
+			errorThrow(0);
 		}
 	}
 	else {
@@ -57,7 +58,7 @@ void KIP::setKIPItemEnabled(unsigned int kipId, bool enabled) {
 	start.append(name);
 	end.append(name);
 	if (rename(start.c_str(), end.c_str()) != 0) {
-		//TODO: Throw a proper error here (error.h/error.cpp)
+		errorThrow(1);
 	}
 }
 
