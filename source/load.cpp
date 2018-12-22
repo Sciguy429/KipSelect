@@ -1,0 +1,1 @@
+//load.cpp stub
