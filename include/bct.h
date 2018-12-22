@@ -7,6 +7,7 @@
 
 typedef struct {
 	std::string name;
+	std::string target;
 	std::string description;
 	bool enabled;
 } bctItem;

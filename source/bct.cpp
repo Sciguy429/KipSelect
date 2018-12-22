@@ -13,6 +13,7 @@ void BCT::scanBCT() {
 			unsigned int pos = bctItems.size();
 			bctItems.push_back(bctItem());
 			bctItems[pos].name = bctNames[i];
+			bctItems[pos].target = bctTargets[i];
 			if (bctString[debugModeLocation + bctTargets[i].length()] - 48 == 1) {
 				bctItems[pos].enabled = true;
 			}
@@ -54,6 +55,14 @@ unsigned int BCT::getBCTItemCount() {
 }
 
 menuItem BCT::getBCTMenuItem(unsigned int bctId) {
-	//TODO: Generate menuItem
-	return menuItem();
+	menuItem mnu;
+	mnu.name = bctItems[bctId].name;
+	mnu.details.push_back(menuDetail());
+	mnu.details[0].prefix = "Target: '";
+	mnu.details[0].data = bctItems[bctId].target;
+	mnu.details[0].suffix = "'";
+	mnu.details.push_back(menuDetail());
+	mnu.details[1].prefix = "Discription:\n";
+	mnu.details[1].data = "This is a test of a discription";
+	return mnu;
 }
