@@ -34,6 +34,8 @@ void gfxDrawRect(texture *tex, unsigned int tx, unsigned int ty, unsigned int bx
 
 void gfxDrawText(texture *tex, const char *text, const font *fnt, int x, int y, int size, uint32_t clr);
 
+void gfxDrawTextWrap(texture *tex, const char *text, const font *fnt, int x, int y, int size, uint32_t clr, int maxLength);
+
 void gfxFill(texture *tex, uint32_t clr);
 
 void gfxBlit(texture *target, texture *source, unsigned int x, unsigned int y);
