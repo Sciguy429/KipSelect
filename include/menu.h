@@ -20,7 +20,7 @@ typedef struct {
 
 class MENU {
 public:
-	void init();
+	void loadAssets();
 	void setTabSelected(unsigned int tabId);
 	unsigned int getTabSelected();
 	void setMenuSelected(unsigned int menuId);

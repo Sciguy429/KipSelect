@@ -2,7 +2,7 @@
 
 #include "menu.h"
 
-void MENU::init() {
+void MENU::loadAssets() {
 	tabSelected = 0;
 	menuSelected = 0;
 	//LOAD ASSETS
