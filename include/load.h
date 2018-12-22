@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 
 #include "gfx.h"
@@ -16,6 +18,6 @@ regTex *registerTexture(std::string path);
 
 regFnt *registerFont(std::string path);
 
-void loadRegistered();
+void loadRegisteredAssets();
 
-void destroyRegistered();
+void destroyRegisteredAssets();

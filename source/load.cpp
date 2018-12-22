@@ -9,6 +9,7 @@ regTex *registerTexture(std::string path) {
 	unsigned int pos = registeredTextures.size();
 	registeredTextures.push_back(regTex());
 	registeredTextures[pos].path = path;
+	registeredTextures[pos].tex;
 	return &registeredTextures[pos];
 }
 
@@ -16,10 +17,11 @@ regFnt *registerFont(std::string path) {
 	unsigned int pos = registeredFonts.size();
 	registeredFonts.push_back(regFnt());
 	registeredFonts[pos].path = path;
+	registeredFonts[pos].fnt;
 	return &registeredFonts[pos];
 }
 
-void loadRegistered() {
+void loadRegisteredAssets() {
 	for (unsigned int i = 0; i < registeredTextures.size(); i++) {
 		registeredTextures[i].tex = gfxCreateTextureFromPNG(registeredTextures[i].path.c_str());
 	}
@@ -28,7 +30,7 @@ void loadRegistered() {
 	}
 }
 
-void destroyRegistered() {
+void destroyRegisteredAssets() {
 	for (unsigned int i = 0; i < registeredTextures.size(); i++) {
 		gfxDestroyTexture(registeredTextures[i].tex);
 	}

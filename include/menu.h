@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "gfx.h"
+#include "load.h"
 
 typedef struct {
 	std::string prefix;
@@ -20,6 +20,7 @@ typedef struct {
 
 class MENU {
 public:
+	void registerAssets();
 	void init();
 	void setTabSelected(unsigned int tabId);
 	unsigned int getTabSelected();
@@ -30,7 +31,6 @@ public:
 	void addMenuItem(unsigned int tab, menuItem itm);
 	void resetMenu();
 	void drawMenu();
-	void destroyAssets();
 private:
 	unsigned int tabSelected;
 	unsigned int menuSelected;
@@ -39,24 +39,27 @@ private:
 	std::vector<menuItem> layeredFS;
 	std::vector<menuItem> options;
 	//ASSETS
-	texture *background;
-	font *mainFont;
-	texture *menuBar;
-	texture *menuBarSelected;
-	texture *checkmark;
-	texture *questionmark;
-	texture *menuScrollUp;
-	texture *menuScrollDown;
-	texture *tabKips;
-	texture *tabKipsSelected;
-	texture *tabBCT;
-	texture *tabBCTSelected;
-	texture *tabLayeredFS;
-	texture *tabLayeredFSSelected;
-	texture *tabOptions;
-	texture *tabOptionsSelected;
-	texture *detailEnabled;
-	texture *detailDisabled;
-	texture *detailLoaded;
-	texture *detailUnloaded;
+	//-Texture
+	regTex *background;
+	regTex *menuBar;
+	regTex *menuBarSelected;
+	regTex *checkmark;
+	regTex *questionmark;
+	regTex *menuScrollUp;
+	regTex *menuScrollDown;
+	regTex *tabKips;
+	regTex *tabKipsSelected;
+	regTex *tabBCT;
+	regTex *tabBCTSelected;
+	regTex *tabLayeredFS;
+	regTex *tabLayeredFSSelected;
+	regTex *tabOptions;
+	regTex *tabOptionsSelected;
+	regTex *detailEnabled;
+	regTex *detailDisabled;
+	//regTex *detailLoaded;
+	//regTex *detailUnloaded;
+	//-Font
+	regFnt *mainFont;
+	regFnt *versionFont;
 };

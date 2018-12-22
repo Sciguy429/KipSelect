@@ -1,15 +1,15 @@
 #include <switch.h>
 
 #include "error.h"
-#include "gfx.h"
+#include "load.h"
 
 bool errorThrown = false;
-texture *errorBackground;
-font *fnt;
+regTex *errorBackground;
+regFnt *fnt;
 
-void errorLoadAssets() {
-	errorBackground = gfxCreateTextureFromPNG("romfs:/png/error/error_background.png");
-	fnt = gfxCreateFontFromTTF("romfs:/font/bahnschrift.ttf");
+void errorRegisterAssets() {
+	errorBackground = registerTexture("romfs:/png/error/error_background.png");
+	fnt = registerFont("romfs:/font/bahnschrift.ttf");
 }
 
 bool isErrorThrown() {
@@ -18,15 +18,10 @@ bool isErrorThrown() {
 
 void errorThrow(const char *header, const char *info, const char *data) {
 	errorThrown = true;
-	gfxBlit(frameBuffer, errorBackground, 0, 0);
-	gfxDrawTextCenter(frameBuffer, header, fnt, 640, 280, 32, RGBA8(255, 255, 255, 0));
+	gfxBlit(frameBuffer, errorBackground->tex, 0, 0);
+	gfxDrawTextCenter(frameBuffer, header, fnt->fnt, 640, 280, 32, RGBA8(255, 255, 255, 0));
 	while (!(hidKeysDown(CONTROLLER_P1_AUTO) & KEY_PLUS)) {
 		hidScanInput();
 		consoleUpdate(NULL);
 	}
-}
-
-void errorDestroyAssets() {
-	gfxDestroyTexture(errorBackground);
-	gfxDestroyFont(fnt);
 }

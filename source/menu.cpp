@@ -2,58 +2,38 @@
 
 #include "menu.h"
 
+void MENU::registerAssets() {
+	//REGISTER ASSETS
+	//-Fonts
+	mainFont = registerFont("romfs:/font/bahnschrift.ttf");
+	versionFont = registerFont("romfs:/font/tt0288m_.ttf");
+	//-Textures
+	background = registerTexture("romfs:/png/background.png");
+	menuBar = registerTexture("romfs:/png/menu/menu_bar.png");
+	menuBarSelected = registerTexture("romfs:/png/menu/menu_bar_selected.png");
+	checkmark = registerTexture("romfs:/png/menu/checkmark.png");
+	questionmark = registerTexture("romfs:/png/menu/questionmark.png");
+	menuScrollUp = registerTexture("romfs:/png/menu/menu_scroll_up.png");
+	menuScrollDown = registerTexture("romfs:/png/menu/menu_scroll_down.png");
+	tabKips = registerTexture("romfs:/png/tab/tab_kips.png");
+	tabKipsSelected = registerTexture("romfs:/png/tab/tab_kips_selected.png");
+	tabBCT = registerTexture("romfs:/png/tab/tab_bct.png");
+	tabBCTSelected = registerTexture("romfs:/png/tab/tab_bct_selected.png");
+	tabLayeredFS = registerTexture("romfs:/png/tab/tab_layeredfs.png");
+	tabLayeredFSSelected = registerTexture("romfs:/png/tab/tab_layeredfs_selected.png");
+	tabOptions = registerTexture("romfs:/png/tab/tab_options.png");
+	tabOptionsSelected = registerTexture("romfs:/png/tab/tab_options_selected.png");
+	detailEnabled = registerTexture("romfs:/png/detail/detail_enabled.png");
+	detailDisabled = registerTexture("romfs:/png/detail/detial_disabled.png");
+	//END REGISTER ASSETS
+}
+
 void MENU::init() {
 	tabSelected = 0;
 	menuSelected = 0;
-	//LOAD ASSETS
-	//-Fonts
-	mainFont = gfxCreateFontFromTTF("romfs:/font/bahnschrift.ttf");
-	font *versionFont = gfxCreateFontFromTTF("romfs:/font/tt0288m_.ttf");
-	//-Textures
-	background = gfxCreateTextureFromPNG("romfs:/png/background.png");
-	menuBar = gfxCreateTextureFromPNG("romfs:/png/menu/menu_bar.png");
-	menuBarSelected = gfxCreateTextureFromPNG("romfs:/png/menu/menu_bar_selected.png");
-	checkmark = gfxCreateTextureFromPNG("romfs:/png/menu/checkmark.png");
-	questionmark = gfxCreateTextureFromPNG("romfs:/png/menu/questionmark.png");
-	menuScrollUp = gfxCreateTextureFromPNG("romfs:/png/menu/menu_scroll_up.png");
-	menuScrollDown = gfxCreateTextureFromPNG("romfs:/png/menu/menu_scroll_down.png");
-	tabKips = gfxCreateTextureFromPNG("romfs:/png/tab/tab_kips.png");
-	tabKipsSelected = gfxCreateTextureFromPNG("romfs:/png/tab/tab_kips_selected.png");
-	tabBCT = gfxCreateTextureFromPNG("romfs:/png/tab/tab_bct.png");
-	tabBCTSelected = gfxCreateTextureFromPNG("romfs:/png/tab/tab_bct_selected.png");
-	tabLayeredFS = gfxCreateTextureFromPNG("romfs:/png/tab/tab_layeredfs.png");
-	tabLayeredFSSelected = gfxCreateTextureFromPNG("romfs:/png/tab/tab_layeredfs_selected.png");
-	tabOptions = gfxCreateTextureFromPNG("romfs:/png/tab/tab_options.png");
-	tabOptionsSelected = gfxCreateTextureFromPNG("romfs:/png/tab/tab_options_selected.png");
-	texture *purpleBox = gfxCreateTextureFromPNG("romfs:/png/detail/detail_purple.png");
-	texture *grayBox = gfxCreateTextureFromPNG("romfs:/png/detail/detail_gray.png");
-	//END LOAD ASSETS
-	//BUILD ASSETS
-	//-Detail Enabled
-	detailEnabled = gfxCreateTexture(243, 59);
-	gfxBlit(detailEnabled, purpleBox, 0, 0);
-	gfxDrawText(detailEnabled, "Enabled", mainFont, 8, 9, 30, RGBA8(255, 255, 255, 0));
-	//-Detail Disabled
-	detailDisabled = gfxCreateTexture(243, 59);
-	gfxBlit(detailDisabled, grayBox, 0, 0);
-	gfxDrawText(detailDisabled, "Disabled", mainFont, 8, 9, 30, RGBA8(50, 50, 50, 0));
-	//-Detail Loaded
-	detailLoaded = gfxCreateTexture(243, 59);
-	gfxBlit(detailLoaded, purpleBox, 0, 0);
-	gfxDrawText(detailLoaded, "Loaded", mainFont, 8, 9, 30, RGBA8(255, 255, 255, 0));
-	//-Detail Unloaded
-	detailUnloaded = gfxCreateTexture(243, 59);
-	gfxBlit(detailUnloaded, grayBox, 0, 0);
-	gfxDrawText(detailUnloaded, "Unloaded", mainFont, 8, 9, 30, RGBA8(50, 50, 50, 0));
-	//-Destroy Base Assets
-	gfxDestroyTexture(purpleBox);
-	gfxDestroyTexture(grayBox);
-	//-Add Version To Backround
 	std::ostringstream version;
 	version << 'v' << VERSION_MAJOR << '.' << VERSION_MINOR << '.' << VERSION_MICRO;
-	gfxDrawText(background, version.str().c_str(), versionFont, 380, 59, 18, RGBA8(194, 17, 170, 0));
-	gfxDestroyFont(versionFont);
-	//END BUILD
+	gfxDrawText(background->tex, version.str().c_str(), versionFont->fnt, 380, 59, 18, RGBA8(194, 17, 170, 0));
 }
 
 void MENU::setTabSelected(unsigned int tabId) {
@@ -142,11 +122,11 @@ void MENU::resetMenu() {
 }
 
 void MENU::drawMenu() {
-	gfxBlit(frameBuffer, background, 0, 0);
-	gfxBlit(frameBuffer, tabSelected == 0 ? tabKipsSelected : tabKips, 560, 118);
-	gfxBlit(frameBuffer, tabSelected == 1 ? tabBCTSelected : tabBCT, 683, 118);
-	gfxBlit(frameBuffer, tabSelected == 2 ? tabLayeredFSSelected : tabLayeredFS, 843, 118);
-	gfxBlit(frameBuffer, tabSelected == 3 ? tabOptionsSelected : tabOptions, 1088, 118);
+	gfxBlit(frameBuffer, background->tex, 0, 0);
+	gfxBlit(frameBuffer, tabSelected == 0 ? tabKipsSelected->tex : tabKips->tex, 560, 118);
+	gfxBlit(frameBuffer, tabSelected == 1 ? tabBCTSelected->tex : tabBCT->tex, 683, 118);
+	gfxBlit(frameBuffer, tabSelected == 2 ? tabLayeredFSSelected->tex : tabLayeredFS->tex, 843, 118);
+	gfxBlit(frameBuffer, tabSelected == 3 ? tabOptionsSelected->tex : tabOptions->tex, 1088, 118);
 	std::vector<menuItem> *mnu = new std::vector<menuItem>;
 	switch (tabSelected) {
 	case 0:
@@ -190,62 +170,39 @@ void MENU::drawMenu() {
 		for (unsigned int i = offset; i < offsetLimit; i++) {
 			unsigned int drawY = 178 + ((i - offset) * 64);
 			if (i == menuSelected) {
-				gfxBlit(frameBuffer, menuBarSelected, 0, drawY);
+				gfxBlit(frameBuffer, menuBarSelected->tex, 0, drawY);
 			}
 			else {
-				gfxBlit(frameBuffer, menuBar, 0, drawY);
+				gfxBlit(frameBuffer, menuBar->tex, 0, drawY);
 			}
 			if ((*mnu)[i].status) {
-				gfxBlit(frameBuffer, checkmark, 825, drawY + 16);
+				gfxBlit(frameBuffer, checkmark->tex, 825, drawY + 16);
 			}
-			gfxDrawText(frameBuffer, (*mnu)[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
+			gfxDrawText(frameBuffer, (*mnu)[i].name.c_str(), mainFont->fnt, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
 		}
 		//~~
 		//DRAW SCROLL INDICATOR
 		if (offset > 0) {
-			gfxBlit(frameBuffer, menuScrollUp, 858, 172);
+			gfxBlit(frameBuffer, menuScrollUp->tex, 858, 172);
 		}
 		if (offsetLimit < mnu->size()) {
-			gfxBlit(frameBuffer, menuScrollDown, 858, 686);
+			gfxBlit(frameBuffer, menuScrollDown->tex, 858, 686);
 		}
 		//~~
 		//DRAW DETAILS WINDOW
-		gfxDrawText(frameBuffer, (*mnu)[menuSelected].name.c_str(), mainFont, 905, 178, 18, RGBA8(255, 255, 255, 0));
+		gfxDrawText(frameBuffer, (*mnu)[menuSelected].name.c_str(), mainFont->fnt, 905, 178, 18, RGBA8(255, 255, 255, 0));
 		for (unsigned int i = 0; i < (*mnu)[menuSelected].details.size(); i++) {
 			unsigned int curY = i * 18 + 202;
 			std::ostringstream ss;
 			ss << (*mnu)[menuSelected].details[i].prefix << (*mnu)[menuSelected].details[i].data << (*mnu)[menuSelected].details[i].suffix;
-			gfxDrawTextWrap(frameBuffer, ss.str().c_str(), mainFont, 905, curY, 12, RGBA8(255, 255, 255, 0), 370);
+			gfxDrawTextWrap(frameBuffer, ss.str().c_str(), mainFont->fnt, 905, curY, 12, RGBA8(255, 255, 255, 0), 370);
 		}
 		if ((*mnu)[menuSelected].status) {
-			gfxBlit(frameBuffer, detailEnabled, 972, 652);
+			gfxBlit(frameBuffer, detailEnabled->tex, 972, 652);
 		}
 		else {
-			gfxBlit(frameBuffer, detailDisabled, 972, 652);
+			gfxBlit(frameBuffer, detailDisabled->tex, 972, 652);
 		}
 		//~~
 	}
-}
-
-void MENU::destroyAssets() {
-	gfxDestroyFont(mainFont);
-	gfxDestroyTexture(background);
-	gfxDestroyTexture(menuBar);
-	gfxDestroyTexture(menuBarSelected);
-	gfxDestroyTexture(checkmark);
-	gfxDestroyTexture(questionmark);
-	gfxDestroyTexture(menuScrollUp);
-	gfxDestroyTexture(menuScrollDown);
-	gfxDestroyTexture(tabKips);
-	gfxDestroyTexture(tabKipsSelected);
-	gfxDestroyTexture(tabBCT);
-	gfxDestroyTexture(tabBCTSelected);
-	gfxDestroyTexture(tabLayeredFS);
-	gfxDestroyTexture(tabLayeredFSSelected);
-	gfxDestroyTexture(tabOptions);
-	gfxDestroyTexture(tabOptionsSelected);
-	gfxDestroyTexture(detailEnabled);
-	gfxDestroyTexture(detailDisabled);
-	gfxDestroyTexture(detailLoaded);
-	gfxDestroyTexture(detailUnloaded);
 }
