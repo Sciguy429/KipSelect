@@ -163,6 +163,7 @@ void MENU::drawMenu() {
 		return;
 	}
 	if (mnu->size() > 0) {
+		//SCROLLING
 		unsigned int offset;
 		unsigned int offsetLimit;
 		if ((int)(menuSelected - 7) > 0) {
@@ -182,6 +183,15 @@ void MENU::drawMenu() {
 		else {
 			offsetLimit = offset + 8;
 		}
+		//~~
+		//PRINT SCROLL INDICATOR
+		if (offset > 0) {
+			printf("%d: Above\n", offset);
+		}
+		if (offsetLimit < mnu->size()) {
+			printf("%d: Below\n", (mnu->size() - offsetLimit));
+		}
+		//~~
 		for (unsigned int i = offset; i < offsetLimit; i++) {
 			unsigned int drawY = 178 + ((i - offset) * 64);
 			if (i == menuSelected) {

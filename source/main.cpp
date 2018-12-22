@@ -36,6 +36,9 @@ int main(int argc, char **argv) {
 	for (unsigned int i = 0; i < lfs.getLFSCount(); i++) {
 		menu.addMenuItem(2, lfs.getLFSMenuItem(i));
 	}
+	for (unsigned int i = 0; i < lfs.getLFSCount(); i++) {
+		menu.addMenuItem(2, lfs.getLFSMenuItem(i));
+	}
 	//~~
 	menu.drawMenu();
 	while (appletMainLoop() && run) {
