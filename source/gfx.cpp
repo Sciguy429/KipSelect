@@ -209,7 +209,7 @@ void gfxDrawTextWrap(texture *tex, const char *text, const font *fnt, int x, int
 		size_t wLength = strlen(wordBuf);
 		uint32_t tmpChar = 0;
 		for (unsigned int j = 0; j < wLength;) {
-			ssize_t unitCount = decode_utf8(&tmpChar, (const uint8_t*)&text[j]);
+			ssize_t unitCount = decode_utf8(&tmpChar, (const uint8_t*)&wordBuf[j]);
 			if (unitCount <= 0) {
 				break;
 			}
