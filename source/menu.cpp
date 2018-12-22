@@ -186,14 +186,6 @@ void MENU::drawMenu() {
 			offsetLimit = offset + 8;
 		}
 		//~~
-		//DRAW SCROLL INDICATOR
-		if (offset > 0) {
-			gfxBlit(frameBuffer, menuScrollUp, 0, 690);
-		}
-		if (offsetLimit < mnu->size()) {
-			gfxBlit(frameBuffer, menuScrollDown, 862, 690);
-		}
-		//~~
 		//DRAW MENU LIST
 		for (unsigned int i = offset; i < offsetLimit; i++) {
 			unsigned int drawY = 178 + ((i - offset) * 64);
@@ -207,6 +199,14 @@ void MENU::drawMenu() {
 				gfxBlit(frameBuffer, checkmark, 825, drawY + 16);
 			}
 			gfxDrawText(frameBuffer, (*mnu)[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
+		}
+		//~~
+		//DRAW SCROLL INDICATOR
+		if (offset > 0) {
+			gfxBlit(frameBuffer, menuScrollUp, 858, 172);
+		}
+		if (offsetLimit < mnu->size()) {
+			gfxBlit(frameBuffer, menuScrollDown, 858, 686);
 		}
 		//~~
 		//DRAW DETAILS WINDOW
