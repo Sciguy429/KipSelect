@@ -15,6 +15,8 @@ void MENU::init() {
 	menuBarSelected = gfxCreateTextureFromPNG("romfs:/png/menu/menu_bar_selected.png");
 	checkmark = gfxCreateTextureFromPNG("romfs:/png/menu/checkmark.png");
 	questionmark = gfxCreateTextureFromPNG("romfs:/png/menu/questionmark.png");
+	menuScrollUp = gfxCreateTextureFromPNG("romfs:/png/menu/menu_scroll_up.png");
+	menuScrollDown = gfxCreateTextureFromPNG("romfs:/png/menu/menu_scroll_down.png");
 	tabKips = gfxCreateTextureFromPNG("romfs:/png/tab/tab_kips.png");
 	tabKipsSelected = gfxCreateTextureFromPNG("romfs:/png/tab/tab_kips_selected.png");
 	tabBCT = gfxCreateTextureFromPNG("romfs:/png/tab/tab_bct.png");
@@ -230,6 +232,8 @@ void MENU::destroyAssets() {
 	gfxDestroyTexture(menuBarSelected);
 	gfxDestroyTexture(checkmark);
 	gfxDestroyTexture(questionmark);
+	gfxDestroyTexture(menuScrollUp);
+	gfxDestroyTexture(menuScrollDown);
 	gfxDestroyTexture(tabKips);
 	gfxDestroyTexture(tabKipsSelected);
 	gfxDestroyTexture(tabBCT);
