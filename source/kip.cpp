@@ -70,6 +70,20 @@ unsigned int KIP::getKIPItemCount() {
 }
 
 menuItem KIP::getKIPMenuItem(unsigned int kipId) {
-	//TODO: Generate menuItem
-	return menuItem();
+	menuItem mnu;
+	mnu.name = kipItems[kipId].name;
+	mnu.details.push_back(menuDetail());
+	mnu.details[0].prefix = "Md5: ";
+	mnu.details[0].data = kipItems[kipId].md5;
+	mnu.details.push_back(menuDetail());
+	mnu.details[1].prefix = "Version: ";
+	mnu.details[1].data = kipItems[kipId].version;
+	mnu.details.push_back(menuDetail());
+	mnu.details[2].prefix = "Size: ";
+	mnu.details[2].data = kipItems[kipId].size;
+	mnu.details[2].suffix = "KB";
+	mnu.details.push_back(menuDetail());
+	mnu.details[3].prefix = "Discription:\n";
+	mnu.details[3].data = "This is a test of a discription";
+	return mnu;
 }
