@@ -32,19 +32,19 @@ void MENU::init() {
 	//-Detail Enabled
 	detailEnabled = gfxCreateTexture(243, 59);
 	gfxBlit(detailEnabled, purpleBox, 0, 0);
-	gfxDrawText(detailEnabled, "Enabled", mainFont, 8, 8, 30, RGBA8(255, 255, 255, 0));
+	gfxDrawText(detailEnabled, "Enabled", mainFont, 8, 9, 30, RGBA8(255, 255, 255, 0));
 	//-Detail Disabled
 	detailDisabled = gfxCreateTexture(243, 59);
 	gfxBlit(detailDisabled, grayBox, 0, 0);
-	gfxDrawText(detailDisabled, "Disabled", mainFont, 8, 8, 30, RGBA8(50, 50, 50, 0));
+	gfxDrawText(detailDisabled, "Disabled", mainFont, 8, 9, 30, RGBA8(50, 50, 50, 0));
 	//-Detail Loaded
 	detailLoaded = gfxCreateTexture(243, 59);
 	gfxBlit(detailLoaded, purpleBox, 0, 0);
-	gfxDrawText(detailLoaded, "Loaded", mainFont, 8, 8, 30, RGBA8(255, 255, 255, 0));
+	gfxDrawText(detailLoaded, "Loaded", mainFont, 8, 9, 30, RGBA8(255, 255, 255, 0));
 	//-Detail Unloaded
 	detailUnloaded = gfxCreateTexture(243, 59);
 	gfxBlit(detailUnloaded, grayBox, 0, 0);
-	gfxDrawText(detailUnloaded, "Unloaded", mainFont, 8, 8, 30, RGBA8(50, 50, 50, 0));
+	gfxDrawText(detailUnloaded, "Unloaded", mainFont, 8, 9, 30, RGBA8(50, 50, 50, 0));
 	//-Destroy Base Assets
 	gfxDestroyTexture(purpleBox);
 	gfxDestroyTexture(grayBox);
@@ -215,7 +215,7 @@ void MENU::drawMenu() {
 			unsigned int curX = i * 18 + 202;
 			std::ostringstream ss;
 			ss << (*mnu)[menuSelected].details[i].prefix << (*mnu)[menuSelected].details[i].data << (*mnu)[menuSelected].details[i].suffix;
-			gfxDrawText(frameBuffer, ss.str().c_str(), mainFont, 905, curX, 12, RGBA8(255, 255, 255, 0));
+			gfxDrawTextWrap(frameBuffer, ss.str().c_str(), mainFont, 905, curX, 12, RGBA8(255, 255, 255, 0), 370);
 		}
 		if ((*mnu)[menuSelected].status) {
 			gfxBlit(frameBuffer, detailEnabled, 972, 652);
