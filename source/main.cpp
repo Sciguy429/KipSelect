@@ -2,6 +2,7 @@
 #include <string>
 
 #include "gfx.h"
+#include "load.h"
 #include "error.h"
 #include "menu.h"
 #include "kip.h"
