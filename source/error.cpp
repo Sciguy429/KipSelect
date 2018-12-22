@@ -9,7 +9,7 @@ font *fnt;
 
 void errorLoadAssets() {
 	errorBackground = gfxCreateTextureFromPNG("romfs:/png/error/error_background.png");
-	fnt = gfxCreateFontFromTTF("romfs:/font/bahnschrift.ttf");
+	fnt = gfxCreateFontFromTTF("romfs:/font/tt0288m_.ttf");
 }
 
 bool isErrorThrown() {
