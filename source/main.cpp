@@ -2,10 +2,11 @@
 #include <string>
 
 #include "gfx.h"
+#include "error.h"
+#include "menu.h"
 #include "kip.h"
 #include "bct.h"
 #include "lfs.h"
-#include "menu.h"
 
 bool run = true;
 u64 kDown;
@@ -18,6 +19,7 @@ int main(int argc, char **argv) {
 	socketInitializeDefault();
 	nxlinkStdio();
 	romfsInit();
+	errorLoadAssets();
 	gfxInit(1280, 720);
 	kip.scanKIP();
 	bct.scanBCT();
@@ -41,11 +43,11 @@ int main(int argc, char **argv) {
 	}
 	//~~
 	menu.drawMenu();
-	while (appletMainLoop() && run) {
+	while (appletMainLoop() && !isErrorThrown()) {
 		hidScanInput();
 		kDown = hidKeysDown(CONTROLLER_P1_AUTO);
 		if (kDown & KEY_PLUS) {
-			run = false;
+			break;
 		}
 		else if (kDown & KEY_L) {
 			if (menu.getTabSelected() > 0) {
@@ -86,7 +88,7 @@ int main(int argc, char **argv) {
 				menu.drawMenu();
 				break;
 			case 3:
-				//Options
+				errorThrow("Example Error", "Sample description\n%s", "SAMPLE TEXT");
 				break;
 			default:
 				break;
@@ -96,6 +98,7 @@ int main(int argc, char **argv) {
 	}
 	menu.destroyAssets();
 	gfxCleanUp();
+	errorDestroyAssets();
 	romfsExit();
 	socketExit();
 	consoleExit(NULL);
