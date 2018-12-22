@@ -87,7 +87,7 @@ int main(int argc, char **argv) {
 				menu.drawMenu();
 				break;
 			case 3:
-				errorThrow("Example Error", "Sample description\n%s", "SAMPLE TEXT");
+				errorThrow(0);
 				break;
 			default:
 				break;
@@ -96,8 +96,8 @@ int main(int argc, char **argv) {
 		consoleUpdate(NULL);
 	}
 	menu.destroyAssets();
-	gfxCleanUp();
 	errorDestroyAssets();
+	gfxCleanUp();
 	romfsExit();
 	socketExit();
 	consoleExit(NULL);
