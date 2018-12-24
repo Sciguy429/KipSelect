@@ -73,6 +73,7 @@ unsigned int KIP::getKIPItemCount() {
 menuItem KIP::getKIPMenuItem(unsigned int kipId) {
 	menuItem mnu;
 	mnu.name = kipItems[kipId].name;
+	mnu.status = kipItems[kipId].enabled;
 	mnu.details.push_back(menuDetail());
 	mnu.details[0].prefix = "Md5: ";
 	mnu.details[0].data = kipItems[kipId].md5;

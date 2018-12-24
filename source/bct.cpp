@@ -58,6 +58,7 @@ unsigned int BCT::getBCTItemCount() {
 menuItem BCT::getBCTMenuItem(unsigned int bctId) {
 	menuItem mnu;
 	mnu.name = bctItems[bctId].name;
+	mnu.status = bctItems[bctId].enabled;
 	mnu.details.push_back(menuDetail());
 	mnu.details[0].prefix = "Target: '";
 	mnu.details[0].data = bctItems[bctId].target;

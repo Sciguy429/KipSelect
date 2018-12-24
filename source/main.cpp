@@ -67,14 +67,17 @@ int main(int argc, char **argv) {
 		else if (kDown & KEY_A) {
 			switch (menu.getTabSelected()) {
 			case 0:
+				kip.setKIPItemEnabled(menu.getMenuSelected(), !kip.getKIPItemEnabled(menu.getMenuSelected()));
 				menu.toggleSelected();
 				menu.drawMenu();
 				break;
 			case 1:
+				bct.setBCTItemEnabled(menu.getMenuSelected(), !bct.getBCTItemEnabled(menu.getMenuSelected()));
 				menu.toggleSelected();
 				menu.drawMenu();
 				break;
 			case 2:
+				lfs.setLFSItemEnabled(menu.getMenuSelected(), !lfs.getLFSItemEnabled(menu.getMenuSelected()));
 				menu.toggleSelected();
 				menu.drawMenu();
 				break;
