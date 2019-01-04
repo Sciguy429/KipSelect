@@ -26,9 +26,9 @@ bool isErrorThrown() {
 
 void errorThrow(unsigned int errorType) {
 	errorThrown = true;
-	gfxBlit(frameBuffer, errorBackground, 0, 0);
-	gfxDrawTextCenter(frameBuffer, errors[errorType].header.c_str(), fnt, 640, 140, 32, RGBA8(255, 255, 255, 0));
-	gfxDrawTextWrap(frameBuffer, errors[errorType].info.c_str(), fnt, 40, 280, 32, RGBA8(255, 255, 255, 0), 1200);
+	gfxBlit(frameBufferTexture, errorBackground, 0, 0);
+	gfxDrawTextCenter(frameBufferTexture, errors[errorType].header.c_str(), fnt, 640, 140, 32, RGBA8(255, 255, 255, 0));
+	gfxDrawTextWrap(frameBufferTexture, errors[errorType].info.c_str(), fnt, 40, 280, 32, RGBA8(255, 255, 255, 0), 1200);
 	while (!(hidKeysDown(CONTROLLER_P1_AUTO) & KEY_PLUS)) {
 		hidScanInput();
 		consoleUpdate(NULL);

@@ -5,7 +5,8 @@
 
 #include "gfx.h"
 
-texture *frameBuffer;
+texture *frameBufferTexture;
+Framebuffer frameBuffer;
 
 static uint32_t colorBlendAlpha(uint32_t colorA, uint32_t colorB) {
 	uint8_t aA = colorA >> 24 & 0xFF;
@@ -84,22 +85,14 @@ static size_t getTextLength(const char *text, const font *fnt, int size) {
 }
 
 void gfxInit(unsigned int windowWidth, unsigned int windowHeight) {
-	gfxInitResolution((uint32_t)windowWidth, (uint32_t)windowHeight);
-	gfxInitDefault();
-	consoleInit(NULL);
-	gfxSetMode(GfxMode_LinearDouble);
-	frameBuffer = (texture*)malloc(sizeof(texture));
-	frameBuffer->width = windowWidth;
-	frameBuffer->height = windowHeight;
-	frameBuffer->data = (uint32_t*)gfxGetFramebuffer(NULL, NULL);
-	frameBuffer->size = windowWidth * windowHeight;
-	printf("Framebuffer located at address %p\n", (void*)frameBuffer);
+	NWindow* win = nwindowGetDefault();
+	framebufferCreate(&frameBuffer, win, windowWidth, windowHeight, PIXEL_FORMAT_RGBA_8888, 2);
+	frameBufferTexture = gfxCreateTexture(windowWidth, windowHeight);
 }
 
 void gfxCleanUp() {
-	free(frameBuffer);
-	printf("Freed framebuffer at address %p\n", (void*)frameBuffer);
-	gfxExit();
+	gfxDestroyTexture(frameBufferTexture);
+	framebufferClose(&frameBuffer);
 }
 
 void gfxDrawPixel(texture *tex, unsigned int x, unsigned int y, uint32_t clr) {

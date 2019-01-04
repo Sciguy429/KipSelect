@@ -142,11 +142,11 @@ void MENU::resetMenu() {
 }
 
 void MENU::drawMenu() {
-	gfxBlit(frameBuffer, background, 0, 0);
-	gfxBlit(frameBuffer, tabSelected == 0 ? tabKipsSelected : tabKips, 560, 118);
-	gfxBlit(frameBuffer, tabSelected == 1 ? tabBCTSelected : tabBCT, 683, 118);
-	gfxBlit(frameBuffer, tabSelected == 2 ? tabLayeredFSSelected : tabLayeredFS, 843, 118);
-	gfxBlit(frameBuffer, tabSelected == 3 ? tabOptionsSelected : tabOptions, 1088, 118);
+	gfxBlit(frameBufferTexture, background, 0, 0);
+	gfxBlit(frameBufferTexture, tabSelected == 0 ? tabKipsSelected : tabKips, 560, 118);
+	gfxBlit(frameBufferTexture, tabSelected == 1 ? tabBCTSelected : tabBCT, 683, 118);
+	gfxBlit(frameBufferTexture, tabSelected == 2 ? tabLayeredFSSelected : tabLayeredFS, 843, 118);
+	gfxBlit(frameBufferTexture, tabSelected == 3 ? tabOptionsSelected : tabOptions, 1088, 118);
 	std::vector<menuItem> *mnu = new std::vector<menuItem>;
 	switch (tabSelected) {
 	case 0:
@@ -190,38 +190,38 @@ void MENU::drawMenu() {
 		for (unsigned int i = offset; i < offsetLimit; i++) {
 			unsigned int drawY = 178 + ((i - offset) * 64);
 			if (i == menuSelected) {
-				gfxBlit(frameBuffer, menuBarSelected, 0, drawY);
+				gfxBlit(frameBufferTexture, menuBarSelected, 0, drawY);
 			}
 			else {
-				gfxBlit(frameBuffer, menuBar, 0, drawY);
+				gfxBlit(frameBufferTexture, menuBar, 0, drawY);
 			}
 			if ((*mnu)[i].status) {
-				gfxBlit(frameBuffer, checkmark, 825, drawY + 16);
+				gfxBlit(frameBufferTexture, checkmark, 825, drawY + 16);
 			}
-			gfxDrawText(frameBuffer, (*mnu)[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
+			gfxDrawText(frameBufferTexture, (*mnu)[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
 		}
 		//~~
 		//DRAW SCROLL INDICATOR
 		if (offset > 0) {
-			gfxBlit(frameBuffer, menuScrollUp, 858, 172);
+			gfxBlit(frameBufferTexture, menuScrollUp, 858, 172);
 		}
 		if (offsetLimit < mnu->size()) {
-			gfxBlit(frameBuffer, menuScrollDown, 858, 686);
+			gfxBlit(frameBufferTexture, menuScrollDown, 858, 686);
 		}
 		//~~
 		//DRAW DETAILS WINDOW
-		gfxDrawText(frameBuffer, (*mnu)[menuSelected].name.c_str(), mainFont, 905, 178, 18, RGBA8(255, 255, 255, 0));
+		gfxDrawText(frameBufferTexture, (*mnu)[menuSelected].name.c_str(), mainFont, 905, 178, 18, RGBA8(255, 255, 255, 0));
 		for (unsigned int i = 0; i < (*mnu)[menuSelected].details.size(); i++) {
 			unsigned int curY = i * 18 + 202;
 			std::ostringstream ss;
 			ss << (*mnu)[menuSelected].details[i].prefix << (*mnu)[menuSelected].details[i].data << (*mnu)[menuSelected].details[i].suffix;
-			gfxDrawTextWrap(frameBuffer, ss.str().c_str(), mainFont, 905, curY, 12, RGBA8(255, 255, 255, 0), 370);
+			gfxDrawTextWrap(frameBufferTexture, ss.str().c_str(), mainFont, 905, curY, 12, RGBA8(255, 255, 255, 0), 370);
 		}
 		if ((*mnu)[menuSelected].status) {
-			gfxBlit(frameBuffer, detailEnabled, 972, 652);
+			gfxBlit(frameBufferTexture, detailEnabled, 972, 652);
 		}
 		else {
-			gfxBlit(frameBuffer, detailDisabled, 972, 652);
+			gfxBlit(frameBufferTexture, detailDisabled, 972, 652);
 		}
 		//~~
 	}

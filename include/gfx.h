@@ -50,4 +50,4 @@ font *gfxCreateFontFromTTF(const char *path);
 
 void gfxDestroyFont(font *fnt);
 
-extern texture *frameBuffer;
+extern texture *frameBufferTexture;
