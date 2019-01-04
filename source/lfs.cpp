@@ -83,8 +83,5 @@ menuItem LFS::getLFSMenuItem(unsigned int lfsId) {
 	menuItem mnu;
 	mnu.name = lfsItems[lfsId].titleId;
 	mnu.status = lfsItems[lfsId].enabled;
-	mnu.details.push_back(menuDetail());
-	mnu.details[0].prefix = "Discription:\n";
-	mnu.details[0].data = "This is a test of a discription";
 	return mnu;
 }
