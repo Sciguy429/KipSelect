@@ -95,6 +95,10 @@ void gfxCleanUp() {
 	framebufferClose(&frameBuffer);
 }
 
+void gfxDrawFramebuffer() {
+	//stub
+}
+
 void gfxDrawPixel(texture *tex, unsigned int x, unsigned int y, uint32_t clr) {
 	if (x < tex->width && y < tex->height) {
 		tex->data[y * tex->width + x] = clr;

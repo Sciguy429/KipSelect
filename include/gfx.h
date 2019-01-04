@@ -20,6 +20,8 @@ void gfxInit(unsigned int windowWidth, unsigned int windowHeight);
 
 void gfxCleanUp();
 
+void gfxDrawFramebuffer();
+
 void gfxDrawPixel(texture *tex, unsigned int x, unsigned int y, uint32_t clr);
 
 void gfxDrawLine(texture *tex, unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1, uint32_t clr);
