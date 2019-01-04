@@ -96,7 +96,7 @@ void gfxCleanUp() {
 	framebufferClose(&frameBuffer);
 }
 
-void gfxDrawFramebuffer() {
+void gfxDrawFrameBuffer() {
 	u32 stride;
 	u32* fb = (u32*)framebufferBegin(&frameBuffer, &stride);
 	uint32_t *dataPtr = &frameBufferTexture->data[0];
