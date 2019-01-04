@@ -103,7 +103,7 @@ void gfxDrawFrameBuffer() {
 	for (unsigned int y = 0; y < frameBufferTexture->height; y++) {
 		uint32_t *rowPtr = &fb[y * stride / sizeof(u32)];
 		for (unsigned int x = 0; x < frameBufferTexture->width; x++, dataPtr++, rowPtr++) {
-			*rowPtr = colorBlendAlpha(*dataPtr, *rowPtr);
+			*rowPtr = *dataPtr;
 		}
 	}
 	framebufferEnd(&frameBuffer);
