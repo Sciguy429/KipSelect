@@ -13,8 +13,8 @@ void MENU::loadAssets() {
 	background = gfxCreateTextureFromPNG("romfs:/png/background.png");
 	menuBar = gfxCreateTextureFromPNG("romfs:/png/menu/menu_bar.png");
 	menuBarSelected = gfxCreateTextureFromPNG("romfs:/png/menu/menu_bar_selected.png");
-	checkmark = gfxCreateTextureFromPNG("romfs:/png/menu/checkmark.png");
-	questionmark = gfxCreateTextureFromPNG("romfs:/png/menu/questionmark.png");
+	checkmark = gfxCreateTextureFromPNG("romfs:/png/menu/menu_checkmark.png");
+	questionmark = gfxCreateTextureFromPNG("romfs:/png/menu/menu_questionmark.png");
 	menuScrollUp = gfxCreateTextureFromPNG("romfs:/png/menu/menu_scroll_up.png");
 	menuScrollDown = gfxCreateTextureFromPNG("romfs:/png/menu/menu_scroll_down.png");
 	tabKips = gfxCreateTextureFromPNG("romfs:/png/tab/tab_kips.png");
