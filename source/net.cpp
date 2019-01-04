@@ -15,6 +15,7 @@ void netDownloadFile(const char *url, const char *path) {
 	if (curl) {
 		file = fopen(path, "wb");
 		curl_easy_setopt(curl, CURLOPT_URL, url);
+		curl_easy_setopt(curl, CURLOPT_USERAGENT, "Kip Select By Sciguy429");
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeFile);
 		curl_easy_setopt(curl, CURLOPT_WRITEDATA, file);
 		res = curl_easy_perform(curl);
