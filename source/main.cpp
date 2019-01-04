@@ -8,6 +8,10 @@
 #include "bct.h"
 #include "lfs.h"
 
+//TEST
+#include "net.h"
+//~~
+
 u64 kDown;
 
 int main(int argc, char **argv) {
@@ -34,6 +38,9 @@ int main(int argc, char **argv) {
 		menu.addMenuItem(2, lfs.getLFSMenuItem(i));
 	}
 	menu.drawMenu();
+	//TEST
+	netDownloadFile("http://nswdb.com/xml.php", "sdmc:/NSWreleases.xml");
+	//~~
 	while (appletMainLoop() && !isErrorThrown()) {
 		hidScanInput();
 		kDown = hidKeysDown(CONTROLLER_P1_AUTO);

@@ -2,4 +2,4 @@
 
 #include <string>
 
-void netDownloadFile(std::string url, std::string path);
+void netDownloadFile(const char *url, const char *path);

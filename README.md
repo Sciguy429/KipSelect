@@ -1,5 +1,5 @@
-# GFX
-This is a alpha GUI for Kip Select, build at your own risk, this new update will be posted officialy when its compleatly done.
+# NOTE
+So uh libnx changed how the gfx stuff worked and now none of this code will work. I dont have the time to resturcture it right now so this project is gonna be put on hold.
 
 # Kip Select
 ![screenshot](https://github.com/Sciguy429/KipSelect/raw/master/graphics/Example-Screenshot.jpg)

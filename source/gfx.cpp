@@ -102,12 +102,6 @@ void gfxCleanUp() {
 	gfxExit();
 }
 
-void gfxHandelBuffers() {
-	gfxFlushBuffers();
-	gfxSwapBuffers();
-	gfxWaitForVsync();
-}
-
 void gfxDrawPixel(texture *tex, unsigned int x, unsigned int y, uint32_t clr) {
 	if (x < tex->width && y < tex->height) {
 		tex->data[y * tex->width + x] = clr;
