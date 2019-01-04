@@ -7,6 +7,8 @@
 #include "lfs.h"
 #include "error.h"
 
+//netDownloadFile("http://nswdb.com/xml.php", "sdmc:/NSWreleases.xml");
+
 void LFS::scanLFS() {
 	lfsItems.clear();
 	DIR* lfsDir;
