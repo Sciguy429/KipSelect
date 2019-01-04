@@ -1,3 +1,6 @@
+# NOTICE
+This program is currently being rebuilt from the ground up. Most of the information below is outdated and will be updated when the tool is finished.
+
 # Kip Select
 ![screenshot](https://github.com/Sciguy429/KipSelect/raw/master/graphics/Example-Screenshot.jpg)
 This is a WIP kip manager for atmosphere's fusée launcher, this homebrew will not work with Kosmos, or any other pack that boots from hekate, while it will run it wont do anything as hekate controls what kips load in those packs. This homebrew is intended only for use with 'vanilla' atmosphere, launched with fusée.
