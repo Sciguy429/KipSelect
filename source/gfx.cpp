@@ -87,6 +87,7 @@ static size_t getTextLength(const char *text, const font *fnt, int size) {
 void gfxInit(unsigned int windowWidth, unsigned int windowHeight) {
 	NWindow* win = nwindowGetDefault();
 	framebufferCreate(&frameBuffer, win, windowWidth, windowHeight, PIXEL_FORMAT_RGBA_8888, 2);
+	framebufferMakeLinear(&frameBuffer);
 	frameBufferTexture = gfxCreateTexture(windowWidth, windowHeight);
 }
 
@@ -96,7 +97,16 @@ void gfxCleanUp() {
 }
 
 void gfxDrawFramebuffer() {
-	//stub
+	u32 stride;
+	u32* fb = (u32*)framebufferBegin(&frameBuffer, &stride);
+	uint32_t *dataPtr = &frameBufferTexture->data[0];
+	for (unsigned int y = 0; y < frameBufferTexture->height; y++) {
+		uint32_t *rowPtr = &fb[y * stride / sizeof(u32)];
+		for (unsigned int x = 0; x < frameBufferTexture->width; x++, dataPtr++, rowPtr++) {
+			*rowPtr = colorBlendAlpha(*dataPtr, *rowPtr);
+		}
+	}
+	framebufferEnd(&frameBuffer);
 }
 
 void gfxDrawPixel(texture *tex, unsigned int x, unsigned int y, uint32_t clr) {

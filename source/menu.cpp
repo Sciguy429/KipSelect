@@ -225,6 +225,7 @@ void MENU::drawMenu() {
 		}
 		//~~
 	}
+	gfxDrawFramebuffer();
 }
 
 void MENU::destroyAssets() {
