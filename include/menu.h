@@ -38,13 +38,14 @@ private:
 	std::vector<menuItem> bct;
 	std::vector<menuItem> layeredFS;
 	std::vector<menuItem> options;
-	//ASSETS
-	texture *background;
+	//FONTS
 	font *mainFont;
+	//TEXTURES
+	texture *background;
 	texture *menuBar;
 	texture *menuBarSelected;
-	texture *checkmark;
-	texture *questionmark;
+	texture *menuCheckmark;
+	texture *menuQuestionmark;
 	texture *menuScrollUp;
 	texture *menuScrollDown;
 	texture *tabKips;

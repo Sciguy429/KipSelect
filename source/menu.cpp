@@ -13,8 +13,8 @@ void MENU::loadAssets() {
 	background = gfxCreateTextureFromPNG("romfs:/png/background.png");
 	menuBar = gfxCreateTextureFromPNG("romfs:/png/menu/menu_bar.png");
 	menuBarSelected = gfxCreateTextureFromPNG("romfs:/png/menu/menu_bar_selected.png");
-	checkmark = gfxCreateTextureFromPNG("romfs:/png/menu/menu_checkmark.png");
-	questionmark = gfxCreateTextureFromPNG("romfs:/png/menu/menu_questionmark.png");
+	menuCheckmark = gfxCreateTextureFromPNG("romfs:/png/menu/menu_checkmark.png");
+	menuQuestionmark = gfxCreateTextureFromPNG("romfs:/png/menu/menu_questionmark.png");
 	menuScrollUp = gfxCreateTextureFromPNG("romfs:/png/menu/menu_scroll_up.png");
 	menuScrollDown = gfxCreateTextureFromPNG("romfs:/png/menu/menu_scroll_down.png");
 	tabKips = gfxCreateTextureFromPNG("romfs:/png/tab/tab_kips.png");
@@ -196,7 +196,7 @@ void MENU::drawMenu() {
 				gfxBlit(frameBufferTexture, menuBar, 0, drawY);
 			}
 			if ((*mnu)[i].status) {
-				gfxBlit(frameBufferTexture, checkmark, 825, drawY + 16);
+				gfxBlit(frameBufferTexture, menuCheckmark, 825, drawY + 16);
 			}
 			gfxDrawText(frameBufferTexture, (*mnu)[i].name.c_str(), mainFont, 16, drawY + 16, 32, RGBA8(255, 255, 255, 0));
 		}
@@ -233,8 +233,8 @@ void MENU::destroyAssets() {
 	gfxDestroyTexture(background);
 	gfxDestroyTexture(menuBar);
 	gfxDestroyTexture(menuBarSelected);
-	gfxDestroyTexture(checkmark);
-	gfxDestroyTexture(questionmark);
+	gfxDestroyTexture(menuCheckmark);
+	gfxDestroyTexture(menuQuestionmark);
 	gfxDestroyTexture(menuScrollUp);
 	gfxDestroyTexture(menuScrollDown);
 	gfxDestroyTexture(tabKips);
