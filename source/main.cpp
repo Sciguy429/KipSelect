@@ -95,6 +95,5 @@ int main(int argc, char **argv) {
 	gfxCleanUp();
 	romfsExit();
 	socketExit();
-	consoleExit(NULL);
 	return 0;
 }
