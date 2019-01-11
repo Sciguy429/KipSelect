@@ -33,6 +33,13 @@ int main(int argc, char **argv) {
 	for (unsigned int i = 0; i < lfs.getLFSCount(); i++) {
 		menu.addMenuItem(2, lfs.getLFSMenuItem(i));
 	}
+	menuItem rebootItem;
+	rebootItem.name = "Reboot";
+	rebootItem.status = false;
+	rebootItem.details.push_back(menuDetail());
+	rebootItem.details[0].prefix = "Discription:\n";
+	rebootItem.details[0].data = "Reboot the console from within this tool. Do not use this with exfat, it may cause corruption!";
+	menu.addMenuItem(3, rebootItem);
 	menu.drawMenu();
 	while (appletMainLoop() && !isErrorThrown()) {
 		hidScanInput();
@@ -82,7 +89,9 @@ int main(int argc, char **argv) {
 				menu.drawMenu();
 				break;
 			case 3:
-				//Options
+				//NOTE: For now we will just reboot if 'a' is pressed as there is only one option here (More are to be added later on)
+				bpcInitialize();
+				bpcRebootSystem();
 				break;
 			default:
 				break;
