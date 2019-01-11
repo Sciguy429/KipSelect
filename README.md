@@ -1,23 +1,30 @@
-# NOTICE
-This program is currently being rebuilt from the ground up. Most of the information below is outdated and will be updated when the tool is finished.
-
 # Kip Select
 ![screenshot](https://github.com/Sciguy429/KipSelect/raw/master/graphics/Example-Screenshot.jpg)
-This is a WIP kip manager for atmosphere's fusée launcher, this homebrew will not work with Kosmos, or any other pack that boots from hekate, while it will run it wont do anything as hekate controls what kips load in those packs. This homebrew is intended only for use with 'vanilla' atmosphere, launched with fusée.
+This is a WIP toolkit for the switch cfw Atmopshere, it started out as a simple KIP manager but has become much more over time. This toolkit is intended for use with Atmosphere Fusee, it will still somewhat work other packs like Kosmos but stuff may be broken.
 
-## How To Use
-This howmebrew enables and disables kips by moving them between the /atmosphere/kips/ folder and an added folder called /atmosphere/kips_disabled/. Since fusée only checks the kips folder on boot, anything in kips_disabled gets ignored. The homebrew automatically creates the required folders (/atmosphere/kips/ & /atmosphere/kips_disabled/) if they are missing, all you need to do is make sure your kips are in one of the two folders before launching. The .nro has no other special requirements and should be launchable from anywhere (although simply placing it in /switch/ is recommended).
+## Features
+* Enabling And Disabling Of KIPS
+    * KIPS, or **K**ernel **I**nline **P**rocesses, are a commonly used homebrew format. This tool allows them to be enabled and disabled. A reboot is required after a KIP is toggled for it to load/unload. This fetaure requires Atmosphere to be launched via Fusee as it dirrectly manipulates the KIPS within /atmosphere/kips/ which are loaded only by the Fusee launcher. If you are useing Kosmos, use Hekate to manage your KIPS instead.
+* Configureing BCT.ini
+    * BCT.ini is a configuration file for Atmosphere. This tool allows modification of all true/false values in this file. It is worth noting however that in order for nogc toggleing to work you must first manually uncomment this line in BCT.ini. As of Atmosphere 0.8.2 nogc patches should enable themselves automatically if the right combiation of fuses is detected. There is also a huge risk of people changing this value accidentally and then breaking there gamecard slot, so for now this is going to remain a bit convoluted.
+* Managing LayeredFS Titles
+    * This homebrew can enable or disable layeredFS titles. Due to the way Atmosphere works Enableing or disabling a layeredFS title only requires that title to be restarted to take effect. Unless you are modding a system title, for themes for instance, a reboot should not be needed.
+* Trigger A Console Restart
+    * You can also trigger a console restart from within this tool. This is a normal restart, it dose not reboot the console into rcm. If you are useing exfat please avoid this feature, in my testing it caused SD card corruption 100% of the time.
 
-#### This homebrew also now supports BCT.ini editing on atmosphere version 0.8.1+
-Current changeable values are debugmode and debugmode_user, both required for using a cheat engine such as sys-netcheat.
+## Planned Features
+There are quite a few things I would still like to add to this tool, below is a short list of the ones that are planned.
+* Get Further KIP Information
+    * I would like the tool to display more about a instaled KIP than just its name. The current plan is to use file md5's to help detect what the KIP is.
+* Display Titlenames For LFS Items
+    * This can be done useing NSWReleases, some basic code for it is already present in the codebase.
+*  Add A Proper Options Menu
 
-## Notes
-* This homebrew only supports a maximum of 32 kips, attempting to use more will result in a error and possibly even a console hard crash.
-* Try and name your kips something reasonable, the program should be able to work with any file name the sdcard fs supports but naming your kip with emoji's isn't going to help.
-* I have no idea how safe this is to use on exFat, it shouldn't corrupt anything as all file operations are correctly closed, but should isn't won't, please be careful.
+## Installing
+I plan on putting this tool on the switch appstore, however if you would like to you can still download it from GitHub or even build it yourself. The nro has no special requiremnts about where it gets placed, I would still recommend your put it in /switch/ though.
 
 ## Building
-This homebrew is a standered libnx project, make sure you have devkitpro installed correctly and simply run make from the project root. I personaly write this project useing VsCode and thus there is a CppProperties.json file already configured for proper syntax highlighting in the project root, this configuration should work with almost any other homebrew project although depending on where your devkitpro install is you may need to change some values around.
+This homebrew is a standered libnx project, make sure you have devkitpro installed correctly and simply run make from the project root. There are some dependencies including, libcurl, libbzip, libpng, and libfreetype. I personaly write this project useing VsCode and thus there is a CppProperties.json file already configured for proper syntax highlighting in the project root, this configuration should work with almost any other homebrew project although depending on where your devkitpro install is you may need to change some values around.
 
 ## Credits
 * [libnx](https://github.com/switchbrew/libnx)
