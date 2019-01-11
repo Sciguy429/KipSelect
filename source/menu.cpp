@@ -10,7 +10,7 @@ void MENU::loadAssets() {
 	mainFont = gfxCreateFontFromTTF("romfs:/font/bahnschrift.ttf");
 	font *versionFont = gfxCreateFontFromTTF("romfs:/font/tt0288m_.ttf");
 	//-Textures
-	background = gfxCreateTextureFromPNG("romfs:/png/background.png");
+	menuBackground = gfxCreateTextureFromPNG("romfs:/png/menu/menu_background.png");
 	menuBar = gfxCreateTextureFromPNG("romfs:/png/menu/menu_bar.png");
 	menuBarSelected = gfxCreateTextureFromPNG("romfs:/png/menu/menu_bar_selected.png");
 	menuCheckmark = gfxCreateTextureFromPNG("romfs:/png/menu/menu_checkmark.png");
@@ -51,7 +51,7 @@ void MENU::loadAssets() {
 	//-Add Version To Backround
 	std::ostringstream version;
 	version << 'v' << VERSION_MAJOR << '.' << VERSION_MINOR << '.' << VERSION_MICRO;
-	gfxDrawText(background, version.str().c_str(), versionFont, 380, 59, 18, RGBA8(194, 17, 170, 0));
+	gfxDrawText(menuBackground, version.str().c_str(), versionFont, 380, 59, 18, RGBA8(194, 17, 170, 0));
 	gfxDestroyFont(versionFont);
 	//END BUILD
 }
@@ -142,7 +142,7 @@ void MENU::resetMenu() {
 }
 
 void MENU::drawMenu() {
-	gfxBlit(frameBufferTexture, background, 0, 0);
+	gfxBlit(frameBufferTexture, menuBackground, 0, 0);
 	gfxBlit(frameBufferTexture, tabSelected == 0 ? tabKipsSelected : tabKips, 560, 118);
 	gfxBlit(frameBufferTexture, tabSelected == 1 ? tabBCTSelected : tabBCT, 683, 118);
 	gfxBlit(frameBufferTexture, tabSelected == 2 ? tabLayeredFSSelected : tabLayeredFS, 843, 118);
@@ -230,7 +230,7 @@ void MENU::drawMenu() {
 
 void MENU::destroyAssets() {
 	gfxDestroyFont(mainFont);
-	gfxDestroyTexture(background);
+	gfxDestroyTexture(menuBackground);
 	gfxDestroyTexture(menuBar);
 	gfxDestroyTexture(menuBarSelected);
 	gfxDestroyTexture(menuCheckmark);

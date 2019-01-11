@@ -41,7 +41,7 @@ private:
 	//FONTS
 	font *mainFont;
 	//TEXTURES
-	texture *background;
+	texture *menuBackground;
 	texture *menuBar;
 	texture *menuBarSelected;
 	texture *menuCheckmark;
