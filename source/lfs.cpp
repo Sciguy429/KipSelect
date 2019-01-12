@@ -93,7 +93,7 @@ void LFS::parseLFSDatabase() {
 		}
 		nswCur = nswCur->next;
 	}
-	printf("Parsed: %d releases from xml file\n", nswCount);
+	printf("Parsed %d releases from file %s\n", nswCount, nswLocation.c_str());
 	xmlFreeDoc(nswDoc);
 }
 
