@@ -1,16 +1,14 @@
 #pragma once
 
-#include "string"
-
 typedef struct {
-	std::string header;
-	std::string info;
+	const char *header;
+	const char *info;
 } errorStructure;
 
 void errorLoadAssets();
 
 bool isErrorThrown();
 
-void errorThrow(unsigned int errorType);
+void errorThrow(unsigned int errorType, const char *errorInfo);
 
 void errorDestroyAssets();

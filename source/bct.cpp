@@ -39,11 +39,11 @@ void BCT::setBCTItemEnabled(unsigned int bctId, bool enabled) {
 			bctOfStream.close();
 		}
 		else {
-			errorThrow(2);
+			errorThrow(2, "/atmosphere/BCT.ini");
 		}
 	}
 	else {
-		errorThrow(3);
+		errorThrow(3, bctTargets[bctId].c_str());
 	}
 }
 

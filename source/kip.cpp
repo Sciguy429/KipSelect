@@ -13,7 +13,7 @@ void KIP::scanKIP() {
 	enabledKipDir = opendir("/atmosphere/kips/");
 	if (enabledKipDir == NULL) {
 		if (mkdir("/atmosphere/kips/", 0700) == -1) {
-			errorThrow(0);
+			errorThrow(0, "/atmosphere/kips/");
 		}
 	}
 	else {
@@ -29,7 +29,7 @@ void KIP::scanKIP() {
 	disabledKipDir = opendir("/atmosphere/kips_disabled/");
 	if (disabledKipDir == NULL) {
 		if (mkdir("/atmosphere/kips_disabled/", 0700) == -1) {
-			errorThrow(0);
+			errorThrow(0, "/atmosphere/kips_disabled/");
 		}
 	}
 	else {
@@ -58,7 +58,7 @@ void KIP::setKIPItemEnabled(unsigned int kipId, bool enabled) {
 	start.append(name);
 	end.append(name);
 	if (rename(start.c_str(), end.c_str()) != 0) {
-		errorThrow(1);
+		errorThrow(1, name.c_str());
 	}
 }
 

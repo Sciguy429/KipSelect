@@ -16,7 +16,7 @@ void LFS::scanLFS() {
 	lfsDir = opendir("/atmosphere/titles/");
 	if (lfsDir == NULL) {
 		if (mkdir("/atmosphere/titles/", 0700) == -1) {
-			errorThrow(0);
+			errorThrow(0, "/atmosphere/titles/");
 		}
 	}
 	else {
@@ -40,7 +40,7 @@ void LFS::scanLFS() {
 			else {
 				lfsItems[pos].enabled = true;
 				if (mkdir(flagsPath.str().c_str(), 0700) == -1) {
-					errorThrow(0);
+					errorThrow(0, flagsPath.str().c_str());
 				}
 			}
 		}
@@ -55,7 +55,7 @@ void LFS::setLFSItemEnabled(unsigned int lfsId, bool enabled) {
 	stat(flagsPath.str().c_str(), &info);
 	if (!(info.st_mode & S_IFDIR)) {
 		if (mkdir(flagsPath.str().c_str(), 0700) == -1) {
-			errorThrow(0);
+			errorThrow(0, flagsPath.str().c_str());
 		}
 	}
 	flagsPath << "/disabled.flag";
@@ -68,7 +68,7 @@ void LFS::setLFSItemEnabled(unsigned int lfsId, bool enabled) {
 			flag.close();
 		}
 		else {
-			errorThrow(2);
+			errorThrow(2, flagsPath.str().c_str());
 		}
 	}
 }
