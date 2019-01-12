@@ -98,7 +98,6 @@ int main(int argc, char **argv) {
 				break;
 			}
 		}
-		consoleUpdate(NULL);
 	}
 	menu.destroyAssets();
 	errorDestroyAssets();
