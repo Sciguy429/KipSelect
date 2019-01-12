@@ -32,7 +32,6 @@ void errorThrow(unsigned int errorType) {
 	gfxDrawFrameBuffer();
 	while (!(hidKeysDown(CONTROLLER_P1_AUTO) & KEY_PLUS)) {
 		hidScanInput();
-		consoleUpdate(NULL);
 	}
 }
 
