@@ -12,6 +12,7 @@ void netDownloadFile(const char *url, const char *path) {
 	CURL *curl;
 	FILE *file;
 	CURLcode res;
+	long httpCode = 0;
 	curl = curl_easy_init();
 	if (curl) {
 		file = fopen(path, "wb");
@@ -20,7 +21,8 @@ void netDownloadFile(const char *url, const char *path) {
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeFile);
 		curl_easy_setopt(curl, CURLOPT_WRITEDATA, file);
 		res = curl_easy_perform(curl);
-		if (res != CURLE_OK) {
+		curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &httpCode);
+		if (res != CURLE_OK && httpCode >= 200 && httpCode <= 299) {
 			errorThrow(4, path);
 		}
 		curl_easy_cleanup(curl);
