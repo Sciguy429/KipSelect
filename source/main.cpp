@@ -12,15 +12,15 @@ u64 kDown;
 
 int main(int argc, char **argv) {
 	MENU menu;
-	KIP kip;
-	BCT bct;
-	LFS lfs;
 	socketInitializeDefault();
 	nxlinkStdio();
 	romfsInit();
 	gfxInit(1280, 720);
 	errorLoadAssets();
 	menu.loadAssets();
+	KIP kip;
+	BCT bct;
+	LFS lfs;
 	kip.scanKIP();
 	bct.scanBCT();
 	lfs.scanLFS();
