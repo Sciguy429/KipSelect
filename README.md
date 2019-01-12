@@ -24,7 +24,7 @@ There are quite a few things I would still like to add to this tool, below is a 
 I plan on putting this tool on the switch appstore, however if you would like to you can still download it from GitHub or even build it yourself. The nro has no special requiremnts about where it gets placed, I would still recommend your put it in /switch/ though.
 
 ## Building
-This homebrew is a standered libnx project, make sure you have devkitpro installed correctly and simply run make from the project root. There are some dependencies including, libcurl, libbzip, libpng, and libfreetype. I personaly write this project useing VsCode and thus there is a CppProperties.json file already configured for proper syntax highlighting in the project root, this configuration should work with almost any other homebrew project although depending on where your devkitpro install is you may need to change some values around.
+This homebrew is a standered libnx project, make sure you have devkitpro installed correctly and simply run make from the project root. There are some dependencies including, libxml2, libcurl, libbzip, libpng, and libfreetype. I personaly write this project useing VsCode and thus there is a CppProperties.json file already configured for proper syntax highlighting in the project root, this configuration should work with almost any other homebrew project although depending on where your devkitpro install is you may need to change some values around.
 
 ## Credits
 * A huge thank you to MatinatorX for all of the graphics assets used by this tool. He had a hand in prety much all of there creation and without his work this tool would proboly look like it had been made in ms paint.
