@@ -3,11 +3,72 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <libxml2/libxml/xmlmemory.h>
+#include <libxml2/libxml/parser.h>
 
 #include "lfs.h"
 #include "error.h"
+#include "net.h"
 
 //netDownloadFile("http://nswdb.com/xml.php", "sdmc:/NSWreleases.xml");
+
+void LFS::updateLFSDatabase() {
+	//stub, will eventualy download a new NSWreleases.xml
+}
+
+void LFS::parseLFSDatabase() {
+	std::string nswLocation;
+	struct stat info;
+	if (stat("sdmc:/NSWreleases.xml", &info) == 0) {
+		nswLocation = "sdmc:/NSWreleases.xml";
+	}
+	else {
+		nswLocation = "romfs:/data/NSWreleases.xml";
+	}
+	xmlDocPtr nswDoc;
+	xmlNodePtr nswCur;
+	nswDoc = xmlParseFile(nswLocation.c_str());
+	if (nswDoc == NULL) {
+		printf("Document failed to parse");
+		return; //REDO
+	}
+	nswCur = xmlDocGetRootElement(nswDoc);
+	if (nswCur == NULL) {
+		printf("Document is empty");
+		return; //REDO
+	}
+	if (xmlStrcmp(nswCur->name, (const xmlChar *)"releases")) {
+		printf("Document of the wrong type, root node != releases");
+		xmlFreeDoc(nswDoc);
+		return;
+	}
+	nswCur = nswCur->xmlChildrenNode;
+	unsigned int nswCount = 0;
+	while (nswCur != NULL) {
+		if ((!xmlStrcmp(nswCur->name, (const xmlChar *)"release"))) {
+			nswTitles.push_back(nswTitle());
+			xmlChar *releaseKey;
+			xmlNodePtr releaseCur = nswCur->xmlChildrenNode;
+			while (releaseCur != NULL) {
+				if ((!xmlStrcmp(releaseCur->name, (const xmlChar *)"name"))) {
+					releaseKey = xmlNodeListGetString(nswDoc, releaseCur->xmlChildrenNode, 1);
+					nswTitles[nswCount].titleName = reinterpret_cast<const char*>(releaseKey);
+					xmlFree(releaseKey);
+				}
+				else if ((!xmlStrcmp(releaseCur->name, (const xmlChar *)"titleid"))) {
+					releaseKey = xmlNodeListGetString(nswDoc, releaseCur->xmlChildrenNode, 1);
+					nswTitles[nswCount].titleId = reinterpret_cast<const char*>(releaseKey);
+					xmlFree(releaseKey);
+				}
+				releaseCur = releaseCur->next;
+			}
+			nswCount++;
+		}
+		nswCur = nswCur->next;
+	}
+	printf("Parsed: %d releases from xml file\n", nswCount);
+	xmlFreeDoc(nswDoc);
+}
 
 void LFS::scanLFS() {
 	lfsItems.clear();

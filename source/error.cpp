@@ -14,7 +14,7 @@ errorStructure errors[] = {
 	{"File Move Failed", "Unable to move file: "}, //Rename Error (1)
 	{"Unable To Open File", "Unable to write to file: "}, //Ofstream Error (2)
 	{"Missing String In BCT.ini", "Unable to fine BCT target: "}, //BCT Location Not Found Error (3)
-	{"Failed To Download File", "Unable to download file:"} //Curl Error (4)
+	{"Failed To Download File", "Unable to download file: "} //Curl Error (4)
 };
 
 void errorLoadAssets() {

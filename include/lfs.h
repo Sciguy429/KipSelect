@@ -6,6 +6,11 @@
 #include "menu.h"
 
 typedef struct {
+	std::string titleId;
+	std::string titleName;
+} nswTitle;
+
+typedef struct {
 	std::string name;
 	std::string titleId;
 	std::string discription;
@@ -14,11 +19,14 @@ typedef struct {
 
 class LFS {
 public:
+	void updateLFSDatabase();
+	void parseLFSDatabase();
 	void scanLFS();
 	void setLFSItemEnabled(unsigned int lfsId, bool enabled);
 	bool getLFSItemEnabled(unsigned int lfsId);
 	unsigned int getLFSCount();
 	menuItem getLFSMenuItem(unsigned int lfsId);
 private:
+	std::vector<nswTitle> nswTitles;
 	std::vector<lfsItem> lfsItems;
 };

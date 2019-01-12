@@ -21,6 +21,7 @@ int main(int argc, char **argv) {
 	gfxInit(1280, 720);
 	errorLoadAssets();
 	menu.loadAssets();
+	lfs.parseLFSDatabase();
 	kip.scanKIP();
 	bct.scanBCT();
 	lfs.scanLFS();
