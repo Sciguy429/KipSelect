@@ -5,12 +5,21 @@
 #include <sys/types.h>
 #include <libxml2/libxml/xmlmemory.h>
 #include <libxml2/libxml/parser.h>
+#include <algorithm>
 
 #include "lfs.h"
 #include "error.h"
 #include "net.h"
 
 //netDownloadFile("http://nswdb.com/xml.php", "sdmc:/NSWreleases.xml");
+
+struct find_id : std::unary_function<nswTitle, bool> {
+	std::string id;
+	find_id(std::string id) :id(id) { }
+	bool operator()(nswTitle const& m) const {
+		return m.titleId == id;
+	}
+};
 
 void LFS::updateLFSDatabase() {
 	//stub, will eventualy download a new NSWreleases.xml
@@ -86,11 +95,11 @@ void LFS::scanLFS() {
 			lfsItems.push_back(lfsItem());
 			lfsItems[pos].titleId = lfsEnt->d_name;
 			std::ostringstream flagsPath;
-			flagsPath << "/atmosphere/titles/" << lfsEnt->d_name;
+			flagsPath << "/atmosphere/titles/" << lfsEnt->d_name << "/flags";
 			struct stat info;
 			stat(flagsPath.str().c_str(), &info);
 			if (info.st_mode & S_IFDIR) {
-				flagsPath << "/disabled.flag";
+				flagsPath << "/fsmitm_disable.flag";
 				if (stat(flagsPath.str().c_str(), &info) == 0) {
 					lfsItems[pos].enabled = false;
 				}
@@ -119,7 +128,7 @@ void LFS::setLFSItemEnabled(unsigned int lfsId, bool enabled) {
 			errorThrow(0, flagsPath.str().c_str());
 		}
 	}
-	flagsPath << "/disabled.flag";
+	flagsPath << "/fsmitm_disable.flag";
 	if (enabled) {
 		remove(flagsPath.str().c_str());
 	}
@@ -144,7 +153,18 @@ unsigned int LFS::getLFSCount() {
 
 menuItem LFS::getLFSMenuItem(unsigned int lfsId) {
 	menuItem mnu;
-	mnu.name = lfsItems[lfsId].titleId;
 	mnu.status = lfsItems[lfsId].enabled;
+	std::string str = lfsItems[lfsId].titleId;
+	std::transform(str.begin(), str.end(), str.begin(), ::toupper);
+	std::vector<nswTitle>::iterator itr = std::find_if(nswTitles.begin(), nswTitles.end(), find_id(str));
+	if (itr != nswTitles.end()) {
+		mnu.name = itr->titleName;
+		mnu.details.push_back(menuDetail());
+		mnu.details[0].prefix = "Title Id: ";
+		mnu.details[0].data = itr->titleId;
+	}
+	else {
+		mnu.name = lfsItems[lfsId].titleId;
+	}
 	return mnu;
 }
