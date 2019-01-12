@@ -59,14 +59,29 @@ void LFS::parseLFSDatabase() {
 			xmlChar *releaseKey;
 			xmlNodePtr releaseCur = nswCur->xmlChildrenNode;
 			while (releaseCur != NULL) {
-				if ((!xmlStrcmp(releaseCur->name, (const xmlChar *)"name"))) {
+				if ((!xmlStrcmp(releaseCur->name, (const xmlChar *)"name"))) { //Title Name
 					releaseKey = xmlNodeListGetString(nswDoc, releaseCur->xmlChildrenNode, 1);
 					nswTitles[nswCount].titleName = reinterpret_cast<const char*>(releaseKey);
 					xmlFree(releaseKey);
 				}
-				else if ((!xmlStrcmp(releaseCur->name, (const xmlChar *)"titleid"))) {
+				else if ((!xmlStrcmp(releaseCur->name, (const xmlChar *)"titleid"))) { //Title Id
 					releaseKey = xmlNodeListGetString(nswDoc, releaseCur->xmlChildrenNode, 1);
 					nswTitles[nswCount].titleId = reinterpret_cast<const char*>(releaseKey);
+					xmlFree(releaseKey);
+				}
+				else if ((!xmlStrcmp(releaseCur->name, (const xmlChar *)"publisher"))) { //Title Publisher
+					releaseKey = xmlNodeListGetString(nswDoc, releaseCur->xmlChildrenNode, 1);
+					nswTitles[nswCount].titlePublisher = reinterpret_cast<const char*>(releaseKey);
+					xmlFree(releaseKey);
+				}
+				else if ((!xmlStrcmp(releaseCur->name, (const xmlChar *)"region"))) { //Title Region
+					releaseKey = xmlNodeListGetString(nswDoc, releaseCur->xmlChildrenNode, 1);
+					nswTitles[nswCount].titleRegion = reinterpret_cast<const char*>(releaseKey);
+					xmlFree(releaseKey);
+				}
+				else if ((!xmlStrcmp(releaseCur->name, (const xmlChar *)"languages"))) { //Title Languages
+					releaseKey = xmlNodeListGetString(nswDoc, releaseCur->xmlChildrenNode, 1);
+					nswTitles[nswCount].titleLanguages = reinterpret_cast<const char*>(releaseKey);
 					xmlFree(releaseKey);
 				}
 				releaseCur = releaseCur->next;
@@ -162,6 +177,15 @@ menuItem LFS::getLFSMenuItem(unsigned int lfsId) {
 		mnu.details.push_back(menuDetail());
 		mnu.details[0].prefix = "Title Id: ";
 		mnu.details[0].data = itr->titleId;
+		mnu.details.push_back(menuDetail());
+		mnu.details[1].prefix = "Title Publisher: ";
+		mnu.details[1].data = itr->titlePublisher;
+		mnu.details.push_back(menuDetail());
+		mnu.details[2].prefix = "Title Region: ";
+		mnu.details[2].data = itr->titleRegion;
+		mnu.details.push_back(menuDetail());
+		mnu.details[3].prefix = "Title Languages: ";
+		mnu.details[3].data = itr->titleLanguages;
 	}
 	else {
 		mnu.name = lfsItems[lfsId].titleId;

@@ -8,6 +8,9 @@
 typedef struct {
 	std::string titleId;
 	std::string titleName;
+	std::string titlePublisher;
+	std::string titleRegion;
+	std::string titleLanguages;
 } nswTitle;
 
 typedef struct {
