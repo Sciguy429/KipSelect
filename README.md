@@ -16,8 +16,8 @@ This is a WIP toolkit for the switch cfw Atmopshere, it started out as a simple 
 There are quite a few things I would still like to add to this tool, below is a short list of the ones that are planned.
 * Get Further KIP Information
     * I would like the tool to display more about a instaled KIP than just its name. The current plan is to use file md5's to help detect what the KIP is.
-* Display Titlenames For LFS Items
-    * This can be done useing NSWReleases, some basic code for it is already present in the codebase.
+* ~~Display Titlenames For LFS Items~~
+    * ~~This can be done useing NSWReleases, some basic code for it is already present in the codebase.~~
 *  Add A Proper Options Menu
 
 ## Installing
