@@ -1,6 +1,7 @@
 #include <curl/curl.h>
 
 #include "net.h"
+#include "error.h"
 
 size_t writeFile(void *ptr, size_t size, size_t nmemb, FILE *stream) {
 	size_t written = fwrite(ptr, size, nmemb, stream);
@@ -20,7 +21,7 @@ void netDownloadFile(const char *url, const char *path) {
 		curl_easy_setopt(curl, CURLOPT_WRITEDATA, file);
 		res = curl_easy_perform(curl);
 		if (res != CURLE_OK) {
-			//Throw Error
+			errorThrow(4, path);
 		}
 		curl_easy_cleanup(curl);
 		fclose(file);
