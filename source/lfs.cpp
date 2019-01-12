@@ -34,20 +34,23 @@ void LFS::parseLFSDatabase() {
 	else {
 		nswLocation = "romfs:/data/NSWreleases.xml";
 	}
+	//Temporary, assign to the romfs location for hotfix release
+	nswLocation = "romfs:/data/NSWreleases.xml";
+	//~~
 	xmlDocPtr nswDoc;
 	xmlNodePtr nswCur;
 	nswDoc = xmlParseFile(nswLocation.c_str());
 	if (nswDoc == NULL) {
-		printf("Document failed to parse");
-		return; //REDO
+		errorThrow(5, "Document failed to parse");
+		return;
 	}
 	nswCur = xmlDocGetRootElement(nswDoc);
 	if (nswCur == NULL) {
-		printf("Document is empty");
-		return; //REDO
+		errorThrow(5, "Document is empty");
+		return;
 	}
 	if (xmlStrcmp(nswCur->name, (const xmlChar *)"releases")) {
-		printf("Document of the wrong type, root node != releases");
+		errorThrow(5, "Document of the wrong type, root node != releases");
 		xmlFreeDoc(nswDoc);
 		return;
 	}
@@ -189,6 +192,8 @@ menuItem LFS::getLFSMenuItem(unsigned int lfsId) {
 	}
 	else {
 		mnu.name = lfsItems[lfsId].titleId;
+		mnu.details.push_back(menuDetail());
+		mnu.details[0].prefix = "Futher Title Infomation Unknown";
 	}
 	return mnu;
 }
