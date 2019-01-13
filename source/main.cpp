@@ -1,5 +1,4 @@
 #include <switch.h>
-#include <string>
 
 #include "gfx.h"
 #include "error.h"
