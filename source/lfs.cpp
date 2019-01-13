@@ -11,8 +11,6 @@
 #include "error.h"
 #include "net.h"
 
-//netDownloadFile("http://nswdb.com/xml.php", "sdmc:/NSWreleases.xml");
-
 struct find_id : std::unary_function<nswTitle, bool> {
 	std::string id;
 	find_id(std::string id) :id(id) { }
