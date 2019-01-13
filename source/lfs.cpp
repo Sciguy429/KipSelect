@@ -21,8 +21,23 @@ struct find_id : std::unary_function<nswTitle, bool> {
 	}
 };
 
+std::ifstream::pos_type fileSize(const char* filename) {
+	std::ifstream in(filename, std::ifstream::ate | std::ifstream::binary);
+	return in.tellg();
+}
+
 void LFS::updateLFSDatabase() {
-	//stub, will eventualy download a new NSWreleases.xml
+	remove("sdmc:/NEW.NSWreleases.xml");
+	netDownloadFile("http://nswdb.com/xml.php", "sdmc:/NEW.NSWreleases.xml");
+	if (fileSize("sdmc:/NEW.NSWreleases.xml") > 0) {
+		remove("sdmc:/NSWreleases.xml");
+		if (rename("sdmc:/NEW.NSWreleases.xml", "sdmc:/NSWreleases.xml") != 0) {
+			errorThrow(1, "sdmc:/NEW.NSWreleases.xml");
+		}
+	}
+	else {
+		remove("sdmc:/NEW.NSWreleases.xml");
+	}
 }
 
 void LFS::parseLFSDatabase() {
@@ -34,9 +49,6 @@ void LFS::parseLFSDatabase() {
 	else {
 		nswLocation = "romfs:/data/NSWreleases.xml";
 	}
-	//Temporary, assign to the romfs location for hotfix release
-	nswLocation = "romfs:/data/NSWreleases.xml";
-	//~~
 	xmlDocPtr nswDoc;
 	xmlNodePtr nswCur;
 	nswDoc = xmlParseFile(nswLocation.c_str());

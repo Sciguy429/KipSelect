@@ -41,6 +41,13 @@ int main(int argc, char **argv) {
 	rebootItem.details[0].prefix = "Discription:\n";
 	rebootItem.details[0].data = "Reboot the console from within this tool. Do not use this with exfat, it may cause corruption!";
 	menu.addMenuItem(3, rebootItem);
+	menuItem updateItem;
+	updateItem.name = "Update NSWreleases.xml";
+	updateItem.status = false;
+	updateItem.details.push_back(menuDetail());
+	updateItem.details[0].prefix = "Discription:\n";
+	updateItem.details[0].data = "This tool comes bundled with a NSWreleases.xml winthin it's romfs. This option will download a updated one to the SD card. Restart the tool afterwords to use the new file.";
+	menu.addMenuItem(3, updateItem);
 	menu.drawMenu();
 	while (appletMainLoop() && !isErrorThrown()) {
 		hidScanInput();
@@ -90,9 +97,19 @@ int main(int argc, char **argv) {
 				menu.drawMenu();
 				break;
 			case 3:
-				//NOTE: For now we will just reboot if 'a' is pressed as there is only one option here (More are to be added later on)
-				bpcInitialize();
-				bpcRebootSystem();
+				switch (menu.getMenuSelected()) {
+				case 0:
+					bpcInitialize();
+					bpcRebootSystem();
+					break;
+				case 1:
+					menu.toggleSelected();
+					menu.drawMenu();
+					lfs.updateLFSDatabase();
+					menu.toggleSelected();
+					menu.drawMenu();
+					break;
+				}
 				break;
 			default:
 				break;
