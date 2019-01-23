@@ -4,7 +4,7 @@ This is a WIP toolkit for the switch cfw Atmopshere, it started out as a simple 
 
 ## Features
 * Enabling And Disabling Of KIPS
-    * KIPS, or **K**ernel **I**nline **P**rocesses, are a commonly used homebrew format. This tool allows them to be enabled and disabled. A reboot is required after a KIP is toggled for it to load/unload. This fetaure requires Atmosphere to be launched via Fusee as it dirrectly manipulates the KIPS within /atmosphere/kips/ which are loaded only by the Fusee launcher. If you are useing Kosmos, use Hekate to manage your KIPS instead.
+    * KIPS, or **K**ernel **I**nitial **P**rocesses, are a commonly used homebrew format. This tool allows them to be enabled and disabled. A reboot is required after a KIP is toggled for it to load/unload. This fetaure requires Atmosphere to be launched via Fusee as it dirrectly manipulates the KIPS within /atmosphere/kips/ which are loaded only by the Fusee launcher. If you are useing Kosmos, use Hekate to manage your KIPS instead.
 * Configureing BCT.ini
     * BCT.ini is a configuration file for Atmosphere. This tool allows modification of all true/false values in this file. It is worth noting however that in order for nogc toggleing to work you must first manually uncomment this line in BCT.ini. As of Atmosphere 0.8.2 nogc patches should enable themselves automatically if the right combiation of fuses is detected. There is also a huge risk of people changing this value accidentally and then breaking there gamecard slot, so for now this is going to remain a bit convoluted.
 * Managing LayeredFS Titles
