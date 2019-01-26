@@ -1,8 +1,380 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <titles>
+  <!--System Modules-->
   <title>
-    <titleid></titleid>
-    <name></name>
-    <description></description>
+    <titleid>0100000000000000</titleid>
+    <name>fs</name>
+    <description>Provides file system services to the switch.</description>
+  </title>
+  <title>
+    <titleid>0100000000000001</titleid>
+    <name>ldr (Loader)</name>
+    <description>Provides loading services to the switch.</description>
+  </title>
+  <title>
+    <titleid>0100000000000002</titleid>
+    <name>ncm</name>
+    <description>Services for internal file path and content management.</description>
+  </title>
+  <title>
+    <titleid>0100000000000003</titleid>
+    <name>pm (Process Manager)</name>
+    <description>Service that manages all console processes.</description>
+  </title>
+  <title>
+    <titleid>0100000000000004</titleid>
+    <name>sm</name>
+    <description>Services API, manages all services.</description>
+  </title>
+  <title>
+    <titleid>0100000000000005</titleid>
+    <name>boot</name>
+    <description>Low level program that helps initlize the console at boot.</description>
+  </title>
+  <title>
+    <titleid>0100000000000006</titleid>
+    <name>usb</name>
+    <description>Service facilitating usb communication.</description>
+  </title>
+  <title>
+    <titleid>0100000000000007</titleid>
+    <name>usb</name>
+    <description>Acts as a debugging sysmodule for devlopment kits, in retail consoles this remains unused.</description>
+  </title>
+  <title>
+    <titleid>0100000000000008</titleid>
+    <name>boot2</name>
+    <description>Secondary switch bootloader, this is the first sysmodule launch by pm at boot.</description>
+  </title>
+  <title>
+    <titleid>0100000000000009</titleid>
+    <name>settings</name>
+    <description>Settings services.</description>
+  </title>
+  <title>
+    <titleid>010000000000000A</titleid>
+    <name>bus</name>
+    <description>Bus services.</description>
+  </title>
+  <title>
+    <titleid>010000000000000B</titleid>
+    <name>bluetooth</name>
+    <description>Bluetooth driver services.</description>
+  </title>
+  <title>
+    <titleid>010000000000000C</titleid>
+    <name>bcat</name>
+    <description>Download/Upload services.</description>
+  </title>
+  <title>
+    <titleid>010000000000000E</titleid>
+    <name>freinds</name>
+    <description>Friend services.</description>
+  </title>
+  <title>
+    <titleid>010000000000000F</titleid>
+    <name>nifm</name>
+    <description>Network Interface services.</description>
+  </title>
+  <title>
+    <titleid>0100000000000010</titleid>
+    <name>ptm</name>
+    <description>PTM services.</description>
+  </title>
+  <title>
+    <titleid>0100000000000012</titleid>
+    <name>bsdsockets</name>
+    <description>Sockets services.</description>
+  </title>
+  <title>
+    <titleid>0100000000000013</titleid>
+    <name>hid</name>
+    <description>HID services.</description>
+  </title>
+  <title>
+    <titleid>0100000000000014</titleid>
+    <name>audio</name>
+    <description>Audio services.</description>
+  </title>
+  <title>
+    <titleid>0100000000000015</titleid>
+    <name>LogManager</name>
+    <description>Log services.</description>
+  </title>
+  <title>
+    <titleid>0100000000000016</titleid>
+    <name>wlan</name>
+    <description>WLAN services.</description>
+  </title>
+  <title>
+    <titleid>0100000000000018</titleid>
+    <name>ldn</name>
+    <description>Service that handels all loacl network communication.</description>
+  </title>
+  <title>
+    <titleid>0100000000000019</titleid>
+    <name>nvservices</name>
+    <description>Customized NVIDIA driver.</description>
+  </title>
+  <title>
+    <titleid>010000000000001A</titleid>
+    <name>pcv</name>
+    <description>PCV services.</description>
+  </title>
+  <title>
+    <titleid>010000000000001B</titleid>
+    <name>ppc</name>
+    <description>PPC Services. This service controls all console clock speeds.</description>
+  </title>
+  <title>
+    <titleid>010000000000001C</titleid>
+    <name>nvnflinger</name>
+    <description>Nvnflinger services. This service is responsibe for mediating the communication between vi and nvservices.</description>
+  </title>
+  <title>
+    <titleid>010000000000001D</titleid>
+    <name>pcie</name>
+    <description>PCIe services.</description>
+  </title>
+  <title>
+    <titleid>010000000000001E</titleid>
+    <name>account</name>
+    <description>Account services.</description>
+  </title>
+  <title>
+    <titleid>010000000000001F</titleid>
+    <name>ns</name>
+    <description>NS Services.</description>
+  </title>
+  <title>
+    <titleid>0100000000000020</titleid>
+    <name>nfc</name>
+    <description>NFC services.</description>
+  </title>
+  <title>
+    <titleid>0100000000000021</titleid>
+    <name>psc</name>
+    <description>PSC services. Provides services related to power state changes in the system.</description>
+  </title>
+  <title>
+    <titleid>0100000000000022</titleid>
+    <name>capsrv</name>
+    <description>Capture services.</description>
+  </title>
+  <title>
+    <titleid>0100000000000023</titleid>
+    <name>am</name>
+    <description>Applet Manager services. Provides services for interacting with system applets.</description>
+  </title>
+  <title>
+    <titleid>0100000000000024</titleid>
+    <name>ssl</name>
+    <description>SSL services.</description>
+  </title>
+  <title>
+    <titleid>0100000000000025</titleid>
+    <name>nim</name>
+    <description>NIM services.</description>
+  </title>
+  <title>
+    <titleid>0100000000000028</titleid>
+    <name>spl</name>
+    <description>SPL services. SPL ("Secure Platform services") is responsible for handling all cryptographic operations within the system and relaying them to the Secure Monitor when necessary.</description>
+  </title>
+  <title>
+    <titleid>0100000000000029</titleid>
+    <name>lbl</name>
+    <description>Backlight services.</description>
+  </title>
+  <title>
+    <titleid>010000000000002A</titleid>
+    <name>btm</name>
+    <description>BTM services.</description>
+  </title>
+  <title>
+    <titleid>010000000000002B</titleid>
+    <name>erpt</name>
+    <description>Error Report services.</description>
+  </title>
+  <title>
+    <titleid>010000000000002D</titleid>
+    <name>vi</name>
+    <description>Display services.</description>
+  </title>
+  <title>
+    <titleid>010000000000002E</titleid>
+    <name>pctl</name>
+    <description>Parental Control services. PCTL handles all parental controls management.</description>
+  </title>
+  <title>
+    <titleid>010000000000002F</titleid>
+    <name>npns</name>
+    <description>NPNS services.</description>
+  </title>
+  <title>
+    <titleid>0100000000000030</titleid>
+    <name>eupld</name>
+    <description>Error Upload services. The "Error upload" service reads and uploads error reports from erpt:r to a cloud server.</description>
+  </title>
+  <title>
+    <titleid>0100000000000031</titleid>
+    <name>glue</name>
+    <description>Glue services.</description>
+  </title>
+  <title>
+    <titleid>0100000000000032</titleid>
+    <name>eclct</name>
+    <description>This title is patched by atmosphere by default.</description>
+  </title>
+  <title>
+    <titleid>0100000000000033</titleid>
+    <name>es</name>
+    <description>ETicket services.</description>
+  </title>
+  <title>
+    <titleid>0100000000000034</titleid>
+    <name>fatal</name>
+    <description>Fatal services. This title is patched by atmosphere by default.</description>
+  </title>
+  <title>
+    <titleid>0100000000000035</titleid>
+    <name>grc</name>
+    <description>GRC services. GRC (Game Recording) uses libstagefright and the NvMMLite TVMR library for writing recorded video to MP4s.</description>
+  </title>
+  <title>
+    <titleid>0100000000000036</titleid>
+    <name>creport</name>
+    <description>This process is launched by NS when PM signals that there is a crashing process. Creport takes a string containing a pid formatted in base10 as input, and generates an error report. This error report can later be sent to the cloud server by Eupld services. This title is patched by atmosphere by default.</description>
+  </title>
+  <title>
+    <titleid>0100000000000037</titleid>
+    <name>ro</name>
+    <description>Services related to the loading of nro files.</description>
+  </title>
+  <title>
+    <titleid>0100000000000039</titleid>
+    <name>sdb</name>
+    <description>Shared Database services.</description>
+  </title>
+  <title>
+    <titleid>010000000000003A</titleid>
+    <name>migration</name>
+    <description>Migration services. Migration is a sysmodule designed for handling the new Switch to Switch transfer system.</description>
+  </title>
+  <title>
+    <titleid>010000000000003C</titleid>
+    <name>jpegdec</name>
+    <description>Jpegdec services. Jpegdec is a refactored sysmodule for handling all JPEG decoding associated with capture services.</description>
+  </title>
+  <title>
+    <titleid>010000000000003D</titleid>
+    <name>safemode</name>
+    <description>Safemode can be launched by a button combo at boot and has the task of performing any pending system updates.</description>
+  </title>
+  <title>
+    <titleid>010000000000003E</titleid>
+    <name>olsc</name>
+    <description>OLSC services. OLSC (OnLine Savedata Cloud?) is a sysmodule designed for handling the new online savedata cloud backup system.</description>
+  </title>
+  <!--System Applets-->
+  <title>
+    <titleid>0100000000001000</titleid>
+    <name>qlaunch</name>
+    <description>Qlaunch system applet, launched by NS with TID loaded from system-config-title. Responsible for the switches homescreen, setting and news menus.</description>
+  </title>
+  <title>
+    <titleid>0100000000001001</titleid>
+    <name>auth</name>
+    <description>Auth (LibraryAppletAuth).</description>
+  </title>
+  <title>
+    <titleid>0100000000001002</titleid>
+    <name>cabinet</name>
+    <description>Cabinet (LibraryAppletCabinet).</description>
+  </title>
+  <title>
+    <titleid>0100000000001003</titleid>
+    <name>controller</name>
+    <description>Controller (LibraryAppletController).</description>
+  </title>
+  <title>
+    <titleid>0100000000001004</titleid>
+    <name>dataErase</name>
+    <description>DataErase (LibraryAppletDataErase).</description>
+  </title>
+  <title>
+    <titleid>0100000000001005</titleid>
+    <name>error</name>
+    <description>Error (LibraryAppletError).</description>
+  </title>
+  <title>
+    <titleid>0100000000001006</titleid>
+    <name>netConnect</name>
+    <description>NetConnect (LibraryAppletNetConnect).</description>
+  </title>
+  <title>
+    <titleid>0100000000001007</titleid>
+    <name>playerSelect</name>
+    <description>This is the applet presented when launching a game that allows the user to select a user.</description>
+  </title>
+  <title>
+    <titleid>0100000000001008</titleid>
+    <name>swkbd</name>
+    <description>The software keyboard applet.</description>
+  </title>
+  <title>
+    <titleid>0100000000001009</titleid>
+    <name>miiEdit</name>
+    <description>MiiEdit (LibraryAppletMiiEdit).</description>
+  </title>
+  <title>
+    <titleid>010000000000100A</titleid>
+    <name>web</name>
+    <description>Nintendo Switch does not have a normal Internet Browser for user usage. However, there is multiple browser applets. It is the NetFront NX browser, which is based on Webkit.</description>
+  </title>
+  <title>
+    <titleid>010000000000100B</titleid>
+    <name>shop</name>
+    <description>Eshop applet.</description>
+  </title>
+  <title>
+    <titleid>010000000000100C</titleid>
+    <name>overlayDisp</name>
+    <description>OverlayDisp (OverlayApplet).</description>
+  </title>
+  <title>
+    <titleid>010000000000100D</titleid>
+    <name>photoViewer</name>
+    <description>PhotoViewer (LibraryAppletPhotoViewer).</description>
+  </title>
+  <title>
+    <titleid>010000000000100F</titleid>
+    <name>offlineWeb</name>
+    <description>OfflineWeb (LibraryAppletOfflineWeb).</description>
+  </title>
+  <title>
+    <titleid>0100000000001010</titleid>
+    <name>loginShare</name>
+    <description>LoginShare (LibraryAppletLoginShare).</description>
+  </title>
+  <title>
+    <titleid>0100000000001011</titleid>
+    <name>wifiWebAuth</name>
+    <description>WifiWebAuth (LibraryAppletWifiWebAuth).</description>
+  </title>
+  <title>
+    <titleid>0100000000001012</titleid>
+    <name>starter</name>
+    <description>Starter (DummyStarter).</description>
+  </title>
+  <title>
+    <titleid>0100000000001013</titleid>
+    <name>myPage</name>
+    <description>MyPage (LibraryAppletMyPage).</description>
+  </title>
+  <title>
+    <titleid>0100000000001015</titleid>
+    <name>MaintenanceMenu</name>
+    <description>	Initial applet displayed when booting into Recovery_Mode. This title is launched by NS when a state flag is val1 indicating that this title should be launched instead of the above "SystemAppletMenu" title.</description>
   </title>
 </titles>
