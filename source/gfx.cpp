@@ -13,7 +13,7 @@ static uint32_t colorBlendAlpha(uint32_t colorA, uint32_t colorB) {
 	if (aA == 0x00) {
 		return colorB;
 	}
-	else if (aA == 0xFF) {
+	if (aA == 0xFF) {
 		return colorA;
 	}
 	uint8_t aR = colorA & 0xFF;
