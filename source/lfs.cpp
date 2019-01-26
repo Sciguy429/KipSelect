@@ -107,6 +107,57 @@ void LFS::parseLFSDatabase() {
 	xmlFreeDoc(nswDoc);
 }
 
+void LFS::parseSysDatabase() {
+	xmlDocPtr sysDoc;
+	xmlNodePtr sysCur;
+	sysDoc = xmlParseFile("romfs:/data/SystemTitles.xml");
+	if (sysDoc == NULL) {
+		errorThrow(5, "Document failed to parse");
+		return;
+	}
+	sysCur = xmlDocGetRootElement(sysDoc);
+	if (sysCur == NULL) {
+		errorThrow(5, "Document is empty");
+		return;
+	}
+	if (xmlStrcmp(sysCur->name, (const xmlChar *)"titles")) {
+		errorThrow(5, "Document of the wrong type, root node != titles");
+		xmlFreeDoc(sysDoc);
+		return;
+	}
+	sysCur = sysCur->xmlChildrenNode;
+	unsigned int sysCount = 0;
+	while (sysCur != NULL) {
+		if ((!xmlStrcmp(sysCur->name, (const xmlChar *)"title"))) {
+			sysTitles.push_back(sysTitle());
+			xmlChar *releaseKey;
+			xmlNodePtr releaseCur = sysCur->xmlChildrenNode;
+			while (releaseCur != NULL) {
+				if ((!xmlStrcmp(releaseCur->name, (const xmlChar *)"name"))) { //Title Id
+					releaseKey = xmlNodeListGetString(sysDoc, releaseCur->xmlChildrenNode, 1);
+					sysTitles[sysCount].titleName = reinterpret_cast<const char*>(releaseKey);
+					xmlFree(releaseKey);
+				}
+				else if ((!xmlStrcmp(releaseCur->name, (const xmlChar *)"titleid"))) { //Title Name
+					releaseKey = xmlNodeListGetString(sysDoc, releaseCur->xmlChildrenNode, 1);
+					sysTitles[sysCount].titleId = reinterpret_cast<const char*>(releaseKey);
+					xmlFree(releaseKey);
+				}
+				else if ((!xmlStrcmp(releaseCur->name, (const xmlChar *)"description"))) { //Title Description
+					releaseKey = xmlNodeListGetString(sysDoc, releaseCur->xmlChildrenNode, 1);
+					sysTitles[sysCount].titleDescription = reinterpret_cast<const char*>(releaseKey);
+					xmlFree(releaseKey);
+				}
+				releaseCur = releaseCur->next;
+			}
+			sysCount++;
+		}
+		sysCur = sysCur->next;
+	}
+	printf("Parsed %d system titles from file romfs:/data/SystemTitles.xml\n", sysCount);
+	xmlFreeDoc(sysDoc);
+}
+
 void LFS::scanLFS() {
 	lfsItems.clear();
 	DIR* lfsDir;
