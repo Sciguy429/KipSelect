@@ -11,10 +11,18 @@
 #include "error.h"
 #include "net.h"
 
-struct find_id : std::unary_function<nswTitle, bool> {
+struct nswFindId : std::unary_function<nswTitle, bool> {
 	std::string id;
-	find_id(std::string id) :id(id) { }
+	nswFindId(std::string id) :id(id) { }
 	bool operator()(nswTitle const& m) const {
+		return m.titleId == id;
+	}
+};
+
+struct sysFindId : std::unary_function<sysTitle, bool> {
+	std::string id;
+	sysFindId(std::string id) :id(id) { }
+	bool operator()(sysTitle const& m) const {
 		return m.titleId == id;
 	}
 };
@@ -235,26 +243,38 @@ menuItem LFS::getLFSMenuItem(unsigned int lfsId) {
 	mnu.status = lfsItems[lfsId].enabled;
 	std::string str = lfsItems[lfsId].titleId;
 	std::transform(str.begin(), str.end(), str.begin(), ::toupper);
-	std::vector<nswTitle>::iterator itr = std::find_if(nswTitles.begin(), nswTitles.end(), find_id(str));
-	if (itr != nswTitles.end()) {
-		mnu.name = itr->titleName;
+	std::vector<sysTitle>::iterator sysItr = std::find_if(sysTitles.begin(), sysTitles.end(), sysFindId(str));
+	if (sysItr != sysTitles.end()) {
+		mnu.name = sysItr->titleName;
 		mnu.details.push_back(menuDetail());
 		mnu.details[0].prefix = "Title Id: ";
-		mnu.details[0].data = itr->titleId;
+		mnu.details[0].data = sysItr->titleId;
 		mnu.details.push_back(menuDetail());
-		mnu.details[1].prefix = "Title Publisher: ";
-		mnu.details[1].data = itr->titlePublisher;
-		mnu.details.push_back(menuDetail());
-		mnu.details[2].prefix = "Title Region: ";
-		mnu.details[2].data = itr->titleRegion;
-		mnu.details.push_back(menuDetail());
-		mnu.details[3].prefix = "Title Languages: ";
-		mnu.details[3].data = itr->titleLanguages;
+		mnu.details[1].prefix = "Description: ";
+		mnu.details[1].data = sysItr->titleDescription;
 	}
 	else {
-		mnu.name = lfsItems[lfsId].titleId;
-		mnu.details.push_back(menuDetail());
-		mnu.details[0].prefix = "Futher Title Infomation Unknown";
+		std::vector<nswTitle>::iterator nswItr = std::find_if(nswTitles.begin(), nswTitles.end(), nswFindId(str));
+		if (nswItr != nswTitles.end()) {
+			mnu.name = nswItr->titleName;
+			mnu.details.push_back(menuDetail());
+			mnu.details[0].prefix = "Title Id: ";
+			mnu.details[0].data = nswItr->titleId;
+			mnu.details.push_back(menuDetail());
+			mnu.details[1].prefix = "Title Publisher: ";
+			mnu.details[1].data = nswItr->titlePublisher;
+			mnu.details.push_back(menuDetail());
+			mnu.details[2].prefix = "Title Region: ";
+			mnu.details[2].data = nswItr->titleRegion;
+			mnu.details.push_back(menuDetail());
+			mnu.details[3].prefix = "Title Languages: ";
+			mnu.details[3].data = nswItr->titleLanguages;
+		}
+		else {
+			mnu.name = lfsItems[lfsId].titleId;
+			mnu.details.push_back(menuDetail());
+			mnu.details[0].prefix = "Futher Title Infomation Unknown";
+		}
 	}
 	return mnu;
 }
