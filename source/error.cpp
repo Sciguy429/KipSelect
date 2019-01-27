@@ -15,7 +15,7 @@ errorStructure errors[] = {
 	{"Unable To Open File", "Unable to write to file: "}, //Ofstream Error (2)
 	{"Missing String In BCT.ini", "Unable to fine BCT target: "}, //BCT Location Not Found Error (3)
 	{"Failed To Download File", "Unable to download file: "}, //Curl Error (4)
-	{"NSWreleases.xml Corrupted", "Unable to load title data from NSWreleases.xml: "} //Xml Error (5)
+	{"Xml File Corrupted", "Unable to load data from Xml file: "} //Xml Error (5)
 };
 
 void errorLoadAssets() {

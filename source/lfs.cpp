@@ -59,16 +59,16 @@ void LFS::parseLFSDatabase() {
 	xmlNodePtr nswCur;
 	nswDoc = xmlParseFile(nswLocation.c_str());
 	if (nswDoc == NULL) {
-		errorThrow(5, "Document failed to parse");
+		errorThrow(5, "NSWreleases.xml failed to parse");
 		return;
 	}
 	nswCur = xmlDocGetRootElement(nswDoc);
 	if (nswCur == NULL) {
-		errorThrow(5, "Document is empty");
+		errorThrow(5, "NSWreleases.xml is empty");
 		return;
 	}
 	if (xmlStrcmp(nswCur->name, (const xmlChar *)"releases")) {
-		errorThrow(5, "Document of the wrong type, root node != releases");
+		errorThrow(5, "NSWreleases.xml is the wrong type, root node != releases");
 		xmlFreeDoc(nswDoc);
 		return;
 	}
@@ -120,16 +120,16 @@ void LFS::parseSysDatabase() {
 	xmlNodePtr sysCur;
 	sysDoc = xmlParseFile("romfs:/data/SystemTitles.xml");
 	if (sysDoc == NULL) {
-		errorThrow(5, "Document failed to parse");
+		errorThrow(5, "SystemTitles.xml failed to parse");
 		return;
 	}
 	sysCur = xmlDocGetRootElement(sysDoc);
 	if (sysCur == NULL) {
-		errorThrow(5, "Document is empty");
+		errorThrow(5, "SystemTitles.xml is empty");
 		return;
 	}
 	if (xmlStrcmp(sysCur->name, (const xmlChar *)"titles")) {
-		errorThrow(5, "Document of the wrong type, root node != titles");
+		errorThrow(5, "SystemTitles.xml is the wrong type, root node != titles");
 		xmlFreeDoc(sysDoc);
 		return;
 	}
