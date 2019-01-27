@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
 	updateItem.status = false;
 	updateItem.details.push_back(menuDetail());
 	updateItem.details[0].prefix = "Discription:\n";
-	updateItem.details[0].data = "This tool comes bundled with a NSWreleases.xml winthin it's romfs. This option will download a updated one to the SD card. Restart the tool afterwords to use the new file.";
+	updateItem.details[0].data = "This tool comes bundled with a NSWreleases.xml winthin it's romfs. This option will download a updated one to the SD card. Restart the tool afterwards to use the new file.";
 	menu.addMenuItem(3, updateItem);
 	menu.drawMenu();
 	while (appletMainLoop() && !isErrorThrown()) {
