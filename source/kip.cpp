@@ -10,10 +10,10 @@ void KIP::scanKIP() {
 	kipItems.clear();
 	DIR* enabledKipDir;
 	struct dirent* enabledKipEnt;
-	enabledKipDir = opendir("/atmosphere/kips/");
+	enabledKipDir = opendir("sdmc:/atmosphere/kips/");
 	if (enabledKipDir == NULL) {
-		if (mkdir("/atmosphere/kips/", 0700) == -1) {
-			errorThrow(0, "/atmosphere/kips/");
+		if (mkdir("sdmc:/atmosphere/kips/", 0700) == -1) {
+			errorThrow(0, "sdmc:/atmosphere/kips/");
 		}
 	}
 	else {
@@ -26,10 +26,10 @@ void KIP::scanKIP() {
 	}
 	DIR* disabledKipDir;
 	struct dirent* disabledKipEnt;
-	disabledKipDir = opendir("/atmosphere/kips_disabled/");
+	disabledKipDir = opendir("sdmc:/atmosphere/kips_disabled/");
 	if (disabledKipDir == NULL) {
-		if (mkdir("/atmosphere/kips_disabled/", 0700) == -1) {
-			errorThrow(0, "/atmosphere/kips_disabled/");
+		if (mkdir("sdmc:/atmosphere/kips_disabled/", 0700) == -1) {
+			errorThrow(0, "sdmc:/atmosphere/kips_disabled/");
 		}
 	}
 	else {
@@ -45,8 +45,8 @@ void KIP::scanKIP() {
 void KIP::setKIPItemEnabled(unsigned int kipId, bool enabled) {
 	kipItems[kipId].enabled = enabled;
 	std::string name = kipItems[kipId].name;
-	std::string start = "/atmosphere/";
-	std::string end = "/atmosphere/";
+	std::string start = "sdmc:/atmosphere/";
+	std::string end = "sdmc:/atmosphere/";
 	if (enabled) {
 		start.append("kips_disabled/");
 		end.append("kips/");

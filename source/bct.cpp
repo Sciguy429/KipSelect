@@ -5,7 +5,7 @@
 
 void BCT::scanBCT() {
 	bctItems.clear();
-	std::ifstream bctIfStream("/atmosphere/BCT.ini");
+	std::ifstream bctIfStream("sdmc:/atmosphere/BCT.ini");
 	std::string bctString((std::istreambuf_iterator<char>(bctIfStream)), (std::istreambuf_iterator<char>()));
 	bctIfStream.close();
 	for (unsigned int i = 0; i < (sizeof(bctTargets) / sizeof(*bctTargets)); i++) {
@@ -27,19 +27,19 @@ void BCT::scanBCT() {
 
 void BCT::setBCTItemEnabled(unsigned int bctId, bool enabled) {
 	bctItems[bctId].enabled = enabled;
-	std::ifstream bctIfStream("/atmosphere/BCT.ini");
+	std::ifstream bctIfStream("sdmc:/atmosphere/BCT.ini");
 	std::string bctString((std::istreambuf_iterator<char>(bctIfStream)), (std::istreambuf_iterator<char>()));
 	bctIfStream.close();
 	size_t location = bctString.find(bctTargets[bctId].c_str(), 0);
 	if (location != std::string::npos) {
 		bctString[location + bctTargets[bctId].length()] = 48 + enabled;
-		std::ofstream bctOfStream("/atmosphere/BCT.ini");
+		std::ofstream bctOfStream("sdmc:/atmosphere/BCT.ini");
 		if (bctOfStream.is_open()) {
 			bctOfStream << bctString;
 			bctOfStream.close();
 		}
 		else {
-			errorThrow(2, "/atmosphere/BCT.ini");
+			errorThrow(2, "sdmc:/atmosphere/BCT.ini");
 		}
 	}
 	else {
