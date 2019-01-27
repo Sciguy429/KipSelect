@@ -15,7 +15,10 @@ errorStructure errors[] = {
 	{"Unable To Open File", "Unable to write to file: "}, //Ofstream Error (2)
 	{"Missing String In BCT.ini", "Unable to fine BCT target: "}, //BCT Location Not Found Error (3)
 	{"Failed To Download File", "Unable to download file: "}, //Curl Error (4)
-	{"Xml File Corrupted", "Unable to load data from Xml file: "} //Xml Error (5)
+	{"Xml File Corrupted", "Unable to load data from Xml file: "}, //Xml Error (5)
+	{"Unable To Initialize Spl", "Response Code: "}, //Spl Initialize Error (6)
+	{"Failed To Configure Spl", "Response Code: "}, //Spl Configuration Error (7)
+	{"Payload File Not Found", "Could not find payload file: "} //Payload File Not Found Error (8)
 };
 
 void errorLoadAssets() {

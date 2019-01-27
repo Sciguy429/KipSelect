@@ -4,16 +4,18 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include <switch.h>
 
 #include "reboot.h"
+#include "error.h"
 
 #define IRAM_PAYLOAD_MAX_SIZE 0x2F000
 #define IRAM_PAYLOAD_BASE 0x40010000
 
-static alignas(0x1000) u8 g_reboot_payload[IRAM_PAYLOAD_MAX_SIZE];
-static alignas(0x1000) u8 g_ff_page[0x1000];
-static alignas(0x1000) u8 g_work_page[0x1000];
+static u8 g_reboot_payload[IRAM_PAYLOAD_MAX_SIZE];
+static u8 g_ff_page[0x1000];
+static u8 g_work_page[0x1000];
 
 void do_iram_dram_copy(void *buf, uintptr_t iram_addr, size_t size, int option) {
 	memcpy(g_work_page, buf, size);
@@ -50,16 +52,22 @@ static void reboot_to_payload(void) {
 	splSetConfig((SplConfigItem)65001, 2);
 }
 
+char* intToCharArray(int num) {
+	char* buffer = (char *)malloc(16);
+	snprintf(buffer, 16, "%d", num);
+	return buffer;
+}
+
 void rebootToRCM() {
 	Result rc = splInitialize();
 	if (R_FAILED(rc)) {
-		//errorThrow(x, "....");
+		errorThrow(6, intToCharArray(rc));
 		return;
 	}
 	else {
 		rc = splSetConfig((SplConfigItem)65001, 1);
 		if (R_FAILED(rc)) {
-			//errorThrow(x, "....");
+			errorThrow(7, intToCharArray(rc));
 			return;
 		}
 	}
@@ -68,13 +76,13 @@ void rebootToRCM() {
 void rebootToPayload(const char *payload) {
 	Result rc = splInitialize();
 	if (R_FAILED(rc)) {
-		//errorThrow(x, "....");
+		errorThrow(6, intToCharArray(rc));
 		return;
 	}
 	else {
 		FILE *payloadFile = fopen(payload, "rb");
 		if (payloadFile == NULL) {
-			//throwError(x, "....");
+			errorThrow(8, payload);
 			return;
 		}
 		else {

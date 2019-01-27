@@ -6,10 +6,7 @@
 #include "kip.h"
 #include "bct.h"
 #include "lfs.h"
-
-extern "C" {
 #include "reboot.h"
-}
 
 u64 kDown;
 
