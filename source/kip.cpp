@@ -109,7 +109,7 @@ kip1_header_t *KIP::getKipHeader(const char *path) {
 		return NULL;
 	}
 	if (raw_header.magic != MAGIC_KIP1) {
-		printf("Kip file %s magic dose not match expected magic (%lX != %lX)", path, raw_header.magic, MAGIC_KIP1);
+		printf("Kip file %s magic dose not match expected magic (%X != %X)", path, raw_header.magic, MAGIC_KIP1);
 		return NULL;
 	}
 	uint64_t size = 0x100 + raw_header.section_headers[0].compressed_size + raw_header.section_headers[1].compressed_size + raw_header.section_headers[2].compressed_size;
