@@ -32,7 +32,7 @@ include $(DEVKITPRO)/libnx/switch_rules
 #---------------------------------------------------------------------------------
 VERSION_MAJOR := 3
 VERSION_MINOR := 0
-VERSION_MICRO := 6
+VERSION_MICRO := 7
 
 APP_TITLE	:=	Kip Select
 APP_AUTHOR	:=	Sciguy429
