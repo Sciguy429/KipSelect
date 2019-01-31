@@ -15,7 +15,6 @@ int main(int argc, char **argv) {
 	KIP kip;
 	BCT bct;
 	LFS lfs;
-	pminfoInitialize();
 	socketInitializeDefault();
 	nxlinkStdio();
 	romfsInit();
@@ -134,6 +133,5 @@ int main(int argc, char **argv) {
 	gfxCleanUp();
 	romfsExit();
 	socketExit();
-	pminfoExit();
 	return 0;
 }

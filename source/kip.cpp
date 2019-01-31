@@ -6,6 +6,7 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <algorithm>
 
 #include "kip.h"
 #include "error.h"
@@ -122,5 +123,6 @@ kip1_header_t *KIP::getKipHeader(const char *path) {
 		//throw error
 		return NULL;
 	}
+	fclose(file);
 	return header;
 }
