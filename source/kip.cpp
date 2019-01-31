@@ -87,14 +87,16 @@ menuItem KIP::getKIPMenuItem(unsigned int kipId) {
 	menuItem mnu;
 	mnu.name = kipItems[kipId].name;
 	mnu.status = kipItems[kipId].enabled;
-	mnu.details.push_back(menuDetail());
-	mnu.details[0].prefix = "Name: ";
-	mnu.details[0].data = kipItems[kipId].header->name;
-	mnu.details.push_back(menuDetail());
-	mnu.details[1].prefix = "Title Id: ";
-	char buf[18];
-	sprintf(buf, "%lX", kipItems[kipId].header->title_id);
-	mnu.details[1].data = buf;
+	if (kipItems[kipId].header->name != NULL) {
+		mnu.details.push_back(menuDetail());
+		mnu.details[0].prefix = "Name: ";
+		mnu.details[0].data = kipItems[kipId].header->name;
+		mnu.details.push_back(menuDetail());
+		mnu.details[1].prefix = "Title Id: ";
+		char buf[18];
+		sprintf(buf, "%lX", kipItems[kipId].header->title_id);
+		mnu.details[1].data = buf;
+	}
 	return mnu;
 }
 
@@ -103,24 +105,22 @@ kip1_header_t *KIP::getKipHeader(const char *path) {
 	kip1_header_t raw_header;
 	fseeko(file, 0, SEEK_SET);
 	if (fread(&raw_header, 1, sizeof(raw_header), file) != sizeof(raw_header)) {
-		//throw some kind of error
+		printf("Failed to read kip file %s", path);
 		return NULL;
 	}
 	if (raw_header.magic != MAGIC_KIP1) {
-		//throw another kind of error
-		//may need to switch between two types here based on the 'magic'
-		//though I have yet to find a 'ini' kip so i will proboly ignore them for now
+		printf("Kip file %s magic dose not match expected magic (%lX != %lX)", path, raw_header.magic, MAGIC_KIP1);
 		return NULL;
 	}
 	uint64_t size = 0x100 + raw_header.section_headers[0].compressed_size + raw_header.section_headers[1].compressed_size + raw_header.section_headers[2].compressed_size;
 	kip1_header_t *header = (kip1_header_t*)malloc(size);
 	if (header == NULL) {
-		//throw a error
+		printf("Unabled to allocate required memory to header at address %p", (void*)header);
 		return NULL;
 	}
 	fseeko(file, 0, SEEK_SET);
 	if (fread(header, 1, size, file) != size) {
-		//throw error
+		printf("Failed to read kip file %s", path);
 		return NULL;
 	}
 	fclose(file);
