@@ -1,3 +1,7 @@
+//Credit to hactool for the basic kip extraction code
+//(https://github.com/SciresM/hactool/blob/master/kip.c)
+
+#include <sstream>
 #include <fstream>
 #include <dirent.h>
 #include <sys/stat.h>
@@ -5,6 +9,8 @@
 
 #include "kip.h"
 #include "error.h"
+
+#define MAGIC_KIP1 0x3150494B
 
 void KIP::scanKIP() {
 	kipItems.clear();
@@ -22,6 +28,9 @@ void KIP::scanKIP() {
 			kipItems.push_back(kipItem());
 			kipItems[pos].name = enabledKipEnt->d_name;
 			kipItems[pos].enabled = true;
+			std::ostringstream ss;
+			ss << "sdmc:/atmosphere/kips/" << enabledKipEnt->d_name;
+			kipItems[pos].header = getKipHeader(ss.str().c_str());
 		}
 	}
 	DIR* disabledKipDir;
@@ -38,6 +47,9 @@ void KIP::scanKIP() {
 			kipItems.push_back(kipItem());
 			kipItems[pos].name = disabledKipEnt->d_name;
 			kipItems[pos].enabled = false;
+			std::ostringstream ss;
+			ss << "sdmc:/atmosphere/kips_disabled/" << disabledKipEnt->d_name;
+			kipItems[pos].header = getKipHeader(ss.str().c_str());
 		}
 	}
 }
@@ -74,18 +86,41 @@ menuItem KIP::getKIPMenuItem(unsigned int kipId) {
 	menuItem mnu;
 	mnu.name = kipItems[kipId].name;
 	mnu.status = kipItems[kipId].enabled;
-	//mnu.details.push_back(menuDetail());
-	//mnu.details[0].prefix = "Md5: ";
-	//mnu.details[0].data = kipItems[kipId].md5;
-	//mnu.details.push_back(menuDetail());
-	//mnu.details[1].prefix = "Version: ";
-	//mnu.details[1].data = kipItems[kipId].version;
-	//mnu.details.push_back(menuDetail());
-	//mnu.details[2].prefix = "Size: ";
-	//mnu.details[2].data = kipItems[kipId].size;
-	//mnu.details[2].suffix = "KB";
-	//mnu.details.push_back(menuDetail());
-	//mnu.details[3].prefix = "Discription:\n";
-	//mnu.details[3].data = "This is a test of a discription";
+	mnu.details.push_back(menuDetail());
+	mnu.details[0].prefix = "Name: ";
+	mnu.details[0].data = kipItems[kipId].header->name;
+	mnu.details.push_back(menuDetail());
+	mnu.details[1].prefix = "Title Id: ";
+	char buf[18];
+	sprintf(buf, "%lX", kipItems[kipId].header->title_id);
+	mnu.details[1].data = buf;
 	return mnu;
+}
+
+kip1_header_t *KIP::getKipHeader(const char *path) {
+	FILE *file = fopen(path, "r");
+	kip1_header_t raw_header;
+	fseeko(file, 0, SEEK_SET);
+	if (fread(&raw_header, 1, sizeof(raw_header), file) != sizeof(raw_header)) {
+		//throw some kind of error
+		return NULL;
+	}
+	if (raw_header.magic != MAGIC_KIP1) {
+		//throw another kind of error
+		//may need to switch between two types here based on the 'magic'
+		//though I have yet to find a 'ini' kip so i will proboly ignore them for now
+		return NULL;
+	}
+	uint64_t size = 0x100 + raw_header.section_headers[0].compressed_size + raw_header.section_headers[1].compressed_size + raw_header.section_headers[2].compressed_size;
+	kip1_header_t *header = (kip1_header_t*)malloc(size);
+	if (header == NULL) {
+		//throw a error
+		return NULL;
+	}
+	fseeko(file, 0, SEEK_SET);
+	if (fread(header, 1, size, file) != size) {
+		//throw error
+		return NULL;
+	}
+	return header;
 }
