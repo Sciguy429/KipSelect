@@ -87,7 +87,11 @@ menuItem KIP::getKIPMenuItem(unsigned int kipId) {
 	menuItem mnu;
 	mnu.name = kipItems[kipId].name;
 	mnu.status = kipItems[kipId].enabled;
-	if (kipItems[kipId].header != NULL) {
+	if (kipItems[kipId].header == NULL) {
+		mnu.details.push_back(menuDetail());
+		mnu.details[0].prefix = "Unknown Kip Format";
+	}
+	else {
 		mnu.details.push_back(menuDetail());
 		mnu.details[0].prefix = "Name: ";
 		mnu.details[0].data = kipItems[kipId].header->name;
