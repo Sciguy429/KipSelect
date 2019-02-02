@@ -8,8 +8,6 @@
 #include "lfs.h"
 #include "reboot.h"
 
-u64 kDown;
-
 int main(int argc, char **argv) {
 	MENU menu;
 	KIP kip;
@@ -65,7 +63,7 @@ int main(int argc, char **argv) {
 	menu.drawMenu();
 	while (appletMainLoop() && !isErrorThrown()) {
 		hidScanInput();
-		kDown = hidKeysDown(CONTROLLER_P1_AUTO);
+		u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
 		if (kDown & KEY_PLUS) {
 			break;
 		}
