@@ -10,7 +10,7 @@ This is a WIP toolkit for the switch cfw Atmopshere, it started out as a simple 
 * Managing LayeredFS Titles
     * This homebrew can enable or disable layeredFS titles. Due to the way Atmosphere works Enableing or disabling a layeredFS title only requires that title to be restarted to take effect. Unless you are modding a system title, for themes for instance, a reboot should not be needed. This tool will attempt to retrive as much information about a title as it can searching both NSWrelease.xml as well as a local database of system title imformation.
 * Trigger A Console Restart
-    * You can also trigger a console restart from within this tool. The console can be restarted dirrectly into RCM mode or with a newly added feature in Atmopshere 8.0.3, it can be dirrectly rebooted back into Atmosphere without the need for a payload dongle.
+    * You can also trigger a console restart from within this tool. The console can be restarted dirrectly into RCM mode or with a newly added feature in Atmopshere 0.8.3, it can be dirrectly rebooted back into Atmosphere without the need for a payload dongle.
 
 ## Installing
 This tool is currently avialable on the switch appstore, however if you would like to you can still download it from GitHub or even build it yourself. The nro has no special requiremnts about where it gets placed, I would still recommend your put it in /switch/ though.

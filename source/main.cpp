@@ -40,21 +40,21 @@ int main(int argc, char **argv) {
 	rebootAtmosphereItem.status = false;
 	rebootAtmosphereItem.details.push_back(menuDetail());
 	rebootAtmosphereItem.details[0].prefix = "Discription:\n";
-	rebootAtmosphereItem.details[0].data = "Reboot the console dirrectly back into Atmosphere, requires Atmosphere 8.0.3+. After selecting this option the console will crash, press volume up after the crash screen shows to finish the restart. Do not use this with exFAT, it may cause corruption!";
+	rebootAtmosphereItem.details[0].data = "Reboot the console dirrectly back into Atmosphere, requires Atmosphere 0.8.3+. After selecting this option the console will crash, press volume up after the crash screen shows to finish the restart. Do not use this with exFAT, it may cause corruption!";
 	menu.addMenuItem(3, rebootAtmosphereItem);
 	menuItem rebootRCMItem;
 	rebootRCMItem.name = "Reboot To RCM";
 	rebootRCMItem.status = false;
 	rebootRCMItem.details.push_back(menuDetail());
 	rebootRCMItem.details[0].prefix = "Discription:\n";
-	rebootRCMItem.details[0].data = "Reboot the console dirrectly into RCM mode, requires Atmosphere 8.0.1+. Do not use this with exFAT, it may cause corruption!";
+	rebootRCMItem.details[0].data = "Reboot the console dirrectly into RCM mode, requires Atmosphere 0.8.1+. Do not use this with exFAT, it may cause corruption!";
 	menu.addMenuItem(3, rebootRCMItem);
 	menuItem updateItem;
 	updateItem.name = "Update NSWreleases.xml";
 	updateItem.status = false;
 	updateItem.details.push_back(menuDetail());
 	updateItem.details[0].prefix = "Discription:\n";
-	updateItem.details[0].data = "This tool comes bundled with a NSWreleases.xml winthin it's romfs. This option will download a updated one to the SD card. Restart the tool afterwards to use the new file.";
+	updateItem.details[0].data = "This tool comes bundled with a NSWreleases.xml winthin it's romfs. This option will download a updated one to the root of the SD card. Restart the tool afterwards to use the new file.";
 	menu.addMenuItem(3, updateItem);
 	menu.drawMenu();
 	while (appletMainLoop() && !isErrorThrown()) {
