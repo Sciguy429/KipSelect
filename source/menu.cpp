@@ -214,7 +214,7 @@ void MENU::drawMenu() {
 		for (unsigned int i = 0; i < (*mnu)[menuSelected].details.size(); i++) {
 			unsigned int curY = i * 18 + 202;
 			std::ostringstream ss;
-			ss << (*mnu)[menuSelected].details[i].prefix << (*mnu)[menuSelected].details[i].data << (*mnu)[menuSelected].details[i].suffix;
+			ss << '^' << (*mnu)[menuSelected].details[i].prefix << '^' << (*mnu)[menuSelected].details[i].data << (*mnu)[menuSelected].details[i].suffix;
 			gfxDrawTextWrap(frameBufferTexture, ss.str().c_str(), mainFont, 905, curY, 12, RGBA8(255, 255, 255, 0), 370);
 		}
 		if ((*mnu)[menuSelected].status) {
