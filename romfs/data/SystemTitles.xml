@@ -375,6 +375,6 @@
   <title>
     <titleid>0100000000001015</titleid>
     <name>MaintenanceMenu</name>
-    <description>	Initial applet displayed when booting into Recovery_Mode. This title is launched by NS when a state flag is val1 indicating that this title should be launched instead of the above "SystemAppletMenu" title.</description>
+    <description>Initial applet displayed when booting into Recovery_Mode. This title is launched by NS when a state flag is val1 indicating that this title should be launched instead of the above "SystemAppletMenu" title.</description>
   </title>
 </titles>
