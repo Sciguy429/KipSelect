@@ -12,14 +12,6 @@ This is a WIP toolkit for the switch cfw Atmopshere, it started out as a simple 
 * Trigger A Console Restart
     * You can also trigger a console restart from within this tool. The console can be restarted dirrectly into RCM mode or with a newly added feature in Atmopshere 8.0.3, it can be dirrectly rebooted back into Atmosphere without the need for a payload dongle.
 
-## Planned Features
-There are quite a few things I would still like to add to this tool, below is a short list of the ones that are planned.
-* Get Further KIP Information
-    * I would like the tool to display more about a instaled KIP than just its name. The current plan is to use file md5's to help detect what the KIP is.
-* ~~Display Titlenames For LFS Items~~
-    * ~~This can be done useing NSWReleases, some basic code for it is already present in the codebase.~~
-*  Add A Proper Options Menu
-
 ## Installing
 This tool is currently avialable on the switch appstore, however if you would like to you can still download it from GitHub or even build it yourself. The nro has no special requiremnts about where it gets placed, I would still recommend your put it in /switch/ though.
 
