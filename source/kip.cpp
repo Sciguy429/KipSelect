@@ -109,22 +109,22 @@ kip1_header_t *KIP::getKipHeader(const char *path) {
 	kip1_header_t raw_header;
 	fseeko(file, 0, SEEK_SET);
 	if (fread(&raw_header, 1, sizeof(raw_header), file) != sizeof(raw_header)) {
-		printf("Failed to read kip file %s", path);
+		printf("Failed to read kip file %s\n", path);
 		return NULL;
 	}
 	if (raw_header.magic != MAGIC_KIP1) {
-		printf("Kip file %s magic dose not match expected magic (%X != %X)", path, raw_header.magic, MAGIC_KIP1);
+		printf("Kip file %s magic dose not match expected magic (%X != %X)\n", path, raw_header.magic, MAGIC_KIP1);
 		return NULL;
 	}
 	uint64_t size = 0x100 + raw_header.section_headers[0].compressed_size + raw_header.section_headers[1].compressed_size + raw_header.section_headers[2].compressed_size;
 	kip1_header_t *header = (kip1_header_t*)malloc(size);
 	if (header == NULL) {
-		printf("Unabled to allocate required memory to header at address %p", (void*)header);
+		printf("Unabled to allocate required memory to header at address %p\n", (void*)header);
 		return NULL;
 	}
 	fseeko(file, 0, SEEK_SET);
 	if (fread(header, 1, size, file) != size) {
-		printf("Failed to read kip file %s", path);
+		printf("Failed to read kip file %s\n", path);
 		return NULL;
 	}
 	fclose(file);
