@@ -64,7 +64,7 @@ menuItem BCT::getBCTMenuItem(unsigned int bctId) {
 	mnu.details[0].data = bctItems[bctId].target;
 	mnu.details[0].suffix = "'";
 	mnu.details.push_back(menuDetail());
-	mnu.details[1].prefix = "Discription:\n";
+	mnu.details[1].prefix = "Discription: ";
 	mnu.details[1].data = bctDiscriptions[bctId];
 	return mnu;
 }
