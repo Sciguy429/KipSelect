@@ -210,13 +210,11 @@ void MENU::drawMenu() {
 		}
 		//~~
 		//DRAW DETAILS WINDOW
-		std::ostringstream name;
-		name << '^' << (*mnu)[menuSelected].name.c_str();
-		gfxDrawText(frameBufferTexture, name.str().c_str(), mainFont, 905, 178, 18, RGBA8(255, 255, 255, 0));
+		gfxDrawText(frameBufferTexture, (*mnu)[menuSelected].name.c_str(), mainFont, 905, 178, 18, RGBA8(255, 255, 255, 0));
 		for (unsigned int i = 0; i < (*mnu)[menuSelected].details.size(); i++) {
 			unsigned int curY = i * 18 + 202;
 			std::ostringstream detail;
-			detail << '^' << (*mnu)[menuSelected].details[i].prefix << '^' << (*mnu)[menuSelected].details[i].data << (*mnu)[menuSelected].details[i].suffix;
+			detail << (*mnu)[menuSelected].details[i].prefix << (*mnu)[menuSelected].details[i].data << (*mnu)[menuSelected].details[i].suffix;
 			gfxDrawTextWrap(frameBufferTexture, detail.str().c_str(), mainFont, 905, curY, 12, RGBA8(255, 255, 255, 0), 370);
 		}
 		if ((*mnu)[menuSelected].status) {

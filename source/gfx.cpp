@@ -173,7 +173,6 @@ void gfxDrawText(texture *tex, const char *text, const font *fnt, int x, int y, 
 	ssize_t unitCount = 0;
 	resizeFont(fnt, size);
 	size_t length = strlen(text);
-	bool bold = false;
 	for (unsigned int i = 0; i < length;) {
 		unitCount = decode_utf8(&tmpChar, (const uint8_t*)&text[i]);
 		if (unitCount <= 0) {
@@ -185,17 +184,11 @@ void gfxDrawText(texture *tex, const char *text, const font *fnt, int x, int y, 
 			curX = x;
 			y += size + 8;
 			continue;
-		case '^': //Bold Toggle
-			bold = !bold;
-			continue;
 		}
 		FT_GlyphSlot slot = loadGlyph(tmpChar, fnt, FT_LOAD_RENDER);
 		if (slot != NULL) {
 			int drawY = y + (size - slot->bitmap_top);
 			drawGlyph(tex, &slot->bitmap, curX + slot->bitmap_left, drawY, clr);
-			if (bold) {
-				drawGlyph(tex, &slot->bitmap, curX + slot->bitmap_left + 1, drawY + 1, clr);
-			}
 			curX += slot->advance.x >> 6;
 		}
 	}
@@ -206,7 +199,6 @@ void gfxDrawTextWrap(texture *tex, const char *text, const font *fnt, int x, int
 	size_t nextBreak = 0;
 	size_t textLength = strlen(text);
 	int curX = x;
-	bool bold = false;
 	for (unsigned int i = 0; i < textLength;) {
 		nextBreak = strcspn(&text[i], " /");
 		memset(wordBuf, 0, 128);
@@ -229,17 +221,11 @@ void gfxDrawTextWrap(texture *tex, const char *text, const font *fnt, int x, int
 				curX = x;
 				y += size + 8;
 				continue;
-			case '^': //Bold Toggle
-				bold = !bold;
-				continue;
 			}
 			FT_GlyphSlot slot = loadGlyph(tmpChar, fnt, FT_LOAD_RENDER);
 			if (slot != NULL) {
 				int drawY = y + (size - slot->bitmap_top);
 				drawGlyph(tex, &slot->bitmap, curX + slot->bitmap_left, drawY, clr);
-				if (bold) {
-					drawGlyph(tex, &slot->bitmap, curX + slot->bitmap_left + 1, drawY + 1, clr);
-				}
 				curX += slot->advance.x >> 6;
 			}
 		}
