@@ -17,8 +17,8 @@ errorStructure errors[] = {
 	{"Failed To Download File", "Unable to download file: "}, //CURL_GENERIC_ERROR
 	{"Http Reponse Error", "Response code: "}, //CURL_HTTP_RESPONSE_ERROR
 	{"Xml File Corrupted", "Unable to load data from Xml file: "}, //XML_ERROR
-	{"Unable To Initialize Spl", "Response Code: "}, //SPL_INITILIZE_ERROR
-	{"Failed To Configure Spl", "Response Code: "}, //SPL_CONFIGURATION_ERROR
+	{"Unable To Initialize Spl", "Response code: "}, //SPL_INITILIZE_ERROR
+	{"Failed To Configure Spl", "Response code: "}, //SPL_CONFIGURATION_ERROR
 	{"Payload File Not Found", "Could not find payload file: "} //PAYLOAD_NOT_FOUND_ERROR
 };
 
