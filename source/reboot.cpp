@@ -61,13 +61,13 @@ char* intToCharArray(int num) {
 void rebootToRCM() {
 	Result rc = splInitialize();
 	if (R_FAILED(rc)) {
-		errorThrow(6, intToCharArray(rc));
+		errorThrow(SPL_INITILIZE_ERROR, intToCharArray(rc));
 		return;
 	}
 	else {
 		rc = splSetConfig((SplConfigItem)65001, 1);
 		if (R_FAILED(rc)) {
-			errorThrow(7, intToCharArray(rc));
+			errorThrow(SPL_CONFIGURATION_ERROR, intToCharArray(rc));
 			return;
 		}
 	}
@@ -76,13 +76,13 @@ void rebootToRCM() {
 void rebootToPayload(const char *payload) {
 	Result rc = splInitialize();
 	if (R_FAILED(rc)) {
-		errorThrow(6, intToCharArray(rc));
+		errorThrow(SPL_INITILIZE_ERROR, intToCharArray(rc));
 		return;
 	}
 	else {
 		FILE *payloadFile = fopen(payload, "rb");
 		if (payloadFile == NULL) {
-			errorThrow(8, payload);
+			errorThrow(PAYLOAD_NOT_FOUND_ERROR, payload);
 			return;
 		}
 		else {

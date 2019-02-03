@@ -38,7 +38,7 @@ void LFS::updateLFSDatabase() {
 	if (fileSize("sdmc:/NEW.NSWreleases.xml") > 0) {
 		remove("sdmc:/NSWreleases.xml");
 		if (rename("sdmc:/NEW.NSWreleases.xml", "sdmc:/NSWreleases.xml") != 0) {
-			errorThrow(1, "sdmc:/NEW.NSWreleases.xml");
+			errorThrow(RENAME_ERROR, "sdmc:/NEW.NSWreleases.xml");
 		}
 	}
 	else {
@@ -59,16 +59,16 @@ void LFS::parseLFSDatabase() {
 	xmlNodePtr nswCur;
 	nswDoc = xmlParseFile(nswLocation.c_str());
 	if (nswDoc == NULL) {
-		errorThrow(5, "NSWreleases.xml failed to parse");
+		errorThrow(XML_ERROR, "NSWreleases.xml failed to parse");
 		return;
 	}
 	nswCur = xmlDocGetRootElement(nswDoc);
 	if (nswCur == NULL) {
-		errorThrow(5, "NSWreleases.xml is empty");
+		errorThrow(XML_ERROR, "NSWreleases.xml is empty");
 		return;
 	}
 	if (xmlStrcmp(nswCur->name, (const xmlChar *)"releases")) {
-		errorThrow(5, "NSWreleases.xml is the wrong type, root node != releases");
+		errorThrow(XML_ERROR, "NSWreleases.xml is the wrong type, root node != releases");
 		xmlFreeDoc(nswDoc);
 		return;
 	}
@@ -120,16 +120,16 @@ void LFS::parseSysDatabase() {
 	xmlNodePtr sysCur;
 	sysDoc = xmlParseFile("romfs:/data/SystemTitles.xml");
 	if (sysDoc == NULL) {
-		errorThrow(5, "SystemTitles.xml failed to parse");
+		errorThrow(XML_ERROR, "SystemTitles.xml failed to parse");
 		return;
 	}
 	sysCur = xmlDocGetRootElement(sysDoc);
 	if (sysCur == NULL) {
-		errorThrow(5, "SystemTitles.xml is empty");
+		errorThrow(XML_ERROR, "SystemTitles.xml is empty");
 		return;
 	}
 	if (xmlStrcmp(sysCur->name, (const xmlChar *)"titles")) {
-		errorThrow(5, "SystemTitles.xml is the wrong type, root node != titles");
+		errorThrow(XML_ERROR, "SystemTitles.xml is the wrong type, root node != titles");
 		xmlFreeDoc(sysDoc);
 		return;
 	}
@@ -173,7 +173,7 @@ void LFS::scanLFS() {
 	lfsDir = opendir("sdmc:/atmosphere/titles/");
 	if (lfsDir == NULL) {
 		if (mkdir("sdmc:/atmosphere/titles/", 0700) == -1) {
-			errorThrow(0, "sdmc:/atmosphere/titles/");
+			errorThrow(MKDIR_ERROR, "sdmc:/atmosphere/titles/");
 		}
 	}
 	else {
@@ -197,7 +197,7 @@ void LFS::scanLFS() {
 			else {
 				lfsItems[pos].enabled = true;
 				if (mkdir(flagsPath.str().c_str(), 0700) == -1) {
-					errorThrow(0, flagsPath.str().c_str());
+					errorThrow(MKDIR_ERROR, flagsPath.str().c_str());
 				}
 			}
 		}
@@ -212,7 +212,7 @@ void LFS::setLFSItemEnabled(unsigned int lfsId, bool enabled) {
 	stat(flagsPath.str().c_str(), &info);
 	if (!(info.st_mode & S_IFDIR)) {
 		if (mkdir(flagsPath.str().c_str(), 0700) == -1) {
-			errorThrow(0, flagsPath.str().c_str());
+			errorThrow(MKDIR_ERROR, flagsPath.str().c_str());
 		}
 	}
 	flagsPath << "/fsmitm_disable.flag";
@@ -225,7 +225,7 @@ void LFS::setLFSItemEnabled(unsigned int lfsId, bool enabled) {
 			flag.close();
 		}
 		else {
-			errorThrow(2, flagsPath.str().c_str());
+			errorThrow(OFSTREAM_ERROR, flagsPath.str().c_str());
 		}
 	}
 }
