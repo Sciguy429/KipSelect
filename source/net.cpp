@@ -25,14 +25,12 @@ void netDownloadFile(const char *url, const char *path) {
 		curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &httpCode);
 		if (res != CURLE_OK) {
 			errorThrow(CURL_GENERIC_ERROR, path);
-			remove(path);
 			return;
 		}
 		if (httpCode != 200) {
 			std::ostringstream ss;
 			ss << httpCode;
 			errorThrow(CURL_HTTP_RESPONSE_ERROR, ss.str().c_str());
-			remove(path);
 			return;
 		}
 		curl_easy_cleanup(curl);
