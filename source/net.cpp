@@ -1,3 +1,4 @@
+#include <sstream>
 #include <curl/curl.h>
 
 #include "net.h"
@@ -28,7 +29,9 @@ void netDownloadFile(const char *url, const char *path) {
 			return;
 		}
 		if (httpCode != 200) {
-			//errorThrow(x, httpCode);
+			std::ostringstream ss;
+			ss << httpCode;
+			errorThrow(CURL_HTTP_RESPONSE_ERROR, ss.str().c_str());
 			remove(path);
 			return;
 		}
