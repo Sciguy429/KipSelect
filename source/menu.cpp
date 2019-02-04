@@ -210,7 +210,14 @@ void MENU::drawMenu() {
 		}
 		//~~
 		//DRAW DETAILS WINDOW
-		gfxDrawTextCenter(frameBufferTexture, (*mnu)[menuSelected].name.c_str(), mainFont, 1090, 178, 22, RGBA8(255, 255, 255, 0));
+		std::ostringstream name;
+		if ((*mnu)[menuSelected].name.length() > 30) {
+			name << (*mnu)[menuSelected].name.substr(0, 27) << "...";
+		}
+		else {
+			name << (*mnu)[menuSelected].name;
+		}
+		gfxDrawTextCenter(frameBufferTexture, name.str().c_str(), mainFont, 1090, 178, 22, RGBA8(255, 255, 255, 0));
 		for (unsigned int i = 0; i < (*mnu)[menuSelected].details.size(); i++) {
 			unsigned int curY = i * 18 + 216;
 			std::ostringstream detail;
