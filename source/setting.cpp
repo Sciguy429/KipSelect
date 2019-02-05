@@ -1,5 +1,4 @@
-#include "settings.h"
-#include "..\include\setting.h"
+#include "setting.h"
 
 void SETTING::loadSetting(const char * path) {
 	//stub
