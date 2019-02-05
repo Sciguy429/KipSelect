@@ -1,3 +1,4 @@
+#include <switch.h>
 #include <sstream>
 
 #include "menu.h"
