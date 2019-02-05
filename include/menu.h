@@ -33,7 +33,7 @@ public:
 private:
 	unsigned int tabSelected;
 	unsigned int menuSelected;
-	std::vector<menuItem> kips;
+	std::vector<menuItem> kip;
 	std::vector<menuItem> bct;
 	std::vector<menuItem> layeredFS;
 	std::vector<menuItem> options;

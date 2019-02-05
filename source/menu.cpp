@@ -77,7 +77,7 @@ unsigned int MENU::getMenuSelected() {
 unsigned int MENU::getMenuSize() {
 	switch (tabSelected) {
 	case 0:
-		return kips.size();
+		return kip.size();
 	case 1:
 		return bct.size();
 	case 2:
@@ -93,7 +93,7 @@ void MENU::toggleSelected() {
 	std::vector<menuItem> *mnu = new std::vector<menuItem>;
 	switch (tabSelected) {
 	case 0:
-		mnu = &kips;
+		mnu = &kip;
 		break;
 	case 1:
 		mnu = &bct;
@@ -116,7 +116,7 @@ void MENU::addMenuItem(unsigned int tab, menuItem itm) {
 	std::vector<menuItem> *mnu = new std::vector<menuItem>;
 	switch (tab) {
 	case 0:
-		mnu = &kips;
+		mnu = &kip;
 		break;
 	case 1:
 		mnu = &bct;
@@ -136,7 +136,7 @@ void MENU::addMenuItem(unsigned int tab, menuItem itm) {
 void MENU::resetMenu() {
 	tabSelected = 0;
 	menuSelected = 0;
-	kips.clear();
+	kip.clear();
 	bct.clear();
 	layeredFS.clear();
 	options.clear();
@@ -151,7 +151,7 @@ void MENU::drawMenu() {
 	std::vector<menuItem> *mnu = new std::vector<menuItem>;
 	switch (tabSelected) {
 	case 0:
-		mnu = &kips;
+		mnu = &kip;
 		break;
 	case 1:
 		mnu = &bct;
