@@ -20,7 +20,7 @@ errorStructure errors[] = {
 	{"Unable To Initialize Spl", "Response code: "}, //SPL_INITILIZE_ERROR
 	{"Failed To Configure Spl", "Response code: "}, //SPL_CONFIGURATION_ERROR
 	{"Payload File Not Found", "Could not find payload file: "}, //PAYLOAD_NOT_FOUND_ERROR
-	{"Unknown String In INI File", "Offending string: "} //INI_PARSE_FAIL
+	{"Unknown String In INI File", "Offending string: "} //INI_PARSE_ERROR
 };
 
 void errorLoadAssets() {

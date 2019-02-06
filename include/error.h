@@ -10,7 +10,7 @@
 #define SPL_INITILIZE_ERROR 7
 #define SPL_CONFIGURATION_ERROR 8
 #define PAYLOAD_NOT_FOUND_ERROR 9
-#define INI_PARSE_FAIL 10
+#define INI_PARSE_ERROR 10
 
 typedef struct {
 	const char *header;

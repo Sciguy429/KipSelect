@@ -59,12 +59,12 @@ void INI::loadINI(const char *path) {
 					setValue(key.c_str(), value.c_str());
 				}
 				else {
-					errorThrow(INI_PARSE_FAIL, line.c_str());
+					errorThrow(INI_PARSE_ERROR, line.c_str());
 					return;
 				}
 			}
 			else {
-				errorThrow(INI_PARSE_FAIL, line.c_str());
+				errorThrow(INI_PARSE_ERROR, line.c_str());
 				return;
 			}
 		}
