@@ -19,7 +19,8 @@ errorStructure errors[] = {
 	{"Xml File Corrupted", "Unable to load data from Xml file: "}, //XML_ERROR
 	{"Unable To Initialize Spl", "Response code: "}, //SPL_INITILIZE_ERROR
 	{"Failed To Configure Spl", "Response code: "}, //SPL_CONFIGURATION_ERROR
-	{"Payload File Not Found", "Could not find payload file: "} //PAYLOAD_NOT_FOUND_ERROR
+	{"Payload File Not Found", "Could not find payload file: "}, //PAYLOAD_NOT_FOUND_ERROR
+	{"Unknown String In Settings.ini", "Offending string: "} //SETTING_INI_PARSE_FAIL
 };
 
 void errorLoadAssets() {
