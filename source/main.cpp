@@ -4,14 +4,14 @@
 #include "error.h"
 #include "menu.h"
 #include "kip.h"
-#include "bct.h"
+//#include "bct.h"
 #include "lfs.h"
 #include "reboot.h"
 
 int main(int argc, char **argv) {
 	MENU menu;
 	KIP kip;
-	BCT bct;
+	//BCT bct;
 	LFS lfs;
 	socketInitializeDefault();
 	nxlinkStdio();
@@ -22,14 +22,16 @@ int main(int argc, char **argv) {
 	lfs.parseLFSDatabase();
 	lfs.parseSysDatabase();
 	kip.scanKIP();
-	bct.scanBCT();
+	//bct.scanBCT();
 	lfs.scanLFS();
 	for (unsigned int i = 0; i < kip.getKIPItemCount(); i++) {
 		menu.addMenuItem(0, kip.getKIPMenuItem(i));
 	}
+	/*
 	for (unsigned int i = 0; i < bct.getBCTItemCount(); i++) {
 		menu.addMenuItem(1, bct.getBCTMenuItem(i));
 	}
+	*/
 	for (unsigned int i = 0; i < lfs.getLFSCount(); i++) {
 		menu.addMenuItem(2, lfs.getLFSMenuItem(i));
 	}
@@ -99,9 +101,11 @@ int main(int argc, char **argv) {
 				menu.drawMenu();
 				break;
 			case 1:
+				/*
 				bct.setBCTItemEnabled(menu.getMenuSelected(), !bct.getBCTItemEnabled(menu.getMenuSelected()));
 				menu.toggleSelected();
 				menu.drawMenu();
+				*/
 				break;
 			case 2:
 				lfs.setLFSItemEnabled(menu.getMenuSelected(), !lfs.getLFSItemEnabled(menu.getMenuSelected()));
