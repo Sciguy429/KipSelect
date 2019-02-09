@@ -4,7 +4,7 @@
 
 class INI {
 public:
-	void setValue(const char *targetKey, const char *value);
+	bool setValue(const char *targetKey, const char *value);
 	std::string getValue(const char *targetKey);
 	INI(const char *path);
 private:

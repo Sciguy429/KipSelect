@@ -4,7 +4,7 @@
 #include "ini.h"
 #include "error.h"
 
-void INI::setValue(const char *targetKey, const char *value) {
+bool INI::setValue(const char *targetKey, const char *value) {
 	std::ifstream iniFileIn(iniPath);
 	std::ostringstream outputString;
 	int pos = getLocation(targetKey);
@@ -32,7 +32,19 @@ void INI::setValue(const char *targetKey, const char *value) {
 						}
 					}
 				}
+				else {
+					iniFileIn.close();
+					return false;
+				}
 			}
+			else {
+				iniFileIn.close();
+				return false;
+			}
+		}
+		else {
+			iniFileIn.close();
+			return false;
 		}
 		while (std::getline(iniFileIn, line, '\n')) {
 			outputString << line << '\n';
@@ -40,14 +52,17 @@ void INI::setValue(const char *targetKey, const char *value) {
 		iniFileIn.close();
 		std::ofstream iniFileOut(iniPath);
 		if (iniFileOut.is_open()) {
-			iniFileOut << outputString;
+			iniFileOut << outputString.str();
 			iniFileOut.close();
+			return true;
 		}
 		else {
 			errorThrow(OFSTREAM_ERROR, iniPath);
-			return;
+			return false;
 		}
 	}
+	iniFileIn.close();
+	return false;
 }
 
 std::string INI::getValue(const char *targetKey) {
