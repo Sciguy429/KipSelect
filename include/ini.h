@@ -1,19 +1,14 @@
 #pragma once
 
 #include <string>
-#include <vector>
-
-typedef struct {
-	std::string key;
-	std::string data;
-} iniValue;
 
 class INI {
 public:
-	void setValue(const char *key, const char *value);
-	std::string getValue(const char *key);
-	void saveINI(const char *path);
-	void loadINI(const char *path);
+	void setValue(const char *targetKey, const char *value);
+	std::string getValue(const char *targetKey);
+	INI(const char *path);
 private:
-	std::vector<iniValue> iniValues;
+	int getLocation(const char *targetKey);
+	std::string removeSpaces(std::string str);
+	const char *iniPath;
 };

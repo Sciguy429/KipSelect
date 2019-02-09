@@ -1,73 +1,101 @@
 #include <fstream>
-#include <algorithm>
 
 #include "ini.h"
 #include "error.h"
 
-struct valueFindKey : std::unary_function<iniValue, bool> {
-	std::string key;
-	valueFindKey(std::string key) :key(key) { }
-	bool operator()(iniValue const& m) const {
-		return m.key == key;
-	}
-};
-
-void INI::setValue(const char *key, const char *value) {
-	size_t size = iniValues.size();
-	iniValues.push_back(iniValue());
-	iniValues[size].key = key;
-	iniValues[size].data = value;
+void INI::setValue(const char *targetKey, const char *value) {
+	//~~~Stub~~~
+	//Will eventualy set a value at key in the current file.
+	//Needs to do everything it can to keep file layout the same.
 }
 
-std::string INI::getValue(const char *key) {
-	std::vector<iniValue>::iterator iniItr = std::find_if(iniValues.begin(), iniValues.end(), valueFindKey(key));
-	if (iniItr != iniValues.end()) {
-		return iniItr->data;
-	}
-	return NULL;
-}
-
-void INI::saveINI(const char *path) {
-	std::ofstream iniFile(path);
-	if (iniFile.is_open()) {
-		for (unsigned int i = 0; i < iniValues.size(); i++) {
-			iniFile << iniValues[i].key << '=' << '"' << iniValues[i].data << '"' << '\n';
-		}
-		iniFile.close();
-	}
-	else {
-		errorThrow(OFSTREAM_ERROR, path);
-		return;
-	}
-}
-
-void INI::loadINI(const char *path) {
-	iniValues.clear();
-	std::ifstream iniFile(path);
-	while (iniFile) {
+std::string INI::getValue(const char *targetKey) {
+	std::ifstream iniFile(iniPath);
+	int pos = getLocation(targetKey);
+	if (pos != -1) {
 		std::string line;
-		std::getline(iniFile, line, '\n');
-		if (line[0] != '#' && line.length() > 0) {
-			std::string::size_type seperator = line.find_first_of('=');
-			if (seperator != std::string::npos) {
-				std::string key = line.substr(0, seperator);
-				std::string value = line.substr(seperator);
-				std::string::size_type pos1 = value.find_first_of('"');
-				std::string::size_type pos2 = value.find_last_of('"');
-				if (pos1 != std::string::npos && pos2 != std::string::npos && pos2 > pos1) {
-					value = value.substr(pos1 + 1, pos2 - pos1 - 1);
-					setValue(key.c_str(), value.c_str());
+		for (int i = 0; i < pos; i++) {
+			std::getline(iniFile, line, '\n');
+		}
+		std::string::size_type seperator = line.find_first_of('=');
+		if (seperator != std::string::npos) {
+			std::string key = removeSpaces(line.substr(0, seperator));
+			std::string value = removeSpaces(line.substr(seperator + 1));
+			if (!key.empty() && !value.empty()) {
+				if (key == targetKey) {
+					iniFile.close();
+					return value;
 				}
-				else {
-					errorThrow(INI_PARSE_ERROR, line.c_str());
-					return;
-				}
-			}
-			else {
-				errorThrow(INI_PARSE_ERROR, line.c_str());
-				return;
 			}
 		}
 	}
 	iniFile.close();
+	return std::string();
+}
+
+INI::INI(const char *path) {
+	iniPath = path;
+}
+
+int INI::getLocation(const char *targetKey) {
+	std::ifstream iniFile(iniPath);
+	std::string line;
+	unsigned int pos = 0;
+	while (std::getline(iniFile, line, '\n')) {
+		pos++;
+		if (line.at(line.length() - 1) == '\r') {
+			if (line.length() > 1) {
+				line = line.substr(0, line.length() - 1);
+			}
+			else {
+				line.clear();
+			}
+		}
+		if (!line.empty()) {
+			if (line.at(0) != ';') {
+				std::string::size_type seperator = line.find_first_of('=');
+				if (seperator != std::string::npos) {
+					std::string key = removeSpaces(line.substr(0, seperator));
+					std::string value = removeSpaces(line.substr(seperator + 1));
+					if (!key.empty() && !value.empty()) {
+						if (key == targetKey) {
+							iniFile.close();
+							return pos;
+						}
+					}
+					else {
+						printf("Empty key/value in file: %s at line: %d\n", iniPath, pos);
+					}
+				}
+				else {
+					printf("Unparseable line in file: %s at line: %d\n", iniPath, pos);
+				}
+			}
+		}
+	}
+	iniFile.close();
+	return -1;
+}
+
+std::string INI::removeSpaces(std::string str) {
+	std::string::size_type pos = str.find_first_of(' ');
+	if (pos != std::string::npos) {
+		unsigned int start = 0;
+		for (unsigned int i = 0; i < str.length(); i++) {
+			if (str.at(i) == ' ') {
+				start = i + 1;
+			}
+			else {
+				break;
+			}
+		}
+		unsigned int end = str.length();
+		for (unsigned int i = start; i < str.length(); i++) {
+			if (str.at(i) != ' ') {
+				end = i + 1;
+			}
+		}
+		return str.substr(start, end);
+	}
+	return str;
 }
