@@ -1,21 +1,62 @@
 #include <fstream>
+#include <sstream>
 
 #include "ini.h"
 #include "error.h"
 
 void INI::setValue(const char *targetKey, const char *value) {
-	//~~~Stub~~~
-	//Will eventualy set a value at key in the current file.
-	//Needs to do everything it can to keep file layout the same.
-}
-
-std::string INI::getValue(const char *targetKey) {
-	std::ifstream iniFile(iniPath);
+	std::ifstream iniFileIn(iniPath);
+	std::ostringstream outputString;
 	int pos = getLocation(targetKey);
 	if (pos != -1) {
 		std::string line;
 		for (int i = 0; i < pos; i++) {
-			std::getline(iniFile, line, '\n');
+			std::getline(iniFileIn, line, '\n');
+			if (i < pos - 1) {
+				outputString << line << '\n';
+			}
+		}
+		std::string::size_type seperator = line.find_first_of('=');
+		if (seperator != std::string::npos) {
+			std::string key = removeSpaces(line.substr(0, seperator));
+			if (!key.empty()) {
+				if (key == targetKey) {
+					outputString << line.substr(0, seperator + 1);
+					for (unsigned int i = seperator + 1; i < line.length(); i++) {
+						if (line.at(i) == ' ') {
+							outputString << line.at(i);
+						}
+						else {
+							outputString << value << "\r\n";
+							break;
+						}
+					}
+				}
+			}
+		}
+		while (std::getline(iniFileIn, line, '\n')) {
+			outputString << line << '\n';
+		}
+		iniFileIn.close();
+		std::ofstream iniFileOut(iniPath);
+		if (iniFileOut.is_open()) {
+			iniFileOut << outputString;
+			iniFileOut.close();
+		}
+		else {
+			errorThrow(OFSTREAM_ERROR, iniPath);
+			return;
+		}
+	}
+}
+
+std::string INI::getValue(const char *targetKey) {
+	std::ifstream iniFileIn(iniPath);
+	int pos = getLocation(targetKey);
+	if (pos != -1) {
+		std::string line;
+		for (int i = 0; i < pos; i++) {
+			std::getline(iniFileIn, line, '\n');
 		}
 		std::string::size_type seperator = line.find_first_of('=');
 		if (seperator != std::string::npos) {
@@ -23,13 +64,13 @@ std::string INI::getValue(const char *targetKey) {
 			std::string value = removeSpaces(line.substr(seperator + 1));
 			if (!key.empty() && !value.empty()) {
 				if (key == targetKey) {
-					iniFile.close();
+					iniFileIn.close();
 					return value;
 				}
 			}
 		}
 	}
-	iniFile.close();
+	iniFileIn.close();
 	return std::string();
 }
 
@@ -38,10 +79,10 @@ INI::INI(const char *path) {
 }
 
 int INI::getLocation(const char *targetKey) {
-	std::ifstream iniFile(iniPath);
+	std::ifstream iniFileIn(iniPath);
 	std::string line;
 	unsigned int pos = 0;
-	while (std::getline(iniFile, line, '\n')) {
+	while (std::getline(iniFileIn, line, '\n')) {
 		pos++;
 		if (line.at(line.length() - 1) == '\r') {
 			if (line.length() > 1) {
@@ -59,7 +100,7 @@ int INI::getLocation(const char *targetKey) {
 					std::string value = removeSpaces(line.substr(seperator + 1));
 					if (!key.empty() && !value.empty()) {
 						if (key == targetKey) {
-							iniFile.close();
+							iniFileIn.close();
 							return pos;
 						}
 					}
@@ -73,7 +114,7 @@ int INI::getLocation(const char *targetKey) {
 			}
 		}
 	}
-	iniFile.close();
+	iniFileIn.close();
 	return -1;
 }
 
