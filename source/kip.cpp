@@ -17,10 +17,10 @@ void KIP::scanKIP() {
 	kipItems.clear();
 	DIR* enabledKipDir;
 	struct dirent* enabledKipEnt;
-	enabledKipDir = opendir("sdmc:/ReiNX/kips/");
+	enabledKipDir = opendir("sdmc:/ReiNX/sysmodules/");
 	if (enabledKipDir == NULL) {
-		if (mkdir("sdmc:/ReiNX/kips/", 0700) == -1) {
-			errorThrow(MKDIR_ERROR, "sdmc:/ReiNX/kips/");
+		if (mkdir("sdmc:/ReiNX/sysmodules/", 0700) == -1) {
+			errorThrow(MKDIR_ERROR, "sdmc:/ReiNX/sysmodules/");
 		}
 	}
 	else {
@@ -30,16 +30,16 @@ void KIP::scanKIP() {
 			kipItems[pos].name = enabledKipEnt->d_name;
 			kipItems[pos].enabled = true;
 			std::ostringstream ss;
-			ss << "sdmc:/ReiNX/kips/" << enabledKipEnt->d_name;
+			ss << "sdmc:/ReiNX/sysmodules/" << enabledKipEnt->d_name;
 			kipItems[pos].header = getKipHeader(ss.str().c_str());
 		}
 	}
 	DIR* disabledKipDir;
 	struct dirent* disabledKipEnt;
-	disabledKipDir = opendir("sdmc:/ReiNX/kips_disabled/");
+	disabledKipDir = opendir("sdmc:/ReiNX/sysmodules.dis/");
 	if (disabledKipDir == NULL) {
-		if (mkdir("sdmc:/ReiNX/kips_disabled/", 0700) == -1) {
-			errorThrow(MKDIR_ERROR, "sdmc:/ReiNX/kips_disabled/");
+		if (mkdir("sdmc:/ReiNX/sysmodules.dis/", 0700) == -1) {
+			errorThrow(MKDIR_ERROR, "sdmc:/ReiNX/sysmodules.dis/");
 		}
 	}
 	else {
@@ -49,7 +49,7 @@ void KIP::scanKIP() {
 			kipItems[pos].name = disabledKipEnt->d_name;
 			kipItems[pos].enabled = false;
 			std::ostringstream ss;
-			ss << "sdmc:/ReiNX/kips_disabled/" << disabledKipEnt->d_name;
+			ss << "sdmc:/ReiNX/sysmodules.dis/" << disabledKipEnt->d_name;
 			kipItems[pos].header = getKipHeader(ss.str().c_str());
 		}
 	}
@@ -61,12 +61,12 @@ void KIP::setKIPItemEnabled(unsigned int kipId, bool enabled) {
 	std::string start = "sdmc:/ReiNX/";
 	std::string end = "sdmc:/ReiNX/";
 	if (enabled) {
-		start.append("kips_disabled/");
-		end.append("kips/");
+		start.append("sysmodules.dis/");
+		end.append("sysmodules/");
 	}
 	else {
-		start.append("kips/");
-		end.append("kips_disabled/");
+		start.append("sysmodules/");
+		end.append("sysmodules.dis/");
 	}
 	start.append(name);
 	end.append(name);
