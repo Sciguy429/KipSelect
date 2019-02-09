@@ -17,10 +17,10 @@ void KIP::scanKIP() {
 	kipItems.clear();
 	DIR* enabledKipDir;
 	struct dirent* enabledKipEnt;
-	enabledKipDir = opendir("sdmc:/atmosphere/kips/");
+	enabledKipDir = opendir("sdmc:/ReiNX/kips/");
 	if (enabledKipDir == NULL) {
-		if (mkdir("sdmc:/atmosphere/kips/", 0700) == -1) {
-			errorThrow(MKDIR_ERROR, "sdmc:/atmosphere/kips/");
+		if (mkdir("sdmc:/ReiNX/kips/", 0700) == -1) {
+			errorThrow(MKDIR_ERROR, "sdmc:/ReiNX/kips/");
 		}
 	}
 	else {
@@ -30,16 +30,16 @@ void KIP::scanKIP() {
 			kipItems[pos].name = enabledKipEnt->d_name;
 			kipItems[pos].enabled = true;
 			std::ostringstream ss;
-			ss << "sdmc:/atmosphere/kips/" << enabledKipEnt->d_name;
+			ss << "sdmc:/ReiNX/kips/" << enabledKipEnt->d_name;
 			kipItems[pos].header = getKipHeader(ss.str().c_str());
 		}
 	}
 	DIR* disabledKipDir;
 	struct dirent* disabledKipEnt;
-	disabledKipDir = opendir("sdmc:/atmosphere/kips_disabled/");
+	disabledKipDir = opendir("sdmc:/ReiNX/kips_disabled/");
 	if (disabledKipDir == NULL) {
-		if (mkdir("sdmc:/atmosphere/kips_disabled/", 0700) == -1) {
-			errorThrow(MKDIR_ERROR, "sdmc:/atmosphere/kips_disabled/");
+		if (mkdir("sdmc:/ReiNX/kips_disabled/", 0700) == -1) {
+			errorThrow(MKDIR_ERROR, "sdmc:/ReiNX/kips_disabled/");
 		}
 	}
 	else {
@@ -49,7 +49,7 @@ void KIP::scanKIP() {
 			kipItems[pos].name = disabledKipEnt->d_name;
 			kipItems[pos].enabled = false;
 			std::ostringstream ss;
-			ss << "sdmc:/atmosphere/kips_disabled/" << disabledKipEnt->d_name;
+			ss << "sdmc:/ReiNX/kips_disabled/" << disabledKipEnt->d_name;
 			kipItems[pos].header = getKipHeader(ss.str().c_str());
 		}
 	}
@@ -58,8 +58,8 @@ void KIP::scanKIP() {
 void KIP::setKIPItemEnabled(unsigned int kipId, bool enabled) {
 	kipItems[kipId].enabled = enabled;
 	std::string name = kipItems[kipId].name;
-	std::string start = "sdmc:/atmosphere/";
-	std::string end = "sdmc:/atmosphere/";
+	std::string start = "sdmc:/ReiNX/";
+	std::string end = "sdmc:/ReiNX/";
 	if (enabled) {
 		start.append("kips_disabled/");
 		end.append("kips/");

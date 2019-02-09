@@ -170,10 +170,10 @@ void LFS::scanLFS() {
 	lfsItems.clear();
 	DIR* lfsDir;
 	struct dirent* lfsEnt;
-	lfsDir = opendir("sdmc:/atmosphere/titles/");
+	lfsDir = opendir("sdmc:/ReiNX/titles/");
 	if (lfsDir == NULL) {
-		if (mkdir("sdmc:/atmosphere/titles/", 0700) == -1) {
-			errorThrow(MKDIR_ERROR, "sdmc:/atmosphere/titles/");
+		if (mkdir("sdmc:/ReiNX/titles/", 0700) == -1) {
+			errorThrow(MKDIR_ERROR, "sdmc:/ReiNX/titles/");
 		}
 	}
 	else {
@@ -182,7 +182,7 @@ void LFS::scanLFS() {
 			lfsItems.push_back(lfsItem());
 			lfsItems[pos].titleId = lfsEnt->d_name;
 			std::ostringstream flagsPath;
-			flagsPath << "sdmc:/atmosphere/titles/" << lfsEnt->d_name << "/flags";
+			flagsPath << "sdmc:/ReiNX/titles/" << lfsEnt->d_name << "/flags";
 			struct stat info;
 			stat(flagsPath.str().c_str(), &info);
 			if (info.st_mode & S_IFDIR) {
@@ -207,7 +207,7 @@ void LFS::scanLFS() {
 void LFS::setLFSItemEnabled(unsigned int lfsId, bool enabled) {
 	lfsItems[lfsId].enabled = enabled;
 	std::ostringstream flagsPath;
-	flagsPath << "sdmc:/atmosphere/titles/" << lfsItems[lfsId].titleId << "/flags";
+	flagsPath << "sdmc:/ReiNX/titles/" << lfsItems[lfsId].titleId << "/flags";
 	struct stat info;
 	stat(flagsPath.str().c_str(), &info);
 	if (!(info.st_mode & S_IFDIR)) {
