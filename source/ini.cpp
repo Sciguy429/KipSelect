@@ -34,16 +34,19 @@ bool INI::setValue(const char *targetKey, const char *value) {
 				}
 				else {
 					iniFileIn.close();
+					errorThrow(INI_PARSE_ERROR, line.c_str());
 					return false;
 				}
 			}
 			else {
 				iniFileIn.close();
+				errorThrow(INI_PARSE_ERROR, line.c_str());
 				return false;
 			}
 		}
 		else {
 			iniFileIn.close();
+			errorThrow(INI_PARSE_ERROR, line.c_str());
 			return false;
 		}
 		while (std::getline(iniFileIn, line, '\n')) {
