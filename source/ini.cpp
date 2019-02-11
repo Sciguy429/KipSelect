@@ -27,7 +27,7 @@ bool INI::setValue(const char *targetKey, const char *value) {
 							outputString << line.at(i);
 						}
 						else {
-							outputString << value << line.substr(i);
+							outputString << value << "\r\n";
 							break;
 						}
 					}
