@@ -74,7 +74,7 @@ bool INI::setValue(const char *targetKey, const char *value) {
 	return false;
 }
 
-std::string INI::getValue(const char *targetKey) {
+std::string INI::getValue(bool *valid, const char *targetKey) {
 	std::ifstream iniFileIn(iniPath);
 	int pos = getLocation(targetKey);
 	if (pos != -1) {
@@ -82,7 +82,7 @@ std::string INI::getValue(const char *targetKey) {
 		for (int i = 0; i < pos; i++) {
 			std::getline(iniFileIn, line, '\n');
 		}
-                if (line.at(line.length() - 1) == '\r') {
+		if (line.at(line.length() - 1) == '\r') {
 			line = line.substr(0, line.length() - 1);
 		}
 		std::string::size_type seperator = line.find_first_of('=');
@@ -92,12 +92,14 @@ std::string INI::getValue(const char *targetKey) {
 			if (!key.empty() && !value.empty()) {
 				if (key == targetKey) {
 					iniFileIn.close();
+					*valid = true;
 					return value;
 				}
 			}
 		}
 	}
 	iniFileIn.close();
+	*valid = false;
 	return std::string();
 }
 
