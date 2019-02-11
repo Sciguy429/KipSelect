@@ -76,6 +76,9 @@ std::string INI::getValue(const char *targetKey) {
 		for (int i = 0; i < pos; i++) {
 			std::getline(iniFileIn, line, '\n');
 		}
+   if (line.at(line.length() - 1) == '\r') {
+			line = line.substr(0, line.length() - 1);
+		}
 		std::string::size_type seperator = line.find_first_of('=');
 		if (seperator != std::string::npos) {
 			std::string key = removeSpaces(line.substr(0, seperator));
