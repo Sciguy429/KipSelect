@@ -27,7 +27,13 @@ bool INI::setValue(const char *targetKey, const char *value) {
 							outputString << line.at(i);
 						}
 						else {
-							outputString << value << "\r\n";
+							outputString << value;
+							if (line.at(line.length() - 1) == '\r') {
+								outputString << "\r\n";
+							}
+							else {
+								outputString << "\n";
+							}
 							break;
 						}
 					}
@@ -102,7 +108,7 @@ INI::INI(const char *path) {
 int INI::getLocation(const char *targetKey) {
 	std::ifstream iniFileIn(iniPath);
 	std::string line;
-	unsigned int pos = 0;
+	int pos = 0;
 	while (std::getline(iniFileIn, line, '\n')) {
 		pos++;
 		if (line.at(line.length() - 1) == '\r') {
