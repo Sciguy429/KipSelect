@@ -16,11 +16,18 @@ This is a WIP toolkit for the switch cfw Atmopshere, it started out as a simple 
 This tool is currently avialable on the switch appstore, however if you would like to you can still download it from GitHub or even build it yourself. The nro has no special requiremnts about where it gets placed, I would still recommend your put it in /switch/ though.
 
 ## Building
-This homebrew is a standered libnx project, make sure you have devkitpro installed correctly and simply run make from the project root. There are some dependencies including, libxml2, libcurl, libbzip, libpng, and libfreetype. I personaly write this project useing VsCode and thus there is a CppProperties.json file already configured for proper syntax highlighting in the project root, this configuration should work with almost any other homebrew project although depending on where your devkitpro install is you may need to change some values around.
+This homebrew is a standered libnx project, make sure you have devkitpro installed correctly and simply run make from the project root. I personaly write this project useing VsCode and thus there is a CppProperties.json file already configured for proper syntax highlighting in the project root, this configuration should work with almost any other homebrew project although depending on where your devkitPro install is you may need to change some values around.
+
+## Dependicies
+* libxml2: For handling xml data files, like NSWreleases.xml.
+* libcurl: For downloading files.
+* libfreetype2: For loading and displaying fonts.
+* libpng: For loading png texture files.
+* libbzip: Dependencie for libpng.
 
 ## Credits
-* A huge thank you to MatinatorX for all of the graphics assets used by this tool. He had a hand in prety much all of there creation and without his work this tool would proboly look like it had been made in ms paint.
+* A huge thank you to MatinatorX for all of the graphics assets used by this tool. He had a hand in prety much all of there creation and without his work this tool would proboly look considerably worse than it dose now.
 * [Libnx - The Framework This Tool Is Built On](https://github.com/switchbrew/libnx)
 * [Switchbrew - For System Title Names/Information](https://switchbrew.org/wiki/Main_Page)
-* [Atmospshere - For 'Reboot To Payload' Code](https://github.com/Atmosphere-NX/Atmosphere)
+* [Atmospshere - For 'Reboot To Payload' Example Code](https://github.com/Atmosphere-NX/Atmosphere)
 * [Hactool - For Kip Header Extraction Code](https://github.com/SciresM/hactool)
