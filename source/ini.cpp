@@ -157,7 +157,7 @@ std::string INI::removeSpaces(std::string str) {
 				break;
 			}
 		}
-		unsigned int end = str.length();
+		unsigned int end = start;
 		for (unsigned int i = start; i < str.length(); i++) {
 			if (str.at(i) != ' ') {
 				end = i + 1;
