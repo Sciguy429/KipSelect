@@ -5,10 +5,10 @@
 #include "error.h"
 
 bool INI::setValue(const char *targetKey, const char *value) {
-	std::ifstream iniFileIn(iniPath);
-	std::ostringstream outputString;
 	int pos = getLocation(targetKey);
 	if (pos != -1) {
+		std::ifstream iniFileIn(iniPath);
+		std::ostringstream outputString;
 		std::string line;
 		for (int i = 0; i < pos; i++) {
 			std::getline(iniFileIn, line, '\n');
@@ -70,14 +70,13 @@ bool INI::setValue(const char *targetKey, const char *value) {
 			return false;
 		}
 	}
-	iniFileIn.close();
 	return false;
 }
 
 std::string INI::getValue(bool *valid, const char *targetKey) {
-	std::ifstream iniFileIn(iniPath);
 	int pos = getLocation(targetKey);
 	if (pos != -1) {
+		std::ifstream iniFileIn(iniPath);
 		std::string line;
 		for (int i = 0; i < pos; i++) {
 			std::getline(iniFileIn, line, '\n');
@@ -98,7 +97,6 @@ std::string INI::getValue(bool *valid, const char *targetKey) {
 			}
 		}
 	}
-	iniFileIn.close();
 	*valid = false;
 	return std::string();
 }
