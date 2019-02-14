@@ -120,7 +120,7 @@ int INI::getLocation(const char *targetKey) {
 			}
 		}
 		if (!line.empty()) {
-			if (line.at(0) != ';' && line.at(0) != '[') {
+			if (line.at(0) != ';') {
 				std::string::size_type seperator = line.find_first_of('=');
 				if (seperator != std::string::npos) {
 					std::string key = removeSpaces(line.substr(0, seperator));
@@ -131,12 +131,6 @@ int INI::getLocation(const char *targetKey) {
 							return pos;
 						}
 					}
-					else {
-						printf("Empty key/value in file: %s at line: %d\n", iniPath, pos);
-					}
-				}
-				else {
-					printf("Unparseable line in file: %s at line: %d\n", iniPath, pos);
 				}
 			}
 		}
