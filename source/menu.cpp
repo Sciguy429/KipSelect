@@ -26,29 +26,10 @@ void MENU::loadAssets() {
 	tabLayeredFSSelected = gfxCreateTextureFromPNG("romfs:/png/tab/tab_layeredfs_selected.png");
 	tabOptions = gfxCreateTextureFromPNG("romfs:/png/tab/tab_options.png");
 	tabOptionsSelected = gfxCreateTextureFromPNG("romfs:/png/tab/tab_options_selected.png");
-	texture *detailPurple = gfxCreateTextureFromPNG("romfs:/png/detail/detail_purple.png");
-	texture *detailGray = gfxCreateTextureFromPNG("romfs:/png/detail/detail_gray.png");
+	detailPurple = gfxCreateTextureFromPNG("romfs:/png/detail/detail_purple.png");
+	detailGray = gfxCreateTextureFromPNG("romfs:/png/detail/detail_gray.png");
 	//END LOAD ASSETS
 	//BUILD ASSETS
-	//-Detail Enabled
-	detailEnabled = gfxCreateTexture(243, 59);
-	gfxBlit(detailEnabled, detailPurple, 0, 0);
-	gfxDrawText(detailEnabled, "Enabled", mainFont, 8, 9, 30, RGBA8(255, 255, 255, 0));
-	//-Detail Disabled
-	detailDisabled = gfxCreateTexture(243, 59);
-	gfxBlit(detailDisabled, detailGray, 0, 0);
-	gfxDrawText(detailDisabled, "Disabled", mainFont, 8, 9, 30, RGBA8(50, 50, 50, 0));
-	//-Detail Loaded
-	detailLoaded = gfxCreateTexture(243, 59);
-	gfxBlit(detailLoaded, detailPurple, 0, 0);
-	gfxDrawText(detailLoaded, "Loaded", mainFont, 8, 9, 30, RGBA8(255, 255, 255, 0));
-	//-Detail Unloaded
-	detailUnloaded = gfxCreateTexture(243, 59);
-	gfxBlit(detailUnloaded, detailGray, 0, 0);
-	gfxDrawText(detailUnloaded, "Unloaded", mainFont, 8, 9, 30, RGBA8(50, 50, 50, 0));
-	//-Destroy Base Assets
-	gfxDestroyTexture(detailPurple);
-	gfxDestroyTexture(detailGray);
 	//-Add Version To Backround
 	std::ostringstream version;
 	version << 'v' << VERSION_MAJOR << '.' << VERSION_MINOR << '.' << VERSION_MICRO;
@@ -253,8 +234,6 @@ void MENU::destroyAssets() {
 	gfxDestroyTexture(tabLayeredFSSelected);
 	gfxDestroyTexture(tabOptions);
 	gfxDestroyTexture(tabOptionsSelected);
-	gfxDestroyTexture(detailEnabled);
-	gfxDestroyTexture(detailDisabled);
-	gfxDestroyTexture(detailLoaded);
-	gfxDestroyTexture(detailUnloaded);
+	gfxDestroyTexture(detailPurple);
+	gfxDestroyTexture(detailGray);
 }

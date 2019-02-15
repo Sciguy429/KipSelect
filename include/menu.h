@@ -5,6 +5,11 @@
 
 #include "gfx.h"
 
+#define STATUS_TYPE_DISABLED 0 //Show a grayed out box with the first value of statusNames
+#define STATUS_TYPE_ONESHOT 1 //Show only the first value of statusNames
+#define STATUS_TYPE_BOOL 2 //Two value toggle
+#define STATUS_TYPE_LIST 3 //Display a list of values
+
 typedef struct {
 	std::string prefix;
 	std::string data;
@@ -14,7 +19,8 @@ typedef struct {
 typedef struct {
 	std::string name;
 	std::vector<menuDetail> details;
-	bool status;
+	unsigned int statusType;
+	std::vector<std::string> statusNames;
 } menuItem;
 
 class MENU {
@@ -55,8 +61,6 @@ private:
 	texture *tabLayeredFSSelected;
 	texture *tabOptions;
 	texture *tabOptionsSelected;
-	texture *detailEnabled;
-	texture *detailDisabled;
-	texture *detailLoaded;
-	texture *detailUnloaded;
+	texture *detailPurple;
+	texture *detailGray;
 };
