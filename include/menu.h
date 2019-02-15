@@ -26,17 +26,18 @@ typedef struct {
 class MENU {
 public:
 	void loadAssets();
-	void setTabSelected(unsigned int tabId);
-	unsigned int getTabSelected();
-	void setMenuSelected(unsigned int menuId);
-	unsigned int getMenuSelected();
-	unsigned int getMenuSize();
-	void toggleSelected();
+	void handleInput(u64 kDown);
+	//void setTabSelected(unsigned int tabId);
+	//unsigned int getTabSelected();
+	//void setMenuSelected(unsigned int menuId);
+	//unsigned int getMenuSelected();
+	//void toggleSelected();
 	void addMenuItem(unsigned int tab, menuItem itm);
 	void resetMenu();
 	void drawMenu();
 	void destroyAssets();
 private:
+	unsigned int getMenuSize();
 	unsigned int tabSelected;
 	unsigned int menuSelected;
 	std::vector<menuItem> kip;
