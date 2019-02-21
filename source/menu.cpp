@@ -38,79 +38,124 @@ void MENU::loadAssets() {
 	//END BUILD
 }
 
-void MENU::handleInput(u64 kDown) {
-	if (kDown & KEY_L) {
-		if (tabSelected > 0) {
-			//menu.setTabSelected(menu.getTabSelected() - 1);
-			tabSelected = tabSelected - 1;
-			//menu.drawMenu();
-		}
-	}
-	else if (kDown & KEY_R) {
-		if (tabSelected < 3) {
-			//menu.setTabSelected(menu.getTabSelected() + 1);
-			tabSelected = tabSelected + 1;
-			//menu.drawMenu();
-		}
-	}
-	else if (kDown & KEY_UP) {
-		if (menuSelected > 0) {
-			//menu.setMenuSelected(menu.getMenuSelected() - 1);
-			menuSelected = menuSelected - 1;
-			//menu.drawMenu();
-		}
-	}
-	else if (kDown & KEY_DOWN) {
-		if (menuSelected < getMenuSize() - 1) {
-			//menu.setMenuSelected(menu.getMenuSelected() + 1);
-			menuSelected = menuSelected + 1;
-			//menu.drawMenu();
-		}
-	}
-	else if (kDown & KEY_A) {
-		//TODO
+void MENU::setTabSelected(unsigned int tabId) {
+	menuSelected = 0;
+	tabSelected = tabId;
+}
+
+unsigned int MENU::getTabSelected() {
+	return tabSelected;
+}
+
+void MENU::setMenuSelected(unsigned int menuId) {
+	menuSelected = menuId;
+}
+
+unsigned int MENU::getMenuSelected() {
+	return menuSelected;
+}
+
+inline unsigned int MENU::getMenuSize() {
+	switch (tabSelected) {
+	case 0:
+		return kip.size();
+	case 1:
+		return bct.size();
+	case 2:
+		return layeredFS.size();
+	case 3:
+		return options.size();
+	default:
+		return 0;
 	}
 }
 
-//void MENU::setTabSelected(unsigned int tabId) {
-//	menuSelected = 0;
-//	tabSelected = tabId;
-//}
+void MENU::setStatusSelected(unsigned int statusId) {
+	std::vector<menuItem> *mnu = new std::vector<menuItem>;
+	switch (tabSelected) {
+	case 0:
+		mnu = &kip;
+		break;
+	case 1:
+		mnu = &bct;
+		break;
+	case 2:
+		mnu = &layeredFS;
+		break;
+	case 3:
+		mnu = &options;
+		break;
+	default:
+		return;
+	}
+	(*mnu)[menuSelected].statusSelected = statusId;
+}
 
-//unsigned int MENU::getTabSelected() {
-//	return tabSelected;
-//}
+unsigned int MENU::getStatusSelected() {
+	std::vector<menuItem> *mnu = new std::vector<menuItem>;
+	switch (tabSelected) {
+	case 0:
+		mnu = &kip;
+		break;
+	case 1:
+		mnu = &bct;
+		break;
+	case 2:
+		mnu = &layeredFS;
+		break;
+	case 3:
+		mnu = &options;
+		break;
+	default:
+		return;
+	}
+	return (*mnu)[menuSelected].statusSelected;
+}
 
-//void MENU::setMenuSelected(unsigned int menuId) {
-//	menuSelected = menuId;
-//}
-
-//unsigned int MENU::getMenuSelected() {
-//	return menuSelected;
-//}
-
-//void MENU::toggleSelected() {
-//	std::vector<menuItem> *mnu = new std::vector<menuItem>;
-//	switch (tabSelected) {
-//	case 0:
-//		mnu = &kip;
-//		break;
-//	case 1:
-//		mnu = &bct;
-//		break;
-//	case 2:
-//		mnu = &layeredFS;
-//		break;
-//	case 3:
-//		mnu = &options;
-//		break;
-//	default:
-//		return;
-//	}
-//	if (mnu->size() > 0) {
-//		(*mnu)[menuSelected].status = !(*mnu)[menuSelected].status;
-//	}
-//}
+unsigned int MENU::getStatusCount() {
+	std::vector<menuItem> *mnu = new std::vector<menuItem>;
+	switch (tabSelected) {
+	case 0:
+		mnu = &kip;
+		break;
+	case 1:
+		mnu = &bct;
+		break;
+	case 2:
+		mnu = &layeredFS;
+		break;
+	case 3:
+		mnu = &options;
+		break;
+	default:
+		return;
+	}
+	return (*mnu)[menuSelected].statuses.size();
+}
+/*
+void MENU::toggleSelected() {
+	std::vector<menuItem> *mnu = new std::vector<menuItem>;
+	switch (tabSelected) {
+	case 0:
+		mnu = &kip;
+		break;
+	case 1:
+		mnu = &bct;
+		break;
+	case 2:
+		mnu = &layeredFS;
+		break;
+	case 3:
+		mnu = &options;
+		break;
+	default:
+		return;
+	}
+	if (mnu->size() > 0) {
+		(*mnu)[menuSelected].status = !(*mnu)[menuSelected].status;
+	}
+}
+*/
 
 void MENU::addMenuItem(unsigned int tab, menuItem itm) {
 	std::vector<menuItem> *mnu = new std::vector<menuItem>;
@@ -257,17 +302,23 @@ void MENU::destroyAssets() {
 	gfxDestroyTexture(detailGray);
 }
 
-unsigned int MENU::getMenuSize() {
+menuItem *MENU::getSelectedItem() {
+	std::vector<menuItem> *mnu = new std::vector<menuItem>;
 	switch (tabSelected) {
 	case 0:
-		return kip.size();
+		mnu = &kip;
+		break;
 	case 1:
-		return bct.size();
+		mnu = &bct;
+		break;
 	case 2:
-		return layeredFS.size();
+		mnu = &layeredFS;
+		break;
 	case 3:
-		return options.size();
+		mnu = &options;
+		break;
 	default:
-		return 0;
+		return;
 	}
+	return &mnu->at(menuSelected);
 }

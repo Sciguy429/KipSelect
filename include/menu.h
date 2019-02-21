@@ -17,27 +17,34 @@ typedef struct {
 } menuDetail;
 
 typedef struct {
+	unsigned int type;
+	std::string name;
+} menuStatus;
+
+typedef struct {
 	std::string name;
 	std::vector<menuDetail> details;
-	unsigned int statusType;
-	std::vector<std::string> statusNames;
+	std::vector<menuStatus> statuses;
+	unsigned int statusSelected;
 } menuItem;
 
 class MENU {
 public:
 	void loadAssets();
-	void handleInput(u64 kDown);
-	//void setTabSelected(unsigned int tabId);
-	//unsigned int getTabSelected();
-	//void setMenuSelected(unsigned int menuId);
-	//unsigned int getMenuSelected();
-	//void toggleSelected();
+	void setTabSelected(unsigned int tabId);
+	unsigned int getTabSelected();
+	void setMenuSelected(unsigned int menuId);
+	unsigned int getMenuSelected();
+	unsigned int getMenuSize();
+	void setStatusSelected(unsigned int statusId);
+	unsigned int getStatusSelected();
+	unsigned int getStatusCount();
 	void addMenuItem(unsigned int tab, menuItem itm);
 	void resetMenu();
 	void drawMenu();
 	void destroyAssets();
 private:
-	unsigned int getMenuSize();
+	menuItem *getSelectedItem();
 	unsigned int tabSelected;
 	unsigned int menuSelected;
 	std::vector<menuItem> kip;
