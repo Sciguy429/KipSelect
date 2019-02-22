@@ -72,7 +72,7 @@ void LFS::parseLFSDatabase() {
 		xmlFreeDoc(nswDoc);
 		return;
 	}
-	nswCur = nswCur->children;
+	nswCur = nswCur->xmlChildrenNode;
 	unsigned int nswCount = 0;
 	while (nswCur != NULL) {
 		if ((!xmlStrcmp(nswCur->name, (const xmlChar *)"release"))) {

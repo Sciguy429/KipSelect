@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<scene>
+  <size> <!--Scene Size-->
+    <x>1280</x> <!--Width-->
+    <y>720</y> <!--Height-->
+  </size>
+  <backroundColor> <!--Backround Color-->
+    <red>0</red> <!--Red-->
+    <green>0</green> <!--Green-->
+    <blue>0</blue> <!--Blue-->
+  </backroundColor>
+  <objects>
+    <text id="testText"> <!--Text Object Example-->
+      <static>true</static> <!--A Static Object Is Never Rerendered-->
+      <position>
+        <x>0</x> <!--X Posistion-->
+        <y>0</y> <!--Y Posistion-->
+        <center>TL</center> <!--Center Type (TL = Top Left)-->
+      </position>
+      <font>romfs:/font/bahnschrift.ttf</font> <!--Path To Font File-->
+      <size>25</size> <!--Text Size-->
+      <wrap>0</wrap> <!--Wrap Pixel Count (0 Means None)-->
+      <text>This Is A Test</text> <!--Displayed Text-->
+    </text>
+    <blit id="testBlit"> <!--Dynaimic Blit Example-->
+      <static>false</static> <!--A Static Object Is Never Rerendered-->
+      <position>
+        <x>0</x> <!--X Posistion-->
+        <y>0</y> <!--Y Posistion-->
+        <center>TL</center> <!--Center Type (TL = Top Left)-->
+      </position>
+      <textures> <!--All Textures For The Blit Object-->
+        <texture id="gray"> <!--Each Texture Needs It's Own Id-->
+          <path>romfs:/png/detail/detail_gray.png</path> <!--As Well As A Path To A Texture-->
+        </texture>
+        <texture id="purple"> <!--Each Texture Needs It's Own Id-->
+          <path>romfs:/png/detail/detail_purple.png</path> <!--As Well As A Path To A Texture-->
+        </texture>
+      </textures>
+      <textureSelected>gray</textureSelected> <!--Selected Texture-->
+    </blit>
+  </objects>
+</scene>

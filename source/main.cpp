@@ -28,7 +28,6 @@ int main(int argc, char **argv) {
 		if (kDown & KEY_PLUS) {
 			break;
 		}
-		/*
 		else if (kDown & KEY_L) {
 			//L
 		}
@@ -42,9 +41,8 @@ int main(int argc, char **argv) {
 			//D
 		}
 		else if (kDown & KEY_A) {
-			//This needs to be redone
+			//A
 		}
-		*/
 	}
 	errorDestroyAssets();
 	gfxCleanUp();
