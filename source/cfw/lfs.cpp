@@ -72,7 +72,7 @@ void LFS::parseLFSDatabase() {
 		xmlFreeDoc(nswDoc);
 		return;
 	}
-	nswCur = nswCur->xmlChildrenNode;
+	nswCur = nswCur->children;
 	unsigned int nswCount = 0;
 	while (nswCur != NULL) {
 		if ((!xmlStrcmp(nswCur->name, (const xmlChar *)"release"))) {
@@ -237,7 +237,7 @@ bool LFS::getLFSItemEnabled(unsigned int lfsId) {
 unsigned int LFS::getLFSCount() {
 	return lfsItems.size();
 }
-
+/*
 menuItem LFS::getLFSMenuItem(unsigned int lfsId) {
 	menuItem mnu;
 	mnu.status = lfsItems[lfsId].enabled;
@@ -278,3 +278,4 @@ menuItem LFS::getLFSMenuItem(unsigned int lfsId) {
 	}
 	return mnu;
 }
+*/

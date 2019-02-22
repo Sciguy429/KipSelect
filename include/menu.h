@@ -26,6 +26,7 @@ typedef struct {
 	std::vector<menuDetail> details;
 	std::vector<menuStatus> statuses;
 	unsigned int statusSelected;
+	bool status;
 } menuItem;
 
 class MENU {

@@ -82,7 +82,7 @@ bool KIP::getKIPItemEnabled(unsigned int kipId) {
 unsigned int KIP::getKIPItemCount() {
 	return kipItems.size();
 }
-
+/*
 menuItem KIP::getKIPMenuItem(unsigned int kipId) {
 	menuItem mnu;
 	mnu.name = kipItems[kipId].name;
@@ -103,7 +103,7 @@ menuItem KIP::getKIPMenuItem(unsigned int kipId) {
 	}
 	return mnu;
 }
-
+*/
 kip1_header_t *KIP::getKipHeader(const char *path) {
 	FILE *file = fopen(path, "r");
 	kip1_header_t raw_header;

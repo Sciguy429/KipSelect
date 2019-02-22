@@ -107,7 +107,7 @@ unsigned int MENU::getStatusSelected() {
 		mnu = &options;
 		break;
 	default:
-		return;
+		return 0;
 	}
 	return (*mnu)[menuSelected].statusSelected;
 }
@@ -128,7 +128,7 @@ unsigned int MENU::getStatusCount() {
 		mnu = &options;
 		break;
 	default:
-		return;
+		return 0;
 	}
 	return (*mnu)[menuSelected].statuses.size();
 }
@@ -188,6 +188,7 @@ void MENU::resetMenu() {
 }
 
 void MENU::drawMenu() {
+	/*
 	gfxBlit(frameBufferTexture, menuBackground, 0, 0);
 	gfxBlit(frameBufferTexture, tabSelected == 0 ? tabKipsSelected : tabKips, 560, 118);
 	gfxBlit(frameBufferTexture, tabSelected == 1 ? tabBCTSelected : tabBCT, 683, 118);
@@ -279,6 +280,7 @@ void MENU::drawMenu() {
 		//~~
 	}
 	gfxDrawFrameBuffer();
+	*/
 }
 
 void MENU::destroyAssets() {
@@ -318,7 +320,7 @@ menuItem *MENU::getSelectedItem() {
 		mnu = &options;
 		break;
 	default:
-		return;
+		return NULL;
 	}
 	return &mnu->at(menuSelected);
 }

@@ -3,8 +3,6 @@
 #include <string>
 #include <vector>
 
-#include "menu.h"
-
 typedef struct {
 	std::string titleId;
 	std::string titleName;
@@ -35,7 +33,7 @@ public:
 	void setLFSItemEnabled(unsigned int lfsId, bool enabled);
 	bool getLFSItemEnabled(unsigned int lfsId);
 	unsigned int getLFSCount();
-	menuItem getLFSMenuItem(unsigned int lfsId);
+	//menuItem getLFSMenuItem(unsigned int lfsId);
 private:
 	std::vector<nswTitle> nswTitles;
 	std::vector<sysTitle> sysTitles;
