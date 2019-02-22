@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-#include "gfx.h"
+#include "screen/gfx.h"
 
 #define STATUS_TYPE_DISABLED 0 //Show a grayed out box with the first value of statusNames
 #define STATUS_TYPE_ONESHOT 1 //Show only the first value of statusNames

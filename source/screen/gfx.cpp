@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <png.h>
 
-#include "gfx.h"
+#include "screen/gfx.h"
 
 texture *frameBufferTexture;
 Framebuffer frameBuffer;

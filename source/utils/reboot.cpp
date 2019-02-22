@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <switch.h>
 
-#include "reboot.h"
+#include "utils/reboot.h"
 #include "error.h"
 
 #define IRAM_PAYLOAD_MAX_SIZE 0x2F000

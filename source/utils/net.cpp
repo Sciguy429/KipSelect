@@ -1,7 +1,7 @@
 #include <sstream>
 #include <curl/curl.h>
 
-#include "net.h"
+#include "utils/net.h"
 #include "error.h"
 
 size_t writeFile(void *ptr, size_t size, size_t nmemb, FILE *stream) {

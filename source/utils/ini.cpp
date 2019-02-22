@@ -1,7 +1,7 @@
 #include <fstream>
 #include <sstream>
 
-#include "ini.h"
+#include "utils/ini.h"
 #include "error.h"
 
 bool INI::setValue(const char *targetKey, const char *value) {

@@ -3,7 +3,7 @@
 #include <sstream>
 
 #include "error.h"
-#include "gfx.h"
+#include "screen/gfx.h"
 
 bool errorThrown = false;
 texture *errorBackground;

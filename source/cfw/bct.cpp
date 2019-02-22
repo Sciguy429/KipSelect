@@ -1,6 +1,6 @@
 #include <fstream>
 
-#include "bct.h"
+#include "cfw/bct.h"
 #include "error.h"
 
 void BCT::scanBCT() {

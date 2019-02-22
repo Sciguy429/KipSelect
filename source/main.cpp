@@ -1,12 +1,12 @@
 #include <switch.h>
 
-#include "gfx.h"
+#include "screen/gfx.h"
 #include "error.h"
 #include "menu.h"
-#include "kip.h"
-#include "bct.h"
-#include "lfs.h"
-#include "reboot.h"
+#include "cfw/kip.h"
+#include "cfw/bct.h"
+#include "cfw/lfs.h"
+#include "utils/reboot.h"
 
 int main(int argc, char **argv) {
 	MENU menu;
