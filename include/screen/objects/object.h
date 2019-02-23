@@ -4,15 +4,15 @@
 
 class OBJECT {
 public:
-	std::string getId();
+	std::string getId() const;
 	void setId(std::string id);
-	bool getIsStatic();
+	bool getIsStatic() const;
 	void setIsStatic(bool isStatic);
-	unsigned int getPosX();
+	unsigned int getPosX() const;
 	void setPosX(unsigned int posX);
-	unsigned int getPosY();
+	unsigned int getPosY() const;
 	void setPosY(unsigned int posY);
-	bool getCentered();
+	bool getCentered() const;
 	void setCentered(bool centered);
 private:
 	std::string id;
