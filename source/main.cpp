@@ -7,6 +7,9 @@
 #include "cfw/lfs.h"
 #include "utils/reboot.h"
 
+#include "screen/objects/text.h"
+#include "screen/objects/blit.h"
+
 int main(int argc, char **argv) {
 	KIP kip;
 	BCT bct;

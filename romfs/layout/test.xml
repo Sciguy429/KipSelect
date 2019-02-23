@@ -15,7 +15,7 @@
       <position>
         <x>0</x> <!--X Posistion-->
         <y>0</y> <!--Y Posistion-->
-        <center>TL</center> <!--Center Type (TL = Top Left)-->
+        <center>false</center> <!--Centered-->
       </position>
       <font>romfs:/font/bahnschrift.ttf</font> <!--Path To Font File-->
       <size>25</size> <!--Text Size-->
@@ -27,7 +27,7 @@
       <position>
         <x>0</x> <!--X Posistion-->
         <y>0</y> <!--Y Posistion-->
-        <center>TL</center> <!--Center Type (TL = Top Left)-->
+        <center>false</center> <!--Centered)-->
       </position>
       <textures> <!--All Textures For The Blit Object-->
         <texture id="gray"> <!--Each Texture Needs It's Own Id-->
