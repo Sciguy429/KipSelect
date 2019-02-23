@@ -13,9 +13,9 @@ typedef struct {
 
 class BLIT: public OBJECT {
 public:
-	texture *getTexture(std::string id);
+	texture *getTexture(std::string id) const;
 	void addTexture(std::string id, texture *tex);
-	std::string getTextureSelected();
+	std::string getTextureSelected() const;
 	void setTextureSelected(std::string textureSelected);
 private:
 	std::vector<blitTexture> textures;

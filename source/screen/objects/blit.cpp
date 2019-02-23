@@ -10,7 +10,7 @@ struct texFindId : std::unary_function<blitTexture, bool> {
 	}
 };
 
-texture *BLIT::getTexture(std::string id) {
+texture *BLIT::getTexture(std::string id) const {
 	std::vector<blitTexture>::iterator texItr = std::find_if(textures.begin(), textures.end(), texFindId(id));
 	if (texItr == textures.end()) {
 		return NULL;
@@ -27,7 +27,7 @@ void BLIT::addTexture(std::string id, texture *tex) {
 	textures[pos].tex = tex;
 }
 
-std::string BLIT::getTextureSelected() {
+std::string BLIT::getTextureSelected() const {
 	return textureSelected;
 }
 

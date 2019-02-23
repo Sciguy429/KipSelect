@@ -14,6 +14,7 @@ public:
 	void setPosY(unsigned int posY);
 	bool getCentered() const;
 	void setCentered(bool centered);
+	virtual ~OBJECT() {};
 private:
 	std::string id;
 	bool isStatic;
