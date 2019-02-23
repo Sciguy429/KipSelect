@@ -4,11 +4,11 @@
     <x>1280</x> <!--Width-->
     <y>720</y> <!--Height-->
   </size>
-  <backroundColor> <!--Backround Color-->
+  <backgroundColor> <!--Backround Color-->
     <red>0</red> <!--Red-->
     <green>0</green> <!--Green-->
     <blue>0</blue> <!--Blue-->
-  </backroundColor>
+  </backgroundColor>
   <objects>
     <text id="testText"> <!--Text Object Example-->
       <static>true</static> <!--A Static Object Is Never Rerendered-->
