@@ -11,7 +11,7 @@ typedef struct {
 	texture *tex;
 } blitTexture;
 
-class BLIT {
+class BLIT: public OBJECT {
 public:
 	texture *getTexture(std::string id);
 	void addTexture(std::string id, texture *tex);
