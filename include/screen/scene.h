@@ -32,9 +32,13 @@ public:
 	void setBackgroundBlue(unsigned int backgroundBlue);
 	TEXT *getTextObjectVector(const char *textObjectId);
 	BLIT *getBlitObjectVector(const char *blitObjectId);
-	//LIST getListIbjectVector(const char *listObjectId);
+	//LIST getListObjectVector(const char *listObjectId);
 	SCENE(const char *layoutXMLFilePath);
 private:
+	font *addLocalFont(const char *path);
+	void destroyLocalFonts();
+	texture *addLocalTexture(const char *path);
+	void destroyLocalTextures();
 	unsigned int sizeX;
 	unsigned int sizeY;
 	unsigned int backgroundRed;
@@ -42,6 +46,6 @@ private:
 	unsigned int backgroundBlue;
 	std::vector<TEXT> textObjects;
 	std::vector<BLIT> blitObjects;
-	std::vector<sceneFont> fonts;
-	std::vector<sceneTexture> textures;
+	std::vector<sceneFont> sceneFonts;
+	std::vector<sceneTexture> sceneTextures;
 };

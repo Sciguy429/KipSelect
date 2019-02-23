@@ -10,6 +10,22 @@ struct objectFindId : std::unary_function<OBJECT, bool> {
 	}
 };
 
+struct sceneTextureFindPath : std::unary_function<sceneTexture, bool> {
+	std::string path;
+	sceneTextureFindPath(std::string path) :path(path) { }
+	bool operator()(sceneTexture const& m) const {
+		return m.path == path;
+	}
+};
+
+struct sceneFontFindPath : std::unary_function<sceneFont, bool> {
+	std::string path;
+	sceneFontFindPath(std::string path) :path(path) { }
+	bool operator()(sceneFont const& m) const {
+		return m.path == path;
+	}
+};
+
 unsigned int SCENE::getSizeX() {
 	return sizeX;
 }
@@ -84,4 +100,48 @@ SCENE::SCENE(const char *layoutXMLFilePath) {
 	testText2.setText("test");
 	testText2.setSize(16);
 	textObjects.push_back(testText2);
+}
+
+font *SCENE::addLocalFont(const char *path) {
+	std::vector<sceneFont>::iterator sceneFontItr = std::find_if(sceneFonts.begin(), sceneFonts.end(), sceneFontFindPath(path));
+	if (sceneFontItr == sceneFonts.end()) {
+		sceneFont sFnt;
+		sFnt.path = path;
+		sFnt.fnt = gfxCreateFontFromTTF(path);
+		sceneFonts.push_back(sFnt);
+		return sFnt.fnt;
+	}
+	return sceneFontItr->fnt;
+}
+
+void SCENE::destroyLocalFonts() {
+	if (sceneFonts.empty()) {
+		return;
+	}
+	for (std::size_t i = 0; i < sceneFonts.size(); i++) {
+		gfxDestroyFont(sceneFonts[i].fnt);
+	}
+	sceneFonts.clear();
+}
+
+texture *SCENE::addLocalTexture(const char *path) {
+	std::vector<sceneTexture>::iterator sceneTextureItr = std::find_if(sceneTextures.begin(), sceneTextures.end(), sceneTextureFindPath(path));
+	if (sceneTextureItr == sceneTextures.end()) {
+		sceneTexture sTex;
+		sTex.path = path;
+		sTex.tex = gfxCreateTextureFromPNG(path);
+		sceneTextures.push_back(sTex);
+		return sTex.tex;
+	}
+	return sceneTextureItr->tex;
+}
+
+void SCENE::destroyLocalTextures() {
+	if (sceneTextures.empty()) {
+		return;
+	}
+	for (std::size_t i = 0; i < sceneTextures.size(); i++) {
+		gfxDestroyTexture(sceneTextures[i].tex);
+	}
+	sceneTextures.clear();
 }
