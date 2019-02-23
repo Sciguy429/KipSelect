@@ -7,13 +7,13 @@
 
 class TEXT: public OBJECT {
 public:
-	font *getFont() const;
+	font *getFont();
 	void setFont(font *fnt);
-	unsigned int getSize() const;
+	unsigned int getSize();
 	void setSize(unsigned int size);
-	unsigned int getWrap() const;
+	unsigned int getWrap();
 	void setWrap(unsigned int wrap);
-	std::string getText() const;
+	std::string getText();
 	void setText(std::string text);
 private:
 	font *fnt;
