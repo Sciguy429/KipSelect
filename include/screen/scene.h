@@ -34,6 +34,7 @@ public:
 	BLIT *getBlitObjectVector(const char *blitObjectId);
 	//LIST getListObjectVector(const char *listObjectId);
 	SCENE(const char *layoutXMLFilePath);
+	~SCENE();
 private:
 	font *addLocalFont(const char *path);
 	void destroyLocalFonts();

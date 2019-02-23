@@ -100,6 +100,19 @@ SCENE::SCENE(const char *layoutXMLFilePath) {
 	testText2.setText("test");
 	testText2.setSize(16);
 	textObjects.push_back(testText2);
+	addLocalFont("romfs:/font/bahnschrift.ttf");
+	addLocalFont("romfs:/font/tt0288m_.ttf");
+	addLocalFont("romfs:/font/bahnschrift.ttf");
+	addLocalTexture("romfs:/png/menu/menu_background.png");
+	addLocalTexture("romfs:/png/menu/menu_bar.png");
+	addLocalTexture("romfs:/png/menu/menu_checkmark.png");
+	addLocalTexture("romfs:/png/tab/tab_kips.png");
+	addLocalTexture("romfs:/png/menu/menu_bar.png");
+}
+
+SCENE::~SCENE() {
+	destroyLocalFonts();
+	destroyLocalTextures();
 }
 
 font *SCENE::addLocalFont(const char *path) {
