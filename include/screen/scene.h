@@ -20,11 +20,26 @@ typedef struct {
 
 class SCENE {
 public:
+	unsigned int getSizeX();
+	void setSizeX(unsigned int sizeX);
+	unsigned int getSizeY();
+	void setSizeY(unsigned int sizeY);
+	unsigned int getBackgroundRed();
+	void setBackgroundRed(unsigned int backgroundRed);
+	unsigned int getBackgroundGreen();
+	void setBackgroundGreen(unsigned int backgroundGreen);
+	unsigned int getBackgroundBlue();
+	void setBackgroundBlue(unsigned int backgroundBlue);
 	TEXT *getTextObjectVector(const char *textObjectId);
 	BLIT *getBlitObjectVector(const char *blitObjectId);
 	//LIST getListIbjectVector(const char *listObjectId);
 	SCENE(const char *layoutXMLFilePath);
 private:
+	unsigned int sizeX;
+	unsigned int sizeY;
+	unsigned int backgroundRed;
+	unsigned int backgroundGreen;
+	unsigned int backgroundBlue;
 	std::vector<TEXT> textObjects;
 	std::vector<BLIT> blitObjects;
 	std::vector<sceneFont> fonts;

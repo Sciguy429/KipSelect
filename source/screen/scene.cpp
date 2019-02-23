@@ -10,6 +10,46 @@ struct objectFindId : std::unary_function<OBJECT, bool> {
 	}
 };
 
+unsigned int SCENE::getSizeX() {
+	return sizeX;
+}
+
+void SCENE::setSizeX(unsigned int sizeX) {
+	this->sizeX = sizeX;
+}
+
+unsigned int SCENE::getSizeY() {
+	return sizeY;
+}
+
+void SCENE::setSizeY(unsigned int sizeY) {
+	this->sizeY = sizeY;
+}
+
+unsigned int SCENE::getBackgroundRed() {
+	return backgroundRed;
+}
+
+void SCENE::setBackgroundRed(unsigned int backgroundRed) {
+	this->backgroundRed = backgroundRed;
+}
+
+unsigned int SCENE::getBackgroundGreen() {
+	return backgroundGreen;
+}
+
+void SCENE::setBackgroundGreen(unsigned int backgroundGreen) {
+	this->backgroundGreen = backgroundGreen;
+}
+
+unsigned int SCENE::getBackgroundBlue() {
+	return backgroundBlue;
+}
+
+void SCENE::setBackgroundBlue(unsigned int backgroundBlue) {
+	this->backgroundBlue = backgroundBlue;
+}
+
 TEXT *SCENE::getTextObjectVector(const char *textObjectId) {
 	if (textObjects.empty()) {
 		return NULL;
