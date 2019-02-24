@@ -9,7 +9,18 @@
 
 #include "screen/scene.h"
 
+void threadTest(void *) {
+	printf("IM A THREAD!\n");
+	gfxDrawRect(frameBufferTexture, 0, 0, 500, 500, RGBA8(255, 0, 0, 0), true);
+	gfxDrawFrameBuffer();
+}
+
 int main(int argc, char **argv) {
+	u32 currentCore = svcGetCurrentProcessorNumber();
+	u32 renderThreadCore = currentCore + 1;
+	if (renderThreadCore > 3) {
+		renderThreadCore = 0;
+	}
 	KIP kip;
 	BCT bct;
 	LFS lfs;
@@ -17,12 +28,17 @@ int main(int argc, char **argv) {
 	nxlinkStdio();
 	romfsInit();
 	gfxInit(1280, 720);
+	printf("main() -- Running On Core: %d\n", currentCore);
+	printf("renderThread() --- Running On Core: %d\n", renderThreadCore);
 	errorLoadAssets();
 	lfs.parseLFSDatabase();
 	lfs.parseSysDatabase();
 	kip.scanKIP();
 	bct.scanBCT();
 	lfs.scanLFS();
+	//TEST
+	Thread testThread;
+	threadCreate(&testThread, &threadTest, NULL, 0x19000, 0x2C, renderThreadCore);
 	//INIT NEW MENU SCENE HERE
 	SCENE test("this dosen't matter yet...");
 	TEXT *text = test.getTextObjectVector("nop");
@@ -40,6 +56,7 @@ int main(int argc, char **argv) {
 		}
 		else if (kDown & KEY_R) {
 			//R
+			threadWaitForExit(&testThread);
 		}
 		else if (kDown & KEY_UP) {
 			//U
@@ -49,8 +66,10 @@ int main(int argc, char **argv) {
 		}
 		else if (kDown & KEY_A) {
 			//A
+			threadStart(&testThread);
 		}
 	}
+	threadClose(&testThread);
 	errorDestroyAssets();
 	gfxCleanUp();
 	romfsExit();
