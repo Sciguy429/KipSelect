@@ -41,9 +41,9 @@ APP_VERSION	:=	${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_MICRO}
 TARGET		:=	$(subst $e ,_,$(notdir $(APP_TITLE)))
 OUTDIR		:=	out
 BUILD		:=	build
-SOURCES		:=	source source/cfw source/screen source/screen/objects source/screen/render source/utils
+SOURCES		:=	source source/cfw source/screen source/screen/objects source/screen/thread source/utils
 DATA		:=	data
-INCLUDES	:=	include include/cfw include/screen include/screen/objects include/screen/render include/utils
+INCLUDES	:=	include include/cfw include/screen include/screen/objects include/screen/thread include/utils
 EXEFS_SRC	:=	exefs_src
 ROMFS	:=	romfs
 
