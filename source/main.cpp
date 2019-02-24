@@ -10,6 +10,7 @@
 #include "screen/scene.h"
 
 #include "screen/thread/render.h"
+#include <sstream>
 
 int main(int argc, char **argv) {
 	u32 mainThreadCore = svcGetCurrentProcessorNumber();
@@ -35,12 +36,14 @@ int main(int argc, char **argv) {
 	rTCV.runThread = true;
 	Thread testThread;
 	threadCreate(&testThread, &renderThread, &rTCV, 0x19000, 0x2C, renderThreadCore);
+	/*
 	//INIT NEW MENU SCENE HERE
 	SCENE test("this dosen't matter yet...");
 	TEXT *text = test.getTextObjectVector("nop");
 	printf("VECTOR ID: %s\n", text->getId().c_str());
 	printf("TEXT: %s\n", text->getText().c_str());
 	//END TEST
+	*/
 	while (appletMainLoop() && !isErrorThrown()) {
 		hidScanInput();
 		u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
@@ -49,11 +52,10 @@ int main(int argc, char **argv) {
 		}
 		else if (kDown & KEY_L) {
 			//L
-			rTCV.runThread = false;
-			printf("MAIN -- Disabled Thread\n");
 		}
 		else if (kDown & KEY_R) {
 			//R
+			rTCV.runThread = false;
 			threadWaitForExit(&testThread);
 		}
 		else if (kDown & KEY_UP) {
