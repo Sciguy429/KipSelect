@@ -1,5 +1,13 @@
 #include "screen/objects/object.h"
 
+unsigned int OBJECT::getType() {
+	return type;
+}
+
+void OBJECT::setType(unsigned int type) {
+	this->type = type;
+}
+
 std::string OBJECT::getId() const {
 	return id;
 }
@@ -38,4 +46,8 @@ bool OBJECT::getCentered() const {
 
 void OBJECT::setCentered(bool centered) {
 	this->centered = centered;
+}
+
+OBJECT::OBJECT() {
+	setType(OBJECT_TYPE_GENERIC);
 }

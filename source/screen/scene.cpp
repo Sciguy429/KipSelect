@@ -2,11 +2,11 @@
 
 #include "screen/scene.h"
 
-struct objectFindId : std::unary_function<OBJECT, bool> {
+struct objectFindId : std::unary_function<void *, bool> {
 	std::string id;
 	objectFindId(std::string id) :id(id) { }
-	bool operator()(OBJECT const& m) const {
-		return m.getId() == id;
+	bool operator()(void * const& m) const {
+		return static_cast<OBJECT *>(m)->getId() == id;
 	}
 };
 
@@ -66,35 +66,56 @@ void SCENE::setBackgroundBlue(unsigned int backgroundBlue) {
 	this->backgroundBlue = backgroundBlue;
 }
 
-TEXT *SCENE::getTextObjectVector(const char *textObjectId) {
-	if (textObjects.empty()) {
+void *SCENE::getObjectVector(const char *objectId) {
+	if (sceneObjects.empty()) {
 		return NULL;
 	}
-	std::vector<TEXT>::iterator textObjectItr = std::find_if(textObjects.begin(), textObjects.end(), objectFindId(textObjectId));
-	if (textObjectItr == textObjects.end()) {
+	std::vector<void *>::iterator sceneObjectItr = std::find_if(sceneObjects.begin(), sceneObjects.end(), objectFindId(objectId));
+	if (sceneObjectItr == sceneObjects.end()) {
 		return NULL;
 	}
-	return &*textObjectItr;
-}
-
-BLIT *SCENE::getBlitObjectVector(const char *blitObjectId) {
-	if (blitObjects.empty()) {
-		return NULL;
-	}
-	std::vector<BLIT>::iterator blitObjectItr = std::find_if(blitObjects.begin(), blitObjects.end(), objectFindId(blitObjectId));
-	if (blitObjectItr == blitObjects.end()) {
-		return NULL;
-	}
-	return &*blitObjectItr;
+	return *sceneObjectItr;
 }
 
 SCENE::SCENE(const char *layoutXMLFilePath) {
 	//Stub
+	TEXT *testText = new TEXT;
+	testText->setId("yes");
+	testText->setText("HELLO");
+	sceneObjects.push_back(testText);
+	TEXT *testTextPTR = (TEXT*)sceneObjects[0];
+	printf("MAIN -- %s\n", testTextPTR->getText().c_str());
 }
 
 SCENE::~SCENE() {
+	if (!sceneObjects.empty()) {
+		for (unsigned int i = 0; i < sceneObjects.size(); i++) {
+			switch (getObjectType(sceneObjects[i])) {
+			case OBJECT_TYPE_GENERIC: {
+				OBJECT *object = (OBJECT*)sceneObjects[i];
+				delete object;
+				break;
+			}
+			case OBJECT_TYPE_TEXT: {
+				TEXT *text = (TEXT*)sceneObjects[i];
+				delete text;
+				break;
+			}
+			case OBJECT_TYPE_BLIT: {
+				BLIT *blit = (BLIT*)sceneObjects[i];
+				delete blit;
+				break;
+			}
+			}
+		}
+	}
 	destroyLocalFonts();
 	destroyLocalTextures();
+}
+
+unsigned int SCENE::getObjectType(void *objectPtr) {
+	OBJECT *obj = (OBJECT*)objectPtr;
+	return obj->getType();
 }
 
 font *SCENE::addLocalFont(const char *path) {

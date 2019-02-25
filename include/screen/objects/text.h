@@ -15,6 +15,7 @@ public:
 	void setWrap(unsigned int wrap);
 	std::string getText();
 	void setText(std::string text);
+	TEXT();
 private:
 	font *fnt;
 	unsigned int size;

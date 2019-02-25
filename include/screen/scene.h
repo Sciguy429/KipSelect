@@ -30,12 +30,11 @@ public:
 	void setBackgroundGreen(unsigned int backgroundGreen);
 	unsigned int getBackgroundBlue();
 	void setBackgroundBlue(unsigned int backgroundBlue);
-	TEXT *getTextObjectVector(const char *textObjectId);
-	BLIT *getBlitObjectVector(const char *blitObjectId);
-	//LIST getListObjectVector(const char *listObjectId);
+	void *getObjectVector(const char *objectId);
 	SCENE(const char *layoutXMLFilePath);
 	~SCENE();
 private:
+	unsigned int getObjectType(void *objectPtr);
 	font *addLocalFont(const char *path);
 	void destroyLocalFonts();
 	texture *addLocalTexture(const char *path);
@@ -45,8 +44,7 @@ private:
 	unsigned int backgroundRed;
 	unsigned int backgroundGreen;
 	unsigned int backgroundBlue;
-	std::vector<TEXT> textObjects;
-	std::vector<BLIT> blitObjects;
+	std::vector<void *> sceneObjects;
 	std::vector<sceneFont> sceneFonts;
 	std::vector<sceneTexture> sceneTextures;
 };

@@ -34,3 +34,7 @@ std::string BLIT::getTextureSelected() {
 void BLIT::setTextureSelected(std::string textureSelected) {
 	this->textureSelected = textureSelected;
 }
+
+BLIT::BLIT() {
+	setType(OBJECT_TYPE_BLIT);
+}

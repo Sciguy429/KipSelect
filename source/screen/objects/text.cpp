@@ -31,3 +31,7 @@ std::string TEXT::getText() {
 void TEXT::setText(std::string text) {
 	this->text = text;
 }
+
+TEXT::TEXT() {
+	setType(OBJECT_TYPE_TEXT);
+}

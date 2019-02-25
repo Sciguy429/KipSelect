@@ -10,7 +10,6 @@
 #include "screen/scene.h"
 
 #include "screen/thread/render.h"
-#include <sstream>
 
 int main(int argc, char **argv) {
 	u32 mainThreadCore = svcGetCurrentProcessorNumber();
@@ -32,6 +31,10 @@ int main(int argc, char **argv) {
 	bct.scanBCT();
 	lfs.scanLFS();
 	//TEST
+	SCENE testS("Nope");
+	TEXT *testText = (TEXT*)testS.getObjectVector("yes");
+	printf("MAIN -- 2 -- %s\n", testText->getText().c_str());
+	//
 	renderThreadControlVector rTCV;
 	rTCV.runThread = true;
 	Thread testThread;
