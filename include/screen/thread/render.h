@@ -4,7 +4,7 @@
 
 typedef struct {
 	bool runThread;
-	//SCENE *mainScene;
+	SCENE *mainScene;
 	//SCENE *overlayScene;
 } renderThreadControlVector;
 

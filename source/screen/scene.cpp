@@ -90,24 +90,6 @@ BLIT *SCENE::getBlitObjectVector(const char *blitObjectId) {
 
 SCENE::SCENE(const char *layoutXMLFilePath) {
 	//Stub
-	TEXT testText;
-	testText.setId("test");
-	testText.setText("NO U");
-	testText.setSize(10);
-	textObjects.push_back(testText);
-	TEXT testText2;
-	testText2.setId("nop");
-	testText2.setText("test");
-	testText2.setSize(16);
-	textObjects.push_back(testText2);
-	addLocalFont("romfs:/font/bahnschrift.ttf");
-	addLocalFont("romfs:/font/tt0288m_.ttf");
-	addLocalFont("romfs:/font/bahnschrift.ttf");
-	addLocalTexture("romfs:/png/menu/menu_background.png");
-	addLocalTexture("romfs:/png/menu/menu_bar.png");
-	addLocalTexture("romfs:/png/menu/menu_checkmark.png");
-	addLocalTexture("romfs:/png/tab/tab_kips.png");
-	addLocalTexture("romfs:/png/menu/menu_bar.png");
 }
 
 SCENE::~SCENE() {

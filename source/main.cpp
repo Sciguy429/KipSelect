@@ -36,14 +36,6 @@ int main(int argc, char **argv) {
 	rTCV.runThread = true;
 	Thread testThread;
 	threadCreate(&testThread, &renderThread, &rTCV, 0x19000, 0x2C, renderThreadCore);
-	/*
-	//INIT NEW MENU SCENE HERE
-	SCENE test("this dosen't matter yet...");
-	TEXT *text = test.getTextObjectVector("nop");
-	printf("VECTOR ID: %s\n", text->getId().c_str());
-	printf("TEXT: %s\n", text->getText().c_str());
-	//END TEST
-	*/
 	while (appletMainLoop() && !isErrorThrown()) {
 		hidScanInput();
 		u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
