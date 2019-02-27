@@ -80,7 +80,15 @@ void *SCENE::getObjectVector(const char *objectId) {
 
 SCENE::SCENE(const char *layoutXMLFilePath) {
 	XML layout(layoutXMLFilePath);
-	//Stub
+	XPATHRESULT sizeXResult = layout.evalXPathExp("/scene/size/x");
+	XPATHRESULT sizeYResult = layout.evalXPathExp("/scene/size/y");
+	XPATHRESULT backgroundRedResult = layout.evalXPathExp("/scene/backgroundColor/red");
+	XPATHRESULT backgroundGreenResult = layout.evalXPathExp("/scene/backgroundColor/green");
+	XPATHRESULT backgroundBlueResult = layout.evalXPathExp("/scene/backgroundColor/blue");
+	XPATHRESULT objectsResult = layout.evalXPathExp("/scene/objects/*");
+	printf("SCENE -- Size :: (X: %s, Y: %s)\n", layout.getKeyword(sizeXResult.getNodePtr()[0]).c_str(), layout.getKeyword(sizeYResult.getNodePtr()[0]).c_str());
+	printf("SCENE -- Background Color :: (Red: %s, Green: %s, Blue: %s)\n", layout.getKeyword(backgroundRedResult.getNodePtr()[0]).c_str(), layout.getKeyword(backgroundGreenResult.getNodePtr()[0]).c_str(), layout.getKeyword(backgroundBlueResult.getNodePtr()[0]).c_str());
+	printf("SCENE -- Objects :: Count: %d\n", objectsResult.getNodeCount());
 }
 
 SCENE::~SCENE() {
