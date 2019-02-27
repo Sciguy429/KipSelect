@@ -6,6 +6,8 @@
 
 class XPATHRESULT {
 public:
+	unsigned int getNodeCount();
+	xmlNodePtr *getNodePtr();
 	XPATHRESULT(xmlXPathObjectPtr xPathObjPtr);
 	~XPATHRESULT();
 private:
@@ -15,6 +17,7 @@ private:
 class XML {
 public:
 	XPATHRESULT evalXPathExp(xmlChar *exp);
+	const char *getKeyword(xmlNodePtr nodePtr);
 	XML(const char *xmlFilePath);
 	~XML();
 private:

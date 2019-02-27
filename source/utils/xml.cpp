@@ -1,6 +1,14 @@
 #include "utils/xml.h"
 
 //XPATHRESULT :: CLASS
+unsigned int XPATHRESULT::getNodeCount() {
+	return xPathObjPtr->nodesetval->nodeNr;
+}
+
+xmlNodePtr *XPATHRESULT::getNodePtr() {
+	return xPathObjPtr->nodesetval->nodeTab;;
+}
+
 XPATHRESULT::XPATHRESULT(xmlXPathObjectPtr xPathObjPtr) {
 	this->xPathObjPtr = xPathObjPtr;
 }
@@ -30,6 +38,14 @@ XPATHRESULT XML::evalXPathExp(xmlChar *exp) {
 		return NULL;
 	}
 	return XPATHRESULT(result);
+}
+
+const char *XML::getKeyword(xmlNodePtr nodePtr) {
+	xmlChar *keyword;
+	keyword = xmlNodeListGetString(xmlDoc, nodePtr->children, 1);
+	const char *out = reinterpret_cast<const char *>(keyword);
+	xmlFree(keyword);
+	return out;
 }
 
 XML::XML(const char *xmlFilePath) {
