@@ -6,7 +6,7 @@ unsigned int XPATHRESULT::getNodeCount() {
 }
 
 xmlNodePtr *XPATHRESULT::getNodePtr() {
-	return xPathObjPtr->nodesetval->nodeTab;;
+	return xPathObjPtr->nodesetval->nodeTab;
 }
 
 XPATHRESULT::XPATHRESULT(xmlXPathObjectPtr xPathObjPtr) {
@@ -40,10 +40,10 @@ XPATHRESULT XML::evalXPathExp(const char *exp) {
 	return XPATHRESULT(result);
 }
 
-const char *XML::getKeyword(xmlNodePtr nodePtr) {
+std::string XML::getKeyword(xmlNodePtr nodePtr) {
 	xmlChar *keyword;
 	keyword = xmlNodeListGetString(xmlDoc, nodePtr->children, 1);
-	const char *out = reinterpret_cast<const char *>(keyword);
+	std::string out = XMLCHAR_TO_CONSTCHAR(keyword);
 	xmlFree(keyword);
 	return out;
 }

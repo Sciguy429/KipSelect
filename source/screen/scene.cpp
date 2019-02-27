@@ -80,7 +80,7 @@ void *SCENE::getObjectVector(const char *objectId) {
 
 SCENE::SCENE(const char *layoutXMLFilePath) {
 	XML layout(layoutXMLFilePath);
-	XPATHRESULT test = layout.evalXPathExp("//*");
+	//Stub
 }
 
 SCENE::~SCENE() {

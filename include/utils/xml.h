@@ -1,8 +1,11 @@
 #pragma once
 
+#include <string>
 #include <libxml2/libxml/xmlmemory.h>
 #include <libxml2/libxml/xpath.h>
 #include <libxml2/libxml/parser.h>
+
+#define XMLCHAR_TO_CONSTCHAR(xC) (reinterpret_cast<const char *>(xC))
 
 class XPATHRESULT {
 public:
@@ -17,7 +20,7 @@ private:
 class XML {
 public:
 	XPATHRESULT evalXPathExp(const char *exp);
-	const char *getKeyword(xmlNodePtr nodePtr);
+	std::string getKeyword(xmlNodePtr nodePtr);
 	XML(const char *xmlFilePath);
 	~XML();
 private:
