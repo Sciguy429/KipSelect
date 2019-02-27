@@ -79,12 +79,6 @@ void *SCENE::getObjectVector(const char *objectId) {
 
 SCENE::SCENE(const char *layoutXMLFilePath) {
 	//Stub
-	TEXT *testText = new TEXT;
-	testText->setId("yes");
-	testText->setText("HELLO");
-	sceneObjects.push_back(testText);
-	TEXT *testTextPTR = (TEXT*)sceneObjects[0];
-	printf("MAIN -- %s\n", testTextPTR->getText().c_str());
 }
 
 SCENE::~SCENE() {

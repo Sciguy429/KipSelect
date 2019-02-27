@@ -31,9 +31,7 @@ int main(int argc, char **argv) {
 	bct.scanBCT();
 	lfs.scanLFS();
 	//TEST
-	SCENE testS("Nope");
-	TEXT *testText = (TEXT*)testS.getObjectVector("yes");
-	printf("MAIN -- 2 -- %s\n", testText->getText().c_str());
+	//SCENE testS("romfs:/layout/test.xml");
 	//
 	renderThreadControlVector rTCV;
 	rTCV.runThread = true;
