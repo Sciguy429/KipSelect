@@ -16,7 +16,7 @@ private:
 
 class XML {
 public:
-	XPATHRESULT evalXPathExp(xmlChar *exp);
+	XPATHRESULT evalXPathExp(const char *exp);
 	const char *getKeyword(xmlNodePtr nodePtr);
 	XML(const char *xmlFilePath);
 	~XML();

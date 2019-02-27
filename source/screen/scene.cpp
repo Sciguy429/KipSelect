@@ -1,6 +1,7 @@
 #include <algorithm>
 
 #include "screen/scene.h"
+#include "utils/xml.h"
 
 struct objectFindId : std::unary_function<void *, bool> {
 	std::string id;
@@ -78,7 +79,8 @@ void *SCENE::getObjectVector(const char *objectId) {
 }
 
 SCENE::SCENE(const char *layoutXMLFilePath) {
-	//Stub
+	XML layout(layoutXMLFilePath);
+	XPATHRESULT test = layout.evalXPathExp("//*");
 }
 
 SCENE::~SCENE() {

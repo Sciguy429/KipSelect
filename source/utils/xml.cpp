@@ -18,7 +18,7 @@ XPATHRESULT::~XPATHRESULT() {
 }
 //XPATHRESULT :: END
 //XML :: CLASS
-XPATHRESULT XML::evalXPathExp(xmlChar *exp) {
+XPATHRESULT XML::evalXPathExp(const char *exp) {
 	xmlXPathContextPtr context;
 	xmlXPathObjectPtr result;
 	context = xmlXPathNewContext(xmlDoc);
@@ -26,7 +26,7 @@ XPATHRESULT XML::evalXPathExp(xmlChar *exp) {
 		printf("XML -- Error Makeing New XPath Context\n");
 		return NULL;
 	}
-	result = xmlXPathEvalExpression(exp, context);
+	result = xmlXPathEvalExpression((xmlChar*) exp, context);
 	xmlXPathFreeContext(context);
 	if (result == NULL) {
 		printf("XML -- Error Evaluating XPath Expression\n");
