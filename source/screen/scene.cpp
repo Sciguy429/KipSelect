@@ -116,6 +116,11 @@ SCENE::~SCENE() {
 				delete blit;
 				break;
 			}
+			case OBJECT_TYPE_ANIMATION: {
+				ANIMATION *animation = (ANIMATION*)sceneObjects[i];
+				delete animation;
+				break;
+			}
 			}
 		}
 	}
