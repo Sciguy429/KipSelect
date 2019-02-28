@@ -89,6 +89,12 @@ SCENE::SCENE(const char *layoutXMLFilePath) {
 	printf("SCENE -- Size :: (X: %s, Y: %s)\n", layout.getKeyword(sizeXResult.getNodePtr()[0]).c_str(), layout.getKeyword(sizeYResult.getNodePtr()[0]).c_str());
 	printf("SCENE -- Background Color :: (Red: %s, Green: %s, Blue: %s)\n", layout.getKeyword(backgroundRedResult.getNodePtr()[0]).c_str(), layout.getKeyword(backgroundGreenResult.getNodePtr()[0]).c_str(), layout.getKeyword(backgroundBlueResult.getNodePtr()[0]).c_str());
 	printf("SCENE -- Objects :: Count: %d\n", objectsResult.getNodeCount());
+	for (unsigned int i = 0; i < objectsResult.getNodeCount(); i++) {
+		xmlChar *id;
+		id = xmlGetProp(objectsResult.getNodePtr()[i], (const xmlChar*)"id");
+		printf("SCENE -- Objects :: Object #%d :: Type: %s, Id: %s\n", i, XMLCHAR_TO_CONSTCHAR(objectsResult.getNodePtr()[i]->name), XMLCHAR_TO_CONSTCHAR(id));
+		xmlFree(id);
+	}
 }
 
 SCENE::~SCENE() {
