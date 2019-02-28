@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 	bct.scanBCT();
 	lfs.scanLFS();
 	//TEST
-	SCENE testS("romfs:/layout/test.xml");
+	//SCENE testS("romfs:/layout/test.xml");
 	//
 	renderThreadControlVector rTCV;
 	rTCV.runThread = true;
