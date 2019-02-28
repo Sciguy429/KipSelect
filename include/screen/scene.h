@@ -7,6 +7,7 @@
 #include "screen/objects/object.h"
 #include "screen/objects/text.h"
 #include "screen/objects/blit.h"
+#include "screen/objects/animation.h"
 
 typedef struct {
 	std::string path;
