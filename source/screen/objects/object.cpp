@@ -40,12 +40,12 @@ void OBJECT::setPosY(unsigned int posY) {
 	this->posY = posY;
 }
 
-bool OBJECT::getCentered() const {
-	return centered;
+unsigned int OBJECT::getCenterType() const {
+	return centerType;
 }
 
-void OBJECT::setCentered(bool centered) {
-	this->centered = centered;
+void OBJECT::setCenterType(unsigned int centerType) {
+	this->centerType = centerType;
 }
 
 OBJECT::OBJECT() {

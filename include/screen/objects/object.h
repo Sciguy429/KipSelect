@@ -7,6 +7,11 @@
 #define OBJECT_TYPE_BLIT 2
 //#define OBJECT_TYPE_LIST 3
 
+#define CENTER_TYPE_TOP_LEFT 0
+#define CENTER_TYPE_TOP_RIGHT 1
+#define CENTER_TYPE_BOTTOM_LEFT 2
+#define CENTER_TYPE_BOTTOM_RIGHT 3
+
 class OBJECT {
 public:
 	unsigned int getType();
@@ -19,8 +24,8 @@ public:
 	void setPosX(unsigned int posX);
 	unsigned int getPosY() const;
 	void setPosY(unsigned int posY);
-	bool getCentered() const;
-	void setCentered(bool centered);
+	unsigned int getCenterType() const;
+	void setCenterType(unsigned int centerType);
 	OBJECT();
 	virtual ~OBJECT() {};
 private:
@@ -29,5 +34,5 @@ private:
 	bool isStatic;
 	unsigned int posX;
 	unsigned int posY;
-	bool centered;
+	unsigned int centerType;
 };

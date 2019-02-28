@@ -15,7 +15,7 @@
       <position>
         <x>0</x> <!--X Posistion-->
         <y>0</y> <!--Y Posistion-->
-        <center>false</center> <!--Centered-->
+        <centerType>false</centerType> <!--Centere Type (0 = Top Left, 1 = Top Right, 2 = Bottom Left, 3 = Bottom Right)-->
       </position>
       <font>romfs:/font/bahnschrift.ttf</font> <!--Path To Font File-->
       <size>25</size> <!--Text Size-->
