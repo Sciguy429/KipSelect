@@ -15,12 +15,12 @@ public:
 	unsigned int getTextureCount();
 	texture *getTexture(unsigned int index);
 	void addTexture(texture *tex);
-	unsigned int getTextureSelected();
-	void setTextureSelected(unsigned int textureSelected);
+	unsigned int getTextureIndexSelected();
+	void setTextureIndexSelected(unsigned int textureIndexSelected);
 	ANIMATION();
 private:
 	bool enabled;
 	unsigned int fps;
 	std::vector<texture*> textures;
-	unsigned int textureSelected;
+	unsigned int textureIndexSelected;
 };

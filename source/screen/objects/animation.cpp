@@ -31,12 +31,12 @@ void ANIMATION::addTexture(texture *tex) {
 	textures.push_back(tex);
 }
 
-unsigned int ANIMATION::getTextureSelected() {
-	return textureSelected;
+unsigned int ANIMATION::getTextureIndexSelected() {
+	return textureIndexSelected;
 }
 
-void ANIMATION::setTextureSelected(unsigned int textureSelected) {
-	this->textureSelected = textureSelected;
+void ANIMATION::setTextureIndexSelected(unsigned int textureIndexSelected) {
+	this->textureIndexSelected = textureIndexSelected;
 }
 
 ANIMATION::ANIMATION() {
