@@ -370,6 +370,54 @@ SCENE::SCENE(const char *layoutXMLFilePath) {
 			sceneObjects.push_back(textObj);
 		}
 		else if (strcmp(objName, "blit") == 0) {
+			//Retrieve Texture List
+			XPATHRESULT blitTexturesResult = layout.evalXPathExpFromNode(&success, obj, "textures/texture");
+			if (!success) {
+				printf("SCENE -- ERROR :: Unable To Find Textures In Blit Object #%d In Layout File: %s\n", i, layoutXMLFilePath);
+				return;
+			}
+			//~~
+			//Retrieve Textures
+			std::vector<blitTexture> blitObjTextures;
+			for (unsigned int t = 0; t < blitTexturesResult.getNodeCount(); t++) {
+				blitTexture blitTex;
+				xmlNodePtr texObj = blitTexturesResult.getNodePtr()[t];
+				//Retrieve Texture Id
+				xmlChar *blitTextureIdXmlChar = xmlGetProp(obj, (xmlChar*) "id");
+				if (blitTextureIdXmlChar == NULL) {
+					printf("SCENE -- ERROR :: Blit Object #%d Texture #%d Is Missing A Id\n", i, t);
+					return;
+				}
+				blitTex.id = XMLCHAR_TO_CONSTCHAR(blitTextureIdXmlChar);
+				xmlFree(blitTextureIdXmlChar);
+				//~~
+				//Retrive Texture Path
+				XPATHRESULT texPathResult = layout.evalXPathExpFromNode(&success, texObj, "path");
+				if (!success) {
+					printf("SCENE -- ERROR :: Unable To Find Path In Blit Object #%d Texture #%d\n", i, t);
+					return;
+				}
+				if (texPathResult.getNodeCount() != 1) {
+					printf("SCENE -- ERROR :: Blit Object #%d Texture #%d Path Search Did Not Return 1 Result, %d Returned\n", i, t, texPathResult.getNodeCount());
+					return;
+				}
+				blitTex.tex = addLocalTexture(layout.getKeyword(texPathResult.getNodePtr()[0]).c_str());
+				//~~
+				blitObjTextures.push_back(blitTex);
+			}
+			//~~
+			//Retrieve Texture Selected
+			XPATHRESULT blitTextureSelectedResult = layout.evalXPathExpFromNode(&success, obj, "textureSelected");
+			if (!success) {
+				printf("SCENE -- ERROR :: Unable To Find Texture Selected In Blit Object #%d In Layout File: %s\n", i, layoutXMLFilePath);
+				return;
+			}
+			if (blitTextureSelectedResult.getNodeCount() != 1) {
+				printf("SCENE -- ERROR :: Texture Selected Search In Blit Object #%d Did Not Return 1 Result, %d Returned\n", i, blitTextureSelectedResult.getNodeCount());
+				return;
+			}
+			std::string blitObjTextureSelected = layout.getKeyword(blitTextureSelectedResult.getNodePtr()[0]);
+			//~~
 			//Blit Object Creation
 			BLIT *blitObject = new BLIT();
 			blitObject->setId(objId);
@@ -377,6 +425,11 @@ SCENE::SCENE(const char *layoutXMLFilePath) {
 			blitObject->setPosX(objPositionX);
 			blitObject->setPosY(objPositionY);
 			blitObject->setCenterType(objCenterType);
+			//---
+			for (std::size_t t = 0; t < blitObjTextures.size(); t++) {
+				blitObject->addTexture(blitObjTextures[t].id, blitObjTextures[t].tex);
+			}
+			blitObject->setTextureSelected(blitObjTextureSelected);
 			//~~
 			sceneObjects.push_back(blitObject);
 		}
