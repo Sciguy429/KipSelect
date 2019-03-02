@@ -297,16 +297,99 @@ SCENE::SCENE(const char *layoutXMLFilePath) {
 		//~~
 		//Retrieve Object Specific Data
 		if (strcmp(objName, "text") == 0) {
-			//Text Object
-			TEXT *textObj();
+			//Retrieve Text Font
+			XPATHRESULT textFontPathResult = layout.evalXPathExpFromNode(&success, obj, "font");
+			if (!success) {
+				printf("SCENE -- ERROR :: Unable To Find Font In Text Object #%d In Layout File: %s\n", i, layoutXMLFilePath);
+				return;
+			}
+			if (textFontPathResult.getNodeCount() != 1) {
+				printf("SCENE -- ERROR :: Font Search In Text Object #%d Did Not Return 1 Result, %d Returned\n", i, textFontPathResult.getNodeCount());
+				return;
+			}
+			std::string textObjFontPath = layout.getKeyword(textFontPathResult.getNodePtr()[0]);
+			//~~
+			//Retrieve Text Size
+			XPATHRESULT textSizeResult = layout.evalXPathExpFromNode(&success, obj, "size");
+			if (!success) {
+				printf("SCENE -- ERROR :: Unable To Find Size In Text Object #%d In Layout File: %s\n", i, layoutXMLFilePath);
+				return;
+			}
+			if (textSizeResult.getNodeCount() != 1) {
+				printf("SCENE -- ERROR :: Size Search In Text Object #%d Did Not Return 1 Result, %d Returned\n", i, textSizeResult.getNodeCount());
+				return;
+			}
+			unsigned int textObjSize = stringToUnsignedInt(&success, layout.getKeyword(textSizeResult.getNodePtr()[0]));
+			if (!success) {
+				printf("SCENE -- ERROR :: Size In Text Object #%d Is Not Of Type 'unsigned int'\n", i);
+				return;
+			}
+			//~~
+			//Retrieve Wrap
+			XPATHRESULT textWrapResult = layout.evalXPathExpFromNode(&success, obj, "wrap");
+			if (!success) {
+				printf("SCENE -- ERROR :: Unable To Find Wrap In Text Object #%d In Layout File: %s\n", i, layoutXMLFilePath);
+				return;
+			}
+			if (textWrapResult.getNodeCount() != 1) {
+				printf("SCENE -- ERROR :: Wrap Search In Text Object #%d Did Not Return 1 Result, %d Returned\n", i, textWrapResult.getNodeCount());
+				return;
+			}
+			unsigned int textObjWrap = stringToUnsignedInt(&success, layout.getKeyword(textWrapResult.getNodePtr()[0]));
+			if (!success) {
+				printf("SCENE -- ERROR :: Wrap In Text Object #%d Is Not Of Type 'unsigned int'\n", i);
+				return;
+			}
+			//~~
+			//Retrieve Text
+			XPATHRESULT textTextResult = layout.evalXPathExpFromNode(&success, obj, "wrap");
+			if (!success) {
+				printf("SCENE -- ERROR :: Unable To Find Text In Text Object #%d In Layout File: %s\n", i, layoutXMLFilePath);
+				return;
+			}
+			if (textTextResult.getNodeCount() != 1) {
+				printf("SCENE -- ERROR :: Text Search In Text Object #%d Did Not Return 1 Result, %d Returned\n", i, textTextResult.getNodeCount());
+				return;
+			}
+			std::string textObjText = layout.getKeyword(textTextResult.getNodePtr()[0]);
+			//~~
+			//Text Object Creation
+			TEXT *textObj = new TEXT();
+			textObj->setId(objId);
+			textObj->setIsStatic(objStatic);
+			textObj->setPosX(objPositionX);
+			textObj->setPosY(objPositionY);
+			textObj->setCenterType(objCenterType);
+			//---
+			font *textObjFont = addLocalFont(textObjFontPath.c_str());
+			textObj->setFont(textObjFont);
+			textObj->setSize(textObjSize);
+			textObj->setWrap(textObjWrap);
+			textObj->setText(textObjText);
+			//~~
+			sceneObjects.push_back(textObj);
 		}
 		else if (strcmp(objName, "blit") == 0) {
-			//Blit Object
-			BLIT *blitObject();
+			//Blit Object Creation
+			BLIT *blitObject = new BLIT();
+			blitObject->setId(objId);
+			blitObject->setIsStatic(objStatic);
+			blitObject->setPosX(objPositionX);
+			blitObject->setPosY(objPositionY);
+			blitObject->setCenterType(objCenterType);
+			//~~
+			sceneObjects.push_back(blitObject);
 		}
 		else if (strcmp(objName, "animation") == 0) {
-			//Animation Object
-			ANIMATION *animationObject();
+			//Animation Object Creation
+			ANIMATION *animationObject = new ANIMATION();
+			animationObject->setId(objId);
+			animationObject->setIsStatic(objStatic);
+			animationObject->setPosX(objPositionX);
+			animationObject->setPosY(objPositionY);
+			animationObject->setCenterType(objCenterType);
+			//~~
+			sceneObjects.push_back(animationObject);
 		}
 		else {
 			printf("SCENE -- ERROR :: Object #%d Has A Unknown Type: %s\n", i, objName);
