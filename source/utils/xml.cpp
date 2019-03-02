@@ -1,33 +1,6 @@
 #include "utils/xml.h"
 
 //XPATHRESULT :: CLASS
-XPATHRESULT XPATHRESULT::evalXPathExp(bool *success, const char *exp) {
-	xmlXPathContextPtr context;
-	xmlXPathObjectPtr result;
-	context = xmlXPathNewContext(xmlDoc);
-	context->node = *xPathObjPtr->nodesetval->nodeTab;
-	if (context == NULL) {
-		printf("XML -- Error Makeing New XPath Context\n");
-		*success = false;
-		return XPATHRESULT();
-	}
-	result = xmlXPathEvalExpression((xmlChar*)exp, context);
-	xmlXPathFreeContext(context);
-	if (result == NULL) {
-		printf("XML -- Error Evaluating XPath Expression\n");
-		*success = false;
-		return XPATHRESULT();
-	}
-	if (xmlXPathNodeSetIsEmpty(result->nodesetval)) {
-		xmlXPathFreeObject(result);
-		printf("XML -- XPath Expression Returned No Results\n");
-		*success = false;
-		return XPATHRESULT();
-	}
-	*success = true;
-	return XPATHRESULT(xmlDoc, result);
-}
-
 unsigned int XPATHRESULT::getNodeCount() {
 	return xPathObjPtr->nodesetval->nodeNr;
 }
@@ -56,6 +29,33 @@ XPATHRESULT XML::evalXPathExp(bool *success, const char *exp) {
 		return XPATHRESULT();
 	}
 	result = xmlXPathEvalExpression((xmlChar*) exp, context);
+	xmlXPathFreeContext(context);
+	if (result == NULL) {
+		printf("XML -- Error Evaluating XPath Expression\n");
+		*success = false;
+		return XPATHRESULT();
+	}
+	if (xmlXPathNodeSetIsEmpty(result->nodesetval)) {
+		xmlXPathFreeObject(result);
+		printf("XML -- XPath Expression Returned No Results\n");
+		*success = false;
+		return XPATHRESULT();
+	}
+	*success = true;
+	return XPATHRESULT(xmlDoc, result);
+}
+
+XPATHRESULT XML::evalXPathExpFromNode(bool *success, xmlNodePtr nodePtr, const char *exp) {
+	xmlXPathContextPtr context;
+	xmlXPathObjectPtr result;
+	context = xmlXPathNewContext(xmlDoc);
+	context->node = nodePtr;
+	if (context == NULL) {
+		printf("XML -- Error Makeing New XPath Context\n");
+		*success = false;
+		return XPATHRESULT();
+	}
+	result = xmlXPathEvalExpression((xmlChar*)exp, context);
 	xmlXPathFreeContext(context);
 	if (result == NULL) {
 		printf("XML -- Error Evaluating XPath Expression\n");

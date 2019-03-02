@@ -215,7 +215,8 @@ SCENE::SCENE(const char *layoutXMLFilePath) {
 			objId = XMLCHAR_TO_CONSTCHAR(objIdXmlChar);
 			xmlFree(objIdXmlChar);
 		}
-		//~~
+		XPATHRESULT staticResult = layout.evalXPathExpFromNode(&success, obj, "static");
+		printf("SCENE -- %d\n", staticResult.getNodeCount());
 	}
 	//~~
 }

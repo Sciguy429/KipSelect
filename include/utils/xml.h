@@ -9,7 +9,6 @@
 
 class XPATHRESULT {
 public:
-	XPATHRESULT evalXPathExp(bool *success, const char *exp);
 	unsigned int getNodeCount();
 	xmlNodePtr *getNodePtr();
 	XPATHRESULT(xmlDocPtr xmlDoc, xmlXPathObjectPtr xPathObjPtr);
@@ -23,6 +22,7 @@ private:
 class XML {
 public:
 	XPATHRESULT evalXPathExp(bool *success, const char *exp);
+	XPATHRESULT evalXPathExpFromNode(bool *success, xmlNodePtr nodePtr, const char *exp);
 	std::string getKeyword(xmlNodePtr nodePtr);
 	XML(bool *success, const char *xmlFilePath);
 	~XML();
