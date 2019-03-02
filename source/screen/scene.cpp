@@ -36,6 +36,21 @@ unsigned int stringToUnsignedInt(bool *success, std::string str) {
 	return std::stoul(str);
 }
 
+bool stringToBool(bool *success, std::string str) {
+	if (str == "false") {
+		*success = true;
+		return false;
+	}
+	else if (str == "true") {
+		*success = true;
+		return true;
+	}
+	else {
+		*success = false;
+		return false;
+	}
+}
+
 unsigned int SCENE::getSizeX() {
 	return sizeX;
 }
@@ -201,8 +216,8 @@ SCENE::SCENE(const char *layoutXMLFilePath) {
 	}
 	for (unsigned int i = 0; i < objectsResult.getNodeCount(); i++) {
 		xmlNodePtr obj = objectsResult.getNodePtr()[i];
-		//Retrieve Object Type
-		const char *objType = XMLCHAR_TO_CONSTCHAR(obj->name);
+		//Retrieve Object Name
+		const char *objName = XMLCHAR_TO_CONSTCHAR(obj->name);
 		//~~
 		//Retrieve Object Id
 		xmlChar *objIdXmlChar = xmlGetProp(obj, (xmlChar*) "id");
@@ -215,8 +230,87 @@ SCENE::SCENE(const char *layoutXMLFilePath) {
 			objId = XMLCHAR_TO_CONSTCHAR(objIdXmlChar);
 			xmlFree(objIdXmlChar);
 		}
+		//~~
+		//Retrieve Object Static
 		XPATHRESULT staticResult = layout.evalXPathExpFromNode(&success, obj, "static");
-		printf("SCENE -- %d\n", staticResult.getNodeCount());
+		if (!success) {
+			printf("SCENE -- ERROR :: Unable To Find Static In Object #%d In Layout File: %s\n", i, layoutXMLFilePath);
+			return;
+		}
+		if (staticResult.getNodeCount() != 1) {
+			printf("SCENE -- ERROR :: Static Search In Object #%d Did Not Return 1 Result, %d Returned\n", i, staticResult.getNodeCount());
+			return;
+		}
+		bool objStatic = stringToBool(&success, layout.getKeyword(staticResult.getNodePtr()[0]));
+		if (!success) {
+			printf("SCENE -- ERROR :: Static In Object %d Is Not Of Type 'bool'\n", i);
+			return;
+		}
+		//~~
+		//Retrieve Object Position (x)
+		XPATHRESULT positionXResult = layout.evalXPathExpFromNode(&success, obj, "position/x");
+		if (!success) {
+			printf("SCENE -- ERROR :: Unable To Find Position (x) In Object #%d In Layout File: %s\n", i, layoutXMLFilePath);
+			return;
+		}
+		if (positionXResult.getNodeCount() != 1) {
+			printf("SCENE -- ERROR :: Position (x) Search In Object #%d Did Not Return 1 Result, %d Returned\n", i, positionXResult.getNodeCount());
+			return;
+		}
+		unsigned int objPositionX = stringToUnsignedInt(&success, layout.getKeyword(positionXResult.getNodePtr()[0]));
+		if (!success) {
+			printf("SCENE -- ERROR :: Position (x) In Object #%d Is Not Of Type 'unsigned int'\n", i);
+			return;
+		}
+		//~~
+		//Retrieve Object Position (y)
+		XPATHRESULT positionYResult = layout.evalXPathExpFromNode(&success, obj, "position/y");
+		if (!success) {
+			printf("SCENE -- ERROR :: Unable To Find Position (y) In Object #%d In Layout File: %s\n", i, layoutXMLFilePath);
+			return;
+		}
+		if (positionYResult.getNodeCount() != 1) {
+			printf("SCENE -- ERROR :: Position (y) Search In Object #%d Did Not Return 1 Result, %d Returned\n", i, positionYResult.getNodeCount());
+			return;
+		}
+		unsigned int objPositionY = stringToUnsignedInt(&success, layout.getKeyword(positionYResult.getNodePtr()[0]));
+		if (!success) {
+			printf("SCENE -- ERROR :: Position (y) In Object #%d Is Not Of Type 'unsigned int'\n", i);
+			return;
+		}
+		//~~
+		//Retrieve Object Center Type
+		XPATHRESULT centerTypeResult = layout.evalXPathExpFromNode(&success, obj, "position/centerType");
+		if (!success) {
+			printf("SCENE -- ERROR :: Unable To Find Center Type In Object #%d In Layout File: %s\n", i, layoutXMLFilePath);
+			return;
+		}
+		if (centerTypeResult.getNodeCount() != 1) {
+			printf("SCENE -- ERROR :: Center Type Search In Object #%d Did Not Return 1 Result, %d Returned\n", i, centerTypeResult.getNodeCount());
+			return;
+		}
+		unsigned int objCenterType = stringToUnsignedInt(&success, layout.getKeyword(centerTypeResult.getNodePtr()[0]));
+		if (!success) {
+			printf("SCENE -- ERROR :: Center Type In Object #%d Is Not Of Type 'unsigned int'\n", i);
+			return;
+		}
+		//~~
+		//Retrieve Object Specific Data
+		unsigned int objType;
+		if (strcmp(objName, "text") == 0) {
+			objType = OBJECT_TYPE_TEXT;
+		}
+		else if (strcmp(objName, "blit") == 0) {
+			objType = OBJECT_TYPE_BLIT;
+		}
+		else if (strcmp(objName, "animation") == 0) {
+			objType = OBJECT_TYPE_ANIMATION;
+		}
+		else {
+			printf("SCENE -- ERROR :: Object #%d Has A Unknown Type: %s\n", i, objName);
+			return;
+		}
+		//~~
 	}
 	//~~
 }
