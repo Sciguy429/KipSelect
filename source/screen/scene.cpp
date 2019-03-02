@@ -195,8 +195,29 @@ SCENE::SCENE(const char *layoutXMLFilePath) {
 	}
 	//Retrieve Objects
 	XPATHRESULT objectsResult = layout.evalXPathExp(&success, "/scene/objects/*");
+	if (!success) {
+		printf("SCENE -- ERROR :: Unable To Find Any Objects In Layout File: %s\n", layoutXMLFilePath);
+		return;
+	}
+	for (unsigned int i = 0; i < objectsResult.getNodeCount(); i++) {
+		xmlNodePtr obj = objectsResult.getNodePtr()[i];
+		//Retrieve Object Type
+		const char *objType = XMLCHAR_TO_CONSTCHAR(obj->name);
+		//~~
+		//Retrieve Object Id
+		xmlChar *objIdXmlChar = xmlGetProp(obj, (xmlChar*) "id");
+		std::string objId;
+		if (objIdXmlChar == NULL) {
+			printf("SCENE -- WARN :: Object #%d In Layout Is Missing A Id\n", i);
+			objId = "__NOID__";
+		}
+		else {
+			objId = XMLCHAR_TO_CONSTCHAR(objIdXmlChar);
+			xmlFree(objIdXmlChar);
+		}
+		//~~
+	}
 	//~~
-	printf("SCENE -- %d:%d,%d:%d:%d\n", sizeX, sizeY, backgroundRed, backgroundGreen, backgroundBlue);
 }
 
 SCENE::~SCENE() {
