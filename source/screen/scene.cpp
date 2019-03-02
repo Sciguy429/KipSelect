@@ -27,6 +27,15 @@ struct sceneFontFindPath : std::unary_function<sceneFont, bool> {
 	}
 };
 
+unsigned int stringToUnsignedInt(bool *success, std::string str) {
+	if (!std::all_of(str.begin(), str.end(), ::isdigit)) {
+		*success = false;
+		return 0;
+	}
+	*success = true;
+	return std::stoul(str);
+}
+
 unsigned int SCENE::getSizeX() {
 	return sizeX;
 }
@@ -82,19 +91,112 @@ SCENE::SCENE(const char *layoutXMLFilePath) {
 	bool success;
 	XML layout(&success, layoutXMLFilePath);
 	if (!success) {
-		printf("SCENE -- Failed To Parse Layout Xml File: %s\n", layoutXMLFilePath);
+		printf("SCENE -- ERROR :: Failed To Parse Layout Xml File: %s\n", layoutXMLFilePath);
 		return;
 	}
+	//Retrieve X Size
 	XPATHRESULT sizeXResult = layout.evalXPathExp(&success, "/scene/size/x");
 	if (!success) {
-		printf("SCENE -- Unable To Find Size (x) In Layout File: %s\n", layoutXMLFilePath);
+		printf("SCENE -- ERROR :: Unable To Find Size (x) In Layout File: %s\n", layoutXMLFilePath);
 		return;
 	}
+	if (sizeXResult.getNodeCount() != 1) {
+		printf("SCENE -- ERROR :: Size (x) Search Did Not Return 1 Result, %d Returned\n", sizeXResult.getNodeCount());
+		return;
+	}
+	sizeX = stringToUnsignedInt(&success, layout.getKeyword(sizeXResult.getNodePtr()[0]));
+	if (!success) {
+		printf("SCENE -- ERROR :: Size (x) Is Not Of Type 'unsigned int'\n");
+		return;
+	}
+	if (sizeX == 0) {
+		printf("SCENE -- ERROR :: Size (x) Is 0\n");
+		return;
+	}
+	//~~
+	//Retrieve Y Size
 	XPATHRESULT sizeYResult = layout.evalXPathExp(&success, "/scene/size/y");
+	if (!success) {
+		printf("SCENE -- ERROR :: Unable To Find Size (y) In Layout File: %s\n", layoutXMLFilePath);
+		return;
+	}
+	if (sizeYResult.getNodeCount() != 1) {
+		printf("SCENE -- ERROR :: Size (y) Search Did Not Return 1 Result, %d Returned\n", sizeYResult.getNodeCount());
+		return;
+	}
+	sizeY = stringToUnsignedInt(&success, layout.getKeyword(sizeYResult.getNodePtr()[0]));
+	if (!success) {
+		printf("SCENE -- ERROR :: Size (y) Is Not Of Type 'unsigned int'\n");
+		return;
+	}
+	if (sizeY == 0) {
+		printf("SCENE -- ERROR :: Size (y) Is 0\n");
+		return;
+	}
+	//~~
+	//Retrieve Background Red
 	XPATHRESULT backgroundRedResult = layout.evalXPathExp(&success, "/scene/backgroundColor/red");
+	if (!success) {
+		printf("SCENE -- ERROR :: Unable To Find Background Color Red In Layout File: %s\n", layoutXMLFilePath);
+		return;
+	}
+	if (backgroundRedResult.getNodeCount() != 1) {
+		printf("SCENE -- ERROR :: Background Color Red Search Did Not Return 1 Result, %d Returned\n", backgroundRedResult.getNodeCount());
+		return;
+	}
+	backgroundRed = stringToUnsignedInt(&success, layout.getKeyword(backgroundRedResult.getNodePtr()[0]));
+	if (!success) {
+		printf("SCENE -- ERROR :: Background Color Red Is Not Of Type 'unsigned int'\n");
+		return;
+	}
+	if (backgroundRed > 255) {
+		printf("SCENE -- ERROR :: Background Color Red Is Larger Than 255, Value Is %d\n", backgroundRed);
+		return;
+	}
+	//~~
+	//Retrieve Background Green
 	XPATHRESULT backgroundGreenResult = layout.evalXPathExp(&success, "/scene/backgroundColor/green");
+	if (!success) {
+		printf("SCENE -- ERROR :: Unable To Find Background Color Green In Layout File: %s\n", layoutXMLFilePath);
+		return;
+	}
+	if (backgroundGreenResult.getNodeCount() != 1) {
+		printf("SCENE -- ERROR :: Background Color Green Search Did Not Return 1 Result, %d Returned\n", backgroundGreenResult.getNodeCount());
+		return;
+	}
+	backgroundGreen = stringToUnsignedInt(&success, layout.getKeyword(backgroundGreenResult.getNodePtr()[0]));
+	if (!success) {
+		printf("SCENE -- ERROR :: Background Color Green Is Not Of Type 'unsigned int'\n");
+		return;
+	}
+	if (backgroundGreen > 255) {
+		printf("SCENE -- ERROR :: Background Color Green Is Larger Than 255, Value Is %d\n", backgroundGreen);
+		return;
+	}
+	//~~
+	//Retrieve Background Blue
 	XPATHRESULT backgroundBlueResult = layout.evalXPathExp(&success, "/scene/backgroundColor/blue");
+	if (!success) {
+		printf("SCENE -- ERROR :: Unable To Find Background Color Blue In Layout File: %s\n", layoutXMLFilePath);
+		return;
+	}
+	if (backgroundBlueResult.getNodeCount() != 1) {
+		printf("SCENE -- ERROR :: Background Color Blue Search Did Not Return 1 Result, %d Returned\n", backgroundBlueResult.getNodeCount());
+		return;
+	}
+	backgroundBlue = stringToUnsignedInt(&success, layout.getKeyword(backgroundBlueResult.getNodePtr()[0]));
+	if (!success) {
+		printf("SCENE -- ERROR :: Background Color Blue Is Not Of Type 'unsigned int'\n");
+		return;
+	}
+	if (backgroundBlue > 255) {
+		printf("SCENE -- ERROR :: Background Color Blue Is Larger Than 255, Value Is %d\n", backgroundBlue);
+		return;
+	}
+	//Retrieve Objects
 	XPATHRESULT objectsResult = layout.evalXPathExp(&success, "/scene/objects/*");
+	//~~
+	printf("SCENE -- %d:%d,%d:%d:%d\n", sizeX, sizeY, backgroundRed, backgroundGreen, backgroundBlue);
 }
 
 SCENE::~SCENE() {
