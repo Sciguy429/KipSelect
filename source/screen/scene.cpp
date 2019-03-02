@@ -80,10 +80,14 @@ void *SCENE::getObjectVector(const char *objectId) {
 
 SCENE::SCENE(const char *layoutXMLFilePath) {
 	bool success;
-	XML layout(layoutXMLFilePath);
+	XML layout(&success, layoutXMLFilePath);
+	if (!success) {
+		printf("SCENE -- Failed To Parse Layout Xml File: %s\n", layoutXMLFilePath);
+		return;
+	}
 	XPATHRESULT sizeXResult = layout.evalXPathExp(&success, "/scene/size/x");
 	if (!success) {
-		printf("SCENE -- Unable To Read Size (x) From Layout File: %s\n", layoutXMLFilePath);
+		printf("SCENE -- Unable To Find Size (x) In Layout File: %s\n", layoutXMLFilePath);
 		return;
 	}
 	XPATHRESULT sizeYResult = layout.evalXPathExp(&success, "/scene/size/y");
