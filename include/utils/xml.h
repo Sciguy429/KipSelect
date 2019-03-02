@@ -9,12 +9,15 @@
 
 class XPATHRESULT {
 public:
+	XPATHRESULT evalXPathExp(bool *success, const char *exp);
 	unsigned int getNodeCount();
 	xmlNodePtr *getNodePtr();
-	XPATHRESULT(xmlXPathObjectPtr xPathObjPtr);
+	XPATHRESULT(xmlDocPtr xmlDoc, xmlXPathObjectPtr xPathObjPtr);
+	XPATHRESULT() {};
 	~XPATHRESULT();
 private:
 	xmlXPathObjectPtr xPathObjPtr;
+	xmlDocPtr xmlDoc;
 };
 
 class XML {
