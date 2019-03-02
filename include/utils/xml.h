@@ -19,9 +19,9 @@ private:
 
 class XML {
 public:
-	XPATHRESULT evalXPathExp(const char *exp);
+	XPATHRESULT evalXPathExp(bool *success, const char *exp);
 	std::string getKeyword(xmlNodePtr nodePtr);
-	XML(const char *xmlFilePath);
+	XML(bool *success, const char *xmlFilePath);
 	~XML();
 private:
 	xmlDocPtr xmlDoc;

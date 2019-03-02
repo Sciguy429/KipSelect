@@ -18,25 +18,29 @@ XPATHRESULT::~XPATHRESULT() {
 }
 //XPATHRESULT :: END
 //XML :: CLASS
-XPATHRESULT XML::evalXPathExp(const char *exp) {
+XPATHRESULT XML::evalXPathExp(bool *success, const char *exp) {
 	xmlXPathContextPtr context;
 	xmlXPathObjectPtr result;
 	context = xmlXPathNewContext(xmlDoc);
 	if (context == NULL) {
 		printf("XML -- Error Makeing New XPath Context\n");
+		*success = false;
 		return NULL;
 	}
 	result = xmlXPathEvalExpression((xmlChar*) exp, context);
 	xmlXPathFreeContext(context);
 	if (result == NULL) {
 		printf("XML -- Error Evaluating XPath Expression\n");
+		*success = false;
 		return NULL;
 	}
 	if (xmlXPathNodeSetIsEmpty(result->nodesetval)) {
 		xmlXPathFreeObject(result);
 		printf("XML -- XPath Expression Returned No Results\n");
+		*success = false;
 		return NULL;
 	}
+	*success = true;
 	return XPATHRESULT(result);
 }
 
@@ -48,12 +52,20 @@ std::string XML::getKeyword(xmlNodePtr nodePtr) {
 	return out;
 }
 
-XML::XML(const char *xmlFilePath) {
+XML::XML(bool *success, const char *xmlFilePath) {
 	xmlDoc = xmlParseFile(xmlFilePath);
 	if (xmlDoc == NULL) {
+		printf("XML -- Failed To Parse Xml File\n");
+		*success = false;
 		return;
 	}
 	xmlCur = xmlDocGetRootElement(xmlDoc);
+	if (xmlCur == NULL) {
+		printf("XML -- Xml File Is Empty\n");
+		*success = false;
+		return;
+	}
+	*success = true;
 }
 
 XML::~XML() {

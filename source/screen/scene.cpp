@@ -79,13 +79,18 @@ void *SCENE::getObjectVector(const char *objectId) {
 }
 
 SCENE::SCENE(const char *layoutXMLFilePath) {
+	bool success;
 	XML layout(layoutXMLFilePath);
-	XPATHRESULT sizeXResult = layout.evalXPathExp("/scene/size/x");
-	XPATHRESULT sizeYResult = layout.evalXPathExp("/scene/size/y");
-	XPATHRESULT backgroundRedResult = layout.evalXPathExp("/scene/backgroundColor/red");
-	XPATHRESULT backgroundGreenResult = layout.evalXPathExp("/scene/backgroundColor/green");
-	XPATHRESULT backgroundBlueResult = layout.evalXPathExp("/scene/backgroundColor/blue");
-	XPATHRESULT objectsResult = layout.evalXPathExp("/scene/objects/*");
+	XPATHRESULT sizeXResult = layout.evalXPathExp(&success, "/scene/size/x");
+	if (!success) {
+		printf("SCENE -- Unable To Read Size (x) From Layout File: %s\n", layoutXMLFilePath);
+		return;
+	}
+	XPATHRESULT sizeYResult = layout.evalXPathExp(&success, "/scene/size/y");
+	XPATHRESULT backgroundRedResult = layout.evalXPathExp(&success, "/scene/backgroundColor/red");
+	XPATHRESULT backgroundGreenResult = layout.evalXPathExp(&success, "/scene/backgroundColor/green");
+	XPATHRESULT backgroundBlueResult = layout.evalXPathExp(&success, "/scene/backgroundColor/blue");
+	XPATHRESULT objectsResult = layout.evalXPathExp(&success, "/scene/objects/*");
 }
 
 SCENE::~SCENE() {
