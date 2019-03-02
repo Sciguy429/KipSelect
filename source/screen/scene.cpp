@@ -296,15 +296,17 @@ SCENE::SCENE(const char *layoutXMLFilePath) {
 		}
 		//~~
 		//Retrieve Object Specific Data
-		unsigned int objType;
 		if (strcmp(objName, "text") == 0) {
-			objType = OBJECT_TYPE_TEXT;
+			//Text Object
+			TEXT *textObj();
 		}
 		else if (strcmp(objName, "blit") == 0) {
-			objType = OBJECT_TYPE_BLIT;
+			//Blit Object
+			BLIT *blitObject();
 		}
 		else if (strcmp(objName, "animation") == 0) {
-			objType = OBJECT_TYPE_ANIMATION;
+			//Animation Object
+			ANIMATION *animationObject();
 		}
 		else {
 			printf("SCENE -- ERROR :: Object #%d Has A Unknown Type: %s\n", i, objName);
