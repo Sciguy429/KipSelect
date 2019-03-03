@@ -5,6 +5,7 @@
 
 #include "screen/gfx.h"
 #include "screen/objects/object.h"
+#include "utils/timer.h"
 
 class ANIMATION : public OBJECT {
 public:
@@ -17,10 +18,13 @@ public:
 	void addTexture(texture *tex);
 	unsigned int getTextureIndexSelected();
 	void setTextureIndexSelected(unsigned int textureIndexSelected);
+	trigger *getRenderTrigger();
+	void setRenderTrigger(trigger *renderTrigger);
 	ANIMATION();
 private:
 	bool enabled;
 	unsigned int fps;
 	std::vector<texture*> textures;
 	unsigned int textureIndexSelected;
+	trigger *renderTrigger;
 };

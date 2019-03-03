@@ -39,6 +39,14 @@ void ANIMATION::setTextureIndexSelected(unsigned int textureIndexSelected) {
 	this->textureIndexSelected = textureIndexSelected;
 }
 
+trigger *ANIMATION::getRenderTrigger() {
+	return renderTrigger;
+}
+
+void ANIMATION::setRenderTrigger(trigger *renderTrigger) {
+	this->renderTrigger = renderTrigger;
+}
+
 ANIMATION::ANIMATION() {
 	setType(OBJECT_TYPE_ANIMATION);
 }
