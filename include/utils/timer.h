@@ -22,6 +22,7 @@ public:
 	trigger *createTrigger(u64 interval, u64 maxCount);
 	void clearTriggers();
 	void update();
+	~TIMER();
 private:
-	std::vector<trigger> triggers;
+	std::vector<trigger*> triggers;
 };
