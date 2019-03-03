@@ -604,17 +604,14 @@ void SCENE::destroyLocalFonts() {
 }
 
 texture *SCENE::addLocalTexture(const char *path) {
-	printf("SCENE -- ADDING TEXTURE: %s :: ", path);
 	std::vector<sceneTexture>::iterator sceneTextureItr = std::find_if(sceneTextures.begin(), sceneTextures.end(), sceneTextureFindPath(path));
 	if (sceneTextureItr == sceneTextures.end()) {
-		printf("true\n");
 		sceneTexture sTex;
 		sTex.path = path;
 		sTex.tex = gfxCreateTextureFromPNG(path);
 		sceneTextures.push_back(sTex);
 		return sTex.tex;
 	}
-	printf("false\n");
 	return sceneTextureItr->tex;
 }
 
