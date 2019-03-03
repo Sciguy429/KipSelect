@@ -50,7 +50,10 @@
       <fps>30</fps> <!--Frames Per Second-->
       <textures> <!--Textures Used By The Animation-->
         <texture id="0"> <!--Must Be Numbered In Order-->
-          <path>PATHTOTEX</path> <!--Still Needs A Path-->
+          <path>romfs:/png/detail/detail_gray.png</path> <!--Still Needs A Path-->
+        </texture>
+        <texture id="1"> <!--Must Be Numbered In Order-->
+          <path>romfs:/png/detail/detail_purple.png</path> <!--Still Needs A Path-->
         </texture>
       </textures>
       <textureSelected>0</textureSelected> <!--Texture Id To Start At-->

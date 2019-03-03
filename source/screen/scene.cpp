@@ -383,7 +383,7 @@ SCENE::SCENE(const char *layoutXMLFilePath) {
 				blitTexture blitTex;
 				xmlNodePtr texObj = blitTexturesResult.getNodePtr()[t];
 				//Retrieve Texture Id
-				xmlChar *blitTextureIdXmlChar = xmlGetProp(obj, (xmlChar*) "id");
+				xmlChar *blitTextureIdXmlChar = xmlGetProp(texObj, (xmlChar*) "id");
 				if (blitTextureIdXmlChar == NULL) {
 					printf("SCENE -- ERROR :: Blit Object #%d Texture #%d Is Missing A Id\n", i, t);
 					return;
@@ -434,6 +434,91 @@ SCENE::SCENE(const char *layoutXMLFilePath) {
 			sceneObjects.push_back(blitObject);
 		}
 		else if (strcmp(objName, "animation") == 0) {
+			//Retrieve Animation Enabled
+			XPATHRESULT animationEnabledResult = layout.evalXPathExpFromNode(&success, obj, "enabled");
+			if (!success) {
+				printf("SCENE -- ERROR :: Unable To Find Enabled In Animation Object #%d In Layout File: %s\n", i, layoutXMLFilePath);
+				return;
+			}
+			if (animationEnabledResult.getNodeCount() != 1) {
+				printf("SCENE -- ERROR :: Enable Search In Animation Object #%d Did Not Return 1, %d Returned\n", i, animationEnabledResult.getNodeCount());
+				return;
+			}
+			bool animationObjEnabled = stringToBool(&success, layout.getKeyword(animationEnabledResult.getNodePtr()[0]));
+			if (!success) {
+				printf("SCENE -- ERROR :: Enabled In Animation Object #%d Is Not Of Type 'bool'\n", i);
+				return;
+			}
+			//~~
+			//Retrieve Animation FPS
+			XPATHRESULT animationFPSResult = layout.evalXPathExpFromNode(&success, obj, "fps");
+			if (!success) {
+				printf("SCENE -- ERROR :: Unable To Find FPS In Animation Object #%d In Layout File: %s\n", i, layoutXMLFilePath);
+				return;
+			}
+			if (animationFPSResult.getNodeCount() != 1) {
+				printf("SCENE -- ERROR :: FPS Search In Animation Object #%d Did Not Return 1, %d Returned\n", i, animationFPSResult.getNodeCount());
+				return;
+			}
+			unsigned int animationObjFPS = stringToUnsignedInt(&success, layout.getKeyword(animationFPSResult.getNodePtr()[0]));
+			if (!success) {
+				printf("SCENE -- ERROR :: FPS In Animation Object #%d Is Not Of Type 'unsigned int'\n", i);
+				return;
+			}
+			//~~
+			//Retrieve Animation Textures
+			std::vector<std::string> animationObjTexturePaths;
+			XPATHRESULT animationTexturesResult = layout.evalXPathExpFromNode(&success, obj, "textures/texture");
+			if (!success) {
+				printf("SCENE -- ERROR :: Unable To Find Texture In Animation Object #%d In Layout File: %s\n", i, layoutXMLFilePath);
+				return;
+			}
+			for (unsigned int t = 0; t < animationTexturesResult.getNodeCount(); t++) {
+				xmlNodePtr texObj = animationTexturesResult.getNodePtr()[t];
+				//Retrieve Texture Id
+				xmlChar *animationTextureIdXmlChar = xmlGetProp(texObj, (xmlChar*) "id");
+				if (animationTextureIdXmlChar == NULL) {
+					printf("SCENE -- ERROR :: Animation Object #%d Texture #%d Is Missing A Id\n", i, t);
+					return;
+				}
+				unsigned int texId = stringToUnsignedInt(&success, XMLCHAR_TO_CONSTCHAR(animationTextureIdXmlChar));
+				xmlFree(animationTextureIdXmlChar);
+				if (!success) {
+					printf("SCENE -- ERROR :: Animation Object #%d Texture #%d Id Is Not Of Type 'unsgined int'\n", i, t);
+					return;
+				}
+				//~~
+				//Retrive Texture Path
+				XPATHRESULT animationTexturePathResult = layout.evalXPathExpFromNode(&success, texObj, "path");
+				if (!success) {
+					printf("SCENE -- ERROR :: Unable To Find Path In Animation Object #%d Texture #%d\n", i, t);
+					return;
+				}
+				if (animationTexturePathResult.getNodeCount() != 1) {
+					printf("SCENE -- ERROR :: Animation Object #%d Texture #%d Path Search Did Not Return 1 Result, %d Returned\n", i, t, animationTexturePathResult.getNodeCount());
+					return;
+				}
+				std::string animationTexturePath = layout.getKeyword(animationTexturePathResult.getNodePtr()[0]);
+				//~~
+				animationObjTexturePaths.push_back(animationTexturePath);
+			}
+			//~~
+			//Retrieve Animation Texture Selected
+			XPATHRESULT animationTextureSelectedResult = layout.evalXPathExpFromNode(&success, obj, "textureSelected");
+			if (!success) {
+				printf("SCENE -- ERROR :: Unable To Find Texture Selected In Animation Object #%d In Layout File: %s\n", i, layoutXMLFilePath);
+				return;
+			}
+			if (animationTextureSelectedResult.getNodeCount() != 1) {
+				printf("SCENE -- ERROR :: Texture Selected Search In Animation Object #%d Did Not Return 1, %d Returned\n", i, animationTextureSelectedResult.getNodeCount());
+				return;
+			}
+			unsigned int animationObjTextureSelected = stringToUnsignedInt(&success, layout.getKeyword(animationTextureSelectedResult.getNodePtr()[0]));
+			if (!success) {
+				printf("SCENE -- ERROR :: Texture Selected In Animation Object #%d Is Not Of Type 'unsigned int'\n", i);
+				return;
+			}
+			//~~
 			//Animation Object Creation
 			ANIMATION *animationObject = new ANIMATION();
 			animationObject->setId(objId);
@@ -441,6 +526,13 @@ SCENE::SCENE(const char *layoutXMLFilePath) {
 			animationObject->setPosX(objPositionX);
 			animationObject->setPosY(objPositionY);
 			animationObject->setCenterType(objCenterType);
+			//---
+			animationObject->setEnabled(animationObjEnabled);
+			animationObject->setFPS(animationObjFPS);
+			for (unsigned int t = 0; t < animationObjTexturePaths.size(); t++) {
+				animationObject->addTexture(addLocalTexture(animationObjTexturePaths[t].c_str()));
+			}
+			animationObject->setTextureIndexSelected(animationObjTextureSelected);
 			//~~
 			sceneObjects.push_back(animationObject);
 		}
@@ -512,14 +604,17 @@ void SCENE::destroyLocalFonts() {
 }
 
 texture *SCENE::addLocalTexture(const char *path) {
+	printf("SCENE -- ADDING TEXTURE: %s :: ", path);
 	std::vector<sceneTexture>::iterator sceneTextureItr = std::find_if(sceneTextures.begin(), sceneTextures.end(), sceneTextureFindPath(path));
 	if (sceneTextureItr == sceneTextures.end()) {
+		printf("true\n");
 		sceneTexture sTex;
 		sTex.path = path;
 		sTex.tex = gfxCreateTextureFromPNG(path);
 		sceneTextures.push_back(sTex);
 		return sTex.tex;
 	}
+	printf("false\n");
 	return sceneTextureItr->tex;
 }
 
