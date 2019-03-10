@@ -35,6 +35,7 @@ int main(int argc, char **argv) {
 	//
 	renderThreadControlVector rTCV;
 	rTCV.runThread = true;
+	rTCV.mainScene = &testS;
 	Thread testThread;
 	threadCreate(&testThread, &renderThread, &rTCV, 0x19000, 0x2C, renderThreadCore);
 	while (appletMainLoop() && !isErrorThrown()) {

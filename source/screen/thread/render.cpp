@@ -1,4 +1,5 @@
 #include <switch.h>
+#include <math.h>
 
 #include "screen/thread/render.h"
 #include "screen/gfx.h"
@@ -6,26 +7,28 @@
 
 void renderThread(void *vector) {
 	renderThreadControlVector *rTCV = (renderThreadControlVector*)vector;
+	TIMER renderTimer = TIMER();
+	trigger *renderFrameTrigger = NULL;
+	SCENE *currentScene = NULL;
 	printf("RENDER -- Render Thread Starting\nRENDER -- Running On Core: %d\n", svcGetCurrentProcessorNumber());
-	TIMER timer = TIMER();
-	trigger *test1 = timer.createTrigger(NS_TO_TICKS(1000000000), 60);
-	trigger *test2 = timer.createTrigger(NS_TO_TICKS(500000000), 60);
-	trigger *test3 = timer.createTrigger(NS_TO_TICKS(500000000), 60);
+	u64 lastNS = 0;
 	while (rTCV->runThread) {
-		//Render
-		timer.update();
-		if (test1->count > 0) {
-			test1->reset();
-			printf("RENDER -- Trigger #1 Detected!\n");
+		//Tick The Main Timer
+		renderTimer.update();
+		//~~
+		//Render Setup
+		if (currentScene != rTCV->mainScene) {
+			currentScene = rTCV->mainScene;
+			renderTimer.clearTriggers();
+			u64 frameTime = NS_TO_TICKS((1.0f / 60.0f) * 1000000000.0f);
+			printf("RENDER -- FRAMETIME: %lu\n", frameTime);
+			renderFrameTrigger = renderTimer.createTrigger(frameTime, 60);
 		}
-		if (test2->count > 0) {
-			test2->reset();
-			printf("RENDER -- Trigger #2 Detected!\n");
+		if (renderFrameTrigger->count > 0) {
+			renderFrameTrigger->reset();
+			//Stub
 		}
-		if (test3->count > 0) {
-			test3->reset();
-			printf("RENDER -- Trigger #3 Detected!\n");
-		}
+		//~~
 	}
 	printf("RENDER -- Thread Terminating\n");
 }
