@@ -2,7 +2,7 @@
 #include <sstream>
 
 #include "utils/ini.h"
-#include "error.h"
+#include "screen/error.h"
 
 bool INI::setValue(const char *targetKey, const char *value) {
 	int pos = getLocation(targetKey);

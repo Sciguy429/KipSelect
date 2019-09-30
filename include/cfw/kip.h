@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 
+#include <screen/menu.h>
+
 typedef struct {
 	uint32_t out_offset;
 	uint32_t out_size;
@@ -36,7 +38,7 @@ public:
 	void setKIPItemEnabled(unsigned int kipId, bool enabled);
 	bool getKIPItemEnabled(unsigned int kipId);
 	unsigned int getKIPItemCount();
-	//menuItem getKIPMenuItem(unsigned int kipId);
+	menuItem getKIPMenuItem(unsigned int kipId);
 private:
 	kip1_header_t *getKipHeader(const char *path);
 	std::vector<kipItem> kipItems;

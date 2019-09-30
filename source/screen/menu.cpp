@@ -1,7 +1,7 @@
 #include <switch.h>
 #include <sstream>
 
-#include "menu.h"
+#include "screen/menu.h"
 
 void MENU::loadAssets() {
 	tabSelected = 0;
@@ -9,7 +9,7 @@ void MENU::loadAssets() {
 	//LOAD ASSETS
 	//-Fonts
 	mainFont = gfxCreateFontFromTTF("romfs:/font/bahnschrift.ttf");
-	font *versionFont = gfxCreateFontFromTTF("romfs:/font/tt0288m_.ttf");
+	font* versionFont = gfxCreateFontFromTTF("romfs:/font/tt0288m_.ttf");
 	//-Textures
 	menuBackground = gfxCreateTextureFromPNG("romfs:/png/menu/menu_background.png");
 	menuBar = gfxCreateTextureFromPNG("romfs:/png/menu/menu_bar.png");
@@ -26,10 +26,29 @@ void MENU::loadAssets() {
 	tabLayeredFSSelected = gfxCreateTextureFromPNG("romfs:/png/tab/tab_layeredfs_selected.png");
 	tabOptions = gfxCreateTextureFromPNG("romfs:/png/tab/tab_options.png");
 	tabOptionsSelected = gfxCreateTextureFromPNG("romfs:/png/tab/tab_options_selected.png");
-	detailPurple = gfxCreateTextureFromPNG("romfs:/png/detail/detail_purple.png");
-	detailGray = gfxCreateTextureFromPNG("romfs:/png/detail/detail_gray.png");
+	texture* detailPurple = gfxCreateTextureFromPNG("romfs:/png/detail/detail_purple.png");
+	texture* detailGray = gfxCreateTextureFromPNG("romfs:/png/detail/detail_gray.png");
 	//END LOAD ASSETS
 	//BUILD ASSETS
+	//-Detail Enabled
+	detailEnabled = gfxCreateTexture(243, 59);
+	gfxBlit(detailEnabled, detailPurple, 0, 0);
+	gfxDrawText(detailEnabled, "Enabled", mainFont, 8, 9, 30, RGBA8(255, 255, 255, 0));
+	//-Detail Disabled
+	detailDisabled = gfxCreateTexture(243, 59);
+	gfxBlit(detailDisabled, detailGray, 0, 0);
+	gfxDrawText(detailDisabled, "Disabled", mainFont, 8, 9, 30, RGBA8(50, 50, 50, 0));
+	//-Detail Loaded
+	detailLoaded = gfxCreateTexture(243, 59);
+	gfxBlit(detailLoaded, detailPurple, 0, 0);
+	gfxDrawText(detailLoaded, "Loaded", mainFont, 8, 9, 30, RGBA8(255, 255, 255, 0));
+	//-Detail Unloaded
+	detailUnloaded = gfxCreateTexture(243, 59);
+	gfxBlit(detailUnloaded, detailGray, 0, 0);
+	gfxDrawText(detailUnloaded, "Unloaded", mainFont, 8, 9, 30, RGBA8(50, 50, 50, 0));
+	//-Destroy Base Assets
+	gfxDestroyTexture(detailPurple);
+	gfxDestroyTexture(detailGray);
 	//-Add Version To Backround
 	std::ostringstream version;
 	version << 'v' << VERSION_MAJOR << '.' << VERSION_MINOR << '.' << VERSION_MICRO;
@@ -55,7 +74,7 @@ unsigned int MENU::getMenuSelected() {
 	return menuSelected;
 }
 
-inline unsigned int MENU::getMenuSize() {
+unsigned int MENU::getMenuSize() {
 	switch (tabSelected) {
 	case 0:
 		return kip.size();
@@ -70,71 +89,8 @@ inline unsigned int MENU::getMenuSize() {
 	}
 }
 
-void MENU::setStatusSelected(unsigned int statusId) {
-	std::vector<menuItem> *mnu = new std::vector<menuItem>;
-	switch (tabSelected) {
-	case 0:
-		mnu = &kip;
-		break;
-	case 1:
-		mnu = &bct;
-		break;
-	case 2:
-		mnu = &layeredFS;
-		break;
-	case 3:
-		mnu = &options;
-		break;
-	default:
-		return;
-	}
-	(*mnu)[menuSelected].statusSelected = statusId;
-}
-
-unsigned int MENU::getStatusSelected() {
-	std::vector<menuItem> *mnu = new std::vector<menuItem>;
-	switch (tabSelected) {
-	case 0:
-		mnu = &kip;
-		break;
-	case 1:
-		mnu = &bct;
-		break;
-	case 2:
-		mnu = &layeredFS;
-		break;
-	case 3:
-		mnu = &options;
-		break;
-	default:
-		return 0;
-	}
-	return (*mnu)[menuSelected].statusSelected;
-}
-
-unsigned int MENU::getStatusCount() {
-	std::vector<menuItem> *mnu = new std::vector<menuItem>;
-	switch (tabSelected) {
-	case 0:
-		mnu = &kip;
-		break;
-	case 1:
-		mnu = &bct;
-		break;
-	case 2:
-		mnu = &layeredFS;
-		break;
-	case 3:
-		mnu = &options;
-		break;
-	default:
-		return 0;
-	}
-	return (*mnu)[menuSelected].statuses.size();
-}
-/*
 void MENU::toggleSelected() {
-	std::vector<menuItem> *mnu = new std::vector<menuItem>;
+	std::vector<menuItem>* mnu = new std::vector<menuItem>;
 	switch (tabSelected) {
 	case 0:
 		mnu = &kip;
@@ -155,10 +111,9 @@ void MENU::toggleSelected() {
 		(*mnu)[menuSelected].status = !(*mnu)[menuSelected].status;
 	}
 }
-*/
 
 void MENU::addMenuItem(unsigned int tab, menuItem itm) {
-	std::vector<menuItem> *mnu = new std::vector<menuItem>;
+	std::vector<menuItem>* mnu = new std::vector<menuItem>;
 	switch (tab) {
 	case 0:
 		mnu = &kip;
@@ -188,13 +143,12 @@ void MENU::resetMenu() {
 }
 
 void MENU::drawMenu() {
-	/*
 	gfxBlit(frameBufferTexture, menuBackground, 0, 0);
 	gfxBlit(frameBufferTexture, tabSelected == 0 ? tabKipsSelected : tabKips, 560, 118);
 	gfxBlit(frameBufferTexture, tabSelected == 1 ? tabBCTSelected : tabBCT, 683, 118);
 	gfxBlit(frameBufferTexture, tabSelected == 2 ? tabLayeredFSSelected : tabLayeredFS, 843, 118);
 	gfxBlit(frameBufferTexture, tabSelected == 3 ? tabOptionsSelected : tabOptions, 1088, 118);
-	std::vector<menuItem> *mnu = new std::vector<menuItem>;
+	std::vector<menuItem>* mnu = new std::vector<menuItem>;
 	switch (tabSelected) {
 	case 0:
 		mnu = &kip;
@@ -280,7 +234,6 @@ void MENU::drawMenu() {
 		//~~
 	}
 	gfxDrawFrameBuffer();
-	*/
 }
 
 void MENU::destroyAssets() {
@@ -300,27 +253,8 @@ void MENU::destroyAssets() {
 	gfxDestroyTexture(tabLayeredFSSelected);
 	gfxDestroyTexture(tabOptions);
 	gfxDestroyTexture(tabOptionsSelected);
-	gfxDestroyTexture(detailPurple);
-	gfxDestroyTexture(detailGray);
-}
-
-menuItem *MENU::getSelectedItem() {
-	std::vector<menuItem> *mnu = new std::vector<menuItem>;
-	switch (tabSelected) {
-	case 0:
-		mnu = &kip;
-		break;
-	case 1:
-		mnu = &bct;
-		break;
-	case 2:
-		mnu = &layeredFS;
-		break;
-	case 3:
-		mnu = &options;
-		break;
-	default:
-		return NULL;
-	}
-	return &mnu->at(menuSelected);
+	gfxDestroyTexture(detailEnabled);
+	gfxDestroyTexture(detailDisabled);
+	gfxDestroyTexture(detailLoaded);
+	gfxDestroyTexture(detailUnloaded);
 }

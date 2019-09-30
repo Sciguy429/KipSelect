@@ -8,7 +8,7 @@
 #include <algorithm>
 
 #include "cfw/lfs.h"
-#include "error.h"
+#include "screen/error.h"
 #include "utils/net.h"
 
 struct nswFindId : std::unary_function<nswTitle, bool> {
@@ -237,7 +237,7 @@ bool LFS::getLFSItemEnabled(unsigned int lfsId) {
 unsigned int LFS::getLFSCount() {
 	return lfsItems.size();
 }
-/*
+
 menuItem LFS::getLFSMenuItem(unsigned int lfsId) {
 	menuItem mnu;
 	mnu.status = lfsItems[lfsId].enabled;
@@ -278,4 +278,3 @@ menuItem LFS::getLFSMenuItem(unsigned int lfsId) {
 	}
 	return mnu;
 }
-*/

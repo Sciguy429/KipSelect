@@ -2,7 +2,7 @@
 #include <stdarg.h>
 #include <sstream>
 
-#include "error.h"
+#include "screen/error.h"
 #include "screen/gfx.h"
 
 bool errorThrown = false;

@@ -1,7 +1,7 @@
 #include <fstream>
 
 #include "cfw/bct.h"
-#include "error.h"
+#include "screen/error.h"
 
 void BCT::scanBCT() {
 	bctItems.clear();
@@ -54,7 +54,7 @@ bool BCT::getBCTItemEnabled(unsigned int bctId) {
 unsigned int BCT::getBCTItemCount() {
 	return bctItems.size();
 }
-/*
+
 menuItem BCT::getBCTMenuItem(unsigned int bctId) {
 	menuItem mnu;
 	mnu.name = bctItems[bctId].name;
@@ -68,4 +68,3 @@ menuItem BCT::getBCTMenuItem(unsigned int bctId) {
 	mnu.details[1].data = bctDiscriptions[bctId];
 	return mnu;
 }
-*/
