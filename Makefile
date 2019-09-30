@@ -41,9 +41,9 @@ APP_VERSION	:=	${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_MICRO}
 TARGET		:=	$(subst $e ,_,$(notdir $(APP_TITLE)))
 OUTDIR		:=	out
 BUILD		:=	build
-SOURCES		:=	source source/cfw source/screen source/screen/objects source/screen/thread source/utils
+SOURCES		:=	source source/cfw source/screen source/utils
 DATA		:=	data
-INCLUDES	:=	include include/cfw include/screen include/screen/objects include/screen/thread include/utils
+INCLUDES	:=	include include/cfw include/utils
 EXEFS_SRC	:=	exefs_src
 ROMFS	:=	romfs
 
@@ -67,7 +67,7 @@ CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++17
 ASFLAGS	:=	-g $(ARCH)
 LDFLAGS	=	-specs=$(DEVKITPRO)/libnx/switch.specs -g $(ARCH) -Wl,-no-as-needed,-Map,$(notdir $*.map)
 
-LIBS	:= -lxml2 -lcurl -lfreetype -lbz2 -lpng -lz -lnx
+LIBS	:= -lcurl -lmbedtls -lmbedcrypto -lmbedx509 -lxml2 -lfreetype -lbz2 -lpng -lz -lnx
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
