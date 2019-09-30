@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-#include "menu.h"
+#include <screen/menu.h>
 
 typedef struct {
 	std::string titleId;

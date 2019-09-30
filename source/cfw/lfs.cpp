@@ -7,9 +7,9 @@
 #include <libxml2/libxml/parser.h>
 #include <algorithm>
 
-#include "lfs.h"
-#include "error.h"
-#include "net.h"
+#include "cfw/lfs.h"
+#include "screen/error.h"
+#include "utils/net.h"
 
 struct nswFindId : std::unary_function<nswTitle, bool> {
 	std::string id;

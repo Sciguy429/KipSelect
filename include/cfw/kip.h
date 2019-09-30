@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-#include "menu.h"
+#include <screen/menu.h>
 
 typedef struct {
 	uint32_t out_offset;

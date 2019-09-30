@@ -1,8 +1,8 @@
 #include <sstream>
 #include <curl/curl.h>
 
-#include "net.h"
-#include "error.h"
+#include "utils/net.h"
+#include "screen/error.h"
 
 size_t writeFile(void *ptr, size_t size, size_t nmemb, FILE *stream) {
 	size_t written = fwrite(ptr, size, nmemb, stream);

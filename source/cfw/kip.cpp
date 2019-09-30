@@ -8,8 +8,8 @@
 #include <sys/types.h>
 #include <algorithm>
 
-#include "kip.h"
-#include "error.h"
+#include "cfw/kip.h"
+#include "screen/error.h"
 
 #define MAGIC_KIP1 0x3150494B
 

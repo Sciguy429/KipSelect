@@ -7,8 +7,8 @@
 #include <stdlib.h>
 #include <switch.h>
 
-#include "reboot.h"
-#include "error.h"
+#include "utils/reboot.h"
+#include "screen/error.h"
 
 #define IRAM_PAYLOAD_MAX_SIZE 0x2F000
 #define IRAM_PAYLOAD_BASE 0x40010000

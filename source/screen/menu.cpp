@@ -1,7 +1,7 @@
 #include <switch.h>
 #include <sstream>
 
-#include "menu.h"
+#include "screen/menu.h"
 
 void MENU::loadAssets() {
 	tabSelected = 0;
@@ -9,7 +9,7 @@ void MENU::loadAssets() {
 	//LOAD ASSETS
 	//-Fonts
 	mainFont = gfxCreateFontFromTTF("romfs:/font/bahnschrift.ttf");
-	font *versionFont = gfxCreateFontFromTTF("romfs:/font/tt0288m_.ttf");
+	font* versionFont = gfxCreateFontFromTTF("romfs:/font/tt0288m_.ttf");
 	//-Textures
 	menuBackground = gfxCreateTextureFromPNG("romfs:/png/menu/menu_background.png");
 	menuBar = gfxCreateTextureFromPNG("romfs:/png/menu/menu_bar.png");
@@ -26,8 +26,8 @@ void MENU::loadAssets() {
 	tabLayeredFSSelected = gfxCreateTextureFromPNG("romfs:/png/tab/tab_layeredfs_selected.png");
 	tabOptions = gfxCreateTextureFromPNG("romfs:/png/tab/tab_options.png");
 	tabOptionsSelected = gfxCreateTextureFromPNG("romfs:/png/tab/tab_options_selected.png");
-	texture *detailPurple = gfxCreateTextureFromPNG("romfs:/png/detail/detail_purple.png");
-	texture *detailGray = gfxCreateTextureFromPNG("romfs:/png/detail/detail_gray.png");
+	texture* detailPurple = gfxCreateTextureFromPNG("romfs:/png/detail/detail_purple.png");
+	texture* detailGray = gfxCreateTextureFromPNG("romfs:/png/detail/detail_gray.png");
 	//END LOAD ASSETS
 	//BUILD ASSETS
 	//-Detail Enabled
@@ -90,7 +90,7 @@ unsigned int MENU::getMenuSize() {
 }
 
 void MENU::toggleSelected() {
-	std::vector<menuItem> *mnu = new std::vector<menuItem>;
+	std::vector<menuItem>* mnu = new std::vector<menuItem>;
 	switch (tabSelected) {
 	case 0:
 		mnu = &kip;
@@ -113,7 +113,7 @@ void MENU::toggleSelected() {
 }
 
 void MENU::addMenuItem(unsigned int tab, menuItem itm) {
-	std::vector<menuItem> *mnu = new std::vector<menuItem>;
+	std::vector<menuItem>* mnu = new std::vector<menuItem>;
 	switch (tab) {
 	case 0:
 		mnu = &kip;
@@ -148,7 +148,7 @@ void MENU::drawMenu() {
 	gfxBlit(frameBufferTexture, tabSelected == 1 ? tabBCTSelected : tabBCT, 683, 118);
 	gfxBlit(frameBufferTexture, tabSelected == 2 ? tabLayeredFSSelected : tabLayeredFS, 843, 118);
 	gfxBlit(frameBufferTexture, tabSelected == 3 ? tabOptionsSelected : tabOptions, 1088, 118);
-	std::vector<menuItem> *mnu = new std::vector<menuItem>;
+	std::vector<menuItem>* mnu = new std::vector<menuItem>;
 	switch (tabSelected) {
 	case 0:
 		mnu = &kip;

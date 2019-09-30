@@ -1,7 +1,7 @@
 #include <fstream>
 
-#include "bct.h"
-#include "error.h"
+#include "cfw/bct.h"
+#include "screen/error.h"
 
 void BCT::scanBCT() {
 	bctItems.clear();
