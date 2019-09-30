@@ -1,5 +1,5 @@
 # Menu System Refractor
-A complete rewrite of the menu system is currently underway, do not bother building from this branch. If you are looking for partial ReiNX support you are in the wrong branch.
+This branch origianly contianed an attempted reqrite of Kip Selects menu system. It is only being kept for historical purposes, DO NOT BUILD FROM HERE!
 
 # Kip Select
 ![Screenshot](https://github.com/Sciguy429/KipSelect/raw/master/graphics/screenshot/screenshot-1.jpg)
