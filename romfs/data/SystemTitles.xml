@@ -276,6 +276,11 @@
     <name>olsc</name>
     <description>OLSC services. OLSC (OnLine Savedata Cloud?) is a sysmodule designed for handling the new online savedata cloud backup system.</description>
   </title>
+  <title>
+    <titleid>010000000000000D</titleid>
+    <name>dmnt</name>
+    <description>Atmosphere cheat client.</description>
+  </title>
   <!--System Applets-->
   <title>
     <titleid>0100000000001000</titleid>
