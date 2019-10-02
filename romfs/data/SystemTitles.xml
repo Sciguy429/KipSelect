@@ -281,6 +281,11 @@
     <name>dmnt</name>
     <description>Atmosphere cheat client.</description>
   </title>
+  <title>
+    <titleid>010041544D530000</titleid>
+    <name>ams-mitm</name>
+    <description>Atmosphere mitm services.</description>
+  </title>
   <!--System Applets-->
   <title>
     <titleid>0100000000001000</titleid>
