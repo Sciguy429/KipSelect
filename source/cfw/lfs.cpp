@@ -166,6 +166,60 @@ void LFS::parseSysDatabase() {
 	xmlFreeDoc(sysDoc);
 }
 
+void LFS::parseUsrDatabase() {
+	xmlDocPtr usrDoc;
+	xmlNodePtr usrCur;
+	usrDoc = xmlParseFile("romfs:/data/UserTitles.xml");
+	if (usrDoc == NULL) {
+		errorThrow(XML_ERROR, "UserTitles.xml failed to parse");
+		return;
+	}
+	usrCur = xmlDocGetRootElement(usrDoc);
+	if (usrCur == NULL) {
+		errorThrow(XML_ERROR, "UserTitles.xml is empty");
+		return;
+	}
+	if (xmlStrcmp(usrCur->name, (const xmlChar*)"titles")) {
+		errorThrow(XML_ERROR, "UserTitles.xml is the wrong type, root node != titles");
+		xmlFreeDoc(usrDoc);
+		return;
+	}
+	usrCur = usrCur->xmlChildrenNode;
+	unsigned int usrCount = 0;
+	while (usrCur != NULL) {
+		if ((!xmlStrcmp(usrCur->name, (const xmlChar*)"title"))) {
+			usrTitles.push_back(usrTitle());
+			xmlChar* releaseKey;
+			xmlNodePtr releaseCur = usrCur->xmlChildrenNode;
+			while (releaseCur != NULL) {
+				if ((!xmlStrcmp(releaseCur->name, (const xmlChar*)"titleId"))) { //Title Id
+					releaseKey = xmlNodeListGetString(usrDoc, releaseCur->xmlChildrenNode, 1);
+					usrTitles[usrCount].titleId = reinterpret_cast<const char*>(releaseKey);
+					xmlFree(releaseKey);
+				}
+				else if ((!xmlStrcmp(releaseCur->name, (const xmlChar*)"name"))) { //Title name
+					releaseKey = xmlNodeListGetString(usrDoc, releaseCur->xmlChildrenNode, 1);
+					usrTitles[usrCount].titleName = reinterpret_cast<const char*>(releaseKey);
+					xmlFree(releaseKey);
+				}
+				else if ((!xmlStrcmp(releaseCur->name, (const xmlChar*)"author"))) { //Title author
+					releaseKey = xmlNodeListGetString(usrDoc, releaseCur->xmlChildrenNode, 1);
+					usrTitles[usrCount].titleAuthor = reinterpret_cast<const char*>(releaseKey);
+					xmlFree(releaseKey);
+				}
+				else if ((!xmlStrcmp(releaseCur->name, (const xmlChar*)"link"))) { //Title link
+					releaseKey = xmlNodeListGetString(usrDoc, releaseCur->xmlChildrenNode, 1);
+					usrTitles[usrCount].titleLink = reinterpret_cast<const char*>(releaseKey);
+					xmlFree(releaseKey);
+				}
+				releaseCur = releaseCur->next;
+			}
+			usrCount++;
+		}
+		usrCur = usrCur->next;
+	}
+}
+
 void LFS::scanLFS() {
 	lfsItems.clear();
 	DIR* lfsDir;
