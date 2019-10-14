@@ -47,5 +47,6 @@ public:
 private:
 	std::vector<nswTitle> nswTitles;
 	std::vector<sysTitle> sysTitles;
+	std::vector<usrTitle> usrTitles;
 	std::vector<lfsItem> lfsItems;
 };
