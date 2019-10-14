@@ -20,6 +20,13 @@ typedef struct {
 } sysTitle;
 
 typedef struct {
+	std::string titleId;
+	std::string titleName;
+	std::string titleAuthor;
+	std::string titleLink;
+} usrTitle;
+
+typedef struct {
 	std::string name;
 	std::string titleId;
 	std::string discription;
@@ -31,6 +38,7 @@ public:
 	void updateLFSDatabase();
 	void parseLFSDatabase();
 	void parseSysDatabase();
+	void parseUsrDatabase();
 	void scanLFS();
 	void setLFSItemEnabled(unsigned int lfsId, bool enabled);
 	bool getLFSItemEnabled(unsigned int lfsId);
