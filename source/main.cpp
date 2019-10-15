@@ -21,6 +21,7 @@ int main(int argc, char** argv) {
 	menu.loadAssets();
 	lfs.parseLFSDatabase();
 	lfs.parseSysDatabase();
+	lfs.parseUsrDatabase();
 	kip.scanKIP();
 	bct.scanBCT();
 	lfs.scanLFS();

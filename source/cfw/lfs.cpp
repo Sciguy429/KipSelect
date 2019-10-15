@@ -218,6 +218,8 @@ void LFS::parseUsrDatabase() {
 		}
 		usrCur = usrCur->next;
 	}
+	printf("Parsed %d user titles from file romfs:/data/UserTitles.xml\n", usrCount);
+	xmlFreeDoc(usrDoc);
 }
 
 void LFS::scanLFS() {
