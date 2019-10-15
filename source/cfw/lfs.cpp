@@ -27,6 +27,14 @@ struct sysFindId : std::unary_function<sysTitle, bool> {
 	}
 };
 
+struct usrFindId : std::unary_function<usrTitle, bool> {
+	std::string id;
+	usrFindId(std::string id) :id(id) { }
+	bool operator()(usrTitle const& m) const {
+		return m.titleId == id;
+	}
+};
+
 std::ifstream::pos_type fileSize(const char* filename) {
 	std::ifstream in(filename, std::ifstream::ate | std::ifstream::binary);
 	return in.tellg();
@@ -327,9 +335,24 @@ menuItem LFS::getLFSMenuItem(unsigned int lfsId) {
 			mnu.details[3].data = nswItr->titleLanguages;
 		}
 		else {
-			mnu.name = lfsItems[lfsId].titleId;
-			mnu.details.push_back(menuDetail());
-			mnu.details[0].prefix = "Futher Title Infomation Unknown";
+			std::vector<usrTitle>::iterator usrItr = std::find_if(usrTitles.begin(), usrTitles.end(), usrFindId(str));
+			if (usrItr != usrTitles.end()) {
+				mnu.name = usrItr->titleName;
+				mnu.details.push_back(menuDetail());
+				mnu.details[0].prefix = "Module Title Id: ";
+				mnu.details[0].data = usrItr->titleId;
+				mnu.details.push_back(menuDetail());
+				mnu.details[1].prefix = "Module Author: ";
+				mnu.details[1].data = usrItr->titleAuthor;
+				mnu.details.push_back(menuDetail());
+				mnu.details[2].prefix = "Module Source: ";
+				mnu.details[2].data = usrItr->titleLink;
+			}
+			else {
+				mnu.name = lfsItems[lfsId].titleId;
+				mnu.details.push_back(menuDetail());
+				mnu.details[0].prefix = "Futher Title Infomation Unknown";
+			}
 		}
 	}
 	return mnu;
