@@ -35,6 +35,13 @@
     <author>jakibaki</author>
     <link>https://github.com/jakibaki/sys-audioplayer</link>
   </title>
+  <!-- sys-con -->
+  <title>
+    <titleId>0100000000000464</titleId>
+    <name>sys-con</name>
+    <author>cathery</author>
+    <link>https://github.com/cathery/sys-con</link>
+  </title>
   <!--sys-ftpd-->
   <title>
     <titleId>420000000000000E</titleId>
