@@ -1,3 +1,6 @@
+# NOTICE
+I am no longer working on this tool. It has gotten to the point where so much has changed with Atmosphere as a whole that in order to suport it I would need to rewrite this tool from scratch. Unfortunatly I just don't have the time for that anymore, so for now it will remain as it is.
+
 # Kip Select
 ![Screenshot](https://github.com/Sciguy429/KipSelect/raw/master/graphics/screenshot/screenshot-1.jpg)
 This is a WIP toolkit for the switch cfw Atmopshere, it started out as a simple KIP manager but has become much more over time. This toolkit is intended for use with Atmosphere Fusee, it will still somewhat work other packs like Kosmos but stuff may be broken. Further CFW support is planned for the future.
